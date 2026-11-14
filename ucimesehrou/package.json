@@ -1,0 +1,12 @@
+{
+  "name": "ucimesehrou",
+  "private": true,
+  "scripts": {
+    "build": "node build.cjs",
+    "render": "node render.cjs 32"
+  },
+  "dependencies": {
+    "ffmpeg-static": "^5.2.0",
+    "playwright-core": "^1.50.0"
+  }
+}

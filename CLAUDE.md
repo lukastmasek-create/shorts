@@ -4,6 +4,9 @@ Cartoon 3D vertical shorts: three.js inside Remotion. Pipeline + rules: `SKILL.m
 Entry: `src/index.ts` -> `src/Root.tsx` (composition `BridgeShort`, 1080x1920, 30fps).
 User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`python3 -m pip`. No captions in video, English only (Czech not wanted), one steady voice.
 
+## Sekce ucimesehrou/
+Samostatná 15,7 s pop-up animace Učíme se hrou (three.js bez Remotionu), nezávislá na zbytku repa. Zdroj `ucimesehrou/src/`, `node build.cjs` -> `index.html`, `node render.cjs 32` -> MP4 (potřebuje GPU PC nebo hodně času, cloud ~10 s/snímek). Postup a úpravy v `ucimesehrou/README.md`.
+
 ## Setup
 - `npm i` then `npx tsc --noEmit` (clean). Stack: remotion 4, three 0.187, @react-three/fiber 9, @react-three/postprocessing, React 19.
 - Kenney `.glb` props (`public/bridge/kenney/*.glb`) NOT in repo; code falls back without them (plainer world). Reference frames/sheets also not copied.
