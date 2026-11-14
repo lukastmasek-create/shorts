@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2560" height="1440" viewBox="0 0 2560 1440">
+<defs>
+<radialGradient id="v" cx="50%" cy="50%" r="65%"><stop offset="0" stop-color="#1c1c1c"/><stop offset="1" stop-color="#000"/></radialGradient>
+<filter id="g" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="a"/><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<g id="p"><circle cx="0" cy="-92" r="30"/><path d="M-42 0 Q-42 -52 0 -52 Q42 -52 42 0Z"/></g>
+</defs>
+<rect width="2560" height="1440" fill="url(#v)"/>
+<g fill="#fff" opacity=".2">
+<use href="#p" x="140" y="850"/><use href="#p" x="300" y="850"/><use href="#p" x="2260" y="850"/><use href="#p" x="2420" y="850"/>
+</g>
+<g filter="url(#g)" stroke="#fff" fill="none" stroke-linecap="round">
+<path d="M0 850 H2560" stroke-width="5" stroke-dasharray="8 16" opacity=".35"/>
+<g fill="#fff" stroke="none"><circle cx="700" cy="640" r="58"/><path d="M606 850 Q606 700 700 700 Q794 700 794 850Z" transform="translate(0,0)"/></g>
+<path d="M880 560 V800" stroke-width="5" opacity=".6"/>
+</g>
+<g fill="#fff" font-family="Helvetica,Arial,sans-serif" font-weight="900" filter="url(#g)">
+<text x="940" y="725" font-size="112" letter-spacing="8">SHORT IDEAS</text>
+</g>
+<g fill="#aaa" font-family="Helvetica,Arial,sans-serif" font-weight="700">
+<text x="944" y="790" font-size="34" letter-spacing="14">BIG LIFE QUESTIONS · 60 SECONDS</text>
+</g>
+</svg>
