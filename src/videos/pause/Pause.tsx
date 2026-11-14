@@ -13,7 +13,8 @@ import { ThreeCanvas } from "@remotion/three";
 import { useThree } from "@react-three/fiber";
 import { EffectComposer } from "@react-three/postprocessing";
 import { BlendFunction, BloomEffect, ToneMappingEffect, ToneMappingMode } from "postprocessing";
-import { World, loadKit } from "./world";
+import { loadKit } from "./world";
+import { PauseWorld } from "./pworld";
 import { InkPass, noInkFallback } from "./ink";
 import { LensBlur, GrainEffect } from "./lensblur";
 import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
@@ -49,7 +50,7 @@ const useKit = () => {
 const Inner: React.FC<{ id: number; kit: Kit }> = ({ id, kit }) => {
   const f = useCurrentFrame();
   const { camera, scene } = useThree();
-  const world = useMemo(() => new World(kit), [kit]);
+  const world = useMemo(() => new PauseWorld(kit), [kit]);
   const target = useMemo(() => new THREE.Vector3(), []);
   const on = useMemo(toggles, []);
   const fx = useMemo(() => ({
@@ -86,7 +87,7 @@ const Inner: React.FC<{ id: number; kit: Kit }> = ({ id, kit }) => {
   return (
     <>
       <primitive object={world.root} dispose={null} />
-      {post}
+      {(getInputProps() as { nopost?: number }).nopost ? null : post /* nopost: cloud preview, the post chain renders blank under swangle */}
     </>
   );
 };

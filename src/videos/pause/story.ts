@@ -71,6 +71,7 @@ const WALK = 0.047; // m per frame (1.4 m/s)
 export const heroPos = (id: number, f: number): V3 => {
   const s = SHOTS[id - 1];
   const t = Math.max(0, f - s.a);
+  if (id === 1) return P("street", 0, 0, -WALK * Math.max(0, FREEZE_AT - f)); // strolling into place, freezes at (0,0,0)
   if (id === 3) return P("street", -1.2, 0, -6 + WALK * t);
   if (id === 5) return P("cafe", -2 + WALK * 1.4 * Math.min(t, 50), 0, 0);
   return P(s.set, 0, 0, 0);
@@ -111,11 +112,11 @@ const rolled = (s: (f: number) => Shot, roll: number) => (f: number): Shot => ({
 const E = 1.6; // hero eye height
 
 // shot 1: wide high 3/4 over the busy street, slow push
-const S1a = (f: number) => dolly(P("street", 9, 6, -16), P("street", 0, 1.5, 2), pushK(f, 0, 0.003), { fov: 44 });
+const S1a = (f: number) => dolly(P("street", 2.5, 5.5, -18), P("street", 0, 1.5, 2), pushK(f, 0, 0.003), { fov: 44 });
 // shot 2: CU on the hero's face in the frozen crowd; roll on "you"
 const S2a = (f: number) => dolly(P("street", 0.5, E, -2.6), P("street", 0, E, 0), pushK(f, 76, 0.003), { fov: 34 });
 // shot 3: low side track riding with the hero between frozen cars; glide up on "noise"
-const S3a = (f: number) => { const h = heroPos(3, f); return dolly([h[0] + 6.5, 0.9, h[2] + 0.5], [h[0], 1.1, h[2] + 1.5], pushK(f, 108, 0.0015), { fov: 40 }); };
+const S3a = (f: number) => { const h = heroPos(3, f); return dolly([h[0] + 4.9, 1.1, h[2] - 3.2], [h[0], 1.1, h[2] + 1.5], pushK(f, 108, 0.0015), { fov: 40 }); };
 const S3b = (f: number) => { const h = heroPos(3, f); return dolly([h[0] + 7, 3.4, h[2] - 2], [h[0], 1.3, h[2] + 2.5], pushK(f, 141, 0.002), { fov: 42 }); };
 // shot 4: pigeon CU at head height, push; kick at "sticker"
 const S4a = (f: number) => dolly(P("street", 1.0, 1.9, -2.4), P("street", 0, 1.9, 0), pushK(f, 166, 0.003), { fov: 32 });

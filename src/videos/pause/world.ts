@@ -49,11 +49,11 @@ const beamBetween = (a: THREE.Vector3, b: THREE.Vector3, th: number) => {
   return g.applyMatrix4(m);
 };
 /** sun disc (solid, soft rim) and the flat golden halo (lighting.md 6 / depth.md 6.4: r50 13-26 % of the frame width) */
-const discTex = () => ctex("sunDisc", 128, 128, (g) => {
+export const discTex = () => ctex("sunDisc", 128, 128, (g) => {
   const gr = g.createRadialGradient(64, 64, 58, 64, 64, 64); gr.addColorStop(0, "rgba(255,255,255,1)"); gr.addColorStop(1, "rgba(255,255,255,0)");
   g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
 });
-const haloTex = () => ctex("sunHalo", 256, 256, (g) => {
+export const haloTex = () => ctex("sunHalo", 256, 256, (g) => {
   const im = g.createImageData(256, 256);
   for (let y = 0; y < 256; y++) for (let x = 0; x < 256; x++) {
     const u = Math.hypot(x - 127.5, y - 127.5) / 128;

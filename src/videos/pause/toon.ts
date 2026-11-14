@@ -907,3 +907,22 @@ export const fxBlob = (p: Pen, col: string) => {
   for (const [r, k] of [[0, 0], [0.5, 0.04], [0.64, 0.18], [0.76, 0.42], [0.87, 0.72], [0.95, 0.92], [1, 1]] as const) gr.addColorStop(r, mix(col, WHITE, k));
   g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
 };
+
+/** pigeon on a 400 x 300 canvas facing right; wing 0 = up (frozen pose), 1 = down */
+export const fxPigeon = (p: Pen, wing: number) => {
+  const up: P2[] = [[190, 150], [120, 30], [235, 105]], dn: P2[] = [[190, 170], [105, 262], [235, 195]];
+  const w = up.map((a, i) => [a[0] + (dn[i][0] - a[0]) * wing, a[1] + (dn[i][1] - a[1]) * wing] as P2);
+  p.poly([[130, 175], [40, 150], [60, 200], [140, 195]], "#6c7288", 6); // tail
+  p.ell(200, 175, 90, 52, "#9097ab", 7); // body
+  p.ell(222, 185, 52, 30, "#b4b9c9", 0); // belly
+  p.poly(w, "#7b8299", 6); // wing
+  p.ell(285, 128, 34, 32, "#7b8299", 7); // head
+  p.ell(262, 158, 26, 18, "#4fa395", 0); // neck sheen
+  p.poly([[312, 122], [352, 134], [312, 142]], "#f2a33a", 5); // beak
+  p.dot(293, 120, 9, "#ffffff"); p.dot(295, 120, 5, INK);
+  p.stroke([[190, 220], [188, 252]], 7, "#d9728a"); p.stroke([[215, 222], [218, 252]], 7, "#d9728a"); // legs
+};
+/** three horn arcs on a 300 x 300 canvas */
+export const fxHorn = (p: Pen) => {
+  for (let i = 0; i < 3; i++) p.arc(60, 150, 60 + i * 55, 60 + i * 55, -35, 35, 14 - i * 2, i % 2 ? "#ffd84a" : INK);
+};

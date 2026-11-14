@@ -258,7 +258,7 @@ const inTheWay = (x0: number, x1: number, y0: number, y1: number, z0: number, z1
 // Kenney's faceted low-poly trees and box hedges -> rounded storybook shapes: clustered smooth spheres for canopies
 // (the two-tone sun term gives each lobe a lit cap and a cool belly), tapered trunks, rounded-box hedges. Smooth
 // normals mean the world ink draws clean silhouettes and lobe-to-lobe folds instead of a crease on every facet.
-type VegKind = "round" | "fat" | "tall" | "cone" | "bush" | "hedge";
+export type VegKind = "round" | "fat" | "tall" | "cone" | "bush" | "hedge";
 const VEG: Record<string, VegKind> = {
   tree_oak: "round", tree_default: "round", tree_detailed: "round", tree_fat: "fat", "tree-high-round": "tall", tree: "tall",
   tree_cone: "cone", plant_bushLarge: "bush", plant_bushDetailed: "bush", plant_bush: "bush", hedge: "hedge",
@@ -324,7 +324,7 @@ const yawQ = (a: number) => new THREE.Quaternion().setFromAxisAngle(V(0, 1, 0), 
 /** half-width of a cartoon plant of kind k and height h (for the sight-line test) */
 const vegRad = (k: VegKind, h: number) => (k === "hedge" ? 1.7 : k === "bush" ? 0.85 * h : k === "tall" ? 0.2 * h : k === "cone" ? 0.27 * h : k === "fat" ? 0.44 * h : 0.39 * h);
 /** add one cartoon plant to a batch: base at (x, y, z), height h, q = lobe detail (0 near .. 2 far) */
-const addVeg = (b: Batch, k: VegKind, x: number, y: number, z: number, h: number, seed: number, q = 0) => {
+export const addVeg = (b: Batch, k: VegKind, x: number, y: number, z: number, h: number, seed: number, q = 0) => {
   const r = rng(Math.abs(Math.floor(seed)) % 200000 + 7), U = (a: number, c: number) => a + (c - a) * r();
   const leaf = leafMat(k === "cone" ? 4 : k === "hedge" ? 1 : Math.floor(r() * 4)), lobe = lobeGeo(q), yaw = r() * 6.28;
   const put = (px: number, py: number, pz: number, rad: number, sy = 0.9) =>
