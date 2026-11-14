@@ -89,7 +89,7 @@ const BUILD: Record<SetId, (g: THREE.Group) => void> = {
     cyl(g, 0.06, 4.2, -6, 0, 2.4, M("#333")); ball(g, 0.3, -6, 4.3, 2.4, M("#ffd08a"));
   },
   track(g) {
-    floor(g, 140, 30, 20, 0, 0, M("#c8553d"), 70, 1); floor(g, 140, 40, 20, -0.02, 22, grass(), 40, 12);
+    floor(g, 140, 30, 20, 0, 0, M("#b5583f"), 70, 1); floor(g, 140, 40, 20, -0.02, 22, grass(), 40, 12);
     for (let x = -20; x < 60; x += 4) box(g, 1.6, 0.02, 0.12, x, 0.02, -1.4, M("#ffffff"), false);
     box(g, 140, 0.02, 0.15, 20, 0.02, 1.8, M("#ffffff"), false);
     for (const z of [-2.4, 2.4]) cyl(g, 0.07, 1.3, 20.6, 0, z, M("#ffffff"));
@@ -152,6 +152,9 @@ const BUILD: Record<SetId, (g: THREE.Group) => void> = {
   },
 };
 
+/** golden sets are side-lit (the bridge preset backlights, which leaves our faces and facades in blue shade) */
+const SUN_SET: Partial<Record<SetId, { az?: number; el?: number }>> = { bar: { az: 55, el: 16 }, car: { az: 45, el: 15 }, bench: { az: 60, el: 15 }, field: { az: 50, el: 14 }, skyline: { az: 55, el: 14 } };
+
 // ---------------- the world ----------------
 export class World {
   root = new THREE.Group();
@@ -213,7 +216,7 @@ export class World {
     let fx = 0, fz = 0;
     for (let f = s.a; f < s.b; f += 3) { const c = camAt(id, f), x = c.look[0] - c.pos[0], z = c.look[2] - c.pos[2], n = Math.hypot(x, z) || 1; fx += x / n; fz += z / n; }
     const n = Math.hypot(fx, fz) || 1; fx /= n; fz /= n;
-    const az = THREE.MathUtils.degToRad(L.az), el = THREE.MathUtils.degToRad(L.el);
+    const so = SUN_SET[s.set], az = THREE.MathUtils.degToRad(so?.az ?? L.az), el = THREE.MathUtils.degToRad(so?.el ?? L.el);
     const hx = fx * Math.cos(az) - fz * Math.sin(az), hz = fz * Math.cos(az) + fx * Math.sin(az);
     v = new THREE.Vector3(hx * Math.cos(el), Math.sin(el), hz * Math.cos(el)).normalize();
     this.sunCache.set(id, v);
@@ -237,7 +240,7 @@ export class World {
     this.sun.position.copy(focus).addScaledVector(sunDir, 220); this.sun.target.position.copy(focus);
     const sc = this.sun.shadow.camera; sc.left = -Rr; sc.right = Rr; sc.top = Rr; sc.bottom = -Rr; sc.near = 20; sc.far = 480; sc.updateProjectionMatrix();
     this.sun.shadow.bias = L.bias; this.sun.shadow.normalBias = L.normalBias * (Rr / 12);
-    TONE.uLitCol.value.set(...L.lit); TONE.uShadeCol.value.set(...L.shade); TONE.uShadeLift.value.set(...L.lift);
+    TONE.uLitCol.value.set(...L.lit); TONE.uShadeCol.value.set(...L.shade); TONE.uShadeLift.value.set(L.lift[0] + (s.light === "golden" ? 0.07 : 0), L.lift[1] + (s.light === "golden" ? 0.05 : 0), L.lift[2] + (s.light === "golden" ? 0.03 : 0));
     TONE.uLambert.value = L.lambert; TONE.uSideK.value = L.sideK; TONE.uTerm.value = L.term; TONE.uBounce.value.set(...K.bounce); TONE.uSat.value = K.sat;
     CHAR.uCharTint.value.set(...L.charTint); CHAR.uCharShade.value = L.charShade; CHAR.uGrad.value = L.charGrad; CHAR.uBodyGrad.value = L.bodyGrad; CHAR.uSideTint.value.set(...L.sideTint);
     const su = this.skyMat.uniforms;

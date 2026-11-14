@@ -13,13 +13,13 @@ const HERO: Outfit = { jacket: "#e2453c", pants: "#3b5b9a", boots: "#f4f1ea", ha
 const aged = (v: number, age: Age): Outfit => {
   const coats = ["#3f6fb5", "#5d7a3a", "#b5653f", "#2f5f6a"];
   const o: Outfit = { jacket: coats[v % 4], pants: "#3b3f52", boots: "#4a3426", skin: SKINS[(v + 1) % 4], build: "adult", hat: "hair", hair: "#5a3b2a" };
-  if (age === "tired") return { ...o, hair: "#5a4a3a" };
-  if (age === "grey") return { ...o, hair: "#b8b8c4", moustache: v % 2 ? "#9a9aa6" : undefined };
-  if (age === "old") return { ...o, hat: null, moustache: "#e8e8ee", jacket: "#7a6a4a", build: "stout" };
+  if (age === "tired") return { ...o, hair: "#5a4a3a", age: 1 };
+  if (age === "grey") return { ...o, hair: "#b8b8c4", moustache: v % 2 ? "#9a9aa6" : undefined, age: 2 };
+  if (age === "old") return { ...o, hat: null, moustache: "#e8e8ee", jacket: "#7a6a4a", build: "stout", age: 3 };
   return o;
 };
-const BOUNCER: Outfit = { jacket: "#22222a", pants: "#1a1a22", boots: "#111118", hat: null, skin: SKINS[3], moustache: "#1b1410", build: "stout" };
-const GRANDPA: Outfit = { jacket: "#8a6a3a", pants: "#3b3f52", boots: "#4a3426", hat: "cap", cap: "#6a5a3a", skin: SKINS[1], moustache: "#f2f2f6", build: "stout" };
+const BOUNCER: Outfit = { jacket: "#3d3d56", pants: "#2a2a3a", boots: "#111118", hat: null, skin: SKINS[3], moustache: "#1b1410", build: "stout", age: 1 };
+const GRANDPA: Outfit = { jacket: "#8a6a3a", pants: "#3b3f52", boots: "#4a3426", hat: "cap", cap: "#6a5a3a", skin: SKINS[1], moustache: "#f2f2f6", build: "stout", age: 3 };
 const WAITER: Outfit = { jacket: "#f1efe6", pants: "#1c1c24", boots: "#111118", hat: null, skin: SKINS[2], moustache: "#2a201a", build: "adult" };
 
 // ---------------- helpers ----------------
