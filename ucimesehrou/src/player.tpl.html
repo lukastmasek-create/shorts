@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Učíme se hrou</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&display=swap">
+<style>
+html,body{margin:0;height:100%;background:#050403;color:#efe6d3;font:14px system-ui,sans-serif}
+body{display:flex;flex-direction:column;align-items:center;justify-content:center}
+#stage{position:relative;width:min(100vw,calc((100vh - 52px) * 16 / 9));aspect-ratio:16/9;background:#000}
+canvas{width:100%;height:100%;display:block}
+#bar{display:flex;gap:12px;align-items:center;box-sizing:border-box;width:min(100vw,calc((100vh - 52px) * 16 / 9));height:52px;padding:0 12px}
+button{background:#2a241c;color:#efe6d3;border:1px solid #4a4032;border-radius:6px;height:34px;min-width:38px;padding:0 10px;font:inherit;cursor:pointer}
+button[aria-pressed="false"]{opacity:.55}
+button:focus-visible,input:focus-visible{outline:2px solid #f5bd35;outline-offset:2px}
+#scrub{flex:1;min-width:0;accent-color:#e2604a}
+#time{font-variant-numeric:tabular-nums;min-width:92px;text-align:right}
+#msg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:700 22px Georgia,serif;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="c" width="1920" height="1080"></canvas><div id="msg">Načítám…</div></div>
+<div id="bar">
+  <button id="play" aria-label="Přehrát">▶</button>
+  <input id="scrub" type="range" min="0" max="1" step="0.001" value="0" aria-label="Čas">
+  <span id="time">0.0 / 25.0</span>
+  <button id="snd" aria-pressed="true" aria-label="Zvuk">🔊</button>
+  <button id="loop" aria-pressed="true" aria-label="Smyčka">↻</button>
+</div>
+<script type="text/plain" id="kit-stage">/*STAGE*/</script>
+<script type="text/plain" id="kit-sound">/*SOUND*/</script>
+<script type="text/plain" id="kit-style">/*STYLE*/</script>
+<script type="importmap">{"imports":{"three":"/*THREE*/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+window.THREE = THREE;
+const inject = (id) => { const s = document.createElement('script'); s.text = document.getElementById(id).textContent; document.head.append(s); };
+inject('kit-stage'); inject('kit-sound'); inject('kit-style');
+await document.fonts.load('700 100px "Fraunces"', 'ěščřžýáíéúůďťňĚŠČŘŽ?²×').catch(() => null);
+const style = STYLES[0];
+const render = new URLSearchParams(location.search).has('render');
+const canvas = document.getElementById('c');
+const S = await K.run(canvas, style, { samples: render ? (+new URLSearchParams(location.search).get('samples') || style.render.samples) : 3 });
+window.STYLE = style; window.S = S;
+window.seek = (t) => S.seek(t);
+window.DURATION = style.duration;
+document.getElementById('msg').remove();
+
+const $ = (id) => document.getElementById(id);
+const D = style.duration;
+let t = 0, playing = false, last = 0, stopSound = () => {}, soundOn = true, loop = true;
+const label = () => { $('time').textContent = t.toFixed(1) + ' / ' + D.toFixed(1); $('scrub').value = t / D; };
+const startSound = () => { stopSound(); stopSound = () => {}; if (soundOn && playing) stopSound = SOUND.live((k) => style.sound(k), t, { voiceover: false }); };
+const halt = () => { stopSound(); stopSound = () => {}; };
+const draw = () => { S.seek(t); label(); };
+const setPlaying = (p) => { playing = p; $('play').textContent = p ? '❚❚' : '▶'; $('play').setAttribute('aria-label', p ? 'Pauza' : 'Přehrát'); if (p) { if (t >= D - 0.01) t = 0; last = performance.now(); startSound(); requestAnimationFrame(tick); } else halt(); };
+function tick(now) {
+  if (!playing) return;
+  t += (now - last) / 1000; last = now;
+  if (t >= D) { if (loop) { t = 0; startSound(); } else { t = D; draw(); setPlaying(false); return; } }
+  draw(); requestAnimationFrame(tick);
+}
+$('play').onclick = () => setPlaying(!playing);
+$('scrub').oninput = (e) => { t = e.target.value * D; halt(); draw(); };
+$('scrub').onchange = () => { if (playing) { last = performance.now(); startSound(); } };
+$('snd').onclick = () => { soundOn = !soundOn; $('snd').setAttribute('aria-pressed', soundOn); $('snd').textContent = soundOn ? '🔊' : '🔇'; if (!soundOn) halt(); else startSound(); };
+$('loop').onclick = () => { loop = !loop; $('loop').setAttribute('aria-pressed', loop); };
+document.addEventListener('keydown', (e) => { if (e.code === 'Space' && e.target.tagName !== 'BUTTON') { e.preventDefault(); setPlaying(!playing); } });
+draw();
+</script>
+</body>
+</html>
