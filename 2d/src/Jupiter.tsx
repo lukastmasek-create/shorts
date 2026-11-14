@@ -25,14 +25,14 @@ const Jup: React.FC<{ x: number; y: number; r: number; t?: number; o?: number }>
   </g>;
 };
 // Earth: outline + continent squiggles
-const Earth: React.FC<{ x: number; y: number; r: number; o?: number; squash?: number; frozen?: number; lava?: number; t?: number }> = ({ x, y, r, o = 1, squash = 1, frozen = 0, lava = 0, t = 0 }) => <g transform={`translate(${x} ${y}) scale(${1 / Math.sqrt(squash)} ${squash})`} opacity={o} style={{ filter: GLOW }}>
+export const Earth: React.FC<{ x: number; y: number; r: number; o?: number; squash?: number; frozen?: number; lava?: number; t?: number }> = ({ x, y, r, o = 1, squash = 1, frozen = 0, lava = 0, t = 0 }) => <g transform={`translate(${x} ${y}) scale(${1 / Math.sqrt(squash)} ${squash})`} opacity={o} style={{ filter: GLOW }}>
   <circle r={r} fill="#000" stroke={INK} strokeWidth={Math.max(4, r * 0.03)} />
   <path d={`M${-r * 0.5} ${-r * 0.2} q ${r * 0.1} ${-r * 0.4} ${r * 0.35} ${-r * 0.3} q ${r * 0.2} ${r * 0.1} ${r * 0.05} ${r * 0.4} q ${-r * 0.2} ${r * 0.2} ${-r * 0.4} ${-r * 0.1} Z`} {...st} strokeWidth={Math.max(2, r * 0.02)} opacity={0.8} />
   <path d={`M${r * 0.15} ${r * 0.15} q ${r * 0.3} ${-r * 0.1} ${r * 0.35} ${r * 0.15} q ${-r * 0.1} ${r * 0.3} ${-r * 0.35} ${r * 0.2} Z`} {...st} strokeWidth={Math.max(2, r * 0.02)} opacity={0.8} />
   {frozen > 0 && Array.from({ length: 8 }, (_, i) => <line key={i} x1={-r * 0.8 + i * r * 0.22} y1={-r * 0.9} x2={-r * 0.8 + i * r * 0.22 + r * 0.5} y2={r * 0.9} stroke="#fff" strokeWidth={2} opacity={0.45 * frozen} clipPath="" />)}
   {lava > 0 && [[-0.5, 0.3], [0.3, -0.4], [0.55, 0.35], [-0.2, -0.55], [0, 0.55]].map(([a, b], i) => <g key={i} opacity={lava}><circle cx={a * r} cy={b * r} r={r * 0.08} fill="#fff" /><path d={`M${a * r - r * 0.1} ${b * r} l ${r * 0.1} ${-r * 0.25 * (1 + 0.3 * Math.sin(t * 0.3 + i))} l ${r * 0.1} ${r * 0.25}`} {...st} strokeWidth={3} /></g>)}
 </g>;
-const Sun: React.FC<{ x: number; y: number; r: number; t: number; o?: number }> = ({ x, y, r, t, o = 1 }) => <g transform={`translate(${x} ${y})`} opacity={o} style={{ filter: GLOW }}>
+export const Sun: React.FC<{ x: number; y: number; r: number; t: number; o?: number }> = ({ x, y, r, t, o = 1 }) => <g transform={`translate(${x} ${y})`} opacity={o} style={{ filter: GLOW }}>
   {Array.from({ length: 14 }, (_, i) => <line key={i} x1={0} x2={0} y1={-r * 1.25} y2={-r * (1.5 + 0.08 * Math.sin(t * 0.2 + i))} stroke={INK} strokeWidth={4} strokeLinecap="round" transform={`rotate(${i * 25.7 + t * 0.4})`} />)}
   <circle r={r} fill="#fff" /></g>;
 
