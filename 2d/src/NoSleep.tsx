@@ -75,33 +75,33 @@ const Year = (t: number) => {
 const Use = (t: number) => {
   const items: [string, "book" | "monitor" | "coins"][] = [["Learn", "book"], ["Build", "monitor"], ["Earn", "coins"]];
   return <>
-    {items.map(([s, k], i) => { const y = 470 + i * 380, a = 10 + i * 40;
+    {items.map(([s, k], i) => { const y = 470 + i * 380, a = [12, 28, 55][i];
       return <g key={s}><Icon2 k={k} x={250} y={y} s={1.3} o={pop(t, a)} /><Pill text={s} x={650} y={y - 70} a={a + 6} size={18} />
         <rect x={420} y={y + 10} width={500} height={26} fill="none" stroke="#fff" strokeWidth={2.5} opacity={0.6 * pop(t, a)} />
-        <rect x={420} y={y + 10} width={500 * easeOut(prog(t, a + 8, a + 60))} height={26} fill="#fff" style={{ filter: GLOW }} opacity={pop(t, a)} /></g>; })}
+        <rect x={420} y={y + 10} width={500 * easeOut(prog(t, a + 4, a + 40))} height={26} fill="#fff" style={{ filter: GLOW }} opacity={pop(t, a)} /></g>; })}
   </>;
 };
 // 4 years pass, hero pulls ahead of dim crowd
 const Ahead = (t: number) => {
-  const yr = 1 + Math.round(4 * easeIO(prog(t, 10, 120)));
+  const yr = 1 + Math.round(3 * easeIO(prog(t, 4, 22)));
   return <>
     <Num v={"YEAR " + yr} x={cx} y={300} size={110} />
     <Ground y={1250} />
     {[0, 1, 2, 3].map(i => <Person key={i} x={150 + i * 110 + 90 * easeIO(prog(t, 10, 120))} y={1250} fill={false} o={0.55} />)}
     <g transform={`translate(${easeIO(prog(t, 10, 120)) * 520} 0)`}><SuitMan x={200} y={1250} s={2.4} /></g>
-    <Pill text="Everyone else" x={330} y={1110} a={30} on={false} size={13} />
-    <Pill text="Way ahead" x={cx + 200} y={700} a={95} />
+    <Pill text="Everyone else" x={330} y={1370} a={30} on={false} size={13} />
+    <Pill text="Way ahead" x={cx + 200} y={700} a={52} />
   </>;
 };
 // 5 skills stack: bars staircase + certs
 const Skills = (t: number) => <>
-  <Pill text="Skills stack up" x={cx} y={250} a={5} />
-  {[0, 1, 2, 3, 4, 5].map(i => { const h = 130 + i * 130 * easeOut(prog(t, 15 + i * 12, 45 + i * 12)) , hh = (80 + i * 120) * easeOut(prog(t, 15 + i * 12, 45 + i * 12));
+  <Pill text="Skills stack up" x={cx} y={250} a={0} />
+  {[0, 1, 2, 3, 4, 5].map(i => { const hh = (80 + i * 120) * easeOut(prog(t, 2 + i * 9, 40 + i * 9));
     return <rect key={i} x={140 + i * 140} y={1350 - hh} width={110} height={hh} fill="#fff" fillOpacity={0.15 + i * 0.14} stroke="#fff" strokeWidth={3} style={{ filter: GLOW }} />; })}
   <Ground y={1350} />
-  <Icon2 k="cert" x={300} y={600} s={0.8} o={pop(t, 80)} />
-  <Icon2 k="medal" x={cx + 20} y={500} s={0.8} o={pop(t, 95)} />
-  <Icon2 k="chart" x={W - 260} y={600} s={0.8} o={pop(t, 110)} />
+  <Icon2 k="cert" x={300} y={600} s={0.8} o={pop(t, 72)} />
+  <Icon2 k="medal" x={cx + 20} y={500} s={0.8} o={pop(t, 93)} />
+  <Icon2 k="chart" x={W - 260} y={600} s={0.8} o={pop(t, 100)} />
 </>;
 // 6 world changes: skyline grows, calendar year ticks
 const World = (t: number) => {
