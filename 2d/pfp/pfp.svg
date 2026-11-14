@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+<defs>
+<radialGradient id="v" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#1c1c1c"/><stop offset="1" stop-color="#000"/></radialGradient>
+<filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="a"/><feGaussianBlur in="SourceGraphic" stdDeviation="22" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="a"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1080" height="1080" fill="url(#v)"/>
+<g filter="url(#g)" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round">
+<circle cx="540" cy="540" r="400" stroke-width="8" stroke-dasharray="2 28" opacity=".5"/>
+<circle cx="540" cy="540" r="330" opacity=".9"/>
+<circle cx="540" cy="450" r="85" fill="#fff" stroke="none"/>
+<path d="M395 700 Q395 570 540 570 Q685 570 685 700 Z" fill="#fff" stroke="none"/>
+<path d="M420 760 H660" stroke-dasharray="8 16" stroke-width="6" opacity=".7"/>
+</g>
+<g fill="#fff" opacity=".35" filter="url(#g)">
+<circle cx="325" cy="610" r="26"/><path d="M290 700 Q290 645 325 645 Q360 645 360 700Z"/>
+<circle cx="755" cy="610" r="26"/><path d="M720 700 Q720 645 755 645 Q790 645 790 700Z"/>
+</g>
+</svg>
