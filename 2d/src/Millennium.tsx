@@ -1,5 +1,5 @@
-// "Future" short (idea #77): see 1,000 years into the future, humanity unrecognizable. fx kit (full screen + transitions).
-// Voice: 2d/future/voice.wav (Kokoro, `python 2d/voice_short.py future`); cues from words.json.
+// "Millennium" short (idea #77): see 1,000 years into the future, humanity unrecognizable. fx kit (full screen + transitions).
+// Voice: 2d/millennium/voice.wav (Kokoro, `python 2d/voice_short.py future`); cues from words.json.
 import React from "react";
 import { Audio, staticFile } from "remotion";
 import { Stage, Pill, Num, Person, Ground, Ring, Cross, Icon, W, H, INK, GLOW, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";
@@ -7,7 +7,7 @@ import { Icon2, Txt, Box } from "./kit2";
 import { SceneFx, Cam, Flash, Starfield, GridBG, BigRings, Rays, GhostBleed, spread, CX, CY, Trans } from "./fx";
 
 const FR = [0, 130, 260, 441, 619, 749, 879, 1036, 1171, 1301, 1431, 1617, 1747];
-export const FUTURE_FRAMES = 1747;
+export const MILLENNIUM_FRAMES = 1747;
 const st = { fill: "none", stroke: INK, strokeWidth: 5, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 const Gl: React.FC<{ children: React.ReactNode; o?: number }> = ({ children, o = 1 }) => <g opacity={o} style={{ filter: GLOW }}>{children}</g>;
 const rnd = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
@@ -155,4 +155,4 @@ const PLAN: [Trans, Trans, (t: number) => React.ReactNode][] = [
   ["fade", "zoomIn", Hook], ["zoomIn", "whipL", Year], ["whipL", "zoomIn", Sky], ["zoomIn", "whipL", Street], ["whipL", "zoomOut", Look], ["zoomOut", "whipUp", Machine],
   ["whipUp", "whipL", Rebuilt], ["whipL", "zoomIn", Signal], ["zoomIn", "whipDown", Photo], ["whipDown", "zoomOut", Became], ["zoomOut", "whipL", Page], ["whipL", "fade", End],
 ];
-export const FutureShort: React.FC = () => <Stage><Audio src={staticFile("future/voice.wav")} />{PLAN.map(([i, o, C], k) => <SceneFx key={k} a={FR[k]} b={FR[k + 1]} inT={i} outT={o}>{C}</SceneFx>)}</Stage>;
+export const MillenniumShort: React.FC = () => <Stage><Audio src={staticFile("millennium/voice.wav")} />{PLAN.map(([i, o, C], k) => <SceneFx key={k} a={FR[k]} b={FR[k + 1]} inT={i} outT={o}>{C}</SceneFx>)}</Stage>;
