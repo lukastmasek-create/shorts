@@ -3,6 +3,7 @@ import { Composition } from "remotion";
 import { MonoShort, MONO_FRAMES } from "./Mono";
 import { CalmShort, CALM_FRAMES } from "./Calm";
 import { SimShort, SIM_FRAMES } from "./Sim";
+import { Dim4Short, DIM4_FRAMES } from "./Dim4";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
 export const Root: React.FC = () => (
@@ -11,5 +12,6 @@ export const Root: React.FC = () => (
     <Composition id="CalmShort" component={CalmShort} durationInFrames={CALM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="DegreeShort" component={DegreeShort} durationInFrames={DEGREE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="SimShort" component={SimShort} durationInFrames={SIM_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="Dim4Short" component={Dim4Short} durationInFrames={DIM4_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
