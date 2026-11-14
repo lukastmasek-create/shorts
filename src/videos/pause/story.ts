@@ -71,10 +71,18 @@ const WALK = 0.047; // m per frame (1.4 m/s)
 export const heroPos = (id: number, f: number): V3 => {
   const s = SHOTS[id - 1];
   const t = Math.max(0, f - s.a);
-  if (id === 1) return P("street", 0, 0, -WALK * Math.max(0, FREEZE_AT - f)); // strolling into place, freezes at (0,0,0)
-  if (id === 3) return P("street", -1.2, 0, -6 + WALK * t);
-  if (id === 5) return P("cafe", -2 + WALK * 1.4 * Math.min(t, 50), 0, 0);
-  return P(s.set, 0, 0, 0);
+  switch (id) {
+    case 1: return P("street", 0, 0, -WALK * Math.max(0, FREEZE_AT - f)); // strolling into place, freezes at (0,0,0)
+    case 3: return P("street", -1.2, 0, -6 + WALK * t);
+    case 5: return P("cafe", -2 + 8.6 * smooth(t / 54), 0, 0); // past the frozen queue to the counter
+    case 6: return P("cafe", 6.2, 0, -0.35);
+    case 7: return f < 419 ? P("desk", 0, 0, -0.5) : P("desk", 4.7, 0, -0.5); // at his desk, then beside the neighbor's
+    case 8: return P("library", -1.1, 0, 0);
+    case 9: return f < 597 ? P("square", 0.4, 0, 0) : f < 611 ? P("square", -2.3, 0, 0) : f < 623 ? P("square", 2.8, 0, 0) : P("square", 0.4, 0, 0);
+    case 17: case 18: return P("party", 0.8, 0, 0);
+    case 19: case 20: return P("porch", 0, 0.32, 1.1);
+    default: return P(s.set, 0, 0, 0);
+  }
 };
 
 // ---------------- camera ----------------
@@ -151,7 +159,7 @@ const S13a = (f: number) => dolly(P("lawn", 0.6, 1.2, -2.6), P("lawn", 0, 1.15, 
 const S14a = (f: number) => dolly(P("explain", 0, 1.5, -9), P("explain", 0, 1.5, 0), pushK(f, 980, 0.0015), { fov: 40 });
 const S15a = (f: number) => { const u = glide((f - 1088) / 86); return { pos: P("explain", 0, 1.0 + 3.5 * u, -10), look: P("explain", 0, 1.5 + 3.5 * u, 0), fov: 40 } as Shot; };
 const S16a = (f: number) => dolly(P("explain", 0, 1.5, -9), P("explain", 0, 1.5, 0), pushK(f, 1176, 0.001), { fov: 40 });
-const S16b = (f: number) => dolly(P("explain", 3, 1.5, -6), P("explain", 3.5, 1.5, 0), pushK(f, 1267, 0.0025), { fov: 36 });
+const S16b = (f: number) => dolly(P("explain", -3, 1.5, -6), P("explain", -3.2, 1.5, 0), pushK(f, 1267, 0.0025), { fov: 36 });
 // shot 17: birthday table MS, cut to glasses + book on "wiser", cut to the yawn on "tired"
 const S17a = (f: number) => dolly(P("party", 0, 1.7, -6), P("party", 0, 1.2, 0), pushK(f, 1296, 0.002), { fov: 42 });
 const S17b = (f: number) => dolly(P("party", 0.8, 1.6, -3), P("party", 0.8, 1.5, 0), pushK(f, 1366, 0.0025), { fov: 36 });

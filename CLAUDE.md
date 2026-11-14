@@ -17,7 +17,7 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 - GitHub scope: only `lukastmasek-create/umime-skola` and `lukastmasek-create/shorts`. Cannot create repos.
 
 ## Pause short (`src/videos/pause/`, plan `pause/SHOTPLAN.md`)
-- `story.ts` shots/cams/kicks done; `legacy.ts` = bridge physics for old world.ts/cast.ts (delete later). New: `pworld.ts` (world), `pcast.ts` (cast), `sets.ts` (one builder per set). Only `street` set built (shots 1-4). Stills: `COMP=PauseShort PROPS='{"nopost":1}' node scripts/bridge-stills.mjs out/pause/p_ 10,130`.
+- `story.ts` shots/cams/kicks done; `legacy.ts` = bridge physics for old world.ts/cast.ts (delete later). New: `pworld.ts` (world), `pcast.ts` (cast), `sets.ts` (one builder per set). All 11 sets + casts built (first pass, stills checked at one frame per shot; cameras/props still rough: cube cars, boxy chairs, hands/glasses cards hand-placed). NOTE: cams look +z from -z so set +x is screen LEFT. Stills: `COMP=PauseShort PROPS='{"nopost":1}' node scripts/bridge-stills.mjs out/pause/p_ 10,130`.
 
 ## Status
 Scaffold done, typechecks. No topic/script chosen yet. Next: topic -> script (SKILL.md step 2) -> `scripts/voice.py` -> story.ts shot plan.

@@ -9,9 +9,16 @@ import { TONE, CHAR, untone } from "./shade";
 import { NOINK } from "./ink";
 import { Pool, Actor, Fx } from "./cast";
 import { pauseStage } from "./pcast";
-import { buildStreet, buildCar, STREET_CARS } from "./sets";
+import { buildStreet, buildCar, STREET_CARS, buildCafe, buildDesk, buildLibrary, buildSquare, buildBath, buildLawn, buildExplain, buildParty, buildPorch, buildTown } from "./sets";
 import { discTex, haloTex } from "./world";
 import { FPS, SHOTS, SET_X, FREEZE_AT, camAt, ShotDef } from "./story";
+
+/** per-shot sun override (deg from the view axis / elevation): interiors and flat cards are lit from the front-left so back walls are not in shade */
+const SUN_SHOT: Record<number, { az: number; el: number }> = {
+  5: { az: 30, el: 55 }, 6: { az: 30, el: 55 }, 7: { az: 30, el: 55 }, 8: { az: 25, el: 55 }, 10: { az: 25, el: 55 }, 11: { az: 25, el: 55 },
+  12: { az: 45, el: 22 }, 13: { az: 45, el: 22 }, 14: { az: 20, el: 60 }, 15: { az: 20, el: 60 }, 16: { az: 20, el: 60 }, 17: { az: 25, el: 55 }, 18: { az: 25, el: 55 },
+  19: { az: 40, el: 25 }, 20: { az: 40, el: 25 }, 21: { az: 45, el: 22 },
+};
 
 export class PauseWorld {
   root = new THREE.Group();
@@ -66,8 +73,8 @@ export class PauseWorld {
       m.layers.set(NOINK);
       this.clouds.push(m); R.add(m);
     }
-    // ---- sets (one stage each; only `street` so far) ----
-    buildStreet(R, kit);
+    // ---- sets (one stage each, 200 m apart) ----
+    for (const build of [buildStreet, buildCafe, buildDesk, buildLibrary, buildSquare, buildBath, buildLawn, buildExplain, buildParty, buildPorch, buildTown]) build(R, kit);
     for (const c of STREET_CARS) {
       const g = buildCar(c);
       this.cars.push({ g, z0: c.z0, v: c.v, x: c.x });
@@ -85,7 +92,8 @@ export class PauseWorld {
       fx += x / n; fz += z / n;
     }
     const n = Math.hypot(fx, fz) || 1; fx /= n; fz /= n;
-    const az = THREE.MathUtils.degToRad(L.az), el = THREE.MathUtils.degToRad(L.el);
+    const o = SUN_SHOT[id];
+    const az = THREE.MathUtils.degToRad(o?.az ?? L.az), el = THREE.MathUtils.degToRad(o?.el ?? L.el);
     const hx = fx * Math.cos(az) - fz * Math.sin(az), hz = fz * Math.cos(az) + fx * Math.sin(az);
     v = new THREE.Vector3(hx * Math.cos(el), Math.sin(el), hz * Math.cos(el)).normalize();
     this.sunCache.set(id, v);

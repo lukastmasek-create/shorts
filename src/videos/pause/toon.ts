@@ -926,3 +926,37 @@ export const fxPigeon = (p: Pen, wing: number) => {
 export const fxHorn = (p: Pen) => {
   for (let i = 0; i < 3; i++) p.arc(60, 150, 60 + i * 55, 60 + i * 55, -35, 35, 14 - i * 2, i % 2 ? "#ffd84a" : INK);
 };
+
+// ---- pause short effect cards ----
+const bold = (p: Pen, ch: string, w: number, h: number, size: number, fill: string) => {
+  const g = p.g; g.font = `900 ${size}px Arial Black, Arial, sans-serif`; g.textAlign = "center"; g.textBaseline = "middle";
+  g.lineJoin = "round"; g.lineWidth = 16; g.strokeStyle = INK; g.strokeText(ch, w / 2, h / 2); g.fillStyle = fill; g.fillText(ch, w / 2, h / 2);
+};
+/** "?" card on a 200 x 240 canvas */
+export const fxQuestion = (p: Pen) => bold(p, "?", 200, 240, 200, "#ffd84a");
+/** clock on a 300 x 300 canvas; `slice` = filled fraction of the dial (red), hands at 12 and `slice` */
+export const fxClock = (p: Pen, slice: number) => {
+  p.ell(150, 150, 130, 130, "#fffaf0", 12);
+  if (slice > 0) { const pts: P2[] = [[150, 150]]; for (let i = 0; i <= 24; i++) { const a = -Math.PI / 2 + slice * Math.PI * 2 * (i / 24); pts.push([150 + 110 * Math.cos(a), 150 + 110 * Math.sin(a)]); } p.poly(pts, "#e2453c", 0); }
+  for (let i = 0; i < 12; i++) { const a = (i * Math.PI) / 6; p.stroke([[150 + 112 * Math.sin(a), 150 - 112 * Math.cos(a)], [150 + 126 * Math.sin(a), 150 - 126 * Math.cos(a)]], 6); }
+  p.stroke([[150, 150], [150, 55]], 9); const a = slice * Math.PI * 2; p.stroke([[150, 150], [150 + 70 * Math.sin(a), 150 - 70 * Math.cos(a)]], 9); p.dot(150, 150, 12);
+};
+/** n stacked books / blocks, 240 wide, 40 tall each (canvas 240 x (40 n + 10)) */
+export const fxBooks = (p: Pen, n: number, pal: string[]) => {
+  for (let i = 0; i < n; i++) { const w = 190 + ((i * 37) % 40), x = 120 - w / 2 + (((i * 53) % 21) - 10), y = 40 * n + 5 - 40 * (i + 1); p.poly([[x, y + 4], [x + w, y + 4], [x + w, y + 38], [x, y + 38]], pal[i % pal.length], 6); }
+};
+/** flat rounded rectangle on a 128 x 128 canvas */
+export const fxRect = (p: Pen, col: string, w = 128, h = 128) => p.poly(w === 128 && h === 128 ? [[10, 30], [118, 30], [118, 98], [10, 98]] : [[8, 8], [w - 8, 8], [w - 8, h - 8], [8, h - 8]], col, w === 128 && h === 128 ? 10 : 8);
+/** calendar page on 240 x 300 */
+export const fxCal = (p: Pen) => {
+  p.poly([[20, 20], [220, 20], [220, 280], [20, 280]], "#fffaf0", 10); p.poly([[20, 20], [220, 20], [220, 80], [20, 80]], "#e2453c", 10);
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) p.dot(62 + c * 38, 120 + r * 42, 9);
+};
+/** microphone on 150 x 400 */
+export const fxMic = (p: Pen) => { p.stroke([[75, 380], [75, 180]], 22, INK); p.stroke([[75, 380], [75, 190]], 12, "#555a66"); p.ell(75, 120, 52, 70, "#c9ced8", 10); };
+/** two open hands, ten fingers, 400 x 250 */
+export const fxHands = (p: Pen) => {
+  for (const s of [-1, 1]) { const cx = 200 + s * 105; p.ell(cx, 190, 55, 50, SKIN, 8); for (let i = 0; i < 5; i++) { const a = (-70 + i * 35) * Math.PI / 180 + (s < 0 ? 0 : 0); p.stroke([[cx + 28 * Math.sin(a), 175], [cx + 90 * Math.sin(a) * 0.9, 175 - 105 * Math.cos(a)]], 20, INK); p.stroke([[cx + 28 * Math.sin(a), 175], [cx + 90 * Math.sin(a) * 0.9, 175 - 105 * Math.cos(a)]], 12, SKIN); } }
+};
+/** glasses on 200 x 90 */
+export const fxGlasses = (p: Pen) => { p.ell(55, 50, 38, 34, null, 9); p.ell(145, 50, 38, 34, null, 9); p.stroke([[93, 46], [107, 46]], 8); };
