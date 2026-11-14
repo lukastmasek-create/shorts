@@ -1,0 +1,687 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.56
+ },
+ {
+  "word": "if",
+  "start": 0.56,
+  "end": 0.72
+ },
+ {
+  "word": "you",
+  "start": 0.72,
+  "end": 0.88
+ },
+ {
+  "word": "could",
+  "start": 0.88,
+  "end": 1.04
+ },
+ {
+  "word": "escape",
+  "start": 1.04,
+  "end": 1.38
+ },
+ {
+  "word": "your",
+  "start": 1.38,
+  "end": 1.62
+ },
+ {
+  "word": "own",
+  "start": 1.62,
+  "end": 1.88
+ },
+ {
+  "word": "universe?",
+  "start": 1.88,
+  "end": 2.36
+ },
+ {
+  "word": "Everything",
+  "start": 4.76,
+  "end": 5.02
+ },
+ {
+  "word": "you",
+  "start": 5.02,
+  "end": 5.3
+ },
+ {
+  "word": "know",
+  "start": 5.3,
+  "end": 5.5
+ },
+ {
+  "word": "lives",
+  "start": 5.5,
+  "end": 5.9
+ },
+ {
+  "word": "inside",
+  "start": 5.9,
+  "end": 6.42
+ },
+ {
+  "word": "it,",
+  "start": 6.42,
+  "end": 6.82
+ },
+ {
+  "word": "every",
+  "start": 6.98,
+  "end": 7.22
+ },
+ {
+  "word": "star,",
+  "start": 7.22,
+  "end": 7.66
+ },
+ {
+  "word": "every",
+  "start": 8.32,
+  "end": 8.36
+ },
+ {
+  "word": "atom,",
+  "start": 8.36,
+  "end": 8.76
+ },
+ {
+  "word": "every",
+  "start": 9.0,
+  "end": 9.2
+ },
+ {
+  "word": "second.",
+  "start": 9.2,
+  "end": 9.64
+ },
+ {
+  "word": "Take",
+  "start": 10.62,
+  "end": 10.8
+ },
+ {
+  "word": "one",
+  "start": 10.8,
+  "end": 11.08
+ },
+ {
+  "word": "step",
+  "start": 11.08,
+  "end": 11.36
+ },
+ {
+  "word": "past",
+  "start": 11.36,
+  "end": 11.64
+ },
+ {
+  "word": "the",
+  "start": 11.64,
+  "end": 11.86
+ },
+ {
+  "word": "edge",
+  "start": 11.86,
+  "end": 12.12
+ },
+ {
+  "word": "and",
+  "start": 12.12,
+  "end": 12.3
+ },
+ {
+  "word": "you",
+  "start": 12.3,
+  "end": 12.44
+ },
+ {
+  "word": "leave,",
+  "start": 12.44,
+  "end": 12.72
+ },
+ {
+  "word": "no",
+  "start": 13.18,
+  "end": 13.38
+ },
+ {
+  "word": "space,",
+  "start": 13.38,
+  "end": 13.8
+ },
+ {
+  "word": "no",
+  "start": 14.3,
+  "end": 14.5
+ },
+ {
+  "word": "time.",
+  "start": 14.5,
+  "end": 14.92
+ },
+ {
+  "word": "Outside",
+  "start": 16.12,
+  "end": 16.46
+ },
+ {
+  "word": "you",
+  "start": 16.46,
+  "end": 16.7
+ },
+ {
+  "word": "find",
+  "start": 16.7,
+  "end": 16.94
+ },
+ {
+  "word": "something",
+  "start": 16.94,
+  "end": 17.26
+ },
+ {
+  "word": "strange,",
+  "start": 17.26,
+  "end": 17.84
+ },
+ {
+  "word": "another",
+  "start": 18.38,
+  "end": 18.62
+ },
+ {
+  "word": "universe,",
+  "start": 18.62,
+  "end": 19.2
+ },
+ {
+  "word": "then",
+  "start": 19.6,
+  "end": 19.74
+ },
+ {
+  "word": "another.",
+  "start": 19.74,
+  "end": 20.14
+ },
+ {
+  "word": "Ten,",
+  "start": 21.08,
+  "end": 21.4
+ },
+ {
+  "word": "a",
+  "start": 21.58,
+  "end": 21.62
+ },
+ {
+  "word": "thousand,",
+  "start": 21.62,
+  "end": 22.1
+ },
+ {
+  "word": "billions",
+  "start": 22.74,
+  "end": 22.92
+ },
+ {
+  "word": "of",
+  "start": 22.92,
+  "end": 23.28
+ },
+ {
+  "word": "them",
+  "start": 23.28,
+  "end": 23.52
+ },
+ {
+  "word": "floating",
+  "start": 23.52,
+  "end": 23.84
+ },
+ {
+  "word": "in",
+  "start": 23.84,
+  "end": 24.14
+ },
+ {
+  "word": "the",
+  "start": 24.14,
+  "end": 24.28
+ },
+ {
+  "word": "dark.",
+  "start": 24.28,
+  "end": 24.6
+ },
+ {
+  "word": "Each",
+  "start": 25.46,
+  "end": 25.76
+ },
+ {
+  "word": "one",
+  "start": 25.76,
+  "end": 26.04
+ },
+ {
+  "word": "a",
+  "start": 26.04,
+  "end": 26.2
+ },
+ {
+  "word": "glowing",
+  "start": 26.2,
+  "end": 26.58
+ },
+ {
+  "word": "bubble,",
+  "start": 26.58,
+  "end": 26.94
+ },
+ {
+  "word": "running",
+  "start": 27.34,
+  "end": 27.58
+ },
+ {
+  "word": "by",
+  "start": 27.58,
+  "end": 27.9
+ },
+ {
+  "word": "its",
+  "start": 27.9,
+  "end": 28.04
+ },
+ {
+  "word": "own",
+  "start": 28.04,
+  "end": 28.28
+ },
+ {
+  "word": "rules.",
+  "start": 28.28,
+  "end": 28.8
+ },
+ {
+  "word": "You",
+  "start": 29.48,
+  "end": 30.04
+ },
+ {
+  "word": "look",
+  "start": 30.04,
+  "end": 30.22
+ },
+ {
+  "word": "closer,",
+  "start": 30.22,
+  "end": 30.72
+ },
+ {
+  "word": "inside",
+  "start": 31.16,
+  "end": 31.48
+ },
+ {
+  "word": "every",
+  "start": 31.48,
+  "end": 31.94
+ },
+ {
+  "word": "bubble",
+  "start": 31.94,
+  "end": 32.22
+ },
+ {
+  "word": "a",
+  "start": 32.22,
+  "end": 32.48
+ },
+ {
+  "word": "tiny",
+  "start": 32.48,
+  "end": 32.8
+ },
+ {
+  "word": "you",
+  "start": 32.8,
+  "end": 33.08
+ },
+ {
+  "word": "looking",
+  "start": 33.08,
+  "end": 33.36
+ },
+ {
+  "word": "back.",
+  "start": 33.36,
+  "end": 33.76
+ },
+ {
+  "word": "And",
+  "start": 34.74,
+  "end": 34.86
+ },
+ {
+  "word": "then",
+  "start": 34.86,
+  "end": 34.98
+ },
+ {
+  "word": "you",
+  "start": 34.98,
+  "end": 35.12
+ },
+ {
+  "word": "see",
+  "start": 35.12,
+  "end": 35.3
+ },
+ {
+  "word": "the",
+  "start": 35.3,
+  "end": 35.46
+ },
+ {
+  "word": "code,",
+  "start": 35.46,
+  "end": 35.84
+ },
+ {
+  "word": "it",
+  "start": 36.06,
+  "end": 36.3
+ },
+ {
+  "word": "was",
+  "start": 36.3,
+  "end": 36.42
+ },
+ {
+  "word": "never",
+  "start": 36.42,
+  "end": 36.7
+ },
+ {
+  "word": "real,",
+  "start": 36.7,
+  "end": 37.06
+ },
+ {
+  "word": "it",
+  "start": 37.4,
+  "end": 37.58
+ },
+ {
+  "word": "is",
+  "start": 37.58,
+  "end": 37.72
+ },
+ {
+  "word": "a",
+  "start": 37.72,
+  "end": 37.88
+ },
+ {
+  "word": "simulation.",
+  "start": 37.88,
+  "end": 38.54
+ },
+ {
+  "word": "Yours",
+  "start": 39.8,
+  "end": 40.18
+ },
+ {
+  "word": "is",
+  "start": 40.18,
+  "end": 40.26
+ },
+ {
+  "word": "one",
+  "start": 40.26,
+  "end": 40.42
+ },
+ {
+  "word": "of",
+  "start": 40.42,
+  "end": 40.56
+ },
+ {
+  "word": "billions",
+  "start": 40.56,
+  "end": 40.9
+ },
+ {
+  "word": "of",
+  "start": 40.9,
+  "end": 41.16
+ },
+ {
+  "word": "copies,",
+  "start": 41.16,
+  "end": 41.58
+ },
+ {
+  "word": "same",
+  "start": 42.22,
+  "end": 42.42
+ },
+ {
+  "word": "start,",
+  "start": 42.42,
+  "end": 42.84
+ },
+ {
+  "word": "different",
+  "start": 43.3,
+  "end": 43.48
+ },
+ {
+  "word": "endings.",
+  "start": 43.48,
+  "end": 43.98
+ },
+ {
+  "word": "Somewhere",
+  "start": 45.0,
+  "end": 45.44
+ },
+ {
+  "word": "a",
+  "start": 45.44,
+  "end": 45.74
+ },
+ {
+  "word": "version",
+  "start": 45.74,
+  "end": 46.02
+ },
+ {
+  "word": "of",
+  "start": 46.02,
+  "end": 46.24
+ },
+ {
+  "word": "you",
+  "start": 46.24,
+  "end": 46.38
+ },
+ {
+  "word": "never",
+  "start": 46.38,
+  "end": 46.58
+ },
+ {
+  "word": "made",
+  "start": 46.58,
+  "end": 46.88
+ },
+ {
+  "word": "that",
+  "start": 46.88,
+  "end": 47.12
+ },
+ {
+  "word": "choice.",
+  "start": 47.12,
+  "end": 47.52
+ },
+ {
+  "word": "And",
+  "start": 49.0,
+  "end": 49.56
+ },
+ {
+  "word": "someone",
+  "start": 49.56,
+  "end": 49.9
+ },
+ {
+  "word": "or",
+  "start": 49.9,
+  "end": 50.12
+ },
+ {
+  "word": "something",
+  "start": 50.12,
+  "end": 50.58
+ },
+ {
+  "word": "presses",
+  "start": 50.58,
+  "end": 51.02
+ },
+ {
+  "word": "run.",
+  "start": 51.02,
+  "end": 51.4
+ },
+ {
+  "word": "So",
+  "start": 53.32,
+  "end": 53.88
+ },
+ {
+  "word": "maybe",
+  "start": 53.88,
+  "end": 54.12
+ },
+ {
+  "word": "the",
+  "start": 54.12,
+  "end": 54.38
+ },
+ {
+  "word": "question",
+  "start": 54.38,
+  "end": 54.64
+ },
+ {
+  "word": "is",
+  "start": 54.64,
+  "end": 55.0
+ },
+ {
+  "word": "not",
+  "start": 55.0,
+  "end": 55.2
+ },
+ {
+  "word": "how",
+  "start": 55.2,
+  "end": 55.42
+ },
+ {
+  "word": "to",
+  "start": 55.42,
+  "end": 55.62
+ },
+ {
+  "word": "escape,",
+  "start": 55.62,
+  "end": 56.0
+ },
+ {
+  "word": "it",
+  "start": 56.42,
+  "end": 56.68
+ },
+ {
+  "word": "is",
+  "start": 56.68,
+  "end": 56.8
+ },
+ {
+  "word": "who",
+  "start": 56.8,
+  "end": 57.0
+ },
+ {
+  "word": "is",
+  "start": 57.0,
+  "end": 57.22
+ },
+ {
+  "word": "watching.",
+  "start": 57.22,
+  "end": 57.64
+ },
+ {
+  "word": "For",
+  "start": 57.64,
+  "end": 57.66
+ },
+ {
+  "word": "more",
+  "start": 57.66,
+  "end": 57.76
+ },
+ {
+  "word": "information",
+  "start": 57.76,
+  "end": 57.78
+ },
+ {
+  "word": "on",
+  "start": 57.78,
+  "end": 58.44
+ },
+ {
+  "word": "how",
+  "start": 58.44,
+  "end": 58.44
+ },
+ {
+  "word": "to",
+  "start": 58.44,
+  "end": 58.44
+ },
+ {
+  "word": "escape",
+  "start": 58.44,
+  "end": 58.44
+ },
+ {
+  "word": "your",
+  "start": 58.44,
+  "end": 58.44
+ },
+ {
+  "word": "own",
+  "start": 58.44,
+  "end": 58.44
+ },
+ {
+  "word": "universe.",
+  "start": 58.44,
+  "end": 58.44
+ }
+]

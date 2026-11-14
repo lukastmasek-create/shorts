@@ -33,3 +33,18 @@ branching path with travelling dots, funnel, door, building, hourglass, coins, e
 Extra rules seen: dim ghost people = "everyone else"; hard pill swap for changing text ("entry: school diploma" -> "university degree");
 ring pulse = resolution beat; whip-blur between every scene; last scene ends on glowing hero + "you can do it"-type pill, then fade.
 Compositions: `CalmShort` (Calm.tsx, 11 scenes) and `DegreeShort` (Degree.tsx, 12 scenes). Content is generic/original; names of people/studies from the source clips were NOT reused.
+
+## Transitions & full screen (kit: `2d/src/fx.tsx`, demo: `FxDemo` comp, `2d/src/FxDemo.tsx`)
+Rule 1 — use the WHOLE 1080x1920 canvas, not just the middle band. Spread content over the full height (`spread(n)` gives y positions), let backdrops bleed past every edge, scale hero icons up (2-3x), and keep only text/pills inside `SAFE` (top 160, bottom 1540, left 60, right 960; the platform UI covers top ~150, bottom ~380, right ~120).
+Rule 2 — every scene starts with an edge-to-edge backdrop (draw it first): `Starfield`, `GridBG`, `BigRings` (huge rings, often off-centre), `Rays` (speed lines from a point), `GhostBleed` (giant faint outline icon cropped by an edge). Opacity 0.08-0.2 so the icons stay the hero.
+Rule 3 — scenes never just fade. Wrap each in `<SceneFx a b inT outT d>` and pick a transition pair:
+- `zoomIn`: leaving scene pushes past the camera (scale 1 -> 3.2, blur), next scene arrives small and grows. Use for "go deeper / enter / look closer".
+- `zoomOut`: leaving shrinks away, next arrives huge. Use for "pull back / see the bigger picture".
+- `whipL` / `whipR` / `whipUp` / `whipDown`: slide off-screen with directional motion blur (x or y only). Use for time passing, next item, travel. Match direction to the story (left = forward in time on our shorts).
+- `iris`: circle wipe from the centre. Use for reveals, "inside X", ending.
+- `spin`: small rotate + scale. Use for chaos, dizziness, glitch beats.
+- `fade` / `cut`: calm beats / hard cuts on a loud word.
+Default `d` = 9 frames. Alternate types, do not use the same one 3x in a row; end the short on `iris` or `fade`.
+In-scene camera: `<Cam t a b from={{s:1}} to={{s:1.4,x,y}}>` pushes in / pulls out / pans about a point while a scene plays (use on every scene longer than ~4 s so nothing sits still). `Flash` = white blink on a hard beat.
+Use `SceneFx`, not the old `Scene` (kit.tsx) or per-file `S`/`Inner` wrappers, in new shorts. Old shorts stay as they are.
+Check: `COMP=FxDemo node 2d/stills.mjs out/fx_ 30,55,63,114,124,175,183,215 0.4`.

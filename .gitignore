@@ -1,6 +1,10 @@
 node_modules
 out
+
+2d/voice/*.onnx
+2d/voice/*.bin
+2d/voice/v16.wav
 venv
 voice/*.onnx
 voice/*.bin
-voice/
+/voice/
