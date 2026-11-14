@@ -17,4 +17,13 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 - GitHub scope: only `lukastmasek-create/umime-skola` and `lukastmasek-create/shorts`. Cannot create repos.
 
 ## Status
-Scaffold + render fix done. Short chosen: `aging/` (body stuck at 19, brain ages). Done: SCRIPT.md, voice/voice.wav + words.json (1.2x, 66.5 s), SHOTPLAN.md (18 shots). Also `shadow/SCRIPT.md` (draft, unused). Done: src/videos/aging/story.ts (18 shots, cameras, DOF, kicks, LAYOUT, motion fns; typechecks, all frames finite, standalone: not wired into Root yet). Next: new world pieces (build.ts/paint.ts/world.ts), characters (toon/cast.ts), Bridge.tsx copy, Root registration (see SHOTPLAN.md).
+`aging/` short (body stuck at 19, brain ages) is a full first-pass film, NOT yet rendered end to end.
+- Done: SCRIPT.md, voice/voice.wav + words.json (1.2x, 66.5 s), SHOTPLAN.md, src/videos/aging/{story,cast,world,Aging}.ts(x), composition `AgingShort` in Root.tsx. All 18 shots render (stills checked: frames 60..2000).
+- Engine reused from src/videos/bridge/ (ink, lensblur, grade, lights, shade, toon, paint, cast Pool/Actor/Fx). World = primitives + painted textures, no GLB kit.
+- Face mapping: blank=dazed, confused=nervous, smug=smile_closed, squint=stern, tired=pained. Age cues = hair/moustache colour only (toon has no wrinkles/bags).
+- X axis: camera looks +z, so story +x is screen-LEFT.
+- Seated actors (`fo.mode: "sit"`) sit at ground level: lift y to the seat height (bench 0.4, chair 0.45).
+- Stills: `COMP=AgingShort GL=swangle REMOTION_TMP=/tmp/remotion-tmp CHROME_PATH=/opt/pw-browsers/chromium node scripts/bridge-stills.mjs out/a/s_ 60,420 0.5` (~13 s/frame on CPU: full video ~7 h, render on a GPU PC).
+- Final: `npx remotion render src/index.ts AgingShort out/aging.mp4 --codec h264 --crf 16 --scale 1.3333`, then mux voice: `ffmpeg -i out/aging.mp4 -i aging/voice/voice.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac out/aging_final.mp4`.
+- Not done: SFX + music (audio/ scripts are still the bridge ones), hand-fixing words.json, voice audition, look polish (golden shots are dark blue, track is very orange, wrinkles/bags missing).
+- `shadow/SCRIPT.md` = unused draft.

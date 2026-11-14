@@ -73,12 +73,12 @@ export const LAYOUT: Record<SetId, Record<string, V3>> = {
   fridge: { hero: [0, 0, 0], fridge: [0, 0, 1.2] },
   explain: { hero: [0, 0, 6], brainL: [-1.4, 1.4, 0], brainR: [1.4, 1.4, 0] },
   slowmo: { hero: [0, 0, 0], snail: [-3, 0, 0.3], holes: [1.2, 1.5, 0.8] },
-  books: { hero: [-1.3, 0, 0], tower: [1.1, 0, 0.5] },
+  books: { hero: [-0.5, 0, 0], tower: [0.95, 0, 0.5] },
   car: { car: [0, 0, 0], grandpa: [0.35, 0.7, 0.1] },
   crowd: { hero: [0, 0, 0], mother: [1.5, 0, 0.4], walkerA: [-3, 0, 1.2], walkerB: [3, 0, 1.6] },
   restaurant: { hero: [0, 0, 0], waiter: [1.4, 0, 0.3], menu: [0.1, 0.85, 0.35] },
   bench: { hero: [0, 0, 0] },
-  field: { hero: [-1.3, 0, -0.2], fieldCard: [3, 0, 14] },
+  field: { hero: [-0.5, 0, -0.2], fieldCard: [3, 0, 14] },
   skyline: { hero: [0, 0, 0], kidA: [-2.8, 0, 1.0], kidB: [2.6, 0, 1.4] },
 };
 /** age of the hero's friends / bouncer's line per set (cast.ts picks face + hair + bags) */
@@ -148,10 +148,10 @@ const S3b = (f: number) => dolly([0.4, 1.5, -1.6], [0.1, 1.35, 0], pushK(f, 330,
 const S4a = (f: number) => dolly([-2.2, 0.9, -5.5], [0.2, 1.3, 0], pushK(f, 345, 0.002), { fov: 44 });
 const S4b = (f: number) => dolly([-0.6, 1.7, -2.4], [0.9, 1.75, 0.2], pushK(f, 383, 0.0025), { fov: 34 });
 // shot 5 (track, "At seventy" 491-599): side tracking view riding with the hero, cut to the face on "forgot" (~560)
-const S5a = (f: number) => { const x = HX(5, f); return dolly([x + 2, 1.3, -6], [x + 1.2, 1.1, 0], pushK(f, 487, 0.0015), { fov: 42 }); };
+const S5a = (f: number) => { const x = HX(5, f); return dolly([x + 1.0, 1.1, -6], [x + 0.5, 1.0, 0], pushK(f, 487, 0.0015), { fov: 42 }); };
 const S5b = (f: number) => { const x = HX(5, f); return dolly([x + 0.5, 1.65, -2.2], [x, 1.62, 0], pushK(f, 556, 0.003), { fov: 32 }); };
 // shot 6 (track, "At ninety" 614-738): same side ride, cut to the back of the head on "starting line" (~705)
-const S6a = (f: number) => { const x = HX(6, f); return dolly([x + 2, 1.3, -6], [x + 1.2, 1.1, 0], pushK(f, 604, 0.0015), { fov: 44 }); };
+const S6a = (f: number) => { const x = HX(6, f); return dolly([x + 1.0, 1.1, -6], [x + 0.5, 1.0, 0], pushK(f, 604, 0.0015), { fov: 44 }); };
 const S6b = (f: number) => { const x = HX(6, f); return dolly([x - 2.2, 1.65, -1.2], [x + 0.5, 1.6, 0], pushK(f, 701, 0.003), { fov: 34 }); };
 // shot 7 (kitchen, 749-850): MS front, roll on "no idea" (~820)
 const S7a = (f: number) => dolly([0.4, 1.5, -4.2], [0, 1.4, 0], pushK(f, 744, 0.0022), { fov: 38 });
@@ -159,22 +159,22 @@ const S7a = (f: number) => dolly([0.4, 1.5, -4.2], [0, 1.4, 0], pushK(f, 744, 0.
 const S8a = (f: number) => dolly([-3.5, 1.3, -4.5], [0.5, 1.2, 0], pushK(f, 852, 0.0015));
 const S8b = (f: number) => dolly([-2.2, 1.2, -3.2], [1.5, 1.1, 0], pushK(f, 872, 0.002), { fov: 38 });
 // shot 9 (fridge, 925-1025): CU, push punch on "fridge" (~1005), kick
-const S9a = (f: number) => dolly([0.2, 1.5, -2.8], [0, 1.45, 0], pushK(f, 915, 0.002), { fov: 36 });
-const S9b = (f: number) => dolly([0.05, 1.5, -1.4], [0, 1.5, 0], pushK(f, 996, 0.004), { fov: 30 });
+const S9a = (f: number) => dolly([0.2, 1.4, -4.2], [0, 1.35, 0], pushK(f, 915, 0.002), { fov: 38 });
+const S9b = (f: number) => dolly([0.05, 1.45, -2.6], [0, 1.4, 0], pushK(f, 996, 0.004), { fov: 32 });
 // shot 10 (explainer, 1036-1164): locked front, creep only
-const S10a = (f: number) => dolly([0, 1.2, -6], [0, 1.2, 0], pushK(f, 1030, 0.0012), { fov: 36 });
+const S10a = (f: number) => dolly([0, 1.25, -9.5], [0, 1.25, 0], pushK(f, 1030, 0.0012), { fov: 36 });
 // shot 11 (slow motion, 1178-1256): MS, roll on "Memory" (~1222)
 const S11a = (f: number) => dolly([1.2, 0.9, -4], [0, 0.8, 0], pushK(f, 1172, 0.0022));
 // shot 12 (book tower, 1262-1353): crane up with the growing tower
 const S12a = (f: number): Shot => { const u = glide((f - 1259) / 90); return { pos: [1.5, 0.4 + 4 * u, -5], look: [0, 0.8 + 3.5 * u, 0], fov: 42 }; };
 // shot 13 (sports car, 1367-1495): wide 3/4, cut to the driver on "confused" (~1460)
-const S13a = (f: number) => dolly([4.5, 1.3, -7], [0, 1.0, 0], pushK(f, 1360, 0.002), { fov: 44 });
+const S13a = (f: number) => dolly([3.2, 0.95, -6.5], [0.3, 0.7, 0], pushK(f, 1360, 0.002), { fov: 42 });
 const S13b = (f: number) => dolly([1.0, 1.4, -2.2], [0.3, 1.2, 0.2], pushK(f, 1456, 0.003), { fov: 32 });
 // shot 14 (crowd ignores him, 1508-1612): MS, roll on "Nobody" (~1555)
 const S14a = (f: number) => dolly([0.8, 1.5, -5], [0, 1.4, 0], pushK(f, 1502, 0.002));
 // shot 15 (restaurant, 1627-1723): two-shot, cut to the crayon menu on "menu" (~1700)
-const S15a = (f: number) => dolly([1.2, 1.4, -4.4], [0, 1.0, 0], pushK(f, 1620, 0.002));
-const S15b = (f: number) => dolly([0.3, 1.25, -1.5], [0, 0.85, 0], pushK(f, 1696, 0.003), { fov: 30 });
+const S15a = (f: number) => dolly([1.0, 2.0, -4.6], [0, 0.9, 0], pushK(f, 1620, 0.002));
+const S15b = (f: number) => dolly([0.3, 1.6, -1.8], [0.1, 0.85, 0], pushK(f, 1696, 0.003), { fov: 32 });
 // shot 16 (bench, 1723-1852): low 3/4, slow creep, a long hold
 const S16a = (f: number) => dolly([-2.2, 0.7, -4.5], [0, 1.0, 0], pushK(f, 1726, 0.0015));
 // shot 17 (field, 1865-1916): over the hero's shoulder, glide wider on "all a field" (~1890)
