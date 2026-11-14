@@ -16,6 +16,10 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 - `/plugin` slash commands cannot run in cloud session; user runs them locally. Plugin requested: `artemnovitckii/claude-animation-skills` (animation-skills). Not read, unvetted.
 - GitHub scope: only `lukastmasek-create/umime-skola` and `lukastmasek-create/shorts`. Cannot create repos.
 
+## Render on old macOS (user: Intel Air, macOS 12.7.6, ~560 MB free RAM)
+- Remotion's bundled ffmpeg/ffprobe (compositor-darwin-x64) and its downloaded Chrome Headless Shell do NOT run on macOS 12. Installed Google Chrome 150 works (`--browser-executable`), GPU WebGL stalls: use `--gl=swangle` + props `post.kick`. Single still verified NOT blank on their Mac.
+- Workaround: props `{"post":{"kick":true,"audio":false}}` (no <Audio>), `--sequence --image-format=jpeg` to render pictures, then encode with `ffmpeg-static` (npm i ffmpeg-static; `$(node -p "require('ffmpeg-static')")`) and mux aging/audio/mix.wav. `--scale 1.3333` is invalid (non-integer height): use 1 or 1.5.
+
 ## Status
 `aging/` short (body stuck at 19, brain ages) is a full first-pass film, NOT yet rendered end to end.
 - Done: SCRIPT.md, voice/voice.wav + words.json (1.2x, 66.5 s), SHOTPLAN.md, src/videos/aging/{story,cast,world,Aging}.ts(x), composition `AgingShort` in Root.tsx. All 18 shots render (stills checked: frames 60..2000).
