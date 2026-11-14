@@ -9,7 +9,7 @@ const FR = [0, 130, 260, 402, 556, 755, 915, 1086, 1250, 1390];
 export const NOHUMANS_FRAMES = 1420;
 const st = { fill: "none", stroke: INK, strokeWidth: SW, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 const rnd = (i: number, k = 1) => { const v = Math.sin(i * 127.1 + k * 311.7) * 43758.5453; return v - Math.floor(v); };
-const Gl: React.FC<{ children: React.ReactNode; o?: number }> = ({ children, o = 1 }) => <g opacity={o} style={{ filter: GLOW }}>{children}</g>;
+const Gl: React.FC<{ children: React.ReactNode; o?: number }> = ({ children, o = 1 }) => <g opacity={o}>{children}</g>; // glow is applied once per scene (cheap on CPU)
 
 const GY = 1500; // street level
 // [x, w, h]
@@ -39,12 +39,12 @@ const Sprout: React.FC<{ x: number; y: number; k: number; s?: number }> = ({ x, 
   <Gl><g transform={`translate(${x} ${y}) scale(${s})`}><path d={`M0 0 V${-90 * k} M0 ${-40 * k} C-40 ${-40 * k} -50 ${-80 * k} -50 ${-90 * k} M0 ${-60 * k} C36 ${-60 * k} 46 ${-100 * k} 46 ${-110 * k}`} {...st} strokeWidth={6} /></g></Gl>
 );
 const Paw: React.FC<{ x: number; y: number; s?: number; o?: number; rot?: number }> = ({ x, y, s = 1, o = 1, rot = 0 }) => (
-  <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`} opacity={o} fill={INK} style={{ filter: GLOW }}>
+  <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`} opacity={o} fill={INK}>
     <ellipse rx={26} ry={22} cy={14} />{[[-34, -16], [-12, -34], [12, -34], [34, -16]].map(([a, b], i) => <ellipse key={i} cx={a} cy={b} rx={10} ry={13} />)}
   </g>
 );
 const Waves: React.FC<{ y: number; t: number; o?: number; x0?: number; x1?: number; n?: number }> = ({ y, t, o = 1, x0 = -20, x1 = W + 20, n = 3 }) => (
-  <g opacity={o}>{Array.from({ length: n }, (_, k) => <polyline key={k} points={Array.from({ length: Math.floor((x1 - x0) / 8) + 1 }, (_, i) => `${x0 + i * 8},${y + k * 36 + Math.sin((x0 + i * 8 + t * 4) / 45 + k * 2) * 10}`).join(" ")} {...st} strokeWidth={4} style={{ filter: GLOW }} />)}</g>
+  <g opacity={o}>{Array.from({ length: n }, (_, k) => <polyline key={k} points={Array.from({ length: Math.floor((x1 - x0) / 8) + 1 }, (_, i) => `${x0 + i * 8},${y + k * 36 + Math.sin((x0 + i * 8 + t * 4) / 45 + k * 2) * 10}`).join(" ")} {...st} strokeWidth={4} />)}</g>
 );
 
 // 0 hook: eye over the sleeping city, people missing
@@ -194,7 +194,7 @@ export const NoHumansShort: React.FC<{ audio?: boolean }> = ({ audio = true }) =
   const f = useCurrentFrame();
   return <Stage>
     {audio && <Audio src={staticFile("nohumans/voice.wav")} />}
-    {SC.map(([tr, C], i) => <SceneFx key={i} a={FR[i]} b={i === SC.length - 1 ? NOHUMANS_FRAMES : FR[i + 1]} inT={tr} outT={SC[i + 1] ? SC[i + 1][0] : "fade"}>{C}</SceneFx>)}
+    {SC.map(([tr, C], i) => <SceneFx key={i} a={FR[i]} b={i === SC.length - 1 ? NOHUMANS_FRAMES : FR[i + 1]} inT={tr} outT={SC[i + 1] ? SC[i + 1][0] : "fade"}>{(t) => <g style={{ filter: GLOW }}>{C(t)}</g>}</SceneFx>)}
     <div style={{ position: "absolute", inset: 0, background: "#000", opacity: clamp((f - (NOHUMANS_FRAMES - 18)) / 18) }} />
   </Stage>;
 };
