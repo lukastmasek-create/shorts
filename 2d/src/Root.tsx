@@ -10,6 +10,7 @@ import { ChanceShort, CHANCE_FRAMES } from "./Chance";
 import { BlackHoleShort, BH_FRAMES } from "./BlackHole";
 import { ImmortalShort, IM_FRAMES } from "./Immortal";
 import { NoHumansShort, NOHUMANS_FRAMES } from "./NoHumans";
+import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
 export const Root: React.FC = () => (
@@ -25,5 +26,6 @@ export const Root: React.FC = () => (
     <Composition id="ImmortalShort" component={ImmortalShort} durationInFrames={IM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FxDemo" component={FxDemo} durationInFrames={FXDEMO_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NoHumansShort" component={NoHumansShort} durationInFrames={NOHUMANS_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
