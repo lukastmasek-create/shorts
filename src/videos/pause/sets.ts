@@ -51,16 +51,27 @@ export const STREET_CARS: CarDef[] = [
   { x: 2.6, z0: -12, v: -7, col: "#4fae6a", len: 4.2 }, { x: 2.6, z0: 8, v: -6, col: "#e9e4d6", len: 4.6 }, { x: 2.6, z0: 28, v: -8, col: "#8c5fc9", len: 4.0 },
 ];
 export const buildCar = (def: CarDef): THREE.Group => {
-  const g = new THREE.Group(), L = def.len, W = 1.8;
-  const body = lam("car" + def.col, () => ({ color: def.col })), dark = lam("carDark", () => ({ color: "#2a2d38" })), win = lam("carWin", () => ({ color: "#bfe0f0" }));
-  const box = (x0: number, x1: number, y0: number, y1: number, z0: number, z1: number, m: THREE.Material) => {
-    const me = new THREE.Mesh(boxGeo(V(x0, y0, z0), V(x1, y1, z1)), m);
-    me.castShadow = true; me.receiveShadow = true; g.add(me);
-  };
-  box(-W / 2, W / 2, 0.35, 0.95, -L / 2, L / 2, body); // lower body
-  box(-W / 2 + 0.1, W / 2 - 0.1, 0.95, 1.5, -L / 2 + 0.9, L / 2 - 0.8, win); // glasshouse
-  box(-W / 2 + 0.12, W / 2 - 0.12, 1.5, 1.58, -L / 2 + 0.95, L / 2 - 0.85, body); // roof
-  for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(sx * W / 2 - (sx > 0 ? 0.18 : 0), sx * W / 2 + (sx > 0 ? 0 : 0.18), 0, 0.5, sz * (L / 2 - 0.8) - 0.3, sz * (L / 2 - 0.8) + 0.3, dark);
+  const g = new THREE.Group(), L = def.len, W = 1.8, bev = { bevelEnabled: true, bevelThickness: 0.1, bevelSize: 0.1, bevelSegments: 3, curveSegments: 10 };
+  const body = lam("car" + def.col, () => ({ color: def.col })), dark = lam("carDark", () => ({ color: "#2a2d38" })), win = lam("carWin", () => ({ color: "#bfe0f0" })), hub = lam("carHub", () => ({ color: "#c9ced8" })), lamp = lam("carLamp", () => ({ color: "#fff3b0" }));
+  const add = (geo: THREE.BufferGeometry, m: THREE.Material, x = 0, y = 0, z = 0) => { const me = new THREE.Mesh(geo, m); me.position.set(x, y, z); me.castShadow = true; me.receiveShadow = true; g.add(me); };
+  const side = (sh: THREE.Shape, depth: number) => { const geo = new THREE.ExtrudeGeometry(sh, { depth, ...bev }); geo.translate(0, 0, -depth / 2); geo.rotateY(Math.PI / 2); return geo; };
+  const h = L / 2;
+  const bs = new THREE.Shape();
+  bs.moveTo(-h + 0.3, 0.32); bs.lineTo(h - 0.3, 0.32); bs.quadraticCurveTo(h - 0.05, 0.32, h - 0.05, 0.55); bs.lineTo(h - 0.05, 0.78); bs.quadraticCurveTo(h - 0.05, 0.98, h - 0.5, 1.0);
+  bs.lineTo(-h + 0.5, 1.0); bs.quadraticCurveTo(-h + 0.05, 0.98, -h + 0.05, 0.78); bs.lineTo(-h + 0.05, 0.55); bs.quadraticCurveTo(-h + 0.05, 0.32, -h + 0.3, 0.32);
+  add(side(bs, W - 0.2), body);
+  const cs = new THREE.Shape();
+  cs.moveTo(-h + 0.85, 1.0); cs.quadraticCurveTo(-h + 1.1, 1.55, -h + 1.7, 1.56); cs.lineTo(h - 1.5, 1.56); cs.quadraticCurveTo(h - 0.95, 1.52, h - 0.7, 1.0); cs.lineTo(-h + 0.85, 1.0);
+  add(side(cs, W - 0.45), win);
+  add(side(cs, W - 0.1), body);
+  const cap = g.children[g.children.length - 1]; cap.scale.set(1, 0.06, 1); cap.position.y = 1.56 * 0.94; // roof cap
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+    const w = new THREE.CylinderGeometry(0.34, 0.34, 0.26, 20); w.rotateZ(Math.PI / 2);
+    add(w, dark, sx * (W / 2 - 0.05), 0.34, sz * (h - 0.9));
+    const c = new THREE.CylinderGeometry(0.16, 0.16, 0.28, 12); c.rotateZ(Math.PI / 2);
+    add(c, hub, sx * (W / 2 - 0.04), 0.34, sz * (h - 0.9));
+  }
+  for (const sx of [-1, 1]) add(new THREE.SphereGeometry(0.15, 10, 8), lamp, sx * 0.6, 0.72, h - 0.04);
   return g;
 };
 
@@ -84,8 +95,8 @@ const tilt = (b: Batch, S: SetId, x0: number, x1: number, y0: number, y1: number
     new THREE.Matrix4().makeTranslation(at(S, px), py, pz).multiply(new THREE.Matrix4().makeRotationX(ax)));
 export const deckchair = (b: Batch, S: SetId, x: number, z: number) => {
   const a = col("#e2453c"), c = col("#fff3d6");
-  tilt(b, S, 0, 1.1, 0, 0.08, 0, 1.2, a, -0.25, x, 0.32, z); // seat
-  tilt(b, S, 0, 1.1, 0, 0.08, 0, 1.3, c, -0.55, x, 0.85, z + 0.75); // back (leans away from the lens)
+  bx(b, S, x - 0.55, x + 0.55, 0.28, 0.36, z - 0.6, z + 0.6, a); // seat
+  bx(b, S, x - 0.55, x + 0.55, 0.36, 1.35, z + 0.6, z + 0.68, c); // back, behind the sitter
   for (const sx of [-0.58, 0.58]) bx(b, S, x + sx - 0.04, x + sx + 0.04, 0, 0.45, z - 0.45, z - 0.38, plank);
 };
 const bookCols = ["#c0392b", "#2f6fb5", "#e2b13a", "#3f9a5a", "#7b5ac9", "#e88a3a"];
@@ -112,8 +123,13 @@ export const buildDesk = (R: THREE.Object3D, _k: Kit) => {
   const b = new Batch(), S: SetId = "desk";
   stage(b, S, col("#a9c58a"), 8, [-10, 14, wood], [-10, 14, 4.2, col("#d9e8c8")]);
   bx(b, S, 1.4, 4.6, 1.1, 3.0, 3.12, 3.2, glassM); // window between the two desks
-  for (const [x, w] of [[0, 2.4], [6.4, 2.8]] as const) { bx(b, S, x - w / 2, x + w / 2, 0.72, 0.82, 0.5, 1.9, plank); for (const s of [-1, 1]) bx(b, S, x + s * (w / 2 - 0.12) - 0.05, x + s * (w / 2 - 0.12) + 0.05, 0, 0.72, 0.6, 0.7, plank); bx(b, S, x - 0.9, x - 0.5, 0.82, 1.4, 1.5, 1.6, col("#e2b13a")); } // desks + lamps
-  for (const x of [0, 6.4]) bx(b, S, x - 0.3, x + 0.3, 0, 0.55, -0.9, -0.3, col("#7a4a2a")); // chairs
+  for (const [x, w] of [[0, 2.4], [6.4, 2.8]] as const) {
+    bx(b, S, x - w / 2, x + w / 2, 0.72, 0.82, 0.5, 1.9, plank);
+    for (const s of [-1, 1]) for (const z of [0.6, 1.8]) bx(b, S, x + s * (w / 2 - 0.1) - 0.05, x + s * (w / 2 - 0.1) + 0.05, 0, 0.72, z - 0.05, z + 0.05, plank);
+    bx(b, S, x - 0.9, x - 0.5, 0.82, 1.4, 1.5, 1.6, col("#e2b13a"));
+    bx(b, S, x - 0.4, x + 0.4, 0.4, 0.46, -0.85, -0.2, col("#7a4a2a")); // stool, no backrest (it would hide the sitter)
+    for (const s of [-1, 1]) for (const z of [-0.8, -0.25]) bx(b, S, x + s * 0.35 - 0.03, x + s * 0.35 + 0.03, 0, 0.4, z - 0.03, z + 0.03, plank);
+  } // desks + lamps + chairs
   b.build(R);
 };
 // ---------------- library (shot 8) ----------------

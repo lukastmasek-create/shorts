@@ -94,8 +94,8 @@ const deskCast = (c: Ctx) => {
   const n2 = 18;
   card(c, `nb${n2}`, 240, 40 * n2 + 10, (p) => fxBooks(p, n2, pal), 6.4, 0.82 + 0.05 * n2, 1.2, 0.8, 0.1 * n2);
   const h = heroPos(7, f);
-  put(c.out, c.cam, "desk", { i: 99, ...heroAt(0), x: h[0] - SET_X.desk, z: h[2], y: p2 ? 0 : 0.0, mode: p2 ? "stand" : "sit", expr: "grin", blink: lidAt(f / FPS, 99) });
-  put(c.out, c.cam, "desk", { i: 420, o: FOLK[2], okey: "f2", x: 6.4, z: -0.5, mode: "sit", expr: "stern", blink: lid(c, 420) });
+  put(c.out, c.cam, "desk", { i: 99, ...heroAt(0), x: h[0] - SET_X.desk, z: h[2] - (p2 ? 0 : 0.35), y: p2 ? 0 : 0.4, mode: p2 ? "stand" : "sit", expr: "grin", blink: lidAt(f / FPS, 99) });
+  put(c.out, c.cam, "desk", { i: 420, o: FOLK[2], okey: "f2", x: 6.4, z: -0.55, y: 0.4, mode: "sit", expr: "stern", blink: lid(c, 420) });
 };
 // ---------------- library (shot 8) ----------------
 const libraryCast = (c: Ctx) => {
@@ -179,7 +179,7 @@ const partyCast = (c: Ctx) => {
 // ---------------- porch (shots 19-20) ----------------
 const porchCast = (c: Ctx) => {
   const { id, f } = c;
-  heroHere(c, 4, { mode: "sit", y: 0.32, expr: id === 20 ? "smile_closed" : "smile", blink: lidAt(f / FPS, 99), z: 1.7 });
+  heroHere(c, 4, { mode: "sit", y: 0.55, expr: id === 20 ? "smile_closed" : "smile", blink: lidAt(f / FPS, 99), z: 1.7 });
   const rep: [number, number][] = [[-1.9, 0.5], [1.9, 0.5], [-3.2, 1.0], [3.2, 1.0], [-2.5, 1.9], [2.5, 1.9]];
   rep.forEach(([x, z], i) => put(c.out, c.cam, "porch", { i: 900 + i, o: FOLK[i], okey: `f${i}`, x, z, y: 0.32, face: [x > 0 ? -1 : 1, 0.2], expr: id === 20 && f > 1591 ? "shock" : "neutral", blink: lidAt(f / FPS, 900 + i) }));
   card(c, "mic1", 150, 400, fxMic, -0.7, 1.15, 0.9, 0.22, 0.58); card(c, "mic2", 150, 400, fxMic, 0.7, 1.15, 0.9, 0.22, 0.58);

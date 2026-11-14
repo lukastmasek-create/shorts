@@ -910,12 +910,12 @@ export const fxBlob = (p: Pen, col: string) => {
 
 /** pigeon on a 400 x 300 canvas facing right; wing 0 = up (frozen pose), 1 = down */
 export const fxPigeon = (p: Pen, wing: number) => {
-  const up: P2[] = [[190, 150], [120, 30], [235, 105]], dn: P2[] = [[190, 170], [105, 262], [235, 195]];
-  const w = up.map((a, i) => [a[0] + (dn[i][0] - a[0]) * wing, a[1] + (dn[i][1] - a[1]) * wing] as P2);
+  const up: P2[] = [[185, 150], [150, 92], [118, 40], [152, 34], [168, 56], [190, 22], [208, 54], [232, 38], [240, 100], [236, 140]];
+  const w = up.map((a) => [a[0], a[1] + (350 - 2 * a[1] - a[1] + a[1]) * 0 + (350 - a[1] - a[1]) * wing] as P2);
   p.poly([[130, 175], [40, 150], [60, 200], [140, 195]], "#6c7288", 6); // tail
   p.ell(200, 175, 90, 52, "#9097ab", 7); // body
   p.ell(222, 185, 52, 30, "#b4b9c9", 0); // belly
-  p.poly(w, "#7b8299", 6); // wing
+  p.poly(w, "#7b8299", 6); // wing, feather-edged
   p.ell(285, 128, 34, 32, "#7b8299", 7); // head
   p.ell(262, 158, 26, 18, "#4fa395", 0); // neck sheen
   p.poly([[312, 122], [352, 134], [312, 142]], "#f2a33a", 5); // beak

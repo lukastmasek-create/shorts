@@ -138,7 +138,7 @@ const S7a = (f: number) => dolly(P("desk", 0, 1.6, -3.8), P("desk", 0, 1.1, 0), 
 const S7b = (f: number) => dolly(P("desk", 6, 1.8, -4.2), P("desk", 6, 1.3, 0), pushK(f, 419, 0.0025), { fov: 42 });
 // shot 8: low crane up beside the book tower; cut to the pigeon on "pigeon"
 const S8a = (f: number) => { const u = glide((f - 454) / 76); return { pos: P("library", 3.2, 0.5 + 3.2 * u, -4.5), look: P("library", 0, 1.2 + 3.5 * u, 0), fov: 44 } as Shot; };
-const S8b = (f: number) => dolly(P("library", 1.0, 2.2, -2.2), P("library", 0, 2.1, 0), pushK(f, 533, 0.003), { fov: 32 });
+const S8b = (f: number) => dolly(P("library", 0.2, 2.1, -4.2), P("library", -0.2, 1.9, 0), pushK(f, 533, 0.002), { fov: 38 });
 // shot 9: town square, three quick cuts and a wide
 const S9a = (f: number) => dolly(P("square", 1.5, E, -4), P("square", 0, E, 0), pushK(f, 570, 0.002), { fov: 40 });
 const S9b = (f: number) => dolly(P("square", -2, E, -4.5), P("square", -3, E, 0), pushK(f, 597, 0.002), { fov: 38 });
