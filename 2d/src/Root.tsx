@@ -4,6 +4,7 @@ import { NoSleepShort, NOSLEEP_FRAMES } from "./NoSleep";
 import { UniverseShort, UNIVERSE_FRAMES } from "./Universe";
 import { FxDemo, FXDEMO_FRAMES } from "./FxDemo";
 import { ParallelShort, PARALLEL_FRAMES } from "./Parallel";
+import { FutureShort, FUTURE_FRAMES } from "./Future";
 import { MonoShort, MONO_FRAMES } from "./Mono";
 import { CalmShort, CALM_FRAMES } from "./Calm";
 import { BlackHoleShort, BH_FRAMES } from "./BlackHole";
@@ -21,5 +22,6 @@ export const Root: React.FC = () => (
     <Composition id="ImmortalShort" component={ImmortalShort} durationInFrames={IM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FxDemo" component={FxDemo} durationInFrames={FXDEMO_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ParallelShort" component={ParallelShort} durationInFrames={PARALLEL_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="FutureShort" component={FutureShort} durationInFrames={FUTURE_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
