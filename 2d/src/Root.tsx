@@ -6,6 +6,7 @@ import { SimShort, SIM_FRAMES } from "./Sim";
 import { Dim4Short, DIM4_FRAMES } from "./Dim4";
 import { BlackHoleShort, BH_FRAMES } from "./BlackHole";
 import { ImmortalShort, IM_FRAMES } from "./Immortal";
+import { LiesShort, LIES_FRAMES } from "./Lies";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
 export const Root: React.FC = () => (
@@ -17,5 +18,6 @@ export const Root: React.FC = () => (
     <Composition id="Dim4Short" component={Dim4Short} durationInFrames={DIM4_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="BlackHoleShort" component={BlackHoleShort} durationInFrames={BH_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ImmortalShort" component={ImmortalShort} durationInFrames={IM_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="LiesShort" component={LiesShort} durationInFrames={LIES_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
