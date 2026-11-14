@@ -1,0 +1,542 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.6
+ },
+ {
+  "word": "if",
+  "start": 0.6,
+  "end": 0.74
+ },
+ {
+  "word": "you",
+  "start": 0.74,
+  "end": 0.9
+ },
+ {
+  "word": "could",
+  "start": 0.9,
+  "end": 1.06
+ },
+ {
+  "word": "see",
+  "start": 1.06,
+  "end": 1.28
+ },
+ {
+  "word": "the",
+  "start": 1.28,
+  "end": 1.44
+ },
+ {
+  "word": "world",
+  "start": 1.44,
+  "end": 1.74
+ },
+ {
+  "word": "without",
+  "start": 1.74,
+  "end": 2.12
+ },
+ {
+  "word": "humans?",
+  "start": 2.12,
+  "end": 2.58
+ },
+ {
+  "word": "Day",
+  "start": 4.78,
+  "end": 4.84
+ },
+ {
+  "word": "one,",
+  "start": 4.84,
+  "end": 5.18
+ },
+ {
+  "word": "the",
+  "start": 5.48,
+  "end": 5.62
+ },
+ {
+  "word": "lights",
+  "start": 5.62,
+  "end": 5.86
+ },
+ {
+  "word": "are",
+  "start": 5.86,
+  "end": 6.04
+ },
+ {
+  "word": "still",
+  "start": 6.04,
+  "end": 6.28
+ },
+ {
+  "word": "on,",
+  "start": 6.28,
+  "end": 6.6
+ },
+ {
+  "word": "but",
+  "start": 6.68,
+  "end": 6.78
+ },
+ {
+  "word": "nobody",
+  "start": 6.78,
+  "end": 7.08
+ },
+ {
+  "word": "is",
+  "start": 7.08,
+  "end": 7.44
+ },
+ {
+  "word": "home.",
+  "start": 7.44,
+  "end": 7.82
+ },
+ {
+  "word": "Within",
+  "start": 9.08,
+  "end": 9.24
+ },
+ {
+  "word": "two",
+  "start": 9.24,
+  "end": 9.52
+ },
+ {
+  "word": "days,",
+  "start": 9.52,
+  "end": 9.86
+ },
+ {
+  "word": "the",
+  "start": 9.98,
+  "end": 10.08
+ },
+ {
+  "word": "subway",
+  "start": 10.08,
+  "end": 10.4
+ },
+ {
+  "word": "tunnels",
+  "start": 10.4,
+  "end": 10.8
+ },
+ {
+  "word": "flood,",
+  "start": 10.8,
+  "end": 11.2
+ },
+ {
+  "word": "the",
+  "start": 11.68,
+  "end": 11.84
+ },
+ {
+  "word": "pumps",
+  "start": 11.84,
+  "end": 12.1
+ },
+ {
+  "word": "have",
+  "start": 12.1,
+  "end": 12.28
+ },
+ {
+  "word": "stopped.",
+  "start": 12.28,
+  "end": 12.82
+ },
+ {
+  "word": "After",
+  "start": 13.8,
+  "end": 14.02
+ },
+ {
+  "word": "a",
+  "start": 14.02,
+  "end": 14.16
+ },
+ {
+  "word": "few",
+  "start": 14.16,
+  "end": 14.3
+ },
+ {
+  "word": "years,",
+  "start": 14.3,
+  "end": 14.72
+ },
+ {
+  "word": "weeds",
+  "start": 15.2,
+  "end": 15.42
+ },
+ {
+  "word": "crack",
+  "start": 15.42,
+  "end": 15.76
+ },
+ {
+  "word": "the",
+  "start": 15.76,
+  "end": 15.98
+ },
+ {
+  "word": "streets,",
+  "start": 15.98,
+  "end": 16.28
+ },
+ {
+  "word": "and",
+  "start": 16.64,
+  "end": 16.84
+ },
+ {
+  "word": "roofs",
+  "start": 16.84,
+  "end": 17.12
+ },
+ {
+  "word": "begin",
+  "start": 17.12,
+  "end": 17.46
+ },
+ {
+  "word": "to",
+  "start": 17.46,
+  "end": 17.66
+ },
+ {
+  "word": "leak.",
+  "start": 17.66,
+  "end": 17.88
+ },
+ {
+  "word": "After",
+  "start": 18.94,
+  "end": 19.18
+ },
+ {
+  "word": "20",
+  "start": 19.18,
+  "end": 19.46
+ },
+ {
+  "word": "years,",
+  "start": 19.46,
+  "end": 19.9
+ },
+ {
+  "word": "trees",
+  "start": 20.28,
+  "end": 20.56
+ },
+ {
+  "word": "grow",
+  "start": 20.56,
+  "end": 20.94
+ },
+ {
+  "word": "through",
+  "start": 20.94,
+  "end": 21.2
+ },
+ {
+  "word": "the",
+  "start": 21.2,
+  "end": 21.34
+ },
+ {
+  "word": "buildings,",
+  "start": 21.34,
+  "end": 21.72
+ },
+ {
+  "word": "and",
+  "start": 22.18,
+  "end": 22.42
+ },
+ {
+  "word": "wild",
+  "start": 22.42,
+  "end": 22.82
+ },
+ {
+  "word": "animals",
+  "start": 22.82,
+  "end": 23.34
+ },
+ {
+  "word": "walk",
+  "start": 23.34,
+  "end": 23.7
+ },
+ {
+  "word": "the",
+  "start": 23.7,
+  "end": 23.96
+ },
+ {
+  "word": "avenues.",
+  "start": 23.96,
+  "end": 24.36
+ },
+ {
+  "word": "After",
+  "start": 25.08,
+  "end": 25.72
+ },
+ {
+  "word": "a",
+  "start": 25.72,
+  "end": 25.96
+ },
+ {
+  "word": "century,",
+  "start": 25.96,
+  "end": 26.2
+ },
+ {
+  "word": "the",
+  "start": 26.54,
+  "end": 26.64
+ },
+ {
+  "word": "bridges",
+  "start": 26.64,
+  "end": 26.92
+ },
+ {
+  "word": "rust",
+  "start": 26.92,
+  "end": 27.34
+ },
+ {
+  "word": "and",
+  "start": 27.34,
+  "end": 27.64
+ },
+ {
+  "word": "fall,",
+  "start": 27.64,
+  "end": 28.0
+ },
+ {
+  "word": "rivers",
+  "start": 28.64,
+  "end": 28.84
+ },
+ {
+  "word": "run",
+  "start": 28.84,
+  "end": 29.16
+ },
+ {
+  "word": "free",
+  "start": 29.16,
+  "end": 29.5
+ },
+ {
+  "word": "again.",
+  "start": 29.5,
+  "end": 29.92
+ },
+ {
+  "word": "After",
+  "start": 31.0,
+  "end": 31.12
+ },
+ {
+  "word": "a",
+  "start": 31.12,
+  "end": 31.28
+ },
+ {
+  "word": "few",
+  "start": 31.28,
+  "end": 31.4
+ },
+ {
+  "word": "hundred",
+  "start": 31.4,
+  "end": 31.72
+ },
+ {
+  "word": "years,",
+  "start": 31.72,
+  "end": 32.22
+ },
+ {
+  "word": "most",
+  "start": 32.72,
+  "end": 32.9
+ },
+ {
+  "word": "buildings",
+  "start": 32.9,
+  "end": 33.3
+ },
+ {
+  "word": "collapse",
+  "start": 33.3,
+  "end": 33.78
+ },
+ {
+  "word": "and",
+  "start": 33.78,
+  "end": 34.2
+ },
+ {
+  "word": "forest",
+  "start": 34.2,
+  "end": 34.56
+ },
+ {
+  "word": "covers",
+  "start": 34.56,
+  "end": 35.0
+ },
+ {
+  "word": "the",
+  "start": 35.0,
+  "end": 35.24
+ },
+ {
+  "word": "city.",
+  "start": 35.24,
+  "end": 35.56
+ },
+ {
+  "word": "Only",
+  "start": 36.6,
+  "end": 36.88
+ },
+ {
+  "word": "plastic,",
+  "start": 36.88,
+  "end": 37.48
+ },
+ {
+  "word": "glass,",
+  "start": 37.66,
+  "end": 37.98
+ },
+ {
+  "word": "and",
+  "start": 38.52,
+  "end": 38.64
+ },
+ {
+  "word": "a",
+  "start": 38.64,
+  "end": 38.74
+ },
+ {
+  "word": "few",
+  "start": 38.74,
+  "end": 38.88
+ },
+ {
+  "word": "statues",
+  "start": 38.88,
+  "end": 39.36
+ },
+ {
+  "word": "last",
+  "start": 39.36,
+  "end": 39.74
+ },
+ {
+  "word": "for",
+  "start": 39.74,
+  "end": 40.04
+ },
+ {
+  "word": "thousands",
+  "start": 40.04,
+  "end": 40.44
+ },
+ {
+  "word": "of",
+  "start": 40.44,
+  "end": 40.68
+ },
+ {
+  "word": "years.",
+  "start": 40.68,
+  "end": 40.98
+ },
+ {
+  "word": "The",
+  "start": 41.9,
+  "end": 42.1
+ },
+ {
+  "word": "planet",
+  "start": 42.1,
+  "end": 42.42
+ },
+ {
+  "word": "would",
+  "start": 42.42,
+  "end": 42.66
+ },
+ {
+  "word": "be",
+  "start": 42.66,
+  "end": 42.82
+ },
+ {
+  "word": "fine,",
+  "start": 42.82,
+  "end": 43.26
+ },
+ {
+  "word": "the",
+  "start": 43.78,
+  "end": 43.88
+ },
+ {
+  "word": "real",
+  "start": 43.88,
+  "end": 44.12
+ },
+ {
+  "word": "question",
+  "start": 44.12,
+  "end": 44.42
+ },
+ {
+  "word": "is",
+  "start": 44.42,
+  "end": 44.82
+ },
+ {
+  "word": "would",
+  "start": 44.82,
+  "end": 45.0
+ },
+ {
+  "word": "it",
+  "start": 45.0,
+  "end": 45.14
+ },
+ {
+  "word": "miss",
+  "start": 45.14,
+  "end": 45.36
+ },
+ {
+  "word": "us?",
+  "start": 45.36,
+  "end": 45.68
+ }
+]
