@@ -23,6 +23,7 @@ import { JupiterShort, JUP_FRAMES } from "./Jupiter";
 import { FutureShort, FUT_FRAMES } from "./Future";
 import { NoHumansShort, NOHUMANS_FRAMES } from "./NoHumans";
 import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
+import { GrowShort, GROW_FRAMES } from "./Grow";
 import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
@@ -52,6 +53,7 @@ export const Root: React.FC = () => (
     <Composition id="NeutronShort" component={NeutronShort} durationInFrames={NS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NoHumansShort" component={NoHumansShort} durationInFrames={NOHUMANS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="GrowShort" component={GrowShort} durationInFrames={GROW_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ClocksShort" component={ClocksShort} durationInFrames={CLOCKS_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );

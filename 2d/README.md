@@ -21,3 +21,4 @@ Transitions + full-screen kit: `src/fx.tsx` (SceneFx, Cam, Flash, backdrops, SAF
 Voice for new shorts: `python 2d/voice_short.py <name>` (reads `2d/<name>/script.txt`, one line per scene; writes voice.wav, words.json, frames.json there).
 
 Topics: `topics/` (711 what-if ideas in 25 category files, `topics/README.md` tells the AI to ask the user which category/ID, then delete the picked line + log it in `DONE.md`). Motion helpers: `src/motion.tsx` (spring, Alive, Burst, shake, Trail, beat, draw, count). Rules: `STYLE.md` sections "Dynamic motion", "Models & visualization", "Storytelling".
+`GrowShort` (Grow.tsx, 1838 f, 61 s, topic T001, first short built with `motion.tsx`): script/voice/render in `grow/`, voice copy in `public/grow/`. Render like BlackHoleShort (`GrowShort`, `--gl=swangle`, ~CPU minutes).

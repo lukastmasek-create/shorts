@@ -1,7 +1,6 @@
 # Human body & evolution
 Format: `ID | title`. Delete the line when picked (see README.md).
 
-T001 | What If You Grew 2x Every 2 Seconds?
 T002 | What If Your Muscles Doubled Every Hour?
 T003 | What If Your Bones Became Unbreakable?
 T004 | What If Your Heart Beat Once Every 10 Minutes?
