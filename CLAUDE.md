@@ -9,7 +9,7 @@ Samostatná 15,7 s pop-up animace Učíme se hrou (three.js bez Remotionu), nez�
 Podsložka `ucimesehrou/low-poly/`: druhá verze, 12,8 s 3D low-poly (jeden jeřábový záběr po ostrově, koncová obrazovka se SVG ikonami). Používá `ucimesehrou/src/stage.js` a `sound.js` (nesahat). Zdroj `low-poly/src/style.js` (rozvrh `T` nahoře řídí obraz i zvuk), `node build.cjs` -> `index.html` + `storyboard.html`, `node render.cjs 32` -> `low-poly/video/ucimesehrou-3d.mp4`. Přiložené MP4 má 12 vzorků (cloud bez GPU), na GPU přerenderovat s 64.
 
 ## Sekce 2d/
-Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastní entry `2d/src/index.ts`, komp. MonoShort/CalmShort/DegreeShort. Postup: `2d/README.md`, styl: `2d/STYLE.md`.
+Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastní entry `2d/src/index.ts`, komp. MonoShort/CalmShort/DegreeShort. Postup: `2d/README.md`, styl: `2d/STYLE.md`. Nový short: nejdřív přečti `2d/topics/README.md` (zeptej se na kategorii/ID, smaž vybraný řádek, zapiš do DONE.md).
 
 ## Setup
 - `npm i` then `npx tsc --noEmit` (clean). Stack: remotion 4, three 0.187, @react-three/fiber 9, @react-three/postprocessing, React 19.

@@ -19,3 +19,5 @@ Ideas list (100 "what if" titles): `ideas/SHORTS_IDEAS.md`.
 Status of ideas 26-50 (one by one, sourced facts, SOURCES.md per short): 26 LiesShort done, 27 BoredShort, 28 DeleteShort done (fx kit).
 Transitions + full-screen kit: `src/fx.tsx` (SceneFx, Cam, Flash, backdrops, SAFE/spread), demo comp `FxDemo`. Rules in `STYLE.md` ("Transitions & full screen"). Use it for all new shorts.
 Voice for new shorts: `python 2d/voice_short.py <name>` (reads `2d/<name>/script.txt`, one line per scene; writes voice.wav, words.json, frames.json there).
+
+Topics: `topics/` (711 what-if ideas in 25 category files, `topics/README.md` tells the AI to ask the user which category/ID, then delete the picked line + log it in `DONE.md`). Motion helpers: `src/motion.tsx` (spring, Alive, Burst, shake, Trail, beat, draw, count). Rules: `STYLE.md` sections "Dynamic motion", "Models & visualization", "Storytelling".
