@@ -14,7 +14,7 @@ txt, out = sys.argv[1], sys.argv[2]
 voice = sys.argv[3] if len(sys.argv) > 3 else "am_michael"
 os.makedirs(out, exist_ok=True)
 k = Kokoro(f"{out}/kokoro-v1.0.onnx", f"{out}/voices-v1.0.bin")
-s, sr = k.create(open(txt).read().strip(), voice=voice, speed=1.0, lang="en-us")
+s, sr = k.create(open(txt).read().strip(), voice=voice, speed=float(os.environ.get("SPEED", "1.0")), lang="en-us")
 sf.write(f"{out}/voice.wav", s, sr)
 # PyAV breaks on py3.13: decode with ffmpeg, pass numpy array
 subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{out}/voice.wav", "-ar", "16000", "-ac", "1", f"{out}/v16.wav"], check=True)

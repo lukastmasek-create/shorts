@@ -1,0 +1,1132 @@
+[
+ {
+  "word": "It",
+  "start": 0.0,
+  "end": 0.06
+ },
+ {
+  "word": "will",
+  "start": 0.06,
+  "end": 0.18
+ },
+ {
+  "word": "stay",
+  "start": 0.18,
+  "end": 0.38
+ },
+ {
+  "word": "19",
+  "start": 0.38,
+  "end": 0.84
+ },
+ {
+  "word": "forever.",
+  "start": 0.84,
+  "end": 1.24
+ },
+ {
+  "word": "Your",
+  "start": 1.8,
+  "end": 1.82
+ },
+ {
+  "word": "body",
+  "start": 1.82,
+  "end": 2.1
+ },
+ {
+  "word": "anyway,",
+  "start": 2.1,
+  "end": 2.56
+ },
+ {
+  "word": "your",
+  "start": 2.74,
+  "end": 2.82
+ },
+ {
+  "word": "brain",
+  "start": 2.82,
+  "end": 3.04
+ },
+ {
+  "word": "did",
+  "start": 3.04,
+  "end": 3.22
+ },
+ {
+  "word": "not",
+  "start": 3.22,
+  "end": 3.38
+ },
+ {
+  "word": "get",
+  "start": 3.38,
+  "end": 3.56
+ },
+ {
+  "word": "that",
+  "start": 3.56,
+  "end": 3.78
+ },
+ {
+  "word": "deal.",
+  "start": 3.78,
+  "end": 4.06
+ },
+ {
+  "word": "Year",
+  "start": 4.48,
+  "end": 4.54
+ },
+ {
+  "word": "one",
+  "start": 4.54,
+  "end": 4.68
+ },
+ {
+  "word": "is",
+  "start": 4.68,
+  "end": 4.82
+ },
+ {
+  "word": "perfect.",
+  "start": 4.82,
+  "end": 5.22
+ },
+ {
+  "word": "No",
+  "start": 5.6,
+  "end": 5.72
+ },
+ {
+  "word": "wrinkles,",
+  "start": 5.72,
+  "end": 6.06
+ },
+ {
+  "word": "no",
+  "start": 6.28,
+  "end": 6.44
+ },
+ {
+  "word": "bad",
+  "start": 6.44,
+  "end": 6.7
+ },
+ {
+  "word": "knees,",
+  "start": 6.7,
+  "end": 7.1
+ },
+ {
+  "word": "hair",
+  "start": 7.28,
+  "end": 7.42
+ },
+ {
+  "word": "stays",
+  "start": 7.42,
+  "end": 7.7
+ },
+ {
+  "word": "thick.",
+  "start": 7.7,
+  "end": 8.02
+ },
+ {
+  "word": "At",
+  "start": 8.44,
+  "end": 8.54
+ },
+ {
+  "word": "30,",
+  "start": 8.54,
+  "end": 8.84
+ },
+ {
+  "word": "your",
+  "start": 8.94,
+  "end": 9.06
+ },
+ {
+  "word": "friends",
+  "start": 9.06,
+  "end": 9.3
+ },
+ {
+  "word": "start",
+  "start": 9.3,
+  "end": 9.56
+ },
+ {
+  "word": "looking",
+  "start": 9.56,
+  "end": 9.84
+ },
+ {
+  "word": "tired.",
+  "start": 9.84,
+  "end": 10.2
+ },
+ {
+  "word": "You",
+  "start": 10.4,
+  "end": 10.52
+ },
+ {
+  "word": "still",
+  "start": 10.52,
+  "end": 10.76
+ },
+ {
+  "word": "get",
+  "start": 10.76,
+  "end": 10.96
+ },
+ {
+  "word": "carded.",
+  "start": 10.96,
+  "end": 11.44
+ },
+ {
+  "word": "At",
+  "start": 11.56,
+  "end": 11.68
+ },
+ {
+  "word": "50,",
+  "start": 11.68,
+  "end": 12.04
+ },
+ {
+  "word": "your",
+  "start": 12.12,
+  "end": 12.24
+ },
+ {
+  "word": "friends",
+  "start": 12.24,
+  "end": 12.48
+ },
+ {
+  "word": "have",
+  "start": 12.48,
+  "end": 12.7
+ },
+ {
+  "word": "gray",
+  "start": 12.7,
+  "end": 12.96
+ },
+ {
+  "word": "hair.",
+  "start": 12.96,
+  "end": 13.26
+ },
+ {
+  "word": "A",
+  "start": 13.68,
+  "end": 13.78
+ },
+ {
+  "word": "bouncer",
+  "start": 13.78,
+  "end": 14.18
+ },
+ {
+  "word": "asks",
+  "start": 14.18,
+  "end": 14.5
+ },
+ {
+  "word": "if",
+  "start": 14.5,
+  "end": 14.72
+ },
+ {
+  "word": "you",
+  "start": 14.72,
+  "end": 14.86
+ },
+ {
+  "word": "are",
+  "start": 14.86,
+  "end": 15.0
+ },
+ {
+  "word": "old",
+  "start": 15.0,
+  "end": 15.28
+ },
+ {
+  "word": "enough",
+  "start": 15.28,
+  "end": 15.48
+ },
+ {
+  "word": "to",
+  "start": 15.48,
+  "end": 15.64
+ },
+ {
+  "word": "be",
+  "start": 15.64,
+  "end": 15.78
+ },
+ {
+  "word": "here.",
+  "start": 15.78,
+  "end": 16.06
+ },
+ {
+  "word": "At",
+  "start": 16.36,
+  "end": 16.48
+ },
+ {
+  "word": "70,",
+  "start": 16.48,
+  "end": 16.88
+ },
+ {
+  "word": "you",
+  "start": 17.0,
+  "end": 17.1
+ },
+ {
+  "word": "can",
+  "start": 17.1,
+  "end": 17.22
+ },
+ {
+  "word": "still",
+  "start": 17.22,
+  "end": 17.44
+ },
+ {
+  "word": "sprint.",
+  "start": 17.44,
+  "end": 17.78
+ },
+ {
+  "word": "You",
+  "start": 18.2,
+  "end": 18.36
+ },
+ {
+  "word": "just",
+  "start": 18.36,
+  "end": 18.52
+ },
+ {
+  "word": "forgot",
+  "start": 18.52,
+  "end": 18.88
+ },
+ {
+  "word": "why",
+  "start": 18.88,
+  "end": 19.14
+ },
+ {
+  "word": "you",
+  "start": 19.14,
+  "end": 19.32
+ },
+ {
+  "word": "started",
+  "start": 19.32,
+  "end": 19.66
+ },
+ {
+  "word": "running.",
+  "start": 19.66,
+  "end": 19.98
+ },
+ {
+  "word": "At",
+  "start": 20.46,
+  "end": 20.58
+ },
+ {
+  "word": "90,",
+  "start": 20.58,
+  "end": 20.94
+ },
+ {
+  "word": "your",
+  "start": 21.08,
+  "end": 21.18
+ },
+ {
+  "word": "body",
+  "start": 21.18,
+  "end": 21.46
+ },
+ {
+  "word": "could",
+  "start": 21.46,
+  "end": 21.66
+ },
+ {
+  "word": "win",
+  "start": 21.66,
+  "end": 21.84
+ },
+ {
+  "word": "a",
+  "start": 21.84,
+  "end": 21.96
+ },
+ {
+  "word": "race.",
+  "start": 21.96,
+  "end": 22.24
+ },
+ {
+  "word": "Your",
+  "start": 22.68,
+  "end": 22.78
+ },
+ {
+  "word": "brain",
+  "start": 22.78,
+  "end": 23.04
+ },
+ {
+  "word": "is",
+  "start": 23.04,
+  "end": 23.18
+ },
+ {
+  "word": "still",
+  "start": 23.18,
+  "end": 23.4
+ },
+ {
+  "word": "looking",
+  "start": 23.4,
+  "end": 23.64
+ },
+ {
+  "word": "for",
+  "start": 23.64,
+  "end": 23.88
+ },
+ {
+  "word": "the",
+  "start": 23.88,
+  "end": 23.98
+ },
+ {
+  "word": "starting",
+  "start": 23.98,
+  "end": 24.28
+ },
+ {
+  "word": "line.",
+  "start": 24.28,
+  "end": 24.6
+ },
+ {
+  "word": "Then",
+  "start": 24.96,
+  "end": 25.1
+ },
+ {
+  "word": "one",
+  "start": 25.1,
+  "end": 25.3
+ },
+ {
+  "word": "morning,",
+  "start": 25.3,
+  "end": 25.58
+ },
+ {
+  "word": "you",
+  "start": 25.58,
+  "end": 25.76
+ },
+ {
+  "word": "are",
+  "start": 25.76,
+  "end": 25.88
+ },
+ {
+  "word": "standing",
+  "start": 25.88,
+  "end": 26.16
+ },
+ {
+  "word": "in",
+  "start": 26.16,
+  "end": 26.36
+ },
+ {
+  "word": "the",
+  "start": 26.36,
+  "end": 26.46
+ },
+ {
+  "word": "kitchen.",
+  "start": 26.46,
+  "end": 26.76
+ },
+ {
+  "word": "You",
+  "start": 27.06,
+  "end": 27.18
+ },
+ {
+  "word": "have",
+  "start": 27.18,
+  "end": 27.34
+ },
+ {
+  "word": "no",
+  "start": 27.34,
+  "end": 27.56
+ },
+ {
+  "word": "idea",
+  "start": 27.56,
+  "end": 27.9
+ },
+ {
+  "word": "why.",
+  "start": 27.9,
+  "end": 28.32
+ },
+ {
+  "word": "Luckily,",
+  "start": 28.32,
+  "end": 28.92
+ },
+ {
+  "word": "you",
+  "start": 29.18,
+  "end": 29.24
+ },
+ {
+  "word": "will",
+  "start": 29.24,
+  "end": 29.38
+ },
+ {
+  "word": "never",
+  "start": 29.38,
+  "end": 29.6
+ },
+ {
+  "word": "need",
+  "start": 29.6,
+  "end": 29.82
+ },
+ {
+  "word": "a",
+  "start": 29.82,
+  "end": 30.04
+ },
+ {
+  "word": "cane.",
+  "start": 30.04,
+  "end": 30.26
+ },
+ {
+  "word": "Unluckily,",
+  "start": 30.82,
+  "end": 31.24
+ },
+ {
+  "word": "you",
+  "start": 31.42,
+  "end": 31.44
+ },
+ {
+  "word": "will",
+  "start": 31.44,
+  "end": 31.58
+ },
+ {
+  "word": "need",
+  "start": 31.58,
+  "end": 31.72
+ },
+ {
+  "word": "a",
+  "start": 31.72,
+  "end": 31.86
+ },
+ {
+  "word": "note",
+  "start": 31.86,
+  "end": 32.0
+ },
+ {
+  "word": "on",
+  "start": 32.0,
+  "end": 32.18
+ },
+ {
+  "word": "the",
+  "start": 32.18,
+  "end": 32.3
+ },
+ {
+  "word": "fridge",
+  "start": 32.3,
+  "end": 32.52
+ },
+ {
+  "word": "that",
+  "start": 32.52,
+  "end": 32.76
+ },
+ {
+  "word": "says,",
+  "start": 32.76,
+  "end": 33.06
+ },
+ {
+  "word": "this",
+  "start": 33.44,
+  "end": 33.46
+ },
+ {
+  "word": "is",
+  "start": 33.46,
+  "end": 33.62
+ },
+ {
+  "word": "your",
+  "start": 33.62,
+  "end": 33.78
+ },
+ {
+  "word": "fridge,",
+  "start": 33.78,
+  "end": 34.16
+ },
+ {
+  "word": "here",
+  "start": 34.52,
+  "end": 34.68
+ },
+ {
+  "word": "is",
+  "start": 34.68,
+  "end": 34.84
+ },
+ {
+  "word": "the",
+  "start": 34.84,
+  "end": 35.04
+ },
+ {
+  "word": "thing.",
+  "start": 35.04,
+  "end": 35.28
+ },
+ {
+  "word": "After",
+  "start": 35.76,
+  "end": 35.92
+ },
+ {
+  "word": "40,",
+  "start": 35.92,
+  "end": 36.28
+ },
+ {
+  "word": "your",
+  "start": 36.46,
+  "end": 36.56
+ },
+ {
+  "word": "brain",
+  "start": 36.56,
+  "end": 36.8
+ },
+ {
+  "word": "shrinks",
+  "start": 36.8,
+  "end": 37.16
+ },
+ {
+  "word": "about",
+  "start": 37.16,
+  "end": 37.4
+ },
+ {
+  "word": "5",
+  "start": 37.4,
+  "end": 37.76
+ },
+ {
+  "word": "%",
+  "start": 37.76,
+  "end": 38.12
+ },
+ {
+  "word": "every",
+  "start": 38.12,
+  "end": 38.4
+ },
+ {
+  "word": "decade.",
+  "start": 38.4,
+  "end": 38.8
+ },
+ {
+  "word": "Thinking",
+  "start": 39.28,
+  "end": 39.44
+ },
+ {
+  "word": "gets",
+  "start": 39.44,
+  "end": 39.76
+ },
+ {
+  "word": "slower.",
+  "start": 39.76,
+  "end": 40.24
+ },
+ {
+  "word": "Memory",
+  "start": 40.76,
+  "end": 40.92
+ },
+ {
+  "word": "gets",
+  "start": 40.92,
+  "end": 41.3
+ },
+ {
+  "word": "patchy.",
+  "start": 41.3,
+  "end": 41.86
+ },
+ {
+  "word": "But",
+  "start": 42.06,
+  "end": 42.28
+ },
+ {
+  "word": "the",
+  "start": 42.28,
+  "end": 42.4
+ },
+ {
+  "word": "vocabulary",
+  "start": 42.4,
+  "end": 42.9
+ },
+ {
+  "word": "and",
+  "start": 42.9,
+  "end": 43.28
+ },
+ {
+  "word": "the",
+  "start": 43.28,
+  "end": 43.44
+ },
+ {
+  "word": "stories",
+  "start": 43.44,
+  "end": 43.74
+ },
+ {
+  "word": "keep",
+  "start": 43.74,
+  "end": 44.08
+ },
+ {
+  "word": "growing",
+  "start": 44.08,
+  "end": 44.44
+ },
+ {
+  "word": "for",
+  "start": 44.44,
+  "end": 44.72
+ },
+ {
+  "word": "decades.",
+  "start": 44.72,
+  "end": 45.1
+ },
+ {
+  "word": "It",
+  "start": 45.56,
+  "end": 45.74
+ },
+ {
+  "word": "is",
+  "start": 45.74,
+  "end": 45.84
+ },
+ {
+  "word": "a",
+  "start": 45.84,
+  "end": 45.98
+ },
+ {
+  "word": "brand",
+  "start": 45.98,
+  "end": 46.2
+ },
+ {
+  "word": "new",
+  "start": 46.2,
+  "end": 46.44
+ },
+ {
+  "word": "sports",
+  "start": 46.44,
+  "end": 46.76
+ },
+ {
+  "word": "car",
+  "start": 46.76,
+  "end": 47.12
+ },
+ {
+  "word": "driven",
+  "start": 47.12,
+  "end": 47.4
+ },
+ {
+  "word": "by",
+  "start": 47.4,
+  "end": 47.7
+ },
+ {
+  "word": "a",
+  "start": 47.7,
+  "end": 47.8
+ },
+ {
+  "word": "very",
+  "start": 47.8,
+  "end": 47.98
+ },
+ {
+  "word": "wise,",
+  "start": 47.98,
+  "end": 48.44
+ },
+ {
+  "word": "very",
+  "start": 48.6,
+  "end": 48.74
+ },
+ {
+  "word": "confused",
+  "start": 48.74,
+  "end": 49.22
+ },
+ {
+  "word": "grandpa.",
+  "start": 49.22,
+  "end": 49.82
+ },
+ {
+  "word": "Everyone",
+  "start": 50.28,
+  "end": 50.62
+ },
+ {
+  "word": "treats",
+  "start": 50.62,
+  "end": 50.94
+ },
+ {
+  "word": "you",
+  "start": 50.94,
+  "end": 51.18
+ },
+ {
+  "word": "like",
+  "start": 51.18,
+  "end": 51.3
+ },
+ {
+  "word": "a",
+  "start": 51.3,
+  "end": 51.42
+ },
+ {
+  "word": "teenager.",
+  "start": 51.42,
+  "end": 51.78
+ },
+ {
+  "word": "Nobody",
+  "start": 52.34,
+  "end": 52.64
+ },
+ {
+  "word": "listens",
+  "start": 52.64,
+  "end": 53.0
+ },
+ {
+  "word": "to",
+  "start": 53.0,
+  "end": 53.26
+ },
+ {
+  "word": "your",
+  "start": 53.26,
+  "end": 53.38
+ },
+ {
+  "word": "advice.",
+  "start": 53.38,
+  "end": 53.74
+ },
+ {
+  "word": "You",
+  "start": 54.24,
+  "end": 54.4
+ },
+ {
+  "word": "have",
+  "start": 54.4,
+  "end": 54.56
+ },
+ {
+  "word": "80",
+  "start": 54.56,
+  "end": 54.86
+ },
+ {
+  "word": "years",
+  "start": 54.86,
+  "end": 55.08
+ },
+ {
+  "word": "of",
+  "start": 55.08,
+  "end": 55.26
+ },
+ {
+  "word": "memories",
+  "start": 55.26,
+  "end": 55.58
+ },
+ {
+  "word": "and",
+  "start": 55.58,
+  "end": 55.84
+ },
+ {
+  "word": "a",
+  "start": 55.84,
+  "end": 55.94
+ },
+ {
+  "word": "face",
+  "start": 55.94,
+  "end": 56.16
+ },
+ {
+  "word": "that",
+  "start": 56.16,
+  "end": 56.4
+ },
+ {
+  "word": "gets",
+  "start": 56.4,
+  "end": 56.58
+ },
+ {
+  "word": "you",
+  "start": 56.58,
+  "end": 56.76
+ },
+ {
+  "word": "a",
+  "start": 56.76,
+  "end": 56.9
+ },
+ {
+  "word": "kid's",
+  "start": 56.9,
+  "end": 57.18
+ },
+ {
+  "word": "menu.",
+  "start": 57.18,
+  "end": 57.44
+ },
+ {
+  "word": "So",
+  "start": 57.44,
+  "end": 58.04
+ },
+ {
+  "word": "you",
+  "start": 58.04,
+  "end": 58.2
+ },
+ {
+  "word": "do",
+  "start": 58.2,
+  "end": 58.32
+ },
+ {
+  "word": "the",
+  "start": 58.32,
+  "end": 58.46
+ },
+ {
+  "word": "only",
+  "start": 58.46,
+  "end": 58.68
+ },
+ {
+  "word": "thing",
+  "start": 58.68,
+  "end": 58.98
+ },
+ {
+  "word": "you",
+  "start": 58.98,
+  "end": 59.18
+ },
+ {
+  "word": "can.",
+  "start": 59.18,
+  "end": 59.48
+ },
+ {
+  "word": "You",
+  "start": 59.98,
+  "end": 60.02
+ },
+ {
+  "word": "sit",
+  "start": 60.02,
+  "end": 60.16
+ },
+ {
+  "word": "on",
+  "start": 60.16,
+  "end": 60.3
+ },
+ {
+  "word": "a",
+  "start": 60.3,
+  "end": 60.4
+ },
+ {
+  "word": "bench,",
+  "start": 60.4,
+  "end": 60.72
+ },
+ {
+  "word": "look",
+  "start": 60.84,
+  "end": 60.94
+ },
+ {
+  "word": "young,",
+  "start": 60.94,
+  "end": 61.28
+ },
+ {
+  "word": "and",
+  "start": 61.42,
+  "end": 61.48
+ },
+ {
+  "word": "say,",
+  "start": 61.48,
+  "end": 61.72
+ },
+ {
+  "word": "I",
+  "start": 62.16,
+  "end": 62.3
+ },
+ {
+  "word": "remember",
+  "start": 62.3,
+  "end": 62.58
+ },
+ {
+  "word": "when",
+  "start": 62.58,
+  "end": 62.8
+ },
+ {
+  "word": "this",
+  "start": 62.8,
+  "end": 62.94
+ },
+ {
+  "word": "was",
+  "start": 62.94,
+  "end": 63.1
+ },
+ {
+  "word": "all",
+  "start": 63.1,
+  "end": 63.38
+ },
+ {
+  "word": "a",
+  "start": 63.38,
+  "end": 63.56
+ },
+ {
+  "word": "field.",
+  "start": 63.56,
+  "end": 63.88
+ },
+ {
+  "word": "And",
+  "start": 64.38,
+  "end": 64.48
+ },
+ {
+  "word": "for",
+  "start": 64.48,
+  "end": 64.6
+ },
+ {
+  "word": "once,",
+  "start": 64.6,
+  "end": 64.94
+ },
+ {
+  "word": "nobody",
+  "start": 65.2,
+  "end": 65.38
+ },
+ {
+  "word": "can",
+  "start": 65.38,
+  "end": 65.7
+ },
+ {
+  "word": "prove",
+  "start": 65.7,
+  "end": 65.9
+ },
+ {
+  "word": "you",
+  "start": 65.9,
+  "end": 66.1
+ },
+ {
+  "word": "wrong.",
+  "start": 66.1,
+  "end": 66.34
+ }
+]
