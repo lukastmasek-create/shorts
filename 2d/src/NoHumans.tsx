@@ -194,7 +194,7 @@ export const NoHumansShort: React.FC<{ audio?: boolean }> = ({ audio = true }) =
   const f = useCurrentFrame();
   return <Stage>
     {audio && <Audio src={staticFile("nohumans/voice.wav")} />}
-    {SC.map(([tr, C], i) => <SceneFx key={i} a={FR[i]} b={i === SC.length - 1 ? NOHUMANS_FRAMES : FR[i + 1]} inT={tr} outT={SC[i + 1] ? SC[i + 1][0] : "fade"}>{(t) => <g style={{ filter: GLOW }}>{C(t)}</g>}</SceneFx>)}
+    {SC.map(([tr, C], i) => <SceneFx key={i} a={FR[i]} b={i === SC.length - 1 ? NOHUMANS_FRAMES : FR[i + 1]} inT={tr} outT={SC[i + 1] ? SC[i + 1][0] : "fade"}>{C}</SceneFx>)}
     <div style={{ position: "absolute", inset: 0, background: "#000", opacity: clamp((f - (NOHUMANS_FRAMES - 18)) / 18) }} />
   </Stage>;
 };
