@@ -1,0 +1,662 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.6
+ },
+ {
+  "word": "if",
+  "start": 0.6,
+  "end": 0.74
+ },
+ {
+  "word": "you",
+  "start": 0.74,
+  "end": 0.88
+ },
+ {
+  "word": "had",
+  "start": 0.88,
+  "end": 1.12
+ },
+ {
+  "word": "two",
+  "start": 1.12,
+  "end": 1.38
+ },
+ {
+  "word": "personalities",
+  "start": 1.38,
+  "end": 1.98
+ },
+ {
+  "word": "that",
+  "start": 1.98,
+  "end": 2.52
+ },
+ {
+  "word": "could",
+  "start": 2.52,
+  "end": 2.68
+ },
+ {
+  "word": "see",
+  "start": 2.68,
+  "end": 2.92
+ },
+ {
+  "word": "each",
+  "start": 2.92,
+  "end": 3.16
+ },
+ {
+  "word": "other?",
+  "start": 3.16,
+  "end": 3.46
+ },
+ {
+  "word": "Real",
+  "start": 4.98,
+  "end": 4.98
+ },
+ {
+  "word": "minds",
+  "start": 4.98,
+  "end": 5.48
+ },
+ {
+  "word": "are",
+  "start": 5.48,
+  "end": 5.82
+ },
+ {
+  "word": "messier.",
+  "start": 5.82,
+  "end": 6.42
+ },
+ {
+  "word": "Inner",
+  "start": 6.92,
+  "end": 7.08
+ },
+ {
+  "word": "speech",
+  "start": 7.08,
+  "end": 7.44
+ },
+ {
+  "word": "can",
+  "start": 7.44,
+  "end": 7.74
+ },
+ {
+  "word": "work",
+  "start": 7.74,
+  "end": 7.98
+ },
+ {
+  "word": "like",
+  "start": 7.98,
+  "end": 8.18
+ },
+ {
+  "word": "a",
+  "start": 8.18,
+  "end": 8.32
+ },
+ {
+  "word": "conversation",
+  "start": 8.32,
+  "end": 8.82
+ },
+ {
+  "word": "with",
+  "start": 8.82,
+  "end": 9.22
+ },
+ {
+  "word": "yourself.",
+  "start": 9.22,
+  "end": 9.7
+ },
+ {
+  "word": "Your",
+  "start": 10.84,
+  "end": 10.94
+ },
+ {
+  "word": "future",
+  "start": 10.94,
+  "end": 11.3
+ },
+ {
+  "word": "self",
+  "start": 11.3,
+  "end": 11.64
+ },
+ {
+  "word": "can",
+  "start": 11.64,
+  "end": 11.88
+ },
+ {
+  "word": "feel",
+  "start": 11.88,
+  "end": 12.22
+ },
+ {
+  "word": "like",
+  "start": 12.22,
+  "end": 12.44
+ },
+ {
+  "word": "a",
+  "start": 12.44,
+  "end": 12.62
+ },
+ {
+  "word": "stranger.",
+  "start": 12.62,
+  "end": 13.1
+ },
+ {
+  "word": "In",
+  "start": 13.86,
+  "end": 13.96
+ },
+ {
+  "word": "a",
+  "start": 13.96,
+  "end": 14.1
+ },
+ {
+  "word": "2009",
+  "start": 14.1,
+  "end": 15.14
+ },
+ {
+  "word": "brain",
+  "start": 15.14,
+  "end": 15.78
+ },
+ {
+  "word": "imaging",
+  "start": 15.78,
+  "end": 16.3
+ },
+ {
+  "word": "study,",
+  "start": 16.3,
+  "end": 16.8
+ },
+ {
+  "word": "people",
+  "start": 17.34,
+  "end": 17.54
+ },
+ {
+  "word": "who",
+  "start": 17.54,
+  "end": 17.72
+ },
+ {
+  "word": "felt",
+  "start": 17.72,
+  "end": 17.94
+ },
+ {
+  "word": "less",
+  "start": 17.94,
+  "end": 18.22
+ },
+ {
+  "word": "connected",
+  "start": 18.22,
+  "end": 18.64
+ },
+ {
+  "word": "to",
+  "start": 18.64,
+  "end": 18.9
+ },
+ {
+  "word": "their",
+  "start": 18.9,
+  "end": 19.08
+ },
+ {
+  "word": "future",
+  "start": 19.08,
+  "end": 19.36
+ },
+ {
+  "word": "self",
+  "start": 19.36,
+  "end": 19.86
+ },
+ {
+  "word": "tended",
+  "start": 19.86,
+  "end": 20.26
+ },
+ {
+  "word": "to",
+  "start": 20.26,
+  "end": 20.5
+ },
+ {
+  "word": "prefer",
+  "start": 20.5,
+  "end": 20.86
+ },
+ {
+  "word": "smaller",
+  "start": 20.86,
+  "end": 21.44
+ },
+ {
+  "word": "rewards",
+  "start": 21.44,
+  "end": 22.0
+ },
+ {
+  "word": "now.",
+  "start": 22.0,
+  "end": 22.4
+ },
+ {
+  "word": "One",
+  "start": 23.34,
+  "end": 23.6
+ },
+ {
+  "word": "brain",
+  "start": 23.6,
+  "end": 24.02
+ },
+ {
+  "word": "can",
+  "start": 24.02,
+  "end": 24.28
+ },
+ {
+  "word": "even",
+  "start": 24.28,
+  "end": 24.52
+ },
+ {
+  "word": "run",
+  "start": 24.52,
+  "end": 24.84
+ },
+ {
+  "word": "as",
+  "start": 24.84,
+  "end": 25.08
+ },
+ {
+  "word": "two.",
+  "start": 25.08,
+  "end": 25.4
+ },
+ {
+  "word": "After",
+  "start": 25.4,
+  "end": 26.3
+ },
+ {
+  "word": "surgery",
+  "start": 26.3,
+  "end": 26.82
+ },
+ {
+  "word": "cut",
+  "start": 26.82,
+  "end": 27.14
+ },
+ {
+  "word": "the",
+  "start": 27.14,
+  "end": 27.34
+ },
+ {
+  "word": "link",
+  "start": 27.34,
+  "end": 27.52
+ },
+ {
+  "word": "between",
+  "start": 27.52,
+  "end": 27.84
+ },
+ {
+  "word": "the",
+  "start": 27.84,
+  "end": 28.02
+ },
+ {
+  "word": "hemispheres,",
+  "start": 28.02,
+  "end": 28.66
+ },
+ {
+  "word": "split",
+  "start": 29.3,
+  "end": 29.4
+ },
+ {
+  "word": "-brain",
+  "start": 29.4,
+  "end": 29.7
+ },
+ {
+  "word": "patients",
+  "start": 29.7,
+  "end": 30.3
+ },
+ {
+  "word": "acted",
+  "start": 30.3,
+  "end": 30.66
+ },
+ {
+  "word": "with",
+  "start": 30.66,
+  "end": 30.96
+ },
+ {
+  "word": "each",
+  "start": 30.96,
+  "end": 31.24
+ },
+ {
+  "word": "side",
+  "start": 31.24,
+  "end": 31.62
+ },
+ {
+  "word": "on",
+  "start": 31.62,
+  "end": 31.8
+ },
+ {
+  "word": "its",
+  "start": 31.8,
+  "end": 31.92
+ },
+ {
+  "word": "own.",
+  "start": 31.92,
+  "end": 32.34
+ },
+ {
+  "word": "The",
+  "start": 32.84,
+  "end": 33.04
+ },
+ {
+  "word": "talking",
+  "start": 33.04,
+  "end": 33.42
+ },
+ {
+  "word": "side",
+  "start": 33.42,
+  "end": 33.88
+ },
+ {
+  "word": "invented",
+  "start": 33.88,
+  "end": 34.42
+ },
+ {
+  "word": "reasons",
+  "start": 34.42,
+  "end": 34.98
+ },
+ {
+  "word": "for",
+  "start": 34.98,
+  "end": 35.3
+ },
+ {
+  "word": "actions",
+  "start": 35.3,
+  "end": 35.74
+ },
+ {
+  "word": "it",
+  "start": 35.74,
+  "end": 35.98
+ },
+ {
+  "word": "never",
+  "start": 35.98,
+  "end": 36.24
+ },
+ {
+  "word": "chose.",
+  "start": 36.24,
+  "end": 36.7
+ },
+ {
+  "word": "Dissociative",
+  "start": 38.18,
+  "end": 38.5
+ },
+ {
+  "word": "identity",
+  "start": 38.5,
+  "end": 39.02
+ },
+ {
+  "word": "disorder",
+  "start": 39.02,
+  "end": 39.64
+ },
+ {
+  "word": "is",
+  "start": 39.64,
+  "end": 39.96
+ },
+ {
+  "word": "different.",
+  "start": 39.96,
+  "end": 40.36
+ },
+ {
+  "word": "It",
+  "start": 40.82,
+  "end": 41.04
+ },
+ {
+  "word": "means",
+  "start": 41.04,
+  "end": 41.3
+ },
+ {
+  "word": "two",
+  "start": 41.3,
+  "end": 41.74
+ },
+ {
+  "word": "or",
+  "start": 41.74,
+  "end": 42.04
+ },
+ {
+  "word": "more",
+  "start": 42.04,
+  "end": 42.28
+ },
+ {
+  "word": "distinct",
+  "start": 42.28,
+  "end": 42.72
+ },
+ {
+  "word": "identity",
+  "start": 42.72,
+  "end": 43.4
+ },
+ {
+  "word": "states",
+  "start": 43.4,
+  "end": 43.9
+ },
+ {
+  "word": "with",
+  "start": 43.9,
+  "end": 44.4
+ },
+ {
+  "word": "gaps",
+  "start": 44.4,
+  "end": 44.7
+ },
+ {
+  "word": "in",
+  "start": 44.7,
+  "end": 45.0
+ },
+ {
+  "word": "memory.",
+  "start": 45.0,
+  "end": 45.32
+ },
+ {
+  "word": "It",
+  "start": 45.9,
+  "end": 46.1
+ },
+ {
+  "word": "is",
+  "start": 46.1,
+  "end": 46.2
+ },
+ {
+  "word": "a",
+  "start": 46.2,
+  "end": 46.36
+ },
+ {
+  "word": "recognized",
+  "start": 46.36,
+  "end": 46.92
+ },
+ {
+  "word": "disorder,",
+  "start": 46.92,
+  "end": 47.68
+ },
+ {
+  "word": "not",
+  "start": 47.72,
+  "end": 48.08
+ },
+ {
+  "word": "a",
+  "start": 48.08,
+  "end": 48.26
+ },
+ {
+  "word": "superpower.",
+  "start": 48.26,
+  "end": 48.8
+ },
+ {
+  "word": "So",
+  "start": 49.82,
+  "end": 50.12
+ },
+ {
+  "word": "no,",
+  "start": 50.12,
+  "end": 50.36
+ },
+ {
+  "word": "you",
+  "start": 50.62,
+  "end": 50.74
+ },
+ {
+  "word": "do",
+  "start": 50.74,
+  "end": 50.88
+ },
+ {
+  "word": "not",
+  "start": 50.88,
+  "end": 51.06
+ },
+ {
+  "word": "have",
+  "start": 51.06,
+  "end": 51.28
+ },
+ {
+  "word": "two",
+  "start": 51.28,
+  "end": 51.52
+ },
+ {
+  "word": "selves",
+  "start": 51.52,
+  "end": 51.92
+ },
+ {
+  "word": "watching",
+  "start": 51.92,
+  "end": 52.34
+ },
+ {
+  "word": "each",
+  "start": 52.34,
+  "end": 52.7
+ },
+ {
+  "word": "other,",
+  "start": 52.7,
+  "end": 52.96
+ },
+ {
+  "word": "but",
+  "start": 53.3,
+  "end": 53.54
+ },
+ {
+  "word": "you",
+  "start": 53.54,
+  "end": 53.68
+ },
+ {
+  "word": "already",
+  "start": 53.68,
+  "end": 54.02
+ },
+ {
+  "word": "host",
+  "start": 54.02,
+  "end": 54.38
+ },
+ {
+  "word": "more",
+  "start": 54.38,
+  "end": 54.66
+ },
+ {
+  "word": "than",
+  "start": 54.66,
+  "end": 54.86
+ },
+ {
+  "word": "one",
+  "start": 54.86,
+  "end": 55.06
+ },
+ {
+  "word": "voice.",
+  "start": 55.06,
+  "end": 55.4
+ }
+]
