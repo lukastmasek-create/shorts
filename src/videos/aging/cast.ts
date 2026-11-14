@@ -23,21 +23,21 @@ const GRANDPA: Outfit = { jacket: "#8a6a3a", pants: "#3b3f52", boots: "#4a3426",
 const WAITER: Outfit = { jacket: "#f1efe6", pants: "#1c1c24", boots: "#111118", hat: null, skin: SKINS[2], moustache: "#2a201a", build: "adult" };
 
 // ---------------- helpers ----------------
-const q = (v: number, n = 120) => Math.round(v * n) / n;
-const fkey = (o: object) => JSON.stringify(o, (_k, v) => (typeof v === "number" ? q(v) : v));
-const tier = (d: number): [number, number, number] => d < 3.2 ? [1800, 3000, 3.0] : d < 6.5 ? [1080, 1800, 1.8] : d < 16 ? [480, 800, 0.8] : [240, 400, 0.4];
-const light2D = (c: StageCtx, mirror: boolean) => {
+export const q = (v: number, n = 120) => Math.round(v * n) / n;
+export const fkey = (o: object) => JSON.stringify(o, (_k, v) => (typeof v === "number" ? q(v) : v));
+export const tier = (d: number): [number, number, number] => d < 3.2 ? [1800, 3000, 3.0] : d < 6.5 ? [1080, 1800, 1.8] : d < 16 ? [480, 800, 0.8] : [240, 400, 0.4];
+export const light2D = (c: StageCtx, mirror: boolean) => {
   const sx = (c.sunDir.x * c.right.x + c.sunDir.z * c.right.z) * (mirror ? -1 : 1), sy = -c.sunDir.y;
   return Math.round(Math.atan2(sy, sx) / (Math.PI / 4)) * (Math.PI / 4);
 };
 /** front / side view of someone at (x, z) moving along (dx, dz) */
-const viewOf = (c: StageCtx, x: number, z: number, dx: number, dz: number) => {
+export const viewOf = (c: StageCtx, x: number, z: number, dx: number, dz: number) => {
   const tx = c.pos.x - x, tz = c.pos.z - z, tl = Math.hypot(tx, tz) || 1;
   const cs = (tx * dx + tz * dz) / tl;
   return { side: cs < 0.57, mirror: dx * c.right.x + dz * c.right.z < 0 };
 };
 const CONTACT: Record<"day" | "golden", string> = { day: "#33357f", golden: "#3b3372" };
-const blob = (out: Stage, c: StageCtx, x: number, y: number, z: number, sc: number) => {
+export const blob = (out: Stage, c: StageCtx, x: number, y: number, z: number, sc: number) => {
   const hl = Math.hypot(c.sunDir.x, c.sunDir.z) || 1, ox = -c.sunDir.x / hl, oz = -c.sunDir.z / hl, rot = Math.atan2(-ox, -oz);
   if (c.light === "day") {
     const el = Math.asin(Math.min(0.99, Math.max(0.1, c.sunDir.y))), len = Math.min(2.4, Math.max(0.5, 1.6 / Math.tan(el))) * sc, h = len + 0.55 * sc;
@@ -47,10 +47,10 @@ const blob = (out: Stage, c: StageCtx, x: number, y: number, z: number, sc: numb
   out.fx.push({ key: `blob|contact|${cc}`, cw: 128, ch: 128, draw: (p) => fxContact(p, cc), x: x + ox * 0.03 * sc, y: y + 0.022, z: z + oz * 0.03 * sc, w: 0.52 * sc, h: 0.4 * sc, flat: true, rot });
 };
 
-type Who = { o: Outfit; okey: string; seed: number };
-const WHO = (o: Outfit, okey: string, seed: number): Who => ({ o, okey, seed });
+export type Who = { o: Outfit; okey: string; seed: number };
+export const WHO = (o: Outfit, okey: string, seed: number): Who => ({ o, okey, seed });
 /** one character card; walking = along (dx,0), otherwise faces the camera */
-const person = (out: Stage, c: StageCtx, who: Who, pos: V3, o: { expr: Expr; scale?: number; walk?: [number, number]; fo?: FrontOpts; so?: SideOpts; shadow?: boolean }) => {
+export const person = (out: Stage, c: StageCtx, who: Who, pos: V3, o: { expr: Expr; scale?: number; walk?: [number, number]; fo?: FrontOpts; so?: SideOpts; shadow?: boolean }) => {
   const [x, y, z] = pos, sc = o.scale ?? 1.05;
   const v = o.walk ? viewOf(c, x, z, o.walk[0], o.walk[1]) : { side: false, mirror: false };
   const d = Math.hypot(c.pos.x - x, c.pos.y - (y + 1.2), c.pos.z - z) / sc, [w, h, k] = tier(d);
@@ -62,8 +62,8 @@ const person = (out: Stage, c: StageCtx, who: Who, pos: V3, o: { expr: Expr; sca
 };
 
 // ---------------- effect card drawings ----------------
-const CREAM = "#f6efe0";
-const fxThought = (p: Pen) => {
+export const CREAM = "#f6efe0";
+export const fxThought = (p: Pen) => {
   for (const [x, y, rx, ry] of [[200, 190, 170, 140], [110, 130, 90, 80], [290, 120, 100, 90], [200, 70, 100, 70]] as const) p.ell(x, y, rx, ry, "#ffffff", 0);
   p.ell(200, 190, 170, 140, null, 10); p.dot(90, 410, 22, "#ffffff"); p.ell(90, 410, 22, 22, null, 7); p.ell(45, 470, 12, 12, "#ffffff", 6);
   // wise old head: white hair, glasses, moustache
@@ -71,7 +71,7 @@ const fxThought = (p: Pen) => {
   p.ell(172, 195, 22, 18, "#dff1ff", 6); p.ell(228, 195, 22, 18, "#dff1ff", 6); p.stroke([[194, 195], [206, 195]], 6);
   p.ell(200, 240, 36, 12, "#eeeef4", 5);
 };
-const fxQ = (p: Pen) => {
+export const fxQ = (p: Pen) => {
   const pts: [number, number][] = [];
   for (let i = 0; i <= 20; i++) { const a = ((-200 + (i * 290) / 20) * Math.PI) / 180; pts.push([150 + 70 * Math.cos(a), 100 + 70 * Math.sin(a)]); }
   pts.push([150, 200], [150, 235]);
@@ -137,7 +137,7 @@ const fxMenu = (p: Pen) => {
 const fxField = (p: Pen) => { const g = p.g, gr = g.createRadialGradient(32, 32, 4, 32, 32, 32); gr.addColorStop(0, "rgba(120,196,80,0.85)"); gr.addColorStop(1, "rgba(120,196,80,0)"); g.fillStyle = gr; g.fillRect(0, 0, 64, 64); };
 
 // ---------------- the stage ----------------
-const fx = (out: Stage, key: string, cw: number, ch: number, draw: (p: Pen) => void, x: number, y: number, z: number, w: number, h: number, soft = false) =>
+export const fx = (out: Stage, key: string, cw: number, ch: number, draw: (p: Pen) => void, x: number, y: number, z: number, w: number, h: number, soft = false) =>
   out.fx.push({ key, cw, ch, draw, x, y, z, w, h, soft });
 const faceHero = (id: number, f: number): Expr => {
   const t = f / FPS;
