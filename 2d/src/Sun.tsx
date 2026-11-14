@@ -8,7 +8,7 @@ export const SUN_FRAMES = 1620;
 const cx = W / 2;
 const ic = { fill: "none", stroke: INK, strokeWidth: SW, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 
-const SunI: React.FC<{ x: number; y: number; r?: number; o?: number; t?: number; ghost?: boolean }> = ({ x, y, r = 100, o = 1, t = 0, ghost }) => (
+export const SunI: React.FC<{ x: number; y: number; r?: number; o?: number; t?: number; ghost?: boolean }> = ({ x, y, r = 100, o = 1, t = 0, ghost }) => (
   <g transform={`translate(${x} ${y})`} opacity={o} style={{ filter: ghost ? undefined : GLOW }}>
     <circle r={r} {...ic} fill={ghost ? "none" : INK} strokeDasharray={ghost ? "10 12" : undefined} strokeWidth={ghost ? 3 : SW} />
     <g transform={`rotate(${t * 0.6})`}>
@@ -18,7 +18,7 @@ const SunI: React.FC<{ x: number; y: number; r?: number; o?: number; t?: number;
 );
 
 // lit: 1 = white lit disc, 0 = outline only
-const Earth: React.FC<{ x: number; y: number; r?: number; lit?: number; o?: number }> = ({ x, y, r = 60, lit = 1, o = 1 }) => {
+export const Earth: React.FC<{ x: number; y: number; r?: number; lit?: number; o?: number }> = ({ x, y, r = 60, lit = 1, o = 1 }) => {
   const v = Math.round(lerp(255, 0, lit) * 0 + (lit > 0.5 ? 0 : 255));
   const ln = `rgb(${v},${v},${v})`;
   return (
@@ -29,7 +29,7 @@ const Earth: React.FC<{ x: number; y: number; r?: number; lit?: number; o?: numb
   );
 };
 
-const Stars: React.FC<{ t: number; o?: number }> = ({ t, o = 1 }) => (
+export const Stars: React.FC<{ t: number; o?: number }> = ({ t, o = 1 }) => (
   <g fill={INK} opacity={o}>
     {Array.from({ length: 46 }, (_, i) => { const x = (i * 193 + 71) % W, y = (i * 349 + 113) % H; const tw = 0.4 + 0.6 * Math.abs(Math.sin(t * 0.08 + i)); return <circle key={i} cx={x} cy={y} r={1.5 + (i % 3)} opacity={tw * 0.8} />; })}
   </g>
@@ -41,7 +41,7 @@ const Dots: React.FC<{ x0: number; y0: number; x1: number; y1: number; t: number
   </g>
 );
 
-const Waves: React.FC<{ x: number; y: number; w: number; t: number; o?: number }> = ({ x, y, w, t, o = 1 }) => (
+export const Waves: React.FC<{ x: number; y: number; w: number; t: number; o?: number }> = ({ x, y, w, t, o = 1 }) => (
   <g opacity={o} {...ic} style={{ filter: GLOW }}>
     {[0, 40, 80].map(dy => <polyline key={dy} points={Array.from({ length: Math.floor(w / 6) + 1 }, (_, i) => `${x + i * 6},${y + dy + Math.sin((i * 6 + t * 3) / 40 + dy) * 9}`).join(" ")} {...ic} strokeWidth={4} />)}
   </g>
