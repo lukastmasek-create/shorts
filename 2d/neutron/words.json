@@ -1,0 +1,802 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.52
+ },
+ {
+  "word": "if",
+  "start": 0.52,
+  "end": 0.62
+ },
+ {
+  "word": "you",
+  "start": 0.62,
+  "end": 0.78
+ },
+ {
+  "word": "fell",
+  "start": 0.78,
+  "end": 1.02
+ },
+ {
+  "word": "into",
+  "start": 1.02,
+  "end": 1.28
+ },
+ {
+  "word": "a",
+  "start": 1.28,
+  "end": 1.46
+ },
+ {
+  "word": "neutron",
+  "start": 1.46,
+  "end": 1.8
+ },
+ {
+  "word": "star?",
+  "start": 1.8,
+  "end": 2.32
+ },
+ {
+  "word": "It",
+  "start": 4.7,
+  "end": 4.82
+ },
+ {
+  "word": "is",
+  "start": 4.82,
+  "end": 5.0
+ },
+ {
+  "word": "the",
+  "start": 5.0,
+  "end": 5.18
+ },
+ {
+  "word": "dead",
+  "start": 5.18,
+  "end": 5.44
+ },
+ {
+  "word": "core",
+  "start": 5.44,
+  "end": 5.76
+ },
+ {
+  "word": "of",
+  "start": 5.76,
+  "end": 5.98
+ },
+ {
+  "word": "a",
+  "start": 5.98,
+  "end": 6.18
+ },
+ {
+  "word": "giant",
+  "start": 6.18,
+  "end": 6.4
+ },
+ {
+  "word": "star,",
+  "start": 6.4,
+  "end": 6.94
+ },
+ {
+  "word": "crushed",
+  "start": 7.32,
+  "end": 7.58
+ },
+ {
+  "word": "into",
+  "start": 7.58,
+  "end": 7.88
+ },
+ {
+  "word": "a",
+  "start": 7.88,
+  "end": 8.04
+ },
+ {
+  "word": "ball",
+  "start": 8.04,
+  "end": 8.32
+ },
+ {
+  "word": "just",
+  "start": 8.32,
+  "end": 8.62
+ },
+ {
+  "word": "20",
+  "start": 8.62,
+  "end": 9.06
+ },
+ {
+  "word": "kilometers",
+  "start": 9.06,
+  "end": 9.52
+ },
+ {
+  "word": "wide.",
+  "start": 9.52,
+  "end": 10.2
+ },
+ {
+  "word": "Yet",
+  "start": 11.04,
+  "end": 11.28
+ },
+ {
+  "word": "it",
+  "start": 11.28,
+  "end": 11.38
+ },
+ {
+  "word": "weighs",
+  "start": 11.38,
+  "end": 11.56
+ },
+ {
+  "word": "more",
+  "start": 11.56,
+  "end": 11.88
+ },
+ {
+  "word": "than",
+  "start": 11.88,
+  "end": 12.06
+ },
+ {
+  "word": "our",
+  "start": 12.06,
+  "end": 12.24
+ },
+ {
+  "word": "sun.",
+  "start": 12.24,
+  "end": 12.52
+ },
+ {
+  "word": "One",
+  "start": 13.08,
+  "end": 13.28
+ },
+ {
+  "word": "spoonful",
+  "start": 13.28,
+  "end": 13.82
+ },
+ {
+  "word": "would",
+  "start": 13.82,
+  "end": 14.0
+ },
+ {
+  "word": "weigh",
+  "start": 14.0,
+  "end": 14.22
+ },
+ {
+  "word": "a",
+  "start": 14.22,
+  "end": 14.44
+ },
+ {
+  "word": "billion",
+  "start": 14.44,
+  "end": 14.78
+ },
+ {
+  "word": "tons.",
+  "start": 14.78,
+  "end": 15.2
+ },
+ {
+  "word": "You",
+  "start": 16.18,
+  "end": 16.46
+ },
+ {
+  "word": "fall",
+  "start": 16.46,
+  "end": 16.72
+ },
+ {
+  "word": "toward",
+  "start": 16.72,
+  "end": 17.1
+ },
+ {
+  "word": "it.",
+  "start": 17.1,
+  "end": 17.44
+ },
+ {
+  "word": "Gravity",
+  "start": 17.98,
+  "end": 18.22
+ },
+ {
+  "word": "there",
+  "start": 18.22,
+  "end": 18.54
+ },
+ {
+  "word": "is",
+  "start": 18.54,
+  "end": 18.7
+ },
+ {
+  "word": "a",
+  "start": 18.7,
+  "end": 18.84
+ },
+ {
+  "word": "hundred",
+  "start": 18.84,
+  "end": 19.18
+ },
+ {
+  "word": "billion",
+  "start": 19.18,
+  "end": 19.62
+ },
+ {
+  "word": "times",
+  "start": 19.62,
+  "end": 20.08
+ },
+ {
+  "word": "stronger",
+  "start": 20.08,
+  "end": 20.54
+ },
+ {
+  "word": "than",
+  "start": 20.54,
+  "end": 20.86
+ },
+ {
+  "word": "on",
+  "start": 20.86,
+  "end": 21.06
+ },
+ {
+  "word": "Earth.",
+  "start": 21.06,
+  "end": 21.34
+ },
+ {
+  "word": "You",
+  "start": 22.24,
+  "end": 22.5
+ },
+ {
+  "word": "speed",
+  "start": 22.5,
+  "end": 22.8
+ },
+ {
+  "word": "up,",
+  "start": 22.8,
+  "end": 23.14
+ },
+ {
+  "word": "faster",
+  "start": 23.48,
+  "end": 23.86
+ },
+ {
+  "word": "and",
+  "start": 23.86,
+  "end": 24.18
+ },
+ {
+  "word": "faster,",
+  "start": 24.18,
+  "end": 24.64
+ },
+ {
+  "word": "until",
+  "start": 24.88,
+  "end": 25.14
+ },
+ {
+  "word": "you",
+  "start": 25.14,
+  "end": 25.3
+ },
+ {
+  "word": "move",
+  "start": 25.3,
+  "end": 25.48
+ },
+ {
+  "word": "at",
+  "start": 25.48,
+  "end": 25.64
+ },
+ {
+  "word": "a",
+  "start": 25.64,
+  "end": 25.78
+ },
+ {
+  "word": "third",
+  "start": 25.78,
+  "end": 25.98
+ },
+ {
+  "word": "of",
+  "start": 25.98,
+  "end": 26.18
+ },
+ {
+  "word": "the",
+  "start": 26.18,
+  "end": 26.26
+ },
+ {
+  "word": "speed",
+  "start": 26.26,
+  "end": 26.5
+ },
+ {
+  "word": "of",
+  "start": 26.5,
+  "end": 26.68
+ },
+ {
+  "word": "light.",
+  "start": 26.68,
+  "end": 26.98
+ },
+ {
+  "word": "Before",
+  "start": 27.82,
+  "end": 28.14
+ },
+ {
+  "word": "you",
+  "start": 28.14,
+  "end": 28.36
+ },
+ {
+  "word": "arrive,",
+  "start": 28.36,
+  "end": 28.78
+ },
+ {
+  "word": "Title",
+  "start": 29.18,
+  "end": 29.28
+ },
+ {
+  "word": "IV",
+  "start": 29.28,
+  "end": 29.64
+ },
+ {
+  "word": "stretches",
+  "start": 29.64,
+  "end": 30.02
+ },
+ {
+  "word": "you",
+  "start": 30.02,
+  "end": 30.4
+ },
+ {
+  "word": "thin.",
+  "start": 30.4,
+  "end": 30.68
+ },
+ {
+  "word": "Your",
+  "start": 31.3,
+  "end": 31.48
+ },
+ {
+  "word": "body",
+  "start": 31.48,
+  "end": 31.82
+ },
+ {
+  "word": "is",
+  "start": 31.82,
+  "end": 32.04
+ },
+ {
+  "word": "pulled",
+  "start": 32.04,
+  "end": 32.3
+ },
+ {
+  "word": "apart",
+  "start": 32.3,
+  "end": 32.74
+ },
+ {
+  "word": "atom",
+  "start": 32.74,
+  "end": 33.22
+ },
+ {
+  "word": "by",
+  "start": 33.22,
+  "end": 33.46
+ },
+ {
+  "word": "atom.",
+  "start": 33.46,
+  "end": 33.9
+ },
+ {
+  "word": "Then",
+  "start": 34.76,
+  "end": 34.98
+ },
+ {
+  "word": "you",
+  "start": 34.98,
+  "end": 35.1
+ },
+ {
+  "word": "hit",
+  "start": 35.1,
+  "end": 35.26
+ },
+ {
+  "word": "the",
+  "start": 35.26,
+  "end": 35.5
+ },
+ {
+  "word": "surface.",
+  "start": 35.5,
+  "end": 35.88
+ },
+ {
+  "word": "It",
+  "start": 36.4,
+  "end": 36.56
+ },
+ {
+  "word": "is",
+  "start": 36.56,
+  "end": 36.66
+ },
+ {
+  "word": "smoother",
+  "start": 36.66,
+  "end": 37.02
+ },
+ {
+  "word": "than",
+  "start": 37.02,
+  "end": 37.32
+ },
+ {
+  "word": "any",
+  "start": 37.32,
+  "end": 37.58
+ },
+ {
+  "word": "mirror.",
+  "start": 37.58,
+  "end": 37.92
+ },
+ {
+  "word": "The",
+  "start": 38.42,
+  "end": 38.56
+ },
+ {
+  "word": "tallest",
+  "start": 38.56,
+  "end": 38.94
+ },
+ {
+  "word": "mountain",
+  "start": 38.94,
+  "end": 39.48
+ },
+ {
+  "word": "is",
+  "start": 39.48,
+  "end": 39.72
+ },
+ {
+  "word": "less",
+  "start": 39.72,
+  "end": 39.98
+ },
+ {
+  "word": "than",
+  "start": 39.98,
+  "end": 40.24
+ },
+ {
+  "word": "a",
+  "start": 40.24,
+  "end": 40.38
+ },
+ {
+  "word": "millimeter",
+  "start": 40.38,
+  "end": 40.82
+ },
+ {
+  "word": "high.",
+  "start": 40.82,
+  "end": 41.24
+ },
+ {
+  "word": "The",
+  "start": 42.16,
+  "end": 42.42
+ },
+ {
+  "word": "impact",
+  "start": 42.42,
+  "end": 42.78
+ },
+ {
+  "word": "is",
+  "start": 42.78,
+  "end": 43.08
+ },
+ {
+  "word": "far",
+  "start": 43.08,
+  "end": 43.44
+ },
+ {
+  "word": "more",
+  "start": 43.44,
+  "end": 43.66
+ },
+ {
+  "word": "violent",
+  "start": 43.66,
+  "end": 44.16
+ },
+ {
+  "word": "than",
+  "start": 44.16,
+  "end": 44.54
+ },
+ {
+  "word": "any",
+  "start": 44.54,
+  "end": 44.78
+ },
+ {
+  "word": "explosion",
+  "start": 44.78,
+  "end": 45.26
+ },
+ {
+  "word": "we",
+  "start": 45.26,
+  "end": 45.6
+ },
+ {
+  "word": "can",
+  "start": 45.6,
+  "end": 45.8
+ },
+ {
+  "word": "build.",
+  "start": 45.8,
+  "end": 46.14
+ },
+ {
+  "word": "In",
+  "start": 47.06,
+  "end": 47.24
+ },
+ {
+  "word": "a",
+  "start": 47.24,
+  "end": 47.38
+ },
+ {
+  "word": "flash,",
+  "start": 47.38,
+  "end": 47.7
+ },
+ {
+  "word": "you",
+  "start": 48.0,
+  "end": 48.16
+ },
+ {
+  "word": "are",
+  "start": 48.16,
+  "end": 48.26
+ },
+ {
+  "word": "flattened",
+  "start": 48.26,
+  "end": 48.68
+ },
+ {
+  "word": "into",
+  "start": 48.68,
+  "end": 48.98
+ },
+ {
+  "word": "a",
+  "start": 48.98,
+  "end": 49.18
+ },
+ {
+  "word": "single",
+  "start": 49.18,
+  "end": 49.52
+ },
+ {
+  "word": "layer",
+  "start": 49.52,
+  "end": 49.82
+ },
+ {
+  "word": "of",
+  "start": 49.82,
+  "end": 50.06
+ },
+ {
+  "word": "atoms.",
+  "start": 50.06,
+  "end": 50.52
+ },
+ {
+  "word": "Underneath,",
+  "start": 51.58,
+  "end": 52.2
+ },
+ {
+  "word": "matter",
+  "start": 52.78,
+  "end": 52.82
+ },
+ {
+  "word": "is",
+  "start": 52.82,
+  "end": 53.06
+ },
+ {
+  "word": "so",
+  "start": 53.06,
+  "end": 53.32
+ },
+ {
+  "word": "dense",
+  "start": 53.32,
+  "end": 53.66
+ },
+ {
+  "word": "that",
+  "start": 53.66,
+  "end": 53.96
+ },
+ {
+  "word": "protons",
+  "start": 53.96,
+  "end": 54.6
+ },
+ {
+  "word": "and",
+  "start": 54.6,
+  "end": 54.74
+ },
+ {
+  "word": "electrons",
+  "start": 54.74,
+  "end": 55.32
+ },
+ {
+  "word": "merge",
+  "start": 55.32,
+  "end": 55.72
+ },
+ {
+  "word": "into",
+  "start": 55.72,
+  "end": 56.04
+ },
+ {
+  "word": "neutrons.",
+  "start": 56.04,
+  "end": 56.7
+ },
+ {
+  "word": "And",
+  "start": 57.68,
+  "end": 57.82
+ },
+ {
+  "word": "the",
+  "start": 57.82,
+  "end": 57.94
+ },
+ {
+  "word": "star",
+  "start": 57.94,
+  "end": 58.24
+ },
+ {
+  "word": "keeps",
+  "start": 58.24,
+  "end": 58.56
+ },
+ {
+  "word": "spinning",
+  "start": 58.56,
+  "end": 59.04
+ },
+ {
+  "word": "hundreds",
+  "start": 59.04,
+  "end": 59.78
+ },
+ {
+  "word": "of",
+  "start": 59.78,
+  "end": 60.04
+ },
+ {
+  "word": "times",
+  "start": 60.04,
+  "end": 60.42
+ },
+ {
+  "word": "every",
+  "start": 60.42,
+  "end": 60.74
+ },
+ {
+  "word": "second.",
+  "start": 60.74,
+  "end": 61.2
+ },
+ {
+  "word": "So",
+  "start": 62.22,
+  "end": 62.48
+ },
+ {
+  "word": "tell",
+  "start": 62.48,
+  "end": 62.72
+ },
+ {
+  "word": "me,",
+  "start": 62.72,
+  "end": 62.98
+ },
+ {
+  "word": "would",
+  "start": 63.2,
+  "end": 63.3
+ },
+ {
+  "word": "you",
+  "start": 63.3,
+  "end": 63.42
+ },
+ {
+  "word": "get",
+  "start": 63.42,
+  "end": 63.58
+ },
+ {
+  "word": "close?",
+  "start": 63.58,
+  "end": 63.88
+ }
+]
