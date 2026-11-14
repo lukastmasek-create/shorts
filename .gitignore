@@ -8,3 +8,5 @@ venv
 voice/*.onnx
 voice/*.bin
 /voice/
+/2d/voice/*.onnx
+/2d/voice/*.bin

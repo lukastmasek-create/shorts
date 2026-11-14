@@ -1,0 +1,622 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.56
+ },
+ {
+  "word": "if",
+  "start": 0.56,
+  "end": 0.7
+ },
+ {
+  "word": "you",
+  "start": 0.7,
+  "end": 0.86
+ },
+ {
+  "word": "knew",
+  "start": 0.86,
+  "end": 1.1
+ },
+ {
+  "word": "exactly",
+  "start": 1.1,
+  "end": 1.7
+ },
+ {
+  "word": "when",
+  "start": 1.7,
+  "end": 2.1
+ },
+ {
+  "word": "someone",
+  "start": 2.1,
+  "end": 2.48
+ },
+ {
+  "word": "got",
+  "start": 2.48,
+  "end": 2.76
+ },
+ {
+  "word": "bored",
+  "start": 2.76,
+  "end": 3.1
+ },
+ {
+  "word": "of",
+  "start": 3.1,
+  "end": 3.3
+ },
+ {
+  "word": "you?",
+  "start": 3.3,
+  "end": 3.58
+ },
+ {
+  "word": "Right",
+  "start": 4.72,
+  "end": 4.86
+ },
+ {
+  "word": "now,",
+  "start": 4.86,
+  "end": 5.2
+ },
+ {
+  "word": "you",
+  "start": 5.4,
+  "end": 5.46
+ },
+ {
+  "word": "are",
+  "start": 5.46,
+  "end": 5.6
+ },
+ {
+  "word": "guessing.",
+  "start": 5.6,
+  "end": 5.92
+ },
+ {
+  "word": "In",
+  "start": 9.16,
+  "end": 9.8
+ },
+ {
+  "word": "2021,",
+  "start": 9.8,
+  "end": 10.44
+ },
+ {
+  "word": "researchers",
+  "start": 11.36,
+  "end": 11.46
+ },
+ {
+  "word": "studied",
+  "start": 11.46,
+  "end": 12.04
+ },
+ {
+  "word": "932",
+  "start": 12.04,
+  "end": 13.42
+ },
+ {
+  "word": "conversations.",
+  "start": 13.42,
+  "end": 14.24
+ },
+ {
+  "word": "Only",
+  "start": 15.04,
+  "end": 15.34
+ },
+ {
+  "word": "about",
+  "start": 15.34,
+  "end": 15.66
+ },
+ {
+  "word": "2",
+  "start": 15.66,
+  "end": 16.0
+ },
+ {
+  "word": "%",
+  "start": 16.0,
+  "end": 16.44
+ },
+ {
+  "word": "ended",
+  "start": 16.44,
+  "end": 16.84
+ },
+ {
+  "word": "when",
+  "start": 16.84,
+  "end": 17.08
+ },
+ {
+  "word": "both",
+  "start": 17.08,
+  "end": 17.36
+ },
+ {
+  "word": "people",
+  "start": 17.36,
+  "end": 17.74
+ },
+ {
+  "word": "wanted",
+  "start": 17.74,
+  "end": 18.12
+ },
+ {
+  "word": "them",
+  "start": 18.12,
+  "end": 18.32
+ },
+ {
+  "word": "to.",
+  "start": 18.32,
+  "end": 18.6
+ },
+ {
+  "word": "About",
+  "start": 19.62,
+  "end": 19.84
+ },
+ {
+  "word": "two",
+  "start": 19.84,
+  "end": 20.16
+ },
+ {
+  "word": "-thirds",
+  "start": 20.16,
+  "end": 20.4
+ },
+ {
+  "word": "of",
+  "start": 20.4,
+  "end": 20.64
+ },
+ {
+  "word": "people",
+  "start": 20.64,
+  "end": 20.96
+ },
+ {
+  "word": "said",
+  "start": 20.96,
+  "end": 21.34
+ },
+ {
+  "word": "there",
+  "start": 21.34,
+  "end": 22.0
+ },
+ {
+  "word": "was",
+  "start": 22.0,
+  "end": 22.14
+ },
+ {
+  "word": "a",
+  "start": 22.14,
+  "end": 22.34
+ },
+ {
+  "word": "moment",
+  "start": 22.34,
+  "end": 22.64
+ },
+ {
+  "word": "their",
+  "start": 22.64,
+  "end": 22.92
+ },
+ {
+  "word": "conversation",
+  "start": 22.92,
+  "end": 23.54
+ },
+ {
+  "word": "should",
+  "start": 23.54,
+  "end": 23.96
+ },
+ {
+  "word": "have",
+  "start": 23.96,
+  "end": 24.06
+ },
+ {
+  "word": "ended",
+  "start": 24.06,
+  "end": 24.38
+ },
+ {
+  "word": "earlier.",
+  "start": 24.38,
+  "end": 24.94
+ },
+ {
+  "word": "Meanwhile,",
+  "start": 25.98,
+  "end": 26.24
+ },
+ {
+  "word": "we",
+  "start": 26.62,
+  "end": 26.78
+ },
+ {
+  "word": "assume",
+  "start": 26.78,
+  "end": 27.14
+ },
+ {
+  "word": "the",
+  "start": 27.14,
+  "end": 27.36
+ },
+ {
+  "word": "worst.",
+  "start": 27.36,
+  "end": 27.72
+ },
+ {
+  "word": "In",
+  "start": 27.72,
+  "end": 28.44
+ },
+ {
+  "word": "five",
+  "start": 28.44,
+  "end": 28.84
+ },
+ {
+  "word": "studies,",
+  "start": 28.84,
+  "end": 29.34
+ },
+ {
+  "word": "people",
+  "start": 29.6,
+  "end": 29.88
+ },
+ {
+  "word": "underestimated",
+  "start": 29.88,
+  "end": 30.68
+ },
+ {
+  "word": "how",
+  "start": 30.68,
+  "end": 31.2
+ },
+ {
+  "word": "much",
+  "start": 31.2,
+  "end": 31.44
+ },
+ {
+  "word": "their",
+  "start": 31.44,
+  "end": 31.68
+ },
+ {
+  "word": "partner",
+  "start": 31.68,
+  "end": 32.1
+ },
+ {
+  "word": "liked",
+  "start": 32.1,
+  "end": 32.36
+ },
+ {
+  "word": "them.",
+  "start": 32.36,
+  "end": 32.8
+ },
+ {
+  "word": "Researchers",
+  "start": 33.48,
+  "end": 33.64
+ },
+ {
+  "word": "call",
+  "start": 33.64,
+  "end": 34.18
+ },
+ {
+  "word": "it",
+  "start": 34.18,
+  "end": 34.36
+ },
+ {
+  "word": "the",
+  "start": 34.36,
+  "end": 34.48
+ },
+ {
+  "word": "liking",
+  "start": 34.48,
+  "end": 34.76
+ },
+ {
+  "word": "gap.",
+  "start": 34.76,
+  "end": 35.2
+ },
+ {
+  "word": "We",
+  "start": 36.12,
+  "end": 36.36
+ },
+ {
+  "word": "also",
+  "start": 36.36,
+  "end": 36.72
+ },
+ {
+  "word": "think",
+  "start": 36.72,
+  "end": 36.98
+ },
+ {
+  "word": "our",
+  "start": 36.98,
+  "end": 37.16
+ },
+ {
+  "word": "feelings",
+  "start": 37.16,
+  "end": 37.62
+ },
+ {
+  "word": "show",
+  "start": 37.62,
+  "end": 37.96
+ },
+ {
+  "word": "more",
+  "start": 37.96,
+  "end": 38.3
+ },
+ {
+  "word": "than",
+  "start": 38.3,
+  "end": 38.5
+ },
+ {
+  "word": "they",
+  "start": 38.5,
+  "end": 38.7
+ },
+ {
+  "word": "do.",
+  "start": 38.7,
+  "end": 39.0
+ },
+ {
+  "word": "In",
+  "start": 39.54,
+  "end": 39.68
+ },
+ {
+  "word": "a",
+  "start": 39.68,
+  "end": 39.84
+ },
+ {
+  "word": "1998",
+  "start": 39.84,
+  "end": 40.62
+ },
+ {
+  "word": "study,",
+  "start": 40.62,
+  "end": 41.4
+ },
+ {
+  "word": "half",
+  "start": 41.88,
+  "end": 42.04
+ },
+ {
+  "word": "of",
+  "start": 42.04,
+  "end": 42.2
+ },
+ {
+  "word": "the",
+  "start": 42.2,
+  "end": 42.36
+ },
+ {
+  "word": "liars",
+  "start": 42.36,
+  "end": 42.76
+ },
+ {
+  "word": "thought",
+  "start": 42.76,
+  "end": 43.04
+ },
+ {
+  "word": "they",
+  "start": 43.04,
+  "end": 43.24
+ },
+ {
+  "word": "were",
+  "start": 43.24,
+  "end": 43.38
+ },
+ {
+  "word": "caught.",
+  "start": 43.38,
+  "end": 43.74
+ },
+ {
+  "word": "Only",
+  "start": 44.24,
+  "end": 44.5
+ },
+ {
+  "word": "a",
+  "start": 44.5,
+  "end": 44.7
+ },
+ {
+  "word": "quarter",
+  "start": 44.7,
+  "end": 44.98
+ },
+ {
+  "word": "were.",
+  "start": 44.98,
+  "end": 45.36
+ },
+ {
+  "word": "So",
+  "start": 46.3,
+  "end": 46.58
+ },
+ {
+  "word": "a",
+  "start": 46.58,
+  "end": 46.74
+ },
+ {
+  "word": "boredom",
+  "start": 46.74,
+  "end": 47.08
+ },
+ {
+  "word": "meter",
+  "start": 47.08,
+  "end": 47.42
+ },
+ {
+  "word": "sounds",
+  "start": 47.42,
+  "end": 47.88
+ },
+ {
+  "word": "tempting.",
+  "start": 47.88,
+  "end": 48.38
+ },
+ {
+  "word": "But",
+  "start": 48.9,
+  "end": 49.12
+ },
+ {
+  "word": "the",
+  "start": 49.12,
+  "end": 49.28
+ },
+ {
+  "word": "data",
+  "start": 49.28,
+  "end": 49.52
+ },
+ {
+  "word": "say",
+  "start": 49.52,
+  "end": 49.84
+ },
+ {
+  "word": "you",
+  "start": 49.84,
+  "end": 50.08
+ },
+ {
+  "word": "are",
+  "start": 50.08,
+  "end": 50.28
+ },
+ {
+  "word": "probably",
+  "start": 50.28,
+  "end": 50.66
+ },
+ {
+  "word": "doing",
+  "start": 50.66,
+  "end": 51.04
+ },
+ {
+  "word": "better",
+  "start": 51.04,
+  "end": 51.42
+ },
+ {
+  "word": "than",
+  "start": 51.42,
+  "end": 51.66
+ },
+ {
+  "word": "you",
+  "start": 51.66,
+  "end": 51.84
+ },
+ {
+  "word": "fear.",
+  "start": 51.84,
+  "end": 52.16
+ },
+ {
+  "word": "On",
+  "start": 53.08,
+  "end": 53.36
+ },
+ {
+  "word": "average,",
+  "start": 53.36,
+  "end": 53.86
+ },
+ {
+  "word": "people",
+  "start": 54.22,
+  "end": 54.5
+ },
+ {
+  "word": "like",
+  "start": 54.5,
+  "end": 54.76
+ },
+ {
+  "word": "you",
+  "start": 54.76,
+  "end": 54.98
+ },
+ {
+  "word": "more",
+  "start": 54.98,
+  "end": 55.14
+ },
+ {
+  "word": "than",
+  "start": 55.14,
+  "end": 55.28
+ },
+ {
+  "word": "you",
+  "start": 55.28,
+  "end": 55.44
+ },
+ {
+  "word": "think.",
+  "start": 55.44,
+  "end": 55.7
+ }
+]

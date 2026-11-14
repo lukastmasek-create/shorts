@@ -10,6 +10,7 @@ import { Dim4Short, DIM4_FRAMES } from "./Dim4";
 import { BlackHoleShort, BH_FRAMES } from "./BlackHole";
 import { ImmortalShort, IM_FRAMES } from "./Immortal";
 import { LiesShort, LIES_FRAMES } from "./Lies";
+import { BoredShort, BORED_FRAMES } from "./Bored";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
 export const Root: React.FC = () => (
@@ -24,8 +25,7 @@ export const Root: React.FC = () => (
     <Composition id="LiesShort" component={LiesShort} durationInFrames={LIES_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NoSleepShort" component={NoSleepShort} durationInFrames={NOSLEEP_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="UniverseShort" component={UniverseShort} durationInFrames={UNIVERSE_FRAMES} fps={30} width={1080} height={1920} />
-    <Composition id="BlackHoleShort" component={BlackHoleShort} durationInFrames={BH_FRAMES} fps={30} width={1080} height={1920} />
-    <Composition id="ImmortalShort" component={ImmortalShort} durationInFrames={IM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FxDemo" component={FxDemo} durationInFrames={FXDEMO_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="BoredShort" component={BoredShort} durationInFrames={BORED_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
