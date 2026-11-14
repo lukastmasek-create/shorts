@@ -13,6 +13,7 @@ import { LiesShort, LIES_FRAMES } from "./Lies";
 import { BoredShort, BORED_FRAMES } from "./Bored";
 import { DeleteShort, DELETE_FRAMES } from "./Delete";
 import { TwoSelvesShort, TWOSELVES_FRAMES } from "./TwoSelves";
+import { AboveShort, ABOVE_FRAMES } from "./Above";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
 export const Root: React.FC = () => (
@@ -31,5 +32,6 @@ export const Root: React.FC = () => (
     <Composition id="BoredShort" component={BoredShort} durationInFrames={BORED_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="DeleteShort" component={DeleteShort} durationInFrames={DELETE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="TwoSelvesShort" component={TwoSelvesShort} durationInFrames={TWOSELVES_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="AboveShort" component={AboveShort} durationInFrames={ABOVE_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
