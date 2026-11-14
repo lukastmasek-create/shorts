@@ -8,6 +8,9 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 Samostatná 15,7 s pop-up animace Učíme se hrou (three.js bez Remotionu), nezávislá na zbytku repa. Zdroj `ucimesehrou/src/`, `node build.cjs` -> `index.html`, `node render.cjs 32` -> MP4 (potřebuje GPU PC nebo hodně času, cloud ~10 s/snímek). Postup a úpravy v `ucimesehrou/README.md`.
 Podsložka `ucimesehrou/low-poly/`: druhá verze, 12,8 s 3D low-poly (jeden jeřábový záběr po ostrově, koncová obrazovka se SVG ikonami). Používá `ucimesehrou/src/stage.js` a `sound.js` (nesahat). Zdroj `low-poly/src/style.js` (rozvrh `T` nahoře řídí obraz i zvuk), `node build.cjs` -> `index.html` + `storyboard.html`, `node render.cjs 32` -> `low-poly/video/ucimesehrou-3d.mp4`. Přiložené MP4 má 12 vzorků (cloud bez GPU), na GPU přerenderovat s 64.
 
+## Sekce 2d/
+Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastní entry `2d/src/index.ts`, komp. MonoShort/CalmShort/DegreeShort. Postup: `2d/README.md`, styl: `2d/STYLE.md`.
+
 ## Setup
 - `npm i` then `npx tsc --noEmit` (clean). Stack: remotion 4, three 0.187, @react-three/fiber 9, @react-three/postprocessing, React 19.
 - Kenney `.glb` props (`public/bridge/kenney/*.glb`) NOT in repo; code falls back without them (plainer world). Reference frames/sheets also not copied.

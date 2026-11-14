@@ -22,7 +22,7 @@ Private study only. Never copy its script/wording; story is always our own. Igno
 1250 finish line 65->67 | 1450 freedom + income bars | 1670 battery, retire crossed, gate "permission" | 1790 "your call" rings.
 
 ## Code
-`src/videos/mono/kit.tsx` (Stage, Scene, Pill, Num, Person, Icon, Bar, Cross, Ring) + `Mono.tsx` (composition `MonoShort`, 1080x1920, 1840 f).
+`2d/src/kit.tsx` (Stage, Scene, Pill, Num, Person, Icon, Bar, Cross, Ring) + `Mono.tsx` (composition `MonoShort`, 1080x1920, 1840 f).
 Pure SVG, no three.js, renders on CPU: `COMP=MonoShort GL=swangle ... node scripts/bridge-stills.mjs out/m_ 60,900 0.5` (~1 s/frame).
 Render: `npx remotion render src/index.ts MonoShort out/mono.mp4 --codec h264 --crf 16` (silent; add own voice).
 
