@@ -9,13 +9,17 @@ import { renderStill, selectComposition } from "@remotion/renderer";
 import path from "node:path";
 const [prefix, frames, scale = "0.5"] = process.argv.slice(2);
 const browserExecutable = process.env.CHROME_PATH || undefined;
+const inputProps = process.env.INPUT_PROPS ? JSON.parse(process.env.INPUT_PROPS) : {};
+// software GL (GL=swangle, no GPU): EffectComposer is not mounted at the first manual advance and the frame comes out
+// blank (solid #cfe3f2). post.kick adds one delayed extra advance (see Kick in Bridge.tsx). Not needed on a real GPU.
+if (process.env.GL === "swangle") inputProps.post = { kick: true, ...(inputProps.post ?? {}) };
 const chromiumOptions = { gl: process.env.GL || "angle" };
 const serveUrl = await bundle({ entryPoint: path.resolve(process.env.BRIDGE_ENTRY || "src/index.ts"), publicDir: path.resolve("public") });
-const composition = await selectComposition({ serveUrl, id: "BridgeShort", browserExecutable, chromiumOptions });
-const onBrowserLog = (l) => { if (l.type === "error" || l.type === "warning") console.log(`[${l.type}]`, l.text.slice(0, 300)); };
+const composition = await selectComposition({ serveUrl, inputProps, id: "BridgeShort", browserExecutable, chromiumOptions });
+const onBrowserLog = (l) => { if (process.env.VERBOSE || l.type === "error" || l.type === "warning") console.log(`[${l.type}]`, l.text.slice(0, 300)); };
 for (const f of frames.split(",").map(Number)) {
   const t0 = Date.now();
-  await renderStill({ composition, serveUrl, frame: f, output: `${prefix}${f}.jpg`, imageFormat: "jpeg", jpegQuality: 88, scale: Number(scale),
+  await renderStill({ inputProps, composition, serveUrl, frame: f, output: `${prefix}${f}.jpg`, imageFormat: "jpeg", jpegQuality: 88, scale: Number(scale),
     browserExecutable, chromiumOptions, timeoutInMilliseconds: 180000, onBrowserLog });
   console.log("still", f, ((Date.now() - t0) / 1000).toFixed(1) + "s");
 }
