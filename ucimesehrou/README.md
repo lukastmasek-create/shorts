@@ -32,3 +32,6 @@ CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" node rende
 
 ## Fakta na obrazovce
 Z textu webu: žáci 1.–9. třídy, přijímačky, maturita, pět úrovní u každého kurzu, denní kvíz, opakování, únikovky, rodič vidí pokrok, učitel zadává úkoly. Příklad 7 × 8 = 56 s vysvětlením je ukázkový úkol.
+
+## Druhá verze: 3D low-poly
+Ve složce `low-poly/` je druhá animace Učíme se hrou, tentokrát ve stylu Low-Poly (miniaturní ostrov z facet, jeden jeřábový záběr, koncová obrazovka se čtyřmi SVG ikonami). Sdílí `stage.js` a `sound.js` odsud. Viz `low-poly/README.md`.
