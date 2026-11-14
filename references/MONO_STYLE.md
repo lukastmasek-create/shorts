@@ -25,3 +25,11 @@ Private study only. Never copy its script/wording; story is always our own. Igno
 `src/videos/mono/kit.tsx` (Stage, Scene, Pill, Num, Person, Icon, Bar, Cross, Ring) + `Mono.tsx` (composition `MonoShort`, 1080x1920, 1840 f).
 Pure SVG, no three.js, renders on CPU: `COMP=MonoShort GL=swangle ... node scripts/bridge-stills.mjs out/m_ 60,900 0.5` (~1 s/frame).
 Render: `npx remotion render src/index.ts MonoShort out/mono.mp4 --codec h264 --crf 16` (silent; add own voice).
+
+## Batch 2 (two more clips: composure explainer 1702 f, credentials explainer 2302 f)
+Same language, new vocabulary (all in `kit2.tsx`): suit-man outline person, ECG heartbeat, noisy/sine traces, gauge with needle,
+waffle grid (cells light up to a %), spotlight cone + graduation cap, step cards ("STEP 1 / BREATHE SLOW"), checklist ticks,
+branching path with travelling dots, funnel, door, building, hourglass, coins, eye, monitor, chair, flames ring, bars staircase.
+Extra rules seen: dim ghost people = "everyone else"; hard pill swap for changing text ("entry: school diploma" -> "university degree");
+ring pulse = resolution beat; whip-blur between every scene; last scene ends on glowing hero + "you can do it"-type pill, then fade.
+Compositions: `CalmShort` (Calm.tsx, 11 scenes) and `DegreeShort` (Degree.tsx, 12 scenes). Content is generic/original; names of people/studies from the source clips were NOT reused.
