@@ -2,7 +2,6 @@
 // Same look pipeline as the bridge world (two-tone shading, ink, card shading), minus the bridge/river.
 // update(id, f, camera, scene) poses everything for shot `id` at frame f (pure function of id + f).
 import * as THREE from "three";
-import { getInputProps } from "remotion";
 import { V, Kit } from "./build";
 import { cloudHD } from "./paint";
 import { LIGHTS, LOOK, LightPreset } from "./lights";
@@ -63,8 +62,7 @@ export class PauseWorld {
     this.hemi = new THREE.HemisphereLight("#cfe6ff", "#6c5c8c", 1.1);
     this.sun = new THREE.DirectionalLight("#fff0d6", 2.6);
     this.sun.castShadow = true;
-    const sm = (getInputProps() as { sm?: number }).sm ?? 2048;
-    this.sun.shadow.mapSize.set(sm, sm);
+    this.sun.shadow.mapSize.set(4096, 4096);
     R.add(this.hemi, this.sun, this.sun.target);
     this.cloudMaps = { day: [0, 1, 2, 3].map((k) => cloudHD(k, LOOK.day.cloud)), golden: [0, 1, 2, 3].map((k) => cloudHD(k, LOOK.golden.cloud)) };
     for (let i = 0; i < 9; i++) {
