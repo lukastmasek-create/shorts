@@ -20,7 +20,7 @@ import { GradeEffect, GRADES, GRADE_STRENGTH, gradeFor } from "./grade";
 import { Kit } from "./build";
 import { TOTAL, FLASH_AT, SHOTS, layersAt, dofAt } from "./story";
 
-export const PAUSE_FRAMES = 1800; // voice ends f1769 (58.98 s) + tail; story.ts TOTAL still bridge placeholder
+export const PAUSE_FRAMES = TOTAL; // 1800: voice ends f1769 (58.98 s) + tail
 
 /** A/B switches for test stills only (Remotion inputProps `{ post: { ink: false, ... } }`); everything is on by default. */
 type PostToggles = { ink: boolean; lens: boolean; pre: boolean; bloom: boolean; grade: boolean; grain: boolean };
