@@ -57,9 +57,9 @@ const Goggles = (t: number) => {
       <line x1={400} x2={725} y1={900} y2={900} stroke={INK} strokeWidth={4} strokeDasharray="10 10" opacity={prog(t, 160, 175)} />
       <Lbl x={560} y={860} o={prog(t, 170, 185)}>2 M</Lbl>
       <circle cx={lerp(290, 815, m)} cy={lerp(790, 880, m)} r={22} fill={INK} opacity={prog(t, 215, 228)} style={{ filter: GLOW }} />
-      <Pill text="Video goggles" x={cx} y={1180} a={97} size={14} on={false} />
-      <Pill text="Camera behind" x={cx} y={1300} a={160} size={14} />
-      <Pill text="Felt: sitting behind" x={cx} y={1420} a={253} size={14} />
+      <Pill text="Video goggles" x={cx} y={1130} a={97} size={14} on={false} />
+      <Pill text="Camera behind" x={cx} y={1240} a={160} size={14} />
+      <Pill text="Felt: sitting behind" x={cx} y={1350} a={253} size={14} />
     </Cam>
     <Src>Ehrsson, Science, 2007 (illusion of location)</Src>
   </>;
