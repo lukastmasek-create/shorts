@@ -114,7 +114,7 @@ const Days = (t: number) => {
 };
 // 8 new creatures replace old
 const Fauna = (t: number) => {
-  const old = [[260, 600], [820, 740], [420, 980]];
+  const old = [[260, 480], [820, 600], [420, 820]];
   const nw = [[300, 1250], [780, 1330], [500, 1560]];
   const Old: React.FC<{ x: number; y: number; k: number }> = ({ x, y, k }) => <g transform={`translate(${x} ${y}) scale(${k})`}><path d="M-80 0 C-40 -50 40 -50 80 0 C40 50 -40 50 -80 0 Z M80 0 L125 -35 L125 35 Z" {...st} /><circle cx={-45} cy={-8} r={6} fill="#fff" /></g>;
   const New: React.FC<{ x: number; y: number; k: number; r: number }> = ({ x, y, k, r }) => <g transform={`translate(${x} ${y}) scale(${k}) rotate(${r})`}><path d="M0 -90 L70 -30 L45 70 L-45 70 L-70 -30 Z" {...st} /><line x1={-45} y1={70} x2={-70} y2={125} {...st} /><line x1={45} y1={70} x2={70} y2={125} {...st} /><circle cx={-20} cy={-20} r={7} fill="#fff" /><circle cx={20} cy={-20} r={7} fill="#fff" /></g>;
