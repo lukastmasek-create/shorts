@@ -38,10 +38,10 @@ const Think = (t: number) => {
         {no && <Cross x={x} y={y} r={26} p={prog(t, 170 + r * 8, 180 + r * 8)} />}
       </g>; })}
       <Lbl x={290} y={380} o={prog(t, 125, 140)}>THINK</Lbl><Lbl x={790} y={380} o={prog(t, 125, 140)}>DON'T THINK</Lbl>
-      <rect x={290 - 90} y={1330 - rec(330)} width={180} height={rec(330)} fill={INK} style={{ filter: GLOW }} />
-      <rect x={790 - 90} y={1330 - rec(210)} width={180} height={rec(210)} fill="#bbb" style={{ filter: GLOW }} />
-      <line x1={120} x2={960} y1={1330} y2={1330} stroke={INK} strokeWidth={2} opacity={0.6} />
-      <Pill text="Later: remembered less" x={cx} y={1430} a={262} size={14} />
+      <rect x={290 - 90} y={1250 - rec(330)} width={180} height={rec(330)} fill={INK} style={{ filter: GLOW }} />
+      <rect x={790 - 90} y={1250 - rec(210)} width={180} height={rec(210)} fill="#bbb" style={{ filter: GLOW }} />
+      <line x1={120} x2={960} y1={1250} y2={1250} stroke={INK} strokeWidth={2} opacity={0.6} />
+      <Pill text="Later: remembered less" x={cx} y={1340} a={262} size={14} />
     </Cam>
     <Src>Anderson & Green, Nature, 2001 (bars schematic)</Src>
   </>;
@@ -95,12 +95,9 @@ const Edit = (t: number) => {
   const wipe = easeIO(prog(t, 20, 105));
   return <>
     <BigRings x={cx} y={820} t={t} o={0.1} />
-    <g>
-      <Person x={cx} y={1100} s={6} o={pop(t, 2)} />
-      <rect x={cx - 200 + 400 * (1 - wipe) - 400} y={500} width={400} height={700} fill="#000" opacity={0} />
-      <rect x={cx - 200} y={500} width={400 * wipe} height={700} fill="#000" />
-      <line x1={cx - 200 + 400 * wipe} x2={cx - 200 + 400 * wipe} y1={520} y2={1110} stroke={INK} strokeWidth={4} strokeDasharray="10 10" opacity={wipe > 0 && wipe < 1 ? 1 : 0} />
-    </g>
+    <clipPath id="wp"><rect x={cx - 200 + 400 * wipe} y={400} width={1000} height={900} /></clipPath>
+    <g clipPath="url(#wp)"><Person x={cx} y={1100} s={6} o={pop(t, 2)} /></g>
+    <line x1={cx - 200 + 400 * wipe} x2={cx - 200 + 400 * wipe} y1={520} y2={1110} stroke={INK} strokeWidth={4} strokeDasharray="10 10" opacity={wipe > 0 && wipe < 1 ? 1 : 0} />
     <Pill text="Delete enough" x={cx} y={330} a={16} size={18} on={false} />
     <Pill text="Edit who you are" x={cx} y={1330} a={50} size={20} />
     <Src>Inference from the self-memory model</Src>
