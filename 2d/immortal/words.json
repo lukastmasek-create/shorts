@@ -1,0 +1,762 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.1
+ },
+ {
+  "word": "if",
+  "start": 0.1,
+  "end": 0.22
+ },
+ {
+  "word": "you",
+  "start": 0.22,
+  "end": 0.34
+ },
+ {
+  "word": "were",
+  "start": 0.34,
+  "end": 0.5
+ },
+ {
+  "word": "immortal,",
+  "start": 0.5,
+  "end": 0.94
+ },
+ {
+  "word": "but",
+  "start": 1.1,
+  "end": 1.2
+ },
+ {
+  "word": "everyone",
+  "start": 1.2,
+  "end": 1.54
+ },
+ {
+  "word": "else",
+  "start": 1.54,
+  "end": 1.76
+ },
+ {
+  "word": "wasn't?",
+  "start": 1.76,
+  "end": 2.18
+ },
+ {
+  "word": "At",
+  "start": 2.52,
+  "end": 2.6
+ },
+ {
+  "word": "first,",
+  "start": 2.6,
+  "end": 2.88
+ },
+ {
+  "word": "it",
+  "start": 3.0,
+  "end": 3.14
+ },
+ {
+  "word": "feels",
+  "start": 3.14,
+  "end": 3.32
+ },
+ {
+  "word": "like",
+  "start": 3.32,
+  "end": 3.58
+ },
+ {
+  "word": "a",
+  "start": 3.58,
+  "end": 3.72
+ },
+ {
+  "word": "gift.",
+  "start": 3.72,
+  "end": 3.98
+ },
+ {
+  "word": "You",
+  "start": 4.6,
+  "end": 4.62
+ },
+ {
+  "word": "have",
+  "start": 4.62,
+  "end": 4.74
+ },
+ {
+  "word": "all",
+  "start": 4.74,
+  "end": 5.0
+ },
+ {
+  "word": "the",
+  "start": 5.0,
+  "end": 5.14
+ },
+ {
+  "word": "time",
+  "start": 5.14,
+  "end": 5.38
+ },
+ {
+  "word": "in",
+  "start": 5.38,
+  "end": 5.52
+ },
+ {
+  "word": "the",
+  "start": 5.52,
+  "end": 5.6
+ },
+ {
+  "word": "world.",
+  "start": 5.6,
+  "end": 5.88
+ },
+ {
+  "word": "Then",
+  "start": 6.04,
+  "end": 6.16
+ },
+ {
+  "word": "your",
+  "start": 6.16,
+  "end": 6.28
+ },
+ {
+  "word": "friends",
+  "start": 6.28,
+  "end": 6.54
+ },
+ {
+  "word": "grow",
+  "start": 6.54,
+  "end": 6.82
+ },
+ {
+  "word": "old.",
+  "start": 6.82,
+  "end": 7.14
+ },
+ {
+  "word": "You",
+  "start": 7.34,
+  "end": 7.42
+ },
+ {
+  "word": "attend",
+  "start": 7.42,
+  "end": 7.7
+ },
+ {
+  "word": "every",
+  "start": 7.7,
+  "end": 8.06
+ },
+ {
+  "word": "goodbye.",
+  "start": 8.06,
+  "end": 8.5
+ },
+ {
+  "word": "Their",
+  "start": 8.9,
+  "end": 9.02
+ },
+ {
+  "word": "children",
+  "start": 9.02,
+  "end": 9.3
+ },
+ {
+  "word": "grow",
+  "start": 9.3,
+  "end": 9.64
+ },
+ {
+  "word": "old,",
+  "start": 9.64,
+  "end": 9.96
+ },
+ {
+  "word": "too.",
+  "start": 9.96,
+  "end": 10.26
+ },
+ {
+  "word": "A",
+  "start": 10.58,
+  "end": 10.58
+ },
+ {
+  "word": "hundred",
+  "start": 10.58,
+  "end": 10.82
+ },
+ {
+  "word": "years",
+  "start": 10.82,
+  "end": 11.14
+ },
+ {
+  "word": "pass.",
+  "start": 11.14,
+  "end": 11.5
+ },
+ {
+  "word": "The",
+  "start": 11.96,
+  "end": 12.12
+ },
+ {
+  "word": "streets",
+  "start": 12.12,
+  "end": 12.36
+ },
+ {
+  "word": "you",
+  "start": 12.36,
+  "end": 12.56
+ },
+ {
+  "word": "knew",
+  "start": 12.56,
+  "end": 12.7
+ },
+ {
+  "word": "are",
+  "start": 12.7,
+  "end": 12.88
+ },
+ {
+  "word": "gone.",
+  "start": 12.88,
+  "end": 13.14
+ },
+ {
+  "word": "Even",
+  "start": 13.34,
+  "end": 13.52
+ },
+ {
+  "word": "your",
+  "start": 13.52,
+  "end": 13.72
+ },
+ {
+  "word": "language",
+  "start": 13.72,
+  "end": 14.02
+ },
+ {
+  "word": "changes.",
+  "start": 14.02,
+  "end": 14.56
+ },
+ {
+  "word": "A",
+  "start": 15.02,
+  "end": 15.14
+ },
+ {
+  "word": "thousand",
+  "start": 15.14,
+  "end": 15.48
+ },
+ {
+  "word": "years.",
+  "start": 15.48,
+  "end": 15.92
+ },
+ {
+  "word": "Empires",
+  "start": 16.32,
+  "end": 16.82
+ },
+ {
+  "word": "rise",
+  "start": 16.82,
+  "end": 17.22
+ },
+ {
+  "word": "and",
+  "start": 17.22,
+  "end": 17.54
+ },
+ {
+  "word": "fall.",
+  "start": 17.54,
+  "end": 17.86
+ },
+ {
+  "word": "Whole",
+  "start": 18.4,
+  "end": 18.56
+ },
+ {
+  "word": "civilizations",
+  "start": 18.56,
+  "end": 19.14
+ },
+ {
+  "word": "shrink",
+  "start": 19.14,
+  "end": 19.64
+ },
+ {
+  "word": "to",
+  "start": 19.64,
+  "end": 19.84
+ },
+ {
+  "word": "a",
+  "start": 19.84,
+  "end": 19.98
+ },
+ {
+  "word": "line",
+  "start": 19.98,
+  "end": 20.22
+ },
+ {
+  "word": "in",
+  "start": 20.22,
+  "end": 20.38
+ },
+ {
+  "word": "a",
+  "start": 20.38,
+  "end": 20.48
+ },
+ {
+  "word": "book.",
+  "start": 20.48,
+  "end": 20.72
+ },
+ {
+  "word": "10",
+  "start": 21.16,
+  "end": 21.34
+ },
+ {
+  "word": ",000",
+  "start": 21.34,
+  "end": 21.74
+ },
+ {
+  "word": "years.",
+  "start": 21.74,
+  "end": 22.08
+ },
+ {
+  "word": "Ice",
+  "start": 22.64,
+  "end": 22.78
+ },
+ {
+  "word": "ages",
+  "start": 22.78,
+  "end": 23.28
+ },
+ {
+  "word": "come",
+  "start": 23.28,
+  "end": 23.58
+ },
+ {
+  "word": "and",
+  "start": 23.58,
+  "end": 23.74
+ },
+ {
+  "word": "go.",
+  "start": 23.74,
+  "end": 24.04
+ },
+ {
+  "word": "Coastlines",
+  "start": 24.72,
+  "end": 25.02
+ },
+ {
+  "word": "move.",
+  "start": 25.02,
+  "end": 25.42
+ },
+ {
+  "word": "Forests",
+  "start": 26.18,
+  "end": 26.38
+ },
+ {
+  "word": "turn",
+  "start": 26.38,
+  "end": 26.62
+ },
+ {
+  "word": "to",
+  "start": 26.62,
+  "end": 26.84
+ },
+ {
+  "word": "desert.",
+  "start": 26.84,
+  "end": 27.12
+ },
+ {
+  "word": "A",
+  "start": 27.52,
+  "end": 27.66
+ },
+ {
+  "word": "million",
+  "start": 27.66,
+  "end": 27.92
+ },
+ {
+  "word": "years.",
+  "start": 27.92,
+  "end": 28.42
+ },
+ {
+  "word": "Continents",
+  "start": 28.92,
+  "end": 29.12
+ },
+ {
+  "word": "drift.",
+  "start": 29.12,
+  "end": 29.38
+ },
+ {
+  "word": "Mountains",
+  "start": 29.84,
+  "end": 30.1
+ },
+ {
+  "word": "rise,",
+  "start": 30.1,
+  "end": 30.7
+ },
+ {
+  "word": "then",
+  "start": 30.96,
+  "end": 31.0
+ },
+ {
+  "word": "wear",
+  "start": 31.0,
+  "end": 31.22
+ },
+ {
+  "word": "down",
+  "start": 31.22,
+  "end": 31.48
+ },
+ {
+  "word": "to",
+  "start": 31.48,
+  "end": 31.66
+ },
+ {
+  "word": "dust.",
+  "start": 31.66,
+  "end": 32.02
+ },
+ {
+  "word": "Humans",
+  "start": 32.62,
+  "end": 32.84
+ },
+ {
+  "word": "themselves",
+  "start": 32.84,
+  "end": 33.28
+ },
+ {
+  "word": "may",
+  "start": 33.28,
+  "end": 33.58
+ },
+ {
+  "word": "vanish,",
+  "start": 33.58,
+  "end": 33.96
+ },
+ {
+  "word": "and",
+  "start": 34.12,
+  "end": 34.16
+ },
+ {
+  "word": "something",
+  "start": 34.16,
+  "end": 34.44
+ },
+ {
+  "word": "new",
+  "start": 34.44,
+  "end": 34.72
+ },
+ {
+  "word": "takes",
+  "start": 34.72,
+  "end": 34.96
+ },
+ {
+  "word": "their",
+  "start": 34.96,
+  "end": 35.24
+ },
+ {
+  "word": "place.",
+  "start": 35.24,
+  "end": 35.54
+ },
+ {
+  "word": "A",
+  "start": 35.98,
+  "end": 36.14
+ },
+ {
+  "word": "billion",
+  "start": 36.14,
+  "end": 36.38
+ },
+ {
+  "word": "years.",
+  "start": 36.38,
+  "end": 36.9
+ },
+ {
+  "word": "The",
+  "start": 37.3,
+  "end": 37.46
+ },
+ {
+  "word": "sun",
+  "start": 37.46,
+  "end": 37.66
+ },
+ {
+  "word": "grows",
+  "start": 37.66,
+  "end": 37.96
+ },
+ {
+  "word": "hotter.",
+  "start": 37.96,
+  "end": 38.32
+ },
+ {
+  "word": "The",
+  "start": 38.6,
+  "end": 38.66
+ },
+ {
+  "word": "oceans",
+  "start": 38.66,
+  "end": 39.0
+ },
+ {
+  "word": "boil",
+  "start": 39.0,
+  "end": 39.4
+ },
+ {
+  "word": "away.",
+  "start": 39.4,
+  "end": 39.82
+ },
+ {
+  "word": "Earth",
+  "start": 40.44,
+  "end": 40.58
+ },
+ {
+  "word": "turns",
+  "start": 40.58,
+  "end": 40.9
+ },
+ {
+  "word": "to",
+  "start": 40.9,
+  "end": 41.16
+ },
+ {
+  "word": "bare",
+  "start": 41.16,
+  "end": 41.34
+ },
+ {
+  "word": "rock,",
+  "start": 41.34,
+  "end": 41.7
+ },
+ {
+  "word": "and",
+  "start": 41.84,
+  "end": 41.9
+ },
+ {
+  "word": "you",
+  "start": 41.9,
+  "end": 42.02
+ },
+ {
+  "word": "are",
+  "start": 42.02,
+  "end": 42.14
+ },
+ {
+  "word": "still",
+  "start": 42.14,
+  "end": 42.36
+ },
+ {
+  "word": "here,",
+  "start": 42.36,
+  "end": 42.74
+ },
+ {
+  "word": "alone,",
+  "start": 43.0,
+  "end": 43.32
+ },
+ {
+  "word": "watching",
+  "start": 43.66,
+  "end": 44.1
+ },
+ {
+  "word": "the",
+  "start": 44.1,
+  "end": 44.32
+ },
+ {
+  "word": "last",
+  "start": 44.32,
+  "end": 44.58
+ },
+ {
+  "word": "light",
+  "start": 44.58,
+  "end": 44.84
+ },
+ {
+  "word": "of",
+  "start": 44.84,
+  "end": 44.96
+ },
+ {
+  "word": "the",
+  "start": 44.96,
+  "end": 45.1
+ },
+ {
+  "word": "sun.",
+  "start": 45.1,
+  "end": 45.34
+ },
+ {
+  "word": "Immortality",
+  "start": 45.78,
+  "end": 46.22
+ },
+ {
+  "word": "is",
+  "start": 46.22,
+  "end": 46.58
+ },
+ {
+  "word": "not",
+  "start": 46.58,
+  "end": 46.78
+ },
+ {
+  "word": "about",
+  "start": 46.78,
+  "end": 47.0
+ },
+ {
+  "word": "living",
+  "start": 47.0,
+  "end": 47.3
+ },
+ {
+  "word": "forever.",
+  "start": 47.3,
+  "end": 47.7
+ },
+ {
+  "word": "It",
+  "start": 48.18,
+  "end": 48.28
+ },
+ {
+  "word": "is",
+  "start": 48.28,
+  "end": 48.38
+ },
+ {
+  "word": "about",
+  "start": 48.38,
+  "end": 48.6
+ },
+ {
+  "word": "everyone",
+  "start": 48.6,
+  "end": 49.02
+ },
+ {
+  "word": "else",
+  "start": 49.02,
+  "end": 49.26
+ },
+ {
+  "word": "leaving.",
+  "start": 49.26,
+  "end": 49.62
+ },
+ {
+  "word": "So",
+  "start": 49.96,
+  "end": 50.06
+ },
+ {
+  "word": "tell",
+  "start": 50.06,
+  "end": 50.32
+ },
+ {
+  "word": "me,",
+  "start": 50.32,
+  "end": 50.56
+ },
+ {
+  "word": "would",
+  "start": 50.88,
+  "end": 51.0
+ },
+ {
+  "word": "you",
+  "start": 51.0,
+  "end": 51.14
+ },
+ {
+  "word": "take",
+  "start": 51.14,
+  "end": 51.4
+ },
+ {
+  "word": "it?",
+  "start": 51.4,
+  "end": 51.6
+ }
+]
