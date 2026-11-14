@@ -1,10 +1,10 @@
 // "NoSleepShort": what if you never needed sleep? +8 h/day, but the world moves on without you. Original script, 2D mono line-art.
 import React from "react";
-import { Sequence, useCurrentFrame } from "remotion";
+import { Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { Stage, Pill, Num, Person, Ground, Cross, Ring, Icon, Glow, W, H, INK, GLOW, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";
 import { Icon2, SuitMan, Gauge, Beat, Trace, Waffle, Box, Txt } from "./kit2";
 
-export const NOSLEEP_FRAMES = 1800;
+export const NOSLEEP_FRAMES = 1953;
 const cx = W / 2;
 
 const Moon: React.FC<{ x: number; y: number; s?: number; o?: number }> = ({ x, y, s = 1, o = 1 }) => (
@@ -163,7 +163,6 @@ const End = (t: number) => <>
 </>;
 
 const SCENES: [number, number, (t: number) => React.ReactNode][] = [
-  [0, 160, Hook], [160, 320, Day], [320, 470, Year], [470, 650, Use], [650, 810, Ahead], [810, 960, Skills],
-  [960, 1130, World], [1130, 1290, Left], [1290, 1450, Fatigue], [1450, 1580, Trade], [1580, 1690, Alone], [1690, 1800, End],
+  [0, 160, Hook], [160, 323, Day], [323, 510, Year], [510, 694, Use], [694, 854, Ahead], [854, 1021, Skills], [1021, 1191, World], [1191, 1351, Left], [1351, 1559, Fatigue], [1559, 1689, Trade], [1689, 1819, Alone], [1819, 1953, End],
 ];
-export const NoSleepShort: React.FC = () => <Stage>{SCENES.map(([a, b, C], i) => <S key={i} a={a} b={b}>{C}</S>)}</Stage>;
+export const NoSleepShort: React.FC = () => <Stage><Audio src={staticFile("nosleep/voice.wav")} />{SCENES.map(([a, b, C], i) => <S key={i} a={a} b={b}>{C}</S>)}</Stage>;

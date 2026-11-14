@@ -30,7 +30,7 @@ More time is not more life. Hours are not days.
 So you sit alone, in the quiet hours, with nothing to share.
 Sleep is not lost time. It is what keeps you in the world.
 
-## Notes
+## Notes (final audio: 2d/voice_lines.py, per-line Kokoro am_michael placed at scene starts; scenes retimed to 1953 f = 65 s; copy 2d/voice/voice.wav -> public/nosleep/)
 - Numbers match visuals: +8 h, 2,920 h/yr, 122 days, "YEAR 4", 2025 -> 2040.
 - Scene 8 line is long: if it runs over 5.3 s, cut to "Your friends slept, woke up, and moved on. You missed it all."
 - Pipeline: reuse `scripts/voice.py` (kokoro-onnx, 1.2x) -> `voice/` wav + words.json, then add `<Audio>` to NoSleepShort and re-time scene cuts to words.json if needed.
