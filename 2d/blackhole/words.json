@@ -1,0 +1,832 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.12
+ },
+ {
+  "word": "if",
+  "start": 0.12,
+  "end": 0.2
+ },
+ {
+  "word": "you",
+  "start": 0.2,
+  "end": 0.34
+ },
+ {
+  "word": "fell",
+  "start": 0.34,
+  "end": 0.54
+ },
+ {
+  "word": "into",
+  "start": 0.54,
+  "end": 0.74
+ },
+ {
+  "word": "a",
+  "start": 0.74,
+  "end": 0.88
+ },
+ {
+  "word": "black",
+  "start": 0.88,
+  "end": 1.1
+ },
+ {
+  "word": "hole?",
+  "start": 1.1,
+  "end": 1.46
+ },
+ {
+  "word": "From",
+  "start": 1.82,
+  "end": 1.94
+ },
+ {
+  "word": "far",
+  "start": 1.94,
+  "end": 2.26
+ },
+ {
+  "word": "away,",
+  "start": 2.26,
+  "end": 2.58
+ },
+ {
+  "word": "it",
+  "start": 2.66,
+  "end": 2.76
+ },
+ {
+  "word": "is",
+  "start": 2.76,
+  "end": 2.86
+ },
+ {
+  "word": "just",
+  "start": 2.86,
+  "end": 3.02
+ },
+ {
+  "word": "a",
+  "start": 3.02,
+  "end": 3.2
+ },
+ {
+  "word": "dark",
+  "start": 3.2,
+  "end": 3.44
+ },
+ {
+  "word": "circle.",
+  "start": 3.44,
+  "end": 3.9
+ },
+ {
+  "word": "It",
+  "start": 4.34,
+  "end": 4.46
+ },
+ {
+  "word": "pulls",
+  "start": 4.46,
+  "end": 4.68
+ },
+ {
+  "word": "no",
+  "start": 4.68,
+  "end": 4.96
+ },
+ {
+  "word": "harder",
+  "start": 4.96,
+  "end": 5.28
+ },
+ {
+  "word": "than",
+  "start": 5.28,
+  "end": 5.5
+ },
+ {
+  "word": "a",
+  "start": 5.5,
+  "end": 5.66
+ },
+ {
+  "word": "star",
+  "start": 5.66,
+  "end": 5.94
+ },
+ {
+  "word": "of",
+  "start": 5.94,
+  "end": 6.12
+ },
+ {
+  "word": "the",
+  "start": 6.12,
+  "end": 6.2
+ },
+ {
+  "word": "same",
+  "start": 6.2,
+  "end": 6.44
+ },
+ {
+  "word": "mass,",
+  "start": 6.44,
+  "end": 6.78
+ },
+ {
+  "word": "but",
+  "start": 6.98,
+  "end": 7.12
+ },
+ {
+  "word": "you",
+  "start": 7.12,
+  "end": 7.26
+ },
+ {
+  "word": "drift",
+  "start": 7.26,
+  "end": 7.52
+ },
+ {
+  "word": "closer",
+  "start": 7.52,
+  "end": 7.86
+ },
+ {
+  "word": "and",
+  "start": 7.86,
+  "end": 8.32
+ },
+ {
+  "word": "you",
+  "start": 8.32,
+  "end": 8.44
+ },
+ {
+  "word": "start",
+  "start": 8.44,
+  "end": 8.68
+ },
+ {
+  "word": "to",
+  "start": 8.68,
+  "end": 8.88
+ },
+ {
+  "word": "fall,",
+  "start": 8.88,
+  "end": 9.16
+ },
+ {
+  "word": "faster",
+  "start": 9.42,
+  "end": 9.78
+ },
+ {
+  "word": "and",
+  "start": 9.78,
+  "end": 10.06
+ },
+ {
+  "word": "faster.",
+  "start": 10.06,
+  "end": 10.44
+ },
+ {
+  "word": "Now",
+  "start": 10.88,
+  "end": 11.04
+ },
+ {
+  "word": "gravity",
+  "start": 11.04,
+  "end": 11.42
+ },
+ {
+  "word": "changes",
+  "start": 11.42,
+  "end": 11.88
+ },
+ {
+  "word": "across",
+  "start": 11.88,
+  "end": 12.2
+ },
+ {
+  "word": "your",
+  "start": 12.2,
+  "end": 12.42
+ },
+ {
+  "word": "own",
+  "start": 12.42,
+  "end": 12.62
+ },
+ {
+  "word": "body.",
+  "start": 12.62,
+  "end": 13.0
+ },
+ {
+  "word": "Your",
+  "start": 13.42,
+  "end": 13.54
+ },
+ {
+  "word": "feet",
+  "start": 13.54,
+  "end": 13.76
+ },
+ {
+  "word": "are",
+  "start": 13.76,
+  "end": 13.9
+ },
+ {
+  "word": "pulled",
+  "start": 13.9,
+  "end": 14.16
+ },
+ {
+  "word": "harder",
+  "start": 14.16,
+  "end": 14.48
+ },
+ {
+  "word": "than",
+  "start": 14.48,
+  "end": 14.7
+ },
+ {
+  "word": "your",
+  "start": 14.7,
+  "end": 14.82
+ },
+ {
+  "word": "head.",
+  "start": 14.82,
+  "end": 15.12
+ },
+ {
+  "word": "That",
+  "start": 15.38,
+  "end": 15.5
+ },
+ {
+  "word": "is",
+  "start": 15.5,
+  "end": 15.64
+ },
+ {
+  "word": "tidal",
+  "start": 15.64,
+  "end": 15.98
+ },
+ {
+  "word": "force.",
+  "start": 15.98,
+  "end": 16.48
+ },
+ {
+  "word": "Near",
+  "start": 17.02,
+  "end": 17.12
+ },
+ {
+  "word": "a",
+  "start": 17.12,
+  "end": 17.3
+ },
+ {
+  "word": "small",
+  "start": 17.3,
+  "end": 17.56
+ },
+ {
+  "word": "black",
+  "start": 17.56,
+  "end": 17.84
+ },
+ {
+  "word": "hole,",
+  "start": 17.84,
+  "end": 18.18
+ },
+ {
+  "word": "you",
+  "start": 18.32,
+  "end": 18.38
+ },
+ {
+  "word": "stretch",
+  "start": 18.38,
+  "end": 18.64
+ },
+ {
+  "word": "like",
+  "start": 18.64,
+  "end": 18.9
+ },
+ {
+  "word": "spaghetti.",
+  "start": 18.9,
+  "end": 19.32
+ },
+ {
+  "word": "Near",
+  "start": 19.9,
+  "end": 20.0
+ },
+ {
+  "word": "a",
+  "start": 20.0,
+  "end": 20.3
+ },
+ {
+  "word": "giant",
+  "start": 20.3,
+  "end": 20.58
+ },
+ {
+  "word": "one,",
+  "start": 20.58,
+  "end": 20.8
+ },
+ {
+  "word": "you",
+  "start": 20.86,
+  "end": 20.96
+ },
+ {
+  "word": "would",
+  "start": 20.96,
+  "end": 21.06
+ },
+ {
+  "word": "not",
+  "start": 21.06,
+  "end": 21.26
+ },
+ {
+  "word": "feel",
+  "start": 21.26,
+  "end": 21.52
+ },
+ {
+  "word": "a",
+  "start": 21.52,
+  "end": 21.7
+ },
+ {
+  "word": "thing.",
+  "start": 21.7,
+  "end": 21.96
+ },
+ {
+  "word": "Meanwhile,",
+  "start": 22.9,
+  "end": 22.9
+ },
+ {
+  "word": "time",
+  "start": 23.2,
+  "end": 23.42
+ },
+ {
+  "word": "slows",
+  "start": 23.42,
+  "end": 23.8
+ },
+ {
+  "word": "down.",
+  "start": 23.8,
+  "end": 24.28
+ },
+ {
+  "word": "A",
+  "start": 24.84,
+  "end": 24.84
+ },
+ {
+  "word": "friend",
+  "start": 24.84,
+  "end": 25.06
+ },
+ {
+  "word": "watching",
+  "start": 25.06,
+  "end": 25.46
+ },
+ {
+  "word": "from",
+  "start": 25.46,
+  "end": 25.74
+ },
+ {
+  "word": "far",
+  "start": 25.74,
+  "end": 26.08
+ },
+ {
+  "word": "away",
+  "start": 26.08,
+  "end": 26.38
+ },
+ {
+  "word": "sees",
+  "start": 26.38,
+  "end": 26.64
+ },
+ {
+  "word": "you",
+  "start": 26.64,
+  "end": 26.88
+ },
+ {
+  "word": "grow",
+  "start": 26.88,
+  "end": 27.08
+ },
+ {
+  "word": "slower,",
+  "start": 27.08,
+  "end": 27.54
+ },
+ {
+  "word": "dimmer",
+  "start": 27.7,
+  "end": 27.98
+ },
+ {
+  "word": "and",
+  "start": 27.98,
+  "end": 28.16
+ },
+ {
+  "word": "redder.",
+  "start": 28.16,
+  "end": 28.52
+ },
+ {
+  "word": "They",
+  "start": 28.52,
+  "end": 29.1
+ },
+ {
+  "word": "never",
+  "start": 29.1,
+  "end": 29.26
+ },
+ {
+  "word": "see",
+  "start": 29.26,
+  "end": 29.5
+ },
+ {
+  "word": "you",
+  "start": 29.5,
+  "end": 29.66
+ },
+ {
+  "word": "cross",
+  "start": 29.66,
+  "end": 29.88
+ },
+ {
+  "word": "the",
+  "start": 29.88,
+  "end": 30.1
+ },
+ {
+  "word": "line.",
+  "start": 30.1,
+  "end": 30.38
+ },
+ {
+  "word": "That",
+  "start": 30.74,
+  "end": 30.78
+ },
+ {
+  "word": "line",
+  "start": 30.78,
+  "end": 31.08
+ },
+ {
+  "word": "is",
+  "start": 31.08,
+  "end": 31.24
+ },
+ {
+  "word": "the",
+  "start": 31.24,
+  "end": 31.36
+ },
+ {
+  "word": "event",
+  "start": 31.36,
+  "end": 31.62
+ },
+ {
+  "word": "horizon.",
+  "start": 31.62,
+  "end": 32.04
+ },
+ {
+  "word": "The",
+  "start": 32.6,
+  "end": 32.68
+ },
+ {
+  "word": "point",
+  "start": 32.68,
+  "end": 32.86
+ },
+ {
+  "word": "of",
+  "start": 32.86,
+  "end": 33.02
+ },
+ {
+  "word": "no",
+  "start": 33.02,
+  "end": 33.22
+ },
+ {
+  "word": "return.",
+  "start": 33.22,
+  "end": 33.68
+ },
+ {
+  "word": "Even",
+  "start": 34.24,
+  "end": 34.44
+ },
+ {
+  "word": "light",
+  "start": 34.44,
+  "end": 34.7
+ },
+ {
+  "word": "cannot",
+  "start": 34.7,
+  "end": 34.98
+ },
+ {
+  "word": "climb",
+  "start": 34.98,
+  "end": 35.36
+ },
+ {
+  "word": "back",
+  "start": 35.36,
+  "end": 35.64
+ },
+ {
+  "word": "out.",
+  "start": 35.64,
+  "end": 35.9
+ },
+ {
+  "word": "You",
+  "start": 36.08,
+  "end": 36.14
+ },
+ {
+  "word": "cross",
+  "start": 36.14,
+  "end": 36.4
+ },
+ {
+  "word": "it",
+  "start": 36.4,
+  "end": 36.62
+ },
+ {
+  "word": "and",
+  "start": 36.62,
+  "end": 36.8
+ },
+ {
+  "word": "nothing",
+  "start": 36.8,
+  "end": 37.02
+ },
+ {
+  "word": "special",
+  "start": 37.02,
+  "end": 37.38
+ },
+ {
+  "word": "happens.",
+  "start": 37.38,
+  "end": 37.82
+ },
+ {
+  "word": "No",
+  "start": 38.12,
+  "end": 38.28
+ },
+ {
+  "word": "wall,",
+  "start": 38.28,
+  "end": 38.64
+ },
+ {
+  "word": "no",
+  "start": 38.84,
+  "end": 38.94
+ },
+ {
+  "word": "flash,",
+  "start": 38.94,
+  "end": 39.28
+ },
+ {
+  "word": "but",
+  "start": 39.48,
+  "end": 39.56
+ },
+ {
+  "word": "now",
+  "start": 39.56,
+  "end": 39.78
+ },
+ {
+  "word": "every",
+  "start": 39.78,
+  "end": 40.1
+ },
+ {
+  "word": "path",
+  "start": 40.1,
+  "end": 40.42
+ },
+ {
+  "word": "leads",
+  "start": 40.42,
+  "end": 40.72
+ },
+ {
+  "word": "inward.",
+  "start": 40.72,
+  "end": 41.12
+ },
+ {
+  "word": "The",
+  "start": 41.5,
+  "end": 41.64
+ },
+ {
+  "word": "center",
+  "start": 41.64,
+  "end": 41.84
+ },
+ {
+  "word": "is",
+  "start": 41.84,
+  "end": 42.1
+ },
+ {
+  "word": "no",
+  "start": 42.1,
+  "end": 42.3
+ },
+ {
+  "word": "longer",
+  "start": 42.3,
+  "end": 42.6
+ },
+ {
+  "word": "a",
+  "start": 42.6,
+  "end": 42.78
+ },
+ {
+  "word": "place.",
+  "start": 42.78,
+  "end": 42.98
+ },
+ {
+  "word": "It",
+  "start": 43.26,
+  "end": 43.3
+ },
+ {
+  "word": "is",
+  "start": 43.3,
+  "end": 43.42
+ },
+ {
+  "word": "your",
+  "start": 43.42,
+  "end": 43.58
+ },
+ {
+  "word": "future.",
+  "start": 43.58,
+  "end": 43.94
+ },
+ {
+  "word": "Moments",
+  "start": 44.58,
+  "end": 44.72
+ },
+ {
+  "word": "later,",
+  "start": 44.72,
+  "end": 45.08
+ },
+ {
+  "word": "you",
+  "start": 45.08,
+  "end": 45.38
+ },
+ {
+  "word": "reach",
+  "start": 45.38,
+  "end": 45.56
+ },
+ {
+  "word": "the",
+  "start": 45.56,
+  "end": 45.8
+ },
+ {
+  "word": "singularity",
+  "start": 45.8,
+  "end": 46.58
+ },
+ {
+  "word": "and",
+  "start": 46.58,
+  "end": 46.94
+ },
+ {
+  "word": "that",
+  "start": 46.94,
+  "end": 47.12
+ },
+ {
+  "word": "is",
+  "start": 47.12,
+  "end": 47.24
+ },
+ {
+  "word": "where",
+  "start": 47.24,
+  "end": 47.44
+ },
+ {
+  "word": "our",
+  "start": 47.44,
+  "end": 47.62
+ },
+ {
+  "word": "physics",
+  "start": 47.62,
+  "end": 47.88
+ },
+ {
+  "word": "stops.",
+  "start": 47.88,
+  "end": 48.3
+ },
+ {
+  "word": "So",
+  "start": 48.7,
+  "end": 48.78
+ },
+ {
+  "word": "tell",
+  "start": 48.78,
+  "end": 49.02
+ },
+ {
+  "word": "me,",
+  "start": 49.02,
+  "end": 49.34
+ },
+ {
+  "word": "would",
+  "start": 49.64,
+  "end": 49.76
+ },
+ {
+  "word": "you",
+  "start": 49.76,
+  "end": 49.94
+ },
+ {
+  "word": "jump?",
+  "start": 49.94,
+  "end": 50.24
+ }
+]
