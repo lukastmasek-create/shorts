@@ -19,5 +19,7 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 ## Pause short (`src/videos/pause/`, plan `pause/SHOTPLAN.md`)
 - `story.ts` shots/cams/kicks done; `legacy.ts` = bridge physics for old world.ts/cast.ts (delete later). New: `pworld.ts` (world), `pcast.ts` (cast), `sets.ts` (one builder per set). All 11 sets + casts built (first pass, stills checked at one frame per shot; cameras/props still rough: cube cars, boxy chairs, hands/glasses cards hand-placed). NOTE: cams look +z from -z so set +x is screen LEFT. Stills: `COMP=PauseShort PROPS='{"nopost":1}' node scripts/bridge-stills.mjs out/pause/p_ 10,130`.
 
+- Audio: `audio/pause_audio.py` (run from repo root in venv; needs scipy) -> `pause/audio/mix.wav` + stems + `cues.md` (wavs git-ignored); `public/pause/mix.mp3` (256k) is what `Pause.tsx` plays. Re-run + re-encode after any timing change.
+
 ## Status
 Scaffold done, typechecks. No topic/script chosen yet. Next: topic -> script (SKILL.md step 2) -> `scripts/voice.py` -> story.ts shot plan.

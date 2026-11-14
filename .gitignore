@@ -2,3 +2,5 @@ node_modules
 out
 venv
 voice_models
+pause/audio/*.wav
+audio/_cache
