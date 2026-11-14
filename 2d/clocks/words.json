@@ -1,0 +1,652 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.54
+ },
+ {
+  "word": "if",
+  "start": 0.54,
+  "end": 0.68
+ },
+ {
+  "word": "every",
+  "start": 0.68,
+  "end": 1.08
+ },
+ {
+  "word": "clock",
+  "start": 1.08,
+  "end": 1.34
+ },
+ {
+  "word": "stopped",
+  "start": 1.34,
+  "end": 1.74
+ },
+ {
+  "word": "at",
+  "start": 1.74,
+  "end": 1.92
+ },
+ {
+  "word": "the",
+  "start": 1.92,
+  "end": 2.08
+ },
+ {
+  "word": "same",
+  "start": 2.08,
+  "end": 2.3
+ },
+ {
+  "word": "time?",
+  "start": 2.3,
+  "end": 3.08
+ },
+ {
+  "word": "Wall",
+  "start": 4.68,
+  "end": 4.92
+ },
+ {
+  "word": "clocks,",
+  "start": 4.92,
+  "end": 5.24
+ },
+ {
+  "word": "phones,",
+  "start": 5.44,
+  "end": 5.76
+ },
+ {
+  "word": "watches,",
+  "start": 5.96,
+  "end": 6.26
+ },
+ {
+  "word": "all",
+  "start": 6.84,
+  "end": 7.06
+ },
+ {
+  "word": "frozen",
+  "start": 7.06,
+  "end": 7.48
+ },
+ {
+  "word": "at",
+  "start": 7.48,
+  "end": 7.76
+ },
+ {
+  "word": "3",
+  "start": 7.76,
+  "end": 8.06
+ },
+ {
+  "word": ".17.",
+  "start": 8.06,
+  "end": 8.48
+ },
+ {
+  "word": "Nobody",
+  "start": 9.64,
+  "end": 10.1
+ },
+ {
+  "word": "reacts.",
+  "start": 10.1,
+  "end": 10.7
+ },
+ {
+  "word": "People",
+  "start": 11.34,
+  "end": 11.54
+ },
+ {
+  "word": "walk",
+  "start": 11.54,
+  "end": 11.88
+ },
+ {
+  "word": "past",
+  "start": 11.88,
+  "end": 12.2
+ },
+ {
+  "word": "the",
+  "start": 12.2,
+  "end": 12.44
+ },
+ {
+  "word": "frozen",
+  "start": 12.44,
+  "end": 12.8
+ },
+ {
+  "word": "clocks",
+  "start": 12.8,
+  "end": 13.26
+ },
+ {
+  "word": "as",
+  "start": 13.26,
+  "end": 13.54
+ },
+ {
+  "word": "if",
+  "start": 13.54,
+  "end": 13.7
+ },
+ {
+  "word": "nothing",
+  "start": 13.7,
+  "end": 13.94
+ },
+ {
+  "word": "is",
+  "start": 13.94,
+  "end": 14.26
+ },
+ {
+  "word": "wrong.",
+  "start": 14.26,
+  "end": 14.62
+ },
+ {
+  "word": "You",
+  "start": 15.4,
+  "end": 15.7
+ },
+ {
+  "word": "look",
+  "start": 15.7,
+  "end": 15.86
+ },
+ {
+  "word": "up,",
+  "start": 15.86,
+  "end": 16.08
+ },
+ {
+  "word": "the",
+  "start": 16.24,
+  "end": 16.34
+ },
+ {
+  "word": "sun",
+  "start": 16.34,
+  "end": 16.56
+ },
+ {
+  "word": "still",
+  "start": 16.56,
+  "end": 16.82
+ },
+ {
+  "word": "moves,",
+  "start": 16.82,
+  "end": 17.36
+ },
+ {
+  "word": "your",
+  "start": 17.52,
+  "end": 17.7
+ },
+ {
+  "word": "heart",
+  "start": 17.7,
+  "end": 17.94
+ },
+ {
+  "word": "still",
+  "start": 17.94,
+  "end": 18.24
+ },
+ {
+  "word": "beats,",
+  "start": 18.24,
+  "end": 18.64
+ },
+ {
+  "word": "time",
+  "start": 19.22,
+  "end": 19.4
+ },
+ {
+  "word": "has",
+  "start": 19.4,
+  "end": 19.62
+ },
+ {
+  "word": "not",
+  "start": 19.62,
+  "end": 19.88
+ },
+ {
+  "word": "stopped,",
+  "start": 19.88,
+  "end": 20.42
+ },
+ {
+  "word": "only",
+  "start": 20.8,
+  "end": 21.04
+ },
+ {
+  "word": "the",
+  "start": 21.04,
+  "end": 21.28
+ },
+ {
+  "word": "clocks.",
+  "start": 21.28,
+  "end": 21.68
+ },
+ {
+  "word": "Trains",
+  "start": 22.88,
+  "end": 23.1
+ },
+ {
+  "word": "miss",
+  "start": 23.1,
+  "end": 23.3
+ },
+ {
+  "word": "their",
+  "start": 23.3,
+  "end": 23.54
+ },
+ {
+  "word": "slots,",
+  "start": 23.54,
+  "end": 23.96
+ },
+ {
+  "word": "flights",
+  "start": 24.64,
+  "end": 24.76
+ },
+ {
+  "word": "stay",
+  "start": 24.76,
+  "end": 25.12
+ },
+ {
+  "word": "on",
+  "start": 25.12,
+  "end": 25.28
+ },
+ {
+  "word": "the",
+  "start": 25.28,
+  "end": 25.4
+ },
+ {
+  "word": "ground,",
+  "start": 25.4,
+  "end": 25.72
+ },
+ {
+  "word": "banks",
+  "start": 26.08,
+  "end": 26.24
+ },
+ {
+  "word": "never",
+  "start": 26.24,
+  "end": 26.6
+ },
+ {
+  "word": "open,",
+  "start": 26.6,
+  "end": 27.04
+ },
+ {
+  "word": "the",
+  "start": 27.5,
+  "end": 27.6
+ },
+ {
+  "word": "world",
+  "start": 27.6,
+  "end": 27.86
+ },
+ {
+  "word": "slowly",
+  "start": 27.86,
+  "end": 28.46
+ },
+ {
+  "word": "jams.",
+  "start": 28.46,
+  "end": 28.86
+ },
+ {
+  "word": "Yet",
+  "start": 29.62,
+  "end": 30.18
+ },
+ {
+  "word": "nobody",
+  "start": 30.18,
+  "end": 30.66
+ },
+ {
+  "word": "panics",
+  "start": 30.66,
+  "end": 31.34
+ },
+ {
+  "word": "because",
+  "start": 31.34,
+  "end": 31.9
+ },
+ {
+  "word": "they",
+  "start": 31.9,
+  "end": 32.1
+ },
+ {
+  "word": "trust",
+  "start": 32.1,
+  "end": 32.36
+ },
+ {
+  "word": "the",
+  "start": 32.36,
+  "end": 32.56
+ },
+ {
+  "word": "clock",
+  "start": 32.56,
+  "end": 32.8
+ },
+ {
+  "word": "more",
+  "start": 32.8,
+  "end": 33.08
+ },
+ {
+  "word": "than",
+  "start": 33.08,
+  "end": 33.26
+ },
+ {
+  "word": "the",
+  "start": 33.26,
+  "end": 33.42
+ },
+ {
+  "word": "sun.",
+  "start": 33.42,
+  "end": 33.68
+ },
+ {
+  "word": "Dinner",
+  "start": 34.7,
+  "end": 34.94
+ },
+ {
+  "word": "time",
+  "start": 34.94,
+  "end": 35.24
+ },
+ {
+  "word": "comes,",
+  "start": 35.24,
+  "end": 35.78
+ },
+ {
+  "word": "you",
+  "start": 35.94,
+  "end": 36.36
+ },
+ {
+  "word": "are",
+  "start": 36.36,
+  "end": 36.52
+ },
+ {
+  "word": "hungry,",
+  "start": 36.52,
+  "end": 36.96
+ },
+ {
+  "word": "everyone",
+  "start": 37.44,
+  "end": 37.74
+ },
+ {
+  "word": "around",
+  "start": 37.74,
+  "end": 38.06
+ },
+ {
+  "word": "you",
+  "start": 38.06,
+  "end": 38.3
+ },
+ {
+  "word": "insists",
+  "start": 38.3,
+  "end": 38.72
+ },
+ {
+  "word": "it",
+  "start": 38.72,
+  "end": 39.04
+ },
+ {
+  "word": "is",
+  "start": 39.04,
+  "end": 39.16
+ },
+ {
+  "word": "still",
+  "start": 39.16,
+  "end": 39.42
+ },
+ {
+  "word": "3",
+  "start": 39.42,
+  "end": 39.74
+ },
+ {
+  "word": ".17.",
+  "start": 39.74,
+  "end": 40.18
+ },
+ {
+  "word": "You",
+  "start": 41.28,
+  "end": 41.62
+ },
+ {
+  "word": "point",
+  "start": 41.62,
+  "end": 41.88
+ },
+ {
+  "word": "at",
+  "start": 41.88,
+  "end": 42.04
+ },
+ {
+  "word": "the",
+  "start": 42.04,
+  "end": 42.18
+ },
+ {
+  "word": "sunset,",
+  "start": 42.18,
+  "end": 42.6
+ },
+ {
+  "word": "they",
+  "start": 42.9,
+  "end": 43.18
+ },
+ {
+  "word": "only",
+  "start": 43.18,
+  "end": 43.42
+ },
+ {
+  "word": "look",
+  "start": 43.42,
+  "end": 43.64
+ },
+ {
+  "word": "at",
+  "start": 43.64,
+  "end": 43.76
+ },
+ {
+  "word": "the",
+  "start": 43.76,
+  "end": 43.92
+ },
+ {
+  "word": "clock.",
+  "start": 43.92,
+  "end": 44.3
+ },
+ {
+  "word": "A",
+  "start": 45.78,
+  "end": 45.98
+ },
+ {
+  "word": "clock",
+  "start": 45.98,
+  "end": 46.24
+ },
+ {
+  "word": "does",
+  "start": 46.24,
+  "end": 46.52
+ },
+ {
+  "word": "not",
+  "start": 46.52,
+  "end": 46.76
+ },
+ {
+  "word": "measure",
+  "start": 46.76,
+  "end": 47.1
+ },
+ {
+  "word": "time,",
+  "start": 47.1,
+  "end": 47.54
+ },
+ {
+  "word": "it",
+  "start": 47.88,
+  "end": 48.16
+ },
+ {
+  "word": "only",
+  "start": 48.16,
+  "end": 48.44
+ },
+ {
+  "word": "tells",
+  "start": 48.44,
+  "end": 48.8
+ },
+ {
+  "word": "us",
+  "start": 48.8,
+  "end": 49.06
+ },
+ {
+  "word": "what",
+  "start": 49.06,
+  "end": 49.26
+ },
+ {
+  "word": "to",
+  "start": 49.26,
+  "end": 49.44
+ },
+ {
+  "word": "agree",
+  "start": 49.44,
+  "end": 49.7
+ },
+ {
+  "word": "on.",
+  "start": 49.7,
+  "end": 50.1
+ },
+ {
+  "word": "If",
+  "start": 50.96,
+  "end": 51.2
+ },
+ {
+  "word": "everyone",
+  "start": 51.2,
+  "end": 51.58
+ },
+ {
+  "word": "agrees",
+  "start": 51.58,
+  "end": 52.0
+ },
+ {
+  "word": "who",
+  "start": 52.0,
+  "end": 52.3
+ },
+ {
+  "word": "is",
+  "start": 52.3,
+  "end": 52.46
+ },
+ {
+  "word": "right,",
+  "start": 52.46,
+  "end": 52.8
+ },
+ {
+  "word": "do",
+  "start": 53.12,
+  "end": 53.4
+ },
+ {
+  "word": "you",
+  "start": 53.4,
+  "end": 53.52
+ },
+ {
+  "word": "speak",
+  "start": 53.52,
+  "end": 53.76
+ },
+ {
+  "word": "up",
+  "start": 53.76,
+  "end": 54.02
+ },
+ {
+  "word": "or",
+  "start": 54.02,
+  "end": 54.24
+ },
+ {
+  "word": "go",
+  "start": 54.24,
+  "end": 54.4
+ },
+ {
+  "word": "along?",
+  "start": 54.4,
+  "end": 54.78
+ }
+]
