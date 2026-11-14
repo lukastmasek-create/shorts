@@ -1,0 +1,662 @@
+[
+ {
+  "word": "What",
+  "start": 0.0,
+  "end": 0.12
+ },
+ {
+  "word": "if",
+  "start": 0.12,
+  "end": 0.24
+ },
+ {
+  "word": "you",
+  "start": 0.24,
+  "end": 0.36
+ },
+ {
+  "word": "were",
+  "start": 0.36,
+  "end": 0.46
+ },
+ {
+  "word": "the",
+  "start": 0.46,
+  "end": 0.58
+ },
+ {
+  "word": "only",
+  "start": 0.58,
+  "end": 0.92
+ },
+ {
+  "word": "real",
+  "start": 0.92,
+  "end": 1.28
+ },
+ {
+  "word": "human?",
+  "start": 1.28,
+  "end": 1.68
+ },
+ {
+  "word": "It",
+  "start": 1.96,
+  "end": 1.98
+ },
+ {
+  "word": "starts",
+  "start": 1.98,
+  "end": 2.26
+ },
+ {
+  "word": "small.",
+  "start": 2.26,
+  "end": 2.72
+ },
+ {
+  "word": "A",
+  "start": 3.4,
+  "end": 3.4
+ },
+ {
+  "word": "stranger",
+  "start": 3.4,
+  "end": 3.76
+ },
+ {
+  "word": "says",
+  "start": 3.76,
+  "end": 4.12
+ },
+ {
+  "word": "the",
+  "start": 4.12,
+  "end": 4.32
+ },
+ {
+  "word": "exact",
+  "start": 4.32,
+  "end": 4.7
+ },
+ {
+  "word": "sentence",
+  "start": 4.7,
+  "end": 5.14
+ },
+ {
+  "word": "you",
+  "start": 5.14,
+  "end": 5.36
+ },
+ {
+  "word": "heard",
+  "start": 5.36,
+  "end": 5.58
+ },
+ {
+  "word": "yesterday.",
+  "start": 5.58,
+  "end": 6.12
+ },
+ {
+  "word": "A",
+  "start": 6.68,
+  "end": 6.7
+ },
+ {
+  "word": "crowd",
+  "start": 6.7,
+  "end": 7.08
+ },
+ {
+  "word": "crosses",
+  "start": 7.08,
+  "end": 7.54
+ },
+ {
+  "word": "the",
+  "start": 7.54,
+  "end": 7.78
+ },
+ {
+  "word": "street,",
+  "start": 7.78,
+  "end": 8.04
+ },
+ {
+  "word": "same",
+  "start": 8.32,
+  "end": 8.5
+ },
+ {
+  "word": "steps,",
+  "start": 8.5,
+  "end": 8.94
+ },
+ {
+  "word": "same",
+  "start": 9.52,
+  "end": 9.7
+ },
+ {
+  "word": "pauses,",
+  "start": 9.7,
+  "end": 10.22
+ },
+ {
+  "word": "same",
+  "start": 10.7,
+  "end": 10.82
+ },
+ {
+  "word": "rhythm,",
+  "start": 10.82,
+  "end": 11.16
+ },
+ {
+  "word": "you",
+  "start": 11.28,
+  "end": 11.36
+ },
+ {
+  "word": "look",
+  "start": 11.36,
+  "end": 11.52
+ },
+ {
+  "word": "closer,",
+  "start": 11.52,
+  "end": 12.0
+ },
+ {
+  "word": "faces",
+  "start": 12.4,
+  "end": 12.7
+ },
+ {
+  "word": "repeat.",
+  "start": 12.7,
+  "end": 13.24
+ },
+ {
+  "word": "Nobody",
+  "start": 13.86,
+  "end": 14.06
+ },
+ {
+  "word": "ever",
+  "start": 14.06,
+  "end": 14.4
+ },
+ {
+  "word": "starts",
+  "start": 14.4,
+  "end": 14.72
+ },
+ {
+  "word": "a",
+  "start": 14.72,
+  "end": 14.9
+ },
+ {
+  "word": "thought",
+  "start": 14.9,
+  "end": 15.08
+ },
+ {
+  "word": "you",
+  "start": 15.08,
+  "end": 15.28
+ },
+ {
+  "word": "did",
+  "start": 15.28,
+  "end": 15.42
+ },
+ {
+  "word": "not",
+  "start": 15.42,
+  "end": 15.68
+ },
+ {
+  "word": "start,",
+  "start": 15.68,
+  "end": 16.1
+ },
+ {
+  "word": "so",
+  "start": 16.2,
+  "end": 16.32
+ },
+ {
+  "word": "you",
+  "start": 16.32,
+  "end": 16.48
+ },
+ {
+  "word": "test",
+  "start": 16.48,
+  "end": 16.74
+ },
+ {
+  "word": "it.",
+  "start": 16.74,
+  "end": 16.98
+ },
+ {
+  "word": "You",
+  "start": 17.16,
+  "end": 17.24
+ },
+ {
+  "word": "say",
+  "start": 17.24,
+  "end": 17.44
+ },
+ {
+  "word": "something",
+  "start": 17.44,
+  "end": 17.78
+ },
+ {
+  "word": "no",
+  "start": 17.78,
+  "end": 18.08
+ },
+ {
+  "word": "one",
+  "start": 18.08,
+  "end": 18.28
+ },
+ {
+  "word": "could",
+  "start": 18.28,
+  "end": 18.48
+ },
+ {
+  "word": "predict,",
+  "start": 18.48,
+  "end": 18.94
+ },
+ {
+  "word": "silence.",
+  "start": 19.78,
+  "end": 19.78
+ },
+ {
+  "word": "Then",
+  "start": 20.42,
+  "end": 20.58
+ },
+ {
+  "word": "an",
+  "start": 20.58,
+  "end": 20.72
+ },
+ {
+  "word": "answer,",
+  "start": 20.72,
+  "end": 21.16
+ },
+ {
+  "word": "too",
+  "start": 21.4,
+  "end": 21.54
+ },
+ {
+  "word": "fast,",
+  "start": 21.54,
+  "end": 21.98
+ },
+ {
+  "word": "too",
+  "start": 22.32,
+  "end": 22.46
+ },
+ {
+  "word": "perfect.",
+  "start": 22.46,
+  "end": 22.96
+ },
+ {
+  "word": "You",
+  "start": 23.42,
+  "end": 23.56
+ },
+ {
+  "word": "turn",
+  "start": 23.56,
+  "end": 23.78
+ },
+ {
+  "word": "around",
+  "start": 23.78,
+  "end": 24.04
+ },
+ {
+  "word": "quickly.",
+  "start": 24.04,
+  "end": 24.4
+ },
+ {
+  "word": "Everyone",
+  "start": 24.96,
+  "end": 25.2
+ },
+ {
+  "word": "is",
+  "start": 25.2,
+  "end": 25.48
+ },
+ {
+  "word": "already",
+  "start": 25.48,
+  "end": 25.84
+ },
+ {
+  "word": "looking",
+  "start": 25.84,
+  "end": 26.12
+ },
+ {
+  "word": "at",
+  "start": 26.12,
+  "end": 26.36
+ },
+ {
+  "word": "you.",
+  "start": 26.36,
+  "end": 26.62
+ },
+ {
+  "word": "Now",
+  "start": 27.1,
+  "end": 27.3
+ },
+ {
+  "word": "the",
+  "start": 27.3,
+  "end": 27.48
+ },
+ {
+  "word": "world",
+  "start": 27.48,
+  "end": 27.72
+ },
+ {
+  "word": "feels",
+  "start": 27.72,
+  "end": 28.0
+ },
+ {
+  "word": "like",
+  "start": 28.0,
+  "end": 28.22
+ },
+ {
+  "word": "a",
+  "start": 28.22,
+  "end": 28.36
+ },
+ {
+  "word": "stage,",
+  "start": 28.36,
+  "end": 28.82
+ },
+ {
+  "word": "built",
+  "start": 28.82,
+  "end": 29.38
+ },
+ {
+  "word": "around",
+  "start": 29.38,
+  "end": 29.66
+ },
+ {
+  "word": "one",
+  "start": 29.66,
+  "end": 29.96
+ },
+ {
+  "word": "person.",
+  "start": 29.96,
+  "end": 30.36
+ },
+ {
+  "word": "You,",
+  "start": 30.92,
+  "end": 31.0
+ },
+ {
+  "word": "but",
+  "start": 31.14,
+  "end": 31.22
+ },
+ {
+  "word": "here",
+  "start": 31.22,
+  "end": 31.52
+ },
+ {
+  "word": "is",
+  "start": 31.52,
+  "end": 31.68
+ },
+ {
+  "word": "the",
+  "start": 31.68,
+  "end": 31.84
+ },
+ {
+  "word": "problem.",
+  "start": 31.84,
+  "end": 32.16
+ },
+ {
+  "word": "You",
+  "start": 32.38,
+  "end": 32.44
+ },
+ {
+  "word": "cannot",
+  "start": 32.44,
+  "end": 32.74
+ },
+ {
+  "word": "prove",
+  "start": 32.74,
+  "end": 33.1
+ },
+ {
+  "word": "they",
+  "start": 33.1,
+  "end": 33.32
+ },
+ {
+  "word": "are",
+  "start": 33.32,
+  "end": 33.44
+ },
+ {
+  "word": "fake,",
+  "start": 33.44,
+  "end": 33.76
+ },
+ {
+  "word": "and",
+  "start": 34.18,
+  "end": 34.26
+ },
+ {
+  "word": "you",
+  "start": 34.26,
+  "end": 34.38
+ },
+ {
+  "word": "cannot",
+  "start": 34.38,
+  "end": 34.68
+ },
+ {
+  "word": "prove",
+  "start": 34.68,
+  "end": 35.04
+ },
+ {
+  "word": "they",
+  "start": 35.04,
+  "end": 35.26
+ },
+ {
+  "word": "are",
+  "start": 35.26,
+  "end": 35.44
+ },
+ {
+  "word": "real.",
+  "start": 35.44,
+  "end": 35.76
+ },
+ {
+  "word": "So",
+  "start": 36.26,
+  "end": 36.32
+ },
+ {
+  "word": "choose,",
+  "start": 36.32,
+  "end": 36.74
+ },
+ {
+  "word": "if",
+  "start": 37.08,
+  "end": 37.3
+ },
+ {
+  "word": "you",
+  "start": 37.3,
+  "end": 37.42
+ },
+ {
+  "word": "are",
+  "start": 37.42,
+  "end": 37.58
+ },
+ {
+  "word": "wrong,",
+  "start": 37.58,
+  "end": 37.92
+ },
+ {
+  "word": "kindness",
+  "start": 38.22,
+  "end": 38.42
+ },
+ {
+  "word": "costs",
+  "start": 38.42,
+  "end": 38.82
+ },
+ {
+  "word": "you",
+  "start": 38.82,
+  "end": 39.1
+ },
+ {
+  "word": "nothing.",
+  "start": 39.1,
+  "end": 39.28
+ },
+ {
+  "word": "If",
+  "start": 39.86,
+  "end": 40.0
+ },
+ {
+  "word": "you",
+  "start": 40.0,
+  "end": 40.14
+ },
+ {
+  "word": "are",
+  "start": 40.14,
+  "end": 40.28
+ },
+ {
+  "word": "right,",
+  "start": 40.28,
+  "end": 40.58
+ },
+ {
+  "word": "it",
+  "start": 40.7,
+  "end": 40.8
+ },
+ {
+  "word": "is",
+  "start": 40.8,
+  "end": 40.9
+ },
+ {
+  "word": "the",
+  "start": 40.9,
+  "end": 41.06
+ },
+ {
+  "word": "only",
+  "start": 41.06,
+  "end": 41.34
+ },
+ {
+  "word": "thing",
+  "start": 41.34,
+  "end": 41.7
+ },
+ {
+  "word": "that",
+  "start": 41.7,
+  "end": 41.9
+ },
+ {
+  "word": "is",
+  "start": 41.9,
+  "end": 42.06
+ },
+ {
+  "word": "still",
+  "start": 42.06,
+  "end": 42.32
+ },
+ {
+  "word": "real.",
+  "start": 42.32,
+  "end": 42.72
+ },
+ {
+  "word": "Be",
+  "start": 43.18,
+  "end": 43.34
+ },
+ {
+  "word": "kind,",
+  "start": 43.34,
+  "end": 43.74
+ },
+ {
+  "word": "just",
+  "start": 44.16,
+  "end": 44.44
+ },
+ {
+  "word": "in",
+  "start": 44.44,
+  "end": 44.68
+ },
+ {
+  "word": "case.",
+  "start": 44.68,
+  "end": 44.9
+ }
+]
