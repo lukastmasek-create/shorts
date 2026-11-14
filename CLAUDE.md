@@ -17,4 +17,4 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 - GitHub scope: only `lukastmasek-create/umime-skola` and `lukastmasek-create/shorts`. Cannot create repos.
 
 ## Status
-Scaffold + render fix done. Short chosen: `aging/` (body stuck at 19, brain ages). Done: SCRIPT.md, voice/voice.wav + words.json (1.2x, 66.5 s), SHOTPLAN.md (18 shots). Also `shadow/SCRIPT.md` (draft, unused). Next: story.ts, new world pieces, characters (see SHOTPLAN.md 'Code to write').
+Scaffold + render fix done. Short chosen: `aging/` (body stuck at 19, brain ages). Done: SCRIPT.md, voice/voice.wav + words.json (1.2x, 66.5 s), SHOTPLAN.md (18 shots). Also `shadow/SCRIPT.md` (draft, unused). Done: src/videos/aging/story.ts (18 shots, cameras, DOF, kicks, LAYOUT, motion fns; typechecks, all frames finite, standalone: not wired into Root yet). Next: new world pieces (build.ts/paint.ts/world.ts), characters (toon/cast.ts), Bridge.tsx copy, Root registration (see SHOTPLAN.md).
