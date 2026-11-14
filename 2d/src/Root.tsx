@@ -11,6 +11,7 @@ import { BlackHoleShort, BH_FRAMES } from "./BlackHole";
 import { ImmortalShort, IM_FRAMES } from "./Immortal";
 import { LiesShort, LIES_FRAMES } from "./Lies";
 import { BoredShort, BORED_FRAMES } from "./Bored";
+import { DeleteShort, DELETE_FRAMES } from "./Delete";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
 export const Root: React.FC = () => (
@@ -27,5 +28,6 @@ export const Root: React.FC = () => (
     <Composition id="UniverseShort" component={UniverseShort} durationInFrames={UNIVERSE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FxDemo" component={FxDemo} durationInFrames={FXDEMO_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="BoredShort" component={BoredShort} durationInFrames={BORED_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="DeleteShort" component={DeleteShort} durationInFrames={DELETE_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
