@@ -3,6 +3,8 @@ import { Composition } from "remotion";
 import { NoSleepShort, NOSLEEP_FRAMES } from "./NoSleep";
 import { UniverseShort, UNIVERSE_FRAMES } from "./Universe";
 import { FxDemo, FXDEMO_FRAMES } from "./FxDemo";
+import { ParallelShort, PARALLEL_FRAMES } from "./Parallel";
+import { MillenniumShort, MILLENNIUM_FRAMES } from "./Millennium";
 import { MonoShort, MONO_FRAMES } from "./Mono";
 import { CalmShort, CALM_FRAMES } from "./Calm";
 import { SunShort, SUN_FRAMES } from "./Sun";
@@ -31,6 +33,8 @@ export const Root: React.FC = () => (
     <Composition id="JupiterShort" component={JupiterShort} durationInFrames={JUP_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FutureShort" component={FutureShort} durationInFrames={FUT_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FxDemo" component={FxDemo} durationInFrames={FXDEMO_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="ParallelShort" component={ParallelShort} durationInFrames={PARALLEL_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="MillenniumShort" component={MillenniumShort} durationInFrames={MILLENNIUM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NeutronShort" component={NeutronShort} durationInFrames={NS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NoHumansShort" component={NoHumansShort} durationInFrames={NOHUMANS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />
