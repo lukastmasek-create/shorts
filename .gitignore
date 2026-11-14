@@ -3,3 +3,4 @@ out
 venv
 voice/*.onnx
 voice/*.bin
+voice/
