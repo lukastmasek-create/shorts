@@ -1,0 +1,108 @@
+# Prompt v2 (ucimesehrou showcase, the only placeholder is `[]`)
+
+Copy everything below the line. Replace `[]` (one place) with the website section to showcase, e.g. a URL path or a section name.
+
+---
+
+Make a cinematic vertical short (1080x1920, 30 fps, **max 15 s per video**, split into several parts if the section has more to show; each part is its own 15 s video with the same skeleton) that showcases this section of ucimesehrou.org: **[]**.
+
+## 0. Ground rules
+- Work in this repo's Remotion 2D engine. Read first: `2d/src/Code.tsx` (engine: continuous world + flying camera, `KText` kinetic type, `Morph`, `Win`, `Tag`, `LogoRow`, `createFilm`), `2d/src/logo.ts` (real logo, 20 pieces), `audio/code_mix.py` (music + sfx, scene tables mirror the TSX), `2d/CINEMATIC_PROMPT.md` (older rules). Copy their structure; add the new effects below as new components.
+- Real content only. Find the section in the site repo (`lukastmasek-create/umime-skola`, `src/app/[locale]/<section>/`, its components and `src/lib/*`) and take real feature names, labels, numbers and sample code from it. Never invent features. Anything illustrative (sample chat lines) is reported as invented at the end.
+- Language on screen: Czech. Look = the site: night blue `#12102a` (surface `#1c1936`, edge `#6a63ad`), cream text `#f6f1e4`, logo colours blue `#3248f0`, coral `#ff5a3c`, yellow `#ffc933`, green `#17a864` (each with its darker depth colour as in the logo), fonts Unbounded (labels), Onest (text), Pangolin with cyan neon glow (hero lines), via `@fontsource`. No voice. Music + sfx are original, synthesized.
+- Readability beats speed: a headline stays fully visible >= 1.2 s, a sentence >= 1.4 s, <= 7 words per sentence, <= 3 sentences per part. Nothing important starts while the camera moves fast. Text >= 44 px, inside safe area (top 160, bottom 1540, sides 60).
+
+## 1. Timeline per 15 s part (450 frames, tune but keep the order)
+| s | beat |
+|---|---|
+| 0-2 | **Object -> logo morph.** A different object each part (keycap, speech bubble, play button, gear, folder...) is a cream outline blob that morphs (resampled-polygon morph) into the blue logo tile, face draws on, tile flies into the real logo, the other logo pieces pop around it. |
+| 2-4 | **Kinetic title** (typewriter + slam) with the section name, one keyword in Pangolin neon. |
+| 4-5.5 | **Katana cut** through the title card / an object of the section: slash flash, two halves slide apart, a corner chip breaks off and falls, debris crumbles, small screen shake. |
+| 5.5-7.5 | The cut word **dissolves into fast glowing sparks** (letters become sparks), camera whips along them (this is the transition). |
+| 7.5-13 | Sparks fly into a **chat window**; every spark lands in a slot and becomes a bubble; each bubble types one real sentence about the section. |
+| 13-15 | Sparks that are left converge, morph into the logo tile, URL tag `ucimesehrou.org/<path>`, hold 1 s, fade. A multi-part series ends with a spark that flies out of frame toward "Další díl". |
+
+## 2. Camera and 3D (seamless, no cuts)
+- One continuous world, scenes placed along a path; camera = position + zoom + roll with smootherstep swoops, tiny handheld drift, motion blur only while moving fast. Transitions are camera moves, match cuts or "dolly through" (zoom into a letter/hole until it fills the frame, next scene is behind it). Never hard cut.
+- Real 3D feel without a 3D engine (CPU render, ~2.3 s/frame): wrap the SVG layers in CSS 3D and tilt the whole plane a few degrees with the camera, so layers get parallax:
+```tsx
+// layers at different z; camera tilt rx/ry/rz in degrees comes from the camera function
+<div style={{ perspective: 1600, width: W, height: H, overflow: "hidden" }}>
+  <div style={{ transformStyle: "preserve-3d", transform: `rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)` }}>
+    <svg style={{ position: "absolute", transform: "translateZ(-300px) scale(1.3)" }}>{/* dust, rings */}</svg>
+    <svg style={{ position: "absolute", transform: "translateZ(0)" }}>{/* scenes */}</svg>
+    <svg style={{ position: "absolute", transform: "translateZ(220px)" }}>{/* sparks, foreground */}</svg>
+  </div>
+</div>
+```
+- Extruded objects (cubes, tiles, buttons) with a cheap depth stack, light from top-left:
+```tsx
+const Extrude: React.FC<{ depth?: number; dark: string; children: (fill?: string) => React.ReactNode }> = ({ depth = 16, dark, children }) => (
+  <g>{Array.from({ length: depth }, (_, i) => depth - i).map(d => <g key={d} transform={`translate(${d * 0.55} ${d})`}>{children(dark)}</g>)}{children()}</g>
+);
+```
+  Use real three/R3F (already installed) only for one hero object and only if the render time is acceptable.
+
+## 3. Effects to build (copy these shapes, then tune)
+**Morph (object -> logo)** reuse `Morph` from `Code.tsx` (all shapes resampled to 140 points, `lerp` per point, eased, with trail copies). Add object outlines as point arrays (`samp([...vertices])`) for keycap/bubble/play/gear, fill colour fades from transparent to `#3248f0`, add the darker depth shape under it, then hand over to `LogoRow` piece 0 when it reaches its slot.
+
+**Typewriter** per character with jitter, caret and an optional typo + backspace:
+```tsx
+const TypeLine: React.FC<{ text: string; x: number; y: number; t: number; a: number; cps?: number; typo?: [number, string] }> = ({ text, x, y, t, a, cps = 0.9, typo }) => {
+  let n = Math.floor(Math.max(0, t - a) * cps + 0.0), s = text.slice(0, n);
+  if (typo && n > typo[0]) { const k = n - typo[0]; s = k < 3 ? text.slice(0, typo[0]) + typo[1].slice(0, k) : text.slice(0, typo[0]) + (k < 6 ? typo[1].slice(0, 6 - k) : "") + text.slice(typo[0], typo[0] + Math.max(0, k - 6)); }
+  return <text x={x} y={y} fontFamily={MONO} fontSize={44} fill={C.cream}>{s}{Math.floor(t / 7) % 2 === 0 && <tspan fill={C.yellow}>▌</tspan>}</text>;
+};
+```
+**Katana cut** two half-planes of the cut line clip the same object; slash flash first, then halves slide apart, a corner chip is masked out of one half and falls with gravity, spin and one small bounce, debris crumbles from the cut edge:
+```tsx
+const BIG = 4000;
+const half = (A: Pt, B: Pt, side: 1 | -1) => { const dx = B[0] - A[0], dy = B[1] - A[1], l = Math.hypot(dx, dy), nx = -dy / l * side, ny = dx / l * side, ux = dx / l, uy = dy / l;
+  return [[A[0] - ux * BIG, A[1] - uy * BIG], [B[0] + ux * BIG, B[1] + uy * BIG], [B[0] + ux * BIG + nx * BIG, B[1] + uy * BIG + ny * BIG], [A[0] - ux * BIG + nx * BIG, A[1] - uy * BIG + ny * BIG]].map(p => p.join(",")).join(" "); };
+const G = 2.4, fall = (t0: number, t: number) => 0.5 * G * Math.max(0, t - t0) ** 2;       // px/frame^2
+const Katana: React.FC<{ t: number; tc: number; A: Pt; B: Pt; chip: Pt[]; id: string; children: React.ReactNode }> = ({ t, tc, A, B, chip, id, children }) => {
+  const s = Math.max(0, t - tc), p = easeOut(prog(t, tc, tc + 26)), n: Pt = [-(B[1] - A[1]), B[0] - A[0]], l = Math.hypot(n[0], n[1]);
+  const nx = n[0] / l, ny = n[1] / l, shake = s < 10 ? Math.sin(s * 3.1) * (10 - s) * 0.8 : 0;
+  const slash = prog(t, tc - 4, tc), mid: Pt = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
+  return <g transform={`translate(${shake} ${-shake * 0.6})`}>
+    <clipPath id={id + "a"}><polygon points={half(A, B, 1)} /></clipPath><clipPath id={id + "b"}><polygon points={half(A, B, -1)} /></clipPath>
+    <mask id={id + "m"}><rect x={-BIG} y={-BIG} width={2 * BIG} height={2 * BIG} fill="#fff" /><polygon points={chip.map(q => q.join(",")).join(" ")} fill="#000" /></mask>
+    <g clipPath={`url(#${id}a)`} transform={`translate(${nx * 34 * p} ${ny * 34 * p}) rotate(${-2.5 * p} ${mid[0]} ${mid[1]})`}>{children}</g>
+    <g clipPath={`url(#${id}b)`}><g mask={`url(#${id}m)`} transform={`translate(${-nx * 34 * p} ${-ny * 34 * p + fall(tc + 6, t) * 0.25}) rotate(${3 * p} ${mid[0]} ${mid[1]})`}>{children}</g></g>
+    <clipPath id={id + "c"}><polygon points={chip.map(q => q.join(",")).join(" ")} /></clipPath>
+    <g opacity={s > 0 ? 1 : 0}><g transform={`translate(${-nx * 34 * p + s * 3} ${-ny * 34 * p + Math.min(fall(tc + 2, t), 520)}) rotate(${s * 7} ${chip[0][0]} ${chip[0][1]})`}><g clipPath={`url(#${id}c)`}>{children}</g></g></g>
+    {Array.from({ length: 16 }, (_, i) => { const u = i / 15, px = lerp(A[0], B[0], u), py = lerp(A[1], B[1], u), vx = (rnd(i) - 0.5) * 6, vy = -rnd(i + 5) * 3; return s > 0 && <rect key={i} x={px + vx * s} y={py + vy * s + fall(tc, t) * 0.6} width={7} height={7} rx={2} fill={C.cream} opacity={clamp(1 - s / 40)} transform={`rotate(${s * (rnd(i + 9) - 0.5) * 30} ${px + vx * s} ${py})`} />; })}
+    <line x1={A[0]} y1={A[1]} x2={lerp(A[0], B[0], easeOut(slash))} y2={lerp(A[1], B[1], easeOut(slash))} stroke="#fff" strokeWidth={6 * (1 - clamp(s / 8))} strokeLinecap="round" style={{ filter: "drop-shadow(0 0 10px #6ee7ff) drop-shadow(0 0 28px #2ab7ff)" }} opacity={slash > 0 && s < 10 ? 1 : 0} />
+  </g>;
+};
+```
+(`chip` = a triangle at one corner of the object, on side B of the cut. Add a white flash frame at `tc`.)
+
+**Sparks with motion blur** deterministic particles on quadratic Béziers, drawn as a tapered trail of N samples behind the head (that trail IS the motion blur); spawn them from letter positions of a word, fade the letter as its spark leaves:
+```tsx
+type Spark = { x0: number; y0: number; cx: number; cy: number; x1: number; y1: number; a: number; dur: number; w: number };
+const bez = (s: Spark, u: number): Pt => { const m = 1 - u; return [m * m * s.x0 + 2 * m * u * s.cx + u * u * s.x1, m * m * s.y0 + 2 * m * u * s.cy + u * u * s.y1]; };
+const Sparks: React.FC<{ t: number; list: Spark[] }> = ({ t, list }) => (
+  <g style={{ filter: "drop-shadow(0 0 6px #ffc933) drop-shadow(0 0 18px #ff9b3c)" }}>
+    {list.map((s, i) => { const u = easeIO(clamp((t - s.a) / s.dur)); if (u <= 0 || u >= 1) return null; const N = 9, tail = 0.05 + 0.22 * Math.sin(Math.PI * u);   // longer trail at speed
+      const pts = Array.from({ length: N }, (_, j) => bez(s, clamp(u - (j / N) * tail)));
+      return <g key={i}>{pts.slice(1).map((q, j) => <line key={j} x1={pts[j][0]} y1={pts[j][1]} x2={q[0]} y2={q[1]} stroke={j < 3 ? "#fff6cf" : "#ffc933"} strokeWidth={s.w * (1 - j / N)} strokeLinecap="round" opacity={1 - j / N} />)}<circle cx={pts[0][0]} cy={pts[0][1]} r={s.w * 0.8} fill="#fff" /></g>; })}
+  </g>
+);
+// letters -> sparks: one spark per glyph, start = glyph centre, control point = random big arc, end = chat slot i
+const sparksFromWord = (xs: Pt[], slots: Pt[], a: number): Spark[] => xs.map((p, i) => ({ x0: p[0], y0: p[1], cx: p[0] + (rnd(i) - 0.3) * 700, cy: p[1] - 300 - rnd(i + 3) * 500, x1: slots[i % slots.length][0], y1: slots[i % slots.length][1], a: a + i * 1.5, dur: 34 + rnd(i + 7) * 14, w: 5 + rnd(i + 1) * 5 }));
+```
+Add a speed-line/streak layer behind the sparks, and let the camera chase the sparks (camera target = centroid of the sparks in flight) so the transition is one move.
+
+**Spark -> chat bubble -> sentence**: when spark i arrives (`t >= s.a + s.dur`) draw a ring burst at its end point, morph a circle (r 12) into a squircle bubble (`Morph` with `sx`,`sy` growing, fill `#1c1936`, stroke `#6a63ad`; user bubbles blue `#3248f0`), then `TypeLine` the sentence inside. Bubbles stack downward in the chat window (`Win` with title "chat"), earlier ones shift up by one slot with an eased translate.
+
+**More morphs** (use at least five per part): object -> logo tile, word box -> chat window, spark cluster -> star -> logo, circle dot -> bubble, play triangle -> circle -> check mark, window -> card -> window. Always equal point counts, eased, with echo trails, colour cross-fade.
+
+## 4. Audio (original, `audio/<name>_mix.py`, copy `audio/code_mix.py`)
+D minor, ~100 bpm, bar grid chosen so the final logo hit is on a downbeat. Quiet drone while the logo forms, pulse enters at the title, **katana hit = metallic ring (resonant partials + noise burst) + sub boom at the exact cut frame, short silence of the music for 3 frames then it returns louder**, spark fizz = high-passed noise sweeps panned with the sparks, riser into the chat, one soft pluck note per bubble, typewriter ticks, chat pops, final D major chord + shimmer. Output `public/<name>/partN.wav` (exactly the video length), loudness -15 LUFS, peak < -1 dBFS.
+
+## 5. Build and check
+- Files: `2d/src/<Name>.tsx` with `createFilm(...)` per part, register `KodX`-style compositions in `Root.tsx`, `npx tsc --noEmit` clean.
+- Check stills at: end of logo morph, mid title, the cut frame (+0, +6, +20), mid spark flight, each bubble, last frame; fix overlaps and cut-off text. Check that no text starts during a fast camera move.
+- Render per part: `npx remotion render 2d/src/index.ts <CompId> out/<name>-dilN.mp4 --codec h264 --crf 18 --audio-codec aac --gl=swangle --browser-executable=/opt/pw-browsers/chromium --concurrency=2` (run as a tracked background job, ~2.3 s/frame).
+- Commit sources + wavs, never mp4. Deliver each mp4 directly; report length, what was invented, and that the mix was measured but not auditioned.
