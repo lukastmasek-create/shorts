@@ -8,7 +8,8 @@ Made shorts (removed) are logged in `DONE.md`. Older list: `../ideas/SHORTS_IDEA
 2. Show 8-10 topics of that category (id + title). Ask: "Which ID?"
 3. User picks an ID. Immediately delete that line from its category file, and append `- <title> -> <CompName>` to `DONE.md`.
 4. Build the short: `../2d/STYLE.md` (sections "Dynamic motion", "Models & visualization", "Storytelling") + voice via `python 2d/voice_short.py <name>`.
-5. Never offer a topic that is in `DONE.md`. If a category file is empty, delete it.
+5. When the short is done: write `<name>/DESCRIPTION.md` (TikTok + YouTube Shorts copy, see `../README.md`), send the mp4 and paste both descriptions to the user.
+6. Never offer a topic that is in `DONE.md`. If a category file is empty, delete it.
 
 ## Already made, removed from list
 BlackHole, Neutron, NoSleep, Immortal, Glitch/Sim, Dim4, Delete, Lies, Sun (see `DONE.md`).
