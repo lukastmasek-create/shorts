@@ -1,4 +1,4 @@
-"""Universe short: per-line Kokoro, scene lengths from voice. usage: python 2d/voice_uni.py [voice]  -> 2d/voice/uni/{voice.wav,words.json,frames.json}"""
+"""Universe short: per-line Kokoro, scene lengths from voice. usage: python 2d/voice_uni.py [voice]  -> 2d/voice/uni/{voice.wav,words.json,frames.json}, voice copied to public/universe/voice.wav (committed copy)"""
 import json, math, subprocess, sys, numpy as np, soundfile as sf
 from kokoro_onnx import Kokoro
 from faster_whisper import WhisperModel
@@ -30,3 +30,4 @@ a16, _ = sf.read(f"{D}/v16.wav", dtype="float32")
 segs, _ = WhisperModel("small.en", device="cpu", compute_type="int8").transcribe(a16, word_timestamps=True)
 json.dump([{"word": x.word.strip(), "start": round(float(x.start), 2), "end": round(float(x.end), 2)} for g in segs for x in g.words], open(f"{D}/words.json", "w"), indent=1)
 print(fr, fr[-1] / 30, "s", len(" ".join(LINES).split()), "words")
+import os, shutil; os.remove(f"{D}/v16.wav"); os.makedirs("public/universe", exist_ok=True); shutil.copy(f"{D}/voice.wav", "public/universe/voice.wav")

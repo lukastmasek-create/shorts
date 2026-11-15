@@ -1,4 +1,4 @@
-// "Sun vanishes for 24 h" short: 2D mono line-art + voice (public/sun/voice.wav, script in sun/SCRIPT.md)
+// "Sun vanishes for 24 h" short: 2D mono line-art + voice (public/sun/voice.wav, script in 2d/sun/SCRIPT.md)
 import React from "react";
 import { Audio, staticFile } from "remotion";
 import { Stage, Scene, Pill, Num, Ground, Ring, Cross, W, H, INK, GLOW, SW, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";

@@ -42,7 +42,7 @@ User rules that apply:
 3. **Voice.** Record or generate `voice.wav`, then make its word timings `words.json` (any speech-to-text with word times).
    - Put them in the project folder, e.g. `~/bridge-short/voice/`.
    - Hand-fix the word timings. Everything is timed to words.json.
-4. **Shot plan** in `story.ts`: copy `templates/bridge/` (the final bridge source, same as `src/videos/bridge/` of your Remotion project) to `src/videos/<name>/`, register a new composition next to `BridgeShort` in `src/Root.tsx`, and rename it.
+4. **Shot plan** in `story.ts`: copy `src/videos/bridge/` (the final bridge source) to `src/videos/<name>/`, register a new composition next to `BridgeShort` in `src/Root.tsx`, and rename it.
    - `SHOTS`: id, a/b frames, light day/golden, crowd mode, `tau` story time.
    - `XFADE`: crossfades at place/time changes.
    - `FLASH_AT`: a white flash after the hook.
@@ -79,8 +79,8 @@ User rules that apply:
     - Fix anything it finds, then run a deep Opus audit.
 11. **Deliver.** SendUserFile the final mp4, update memory, write notes.
 
-## Final look values (bridge after 4 verifier rounds; all in `templates/bridge/`)
-Start every new short from `templates/bridge/` (copy to `src/videos/<name>/`): the look lives in these values, the
+## Final look values (bridge after 4 verifier rounds; all in `src/videos/bridge/`)
+Start every new short from `src/videos/bridge/` (copy to `src/videos/<name>/`): the look lives in these values, the
 story lives in story.ts / build.ts layout / cast.ts roles. Opus max scores at the end: colour day 7, golden 5-6,
 lighting 5-6, ink 6, textures 5-6, characters 7, depth 6-7, composition 6-7 (from 5/3/4/5/4/7/4/6 at the start).
 - **Light presets** (`lights.ts`, sun camera-relative and frozen per shot):
