@@ -3,11 +3,16 @@
 // morphing line shapes. Content = real features of the site: 3 files, line-by-line explanations, live preview,
 // našeptávač (autocomplete), fill-in exercises with hint/solution, AI pomocník, 9-step learning plan.
 import React from "react";
-import { useCurrentFrame } from "remotion";
+import { Audio, staticFile, useCurrentFrame } from "remotion";
 import { GLOW, INK, FONT, W, H, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";
 import { BigRings } from "./fx";
 
-export const CODE_FRAMES = 1010;
+// virtual timeline (S) is the authored one; every scene is played slower by K (readable text), see audio/code_mix.py (same numbers)
+const K = [1.25, 1.3, 1.4, 1.3, 1.3, 1.3, 1.3, 1.5, 1.3];
+const S = [0, 100, 205, 370, 480, 580, 685, 780, 915, 1045];
+const R = (() => { const r = [0]; let c = 0; K.forEach((k, i) => { c += (S[i + 1] - S[i]) * k; r.push(Math.floor(c + 0.5)); }); return r; })();
+export const CODE_FRAMES = R[9];
+const warp = (fr: number) => { let i = 0; for (let k = 0; k < 9; k++) if (fr >= R[k]) i = k; return S[i] + (fr - R[i]) * (S[i + 1] - S[i]) / (R[i + 1] - R[i]); };
 const cx = W / 2, cy = H / 2;
 const MONO = `ui-monospace,Menlo,"DejaVu Sans Mono",Consolas,monospace`;
 const rnd = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
@@ -158,7 +163,7 @@ const SceneB = (t: number) => {
 const EL = [["<header>", "Horní část stránky"], ["<h1>", "Hlavní nadpis"], ["<img>", "Obrázek"], ["<hr>", "Vodorovná čára"], ["<h2>", "Podnadpis"]];
 const CODE_C = ["<header>", "  <h1>Učíme se hrou</h1>", "  <img src=\"kocka.png\" alt=\"Kočka\">", "  <hr>", "  <h2>Co umím</h2>", "</header>"];
 const SceneC = (t: number) => {
-  const T0 = 30, SP = 18, k = Math.min(4, Math.max(0, Math.floor((t - T0) / SP))), f = clamp((t - T0 - k * SP) / 9);
+  const T0 = 30, SP = 22, k = Math.min(4, Math.max(0, Math.floor((t - T0) / SP))), f = clamp((t - T0 - k * SP) / 9);
   const prev = Math.max(0, k - 1), li = (i: number) => (i === 4 ? 4 : i), ly = (i: number) => 436 + li(i) * 60.8;
   const hop = k === 0 ? 0 : easeOut(f), yL = lerp(ly(prev), ly(k), hop), hy = k === 0 ? 0 : Math.sin(Math.PI * f) * 34;
   const bar = pop(t, 24, 8);
@@ -274,7 +279,7 @@ const SceneG = (t: number) => {
 // H: 9-step plan, camera flies down the path
 const PLAN: [string, string][] = [["Základ stránky", "1–2 týdny"], ["Styl stránky", "1–2 týdny"], ["Rozložení a telefon", "2 týdny"], ["První kód v JS", "1–2 týdny"], ["Podmínky a logika", "2 týdny"], ["Opakování a funkce", "2 týdny"], ["Seznamy a objekty", "1–2 týdny"], ["Interaktivní stránka", "2–3 týdny"], ["Velký projekt", "3–4 týdny"]];
 const PY = (k: number) => -740 + k * 425, PX = (k: number) => cx + (k % 2 ? 190 : -190);
-const nodeT = (k: number) => 22 + (121 * k) / 8 - 16;
+const nodeT = (k: number) => 22 + (111 * k) / 8 - 16;
 const SceneH = (t: number) => {
   const d = PLAN.slice(0, 8).map((_, k) => `${k ? "" : `M${PX(0)} ${PY(0)}`}C${PX(k)} ${(PY(k) + PY(k + 1)) / 2} ${PX(k + 1)} ${(PY(k) + PY(k + 1)) / 2} ${PX(k + 1)} ${PY(k + 1)}`).join("");
   return <>
@@ -311,7 +316,6 @@ const SceneI = (t: number) => {
 };
 
 // ---------- the world: scenes + flying camera ----------
-const S = [0, 100, 205, 335, 445, 545, 650, 745, 880, 1010];
 const POS: [number, number][] = [[0, 0], [1500, -900], [2900, 300], [4300, -800], [5700, 400], [7100, -700], [8500, 300], [9900, -900], [11300, 0]];
 const SC: ((t: number) => React.ReactNode)[] = [SceneA, SceneB, SceneC, SceneD, SceneE, SceneF, SceneG, SceneH, SceneI];
 const SF = [1.0, 1.14, 1.0, 1.1, 1.0, 1.12, 1.0, 1.0, 1.12], ST = [1.12, 1.0, 1.08, 1.0, 1.1, 1.0, 1.1, 1.0, 0.94], RT = [0, -2.5, 1.5, -2, 2, -1.5, 2, 0, 0];
@@ -344,12 +348,13 @@ const Dust: React.FC<{ c: Cam; par: number; n: number; o: number; rr: number }> 
   </g>;
 };
 export const CodeShort: React.FC = () => {
-  const f = useCurrentFrame();
-  const c = camAt(f), p = camAt(f - 1);
+  const fr = useCurrentFrame(), f = warp(fr);
+  const c = camAt(f), p = camAt(warp(fr - 1));
   const vx = Math.abs(c.x - p.x) * c.s, vy = Math.abs(c.y - p.y) * c.s;
   const bx = Math.min(70, Math.max(0, vx - 12) * 0.22), by = Math.min(70, Math.max(0, vy - 12) * 0.22);
   return (
     <div style={{ width: W, height: H, background: "radial-gradient(ellipse 65% 45% at 50% 48%, #1b1b1b 0%, #090909 60%, #000 100%)", position: "relative", overflow: "hidden", fontFamily: FONT }}>
+      <Audio src={staticFile("code/music.wav")} />
       <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ position: "absolute", inset: 0 }}>
         <defs><filter id="mb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation={`${bx} ${by}`} /></filter></defs>
         <Dust c={c} par={0.12} n={46} o={0.5} rr={1} />
@@ -366,7 +371,7 @@ export const CodeShort: React.FC = () => {
         </g>
         <defs><radialGradient id="vg" cx="50%" cy="50%" r="75%"><stop offset="55%" stopColor="#000" stopOpacity="0" /><stop offset="100%" stopColor="#000" stopOpacity="0.7" /></radialGradient></defs>
         <rect width={W} height={H} fill="url(#vg)" />
-        <rect width={W} height={H} fill="#000" opacity={Math.max(1 - f / 8, prog(f, CODE_FRAMES - 14, CODE_FRAMES - 1))} />
+        <rect width={W} height={H} fill="#000" opacity={Math.max(1 - fr / 8, prog(fr, CODE_FRAMES - 18, CODE_FRAMES - 1))} />
       </svg>
     </div>
   );
