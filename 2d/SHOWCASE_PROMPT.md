@@ -1,10 +1,21 @@
-# Prompt v2 (ucimesehrou showcase, the only placeholder is `[]`)
+# Showcase prompt for ucimesehrou.org (the only placeholder is `[]`)
 
-Copy everything below the line. Replace `[]` (one place) with the website section to showcase, e.g. a URL path or a section name.
+Copy everything below the line. Replace `[]` (one place) with the website section to showcase, e.g. a URL path or a section name. This single file replaces the older cinematic prompts.
 
 ---
 
 Make a cinematic vertical short (1080x1920, 30 fps, **max 15 s per video**, split into several parts if the section has more to show; each part is its own 15 s video with the same skeleton) that showcases this section of ucimesehrou.org: **[]**.
+
+## Reference style: make it look and move like the "Kód na hraní" video
+This is the exact style already shown to and approved by the user (`2d/src/Code.tsx`, comps `KodDil1..4`). New videos must look like the same series.
+- **World:** night-blue radial background (`#26224a` centre -> `#12102a` -> `#0a0918` edges) with a dark vignette, two parallax layers of tiny cream dust dots (every fifth dot in a logo colour), faint concentric rings behind each scene.
+- **UI objects:** rounded windows (`Win`: radius 26, fill `#1c1936`, 4 px edge `#6a63ad` with a soft blue glow, a hard dark offset shadow under it, three title-bar dots coral/yellow/green, tiny uppercase title at the right); pills (`Tag`: blue "on" and gold CTA with a darker offset underneath like the logo tiles, outline "off"); file chips in token colours; buttons and tiles with the logo's depth offset; a light cream mini web page (`#f6f4ee`) whenever a result of code is shown, so it contrasts with the dark UI.
+- **Type:** hero lines in Pangolin with cream-white fill and cyan neon glow (`drop-shadow(0 0 6px #6ee7ff) drop-shadow(0 0 18px #2ab7ff)`), one accent word in yellow; headlines and numbers in Unbounded 800; sentences in Onest 600-800; code in monospace with site token colours; every text is per-letter kinetic (rise with mask, drop, pop, scatter, track) with 2-5 frames stagger and back-easing overshoot.
+- **Motion:** every object pops with back-ease and a stagger; success = yellow ring pulse and a check mark that draws with dash-offset; the typed code and the result react together (typing a CSS line changes the preview colour with a pulse); a yellow spark icon hops line to line as the "pointer".
+- **Camera:** one continuous world, zigzag scene path, swoops (zoom-out dip, roll about 7 deg, smootherstep) with motion blur only above a speed threshold, slow push-in or pull-out on every hold, tiny handheld drift. A long vertical path scene may be followed by the camera (like the 9-step plan).
+- **Logo moment:** blob morphs, becomes the blue tile with the smiley face, flies into the real wordmark, letters and tiles pop around it. Every part opens with it (different source object) and ends with the logo + URL pill.
+- **Sound:** original D-minor score, drone -> pulse -> groove -> breather -> riser/snare roll -> D-major climax on the last logo hit; whooshes on swoops, ticks on typing, zaps on UI actions, chime on success, boom on slams.
+- **Now add on top of that style (the new wishes below):** more morphs, katana cut, sparks, chat, 3D.
 
 ## 0. Ground rules
 - Work in this repo's Remotion 2D engine. Read first: `2d/src/Code.tsx` (engine: continuous world + flying camera, `KText` kinetic type, `Morph`, `Win`, `Tag`, `LogoRow`, `createFilm`), `2d/src/logo.ts` (real logo, 20 pieces), `audio/code_mix.py` (music + sfx, scene tables mirror the TSX), `2d/CINEMATIC_PROMPT.md` (older rules). Copy their structure; add the new effects below as new components.
