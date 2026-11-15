@@ -26,7 +26,7 @@ import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
 import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
-import { CodeShort, CODE_FRAMES } from "./Code";
+import { CodePart1, CodePart2, CodePart3, CodePart4, CODE1_FRAMES, CODE2_FRAMES, CODE3_FRAMES, CODE4_FRAMES } from "./Code";
 
 export const Root: React.FC = () => (
   <>
@@ -56,6 +56,9 @@ export const Root: React.FC = () => (
     <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ClocksShort" component={ClocksShort} durationInFrames={CLOCKS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="InsecureShort" component={InsecureShort} durationInFrames={INSECURE_FRAMES} fps={30} width={1080} height={1920} />
-    <Composition id="CodeShort" component={CodeShort} durationInFrames={CODE_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="KodDil1" component={CodePart1} durationInFrames={CODE1_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="KodDil2" component={CodePart2} durationInFrames={CODE2_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="KodDil3" component={CodePart3} durationInFrames={CODE3_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="KodDil4" component={CodePart4} durationInFrames={CODE4_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
