@@ -14,6 +14,7 @@ const cx = W / 2;
 const NS = FR.length - 1; // scene count
 const LEN = (k: number) => FR[k + 1] - FR[k] + (k === NS - 1 ? 30 : 0);
 const TAU = Math.PI * 2;
+const HX = 570; // Head x: nudged right of the parked ticket stub
 const st = { fill: "none", stroke: INK, strokeWidth: 5, strokeLinecap: "round", strokeLinejoin: "round" } as const;
 /** deterministic hash in [0,1) */
 const hsh = (n: number) => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
@@ -21,7 +22,7 @@ const easeIn = (u: number) => u * u * u;
 
 // ---- text helpers (all inside SAFE) ----
 const Src: React.FC<{ t: number; children: string }> = ({ t, children }) => <Txt x={cx} y={1510} size={24} color="#999" spacing={3} o={prog(t, 4, 14)}>{children.toUpperCase()}</Txt>;
-const Lbl: React.FC<{ x: number; y: number; o?: number; size?: number; children: string }> = ({ x, y, o = 1, size = 22, children }) => <Txt x={x} y={y} size={size} color="#aaa" spacing={5} o={o}>{children}</Txt>;
+const Lbl: React.FC<{ x: number; y: number; o?: number; size?: number; children: string }> = ({ x, y, o = 1, size = 24, children }) => <Txt x={x} y={y} size={size} color="#aaa" spacing={5} o={o}>{children}</Txt>;
 const psz = (s: string) => (s.length >= 18 ? 20 : s.length >= 14 ? 22 : 24);
 const Off: React.FC<{ text: string; a: number; o?: number }> = ({ text, a, o = 1 }) => <Pill text={text} x={cx} y={1330} a={a} on={false} size={psz(text)} o={o} />;
 const On: React.FC<{ text: string; a: number; o?: number }> = ({ text, a, o = 1 }) => <Pill text={text} x={cx} y={1440} a={a} size={psz(text)} o={o} />;
@@ -30,7 +31,7 @@ const NumC: React.FC<{ v: string | number; label: string; x: number; y: number; 
   <Num v={v} x={x} y={y} size={size} />
   <Txt x={x} y={y + size * 0.36 + 6} size={24} weight={600} color="#aaa" spacing={6}>{label.toUpperCase()}</Txt>
 </g>;
-const Head: React.FC<{ v: string | number; label: string; o: number }> = ({ v, label, o }) => <NumC v={v} label={label} x={cx} y={310} o={o} />;
+const Head: React.FC<{ v: string | number; label: string; o: number }> = ({ v, label, o }) => <NumC v={v} label={label} x={HX} y={310} o={o} />;
 const X: React.FC<{ x: number; y: number; r: number; p: number }> = ({ x, y, r, p }) => (p > 0 ? <Cross x={x} y={y} r={r} p={p} /> : null);
 const Pulse: React.FC<{ x: number; y: number; t: number; t0: number }> = ({ x, y, t, t0 }) => { const k = (t - t0) / 40; return k > 0 && k < 1.5 ? <Ring x={x} y={y} t={k} /> : null; };
 /** text revealed letter by letter without shifting (hidden letters keep their width) */
@@ -115,6 +116,7 @@ const WormSphere: React.FC<{ uid: string; x: number; y: number; r: number; t: nu
 
 // embedding diagram: two flared sheets joined by a throat (radius 70 * open). pTop / pBot draw each sheet
 const FH = 230, FRM = 320, FK = 0.28, FU = [1, 0.74, 0.5, 0.3, 0.14];
+const FA = [0.35, -0.35, Math.PI + 0.35, Math.PI - 0.35]; // outward arrow angles (no vertical ones)
 const fR = (a: number, u: number) => a + (FRM - a) * u * u;
 const ell = (yy: number, R: number, front: boolean) => `M${(-R).toFixed(1)} ${yy.toFixed(1)} A${R.toFixed(1)} ${(R * FK).toFixed(1)} 0 0 ${front ? 0 : 1} ${R.toFixed(1)} ${yy.toFixed(1)}`;
 /** local point on the top (sg -1) or bottom (sg 1) sheet at height u (0 throat .. 1 rim), angle ph */
@@ -143,7 +145,7 @@ const Funnel: React.FC<{ x: number; y: number; s?: number; open?: number; pTop?:
     </g>}
     {arrows && arrows.map((p, j) => {
       if (p <= 0) return null;
-      const ph = (j / arrows.length) * TAU + Math.PI / 6, c = Math.cos(ph), sn = FK * Math.sin(ph);
+      const ph = FA[j % FA.length], c = Math.cos(ph), sn = FK * Math.sin(ph);
       const r0 = a + 14, r1 = lerp(r0 + 10, a + 130, easeOut(p)), ex = r1 * c, ey = r1 * sn;
       const L = Math.hypot(c, sn), ux = c / L, uy = sn / L;
       return <g key={j} strokeWidth={6 * sw}>
@@ -251,12 +253,12 @@ const QChip: React.FC<{ x: number; y: number; s: number; lit: number }> = ({ x, 
 
 // ---- ticket stub + stamps (drawn OUTSIDE Cam) ----
 type Pose = { x: number; y: number; s: number; r: number };
-const HOME: Pose = { x: 200, y: 225, s: 1, r: -6 };
+const HOME: Pose = { x: 222, y: 245, s: 1.2, r: -6 }; // bbox ~x60-384, y163-327
 const mixP = (a: Pose, b: Pose, p: number): Pose => ({ x: lerp(a.x, b.x, p), y: lerp(a.y, b.y, p), s: lerp(a.s, b.s, p), r: lerp(a.r, b.r, p) });
 type StampS = { text: string; x: number; y: number; land: number; o?: number };
 const PAST = -99; // already landed in an earlier scene
-const DENIED = (o = 1, land = PAST): StampS => ({ text: "DENIED", x: -32, y: -12, land, o });
-const PENDING = (o = 1, land = PAST): StampS => ({ text: "PENDING", x: -18, y: 16, land, o });
+const DENIED = (o = 1, land = PAST): StampS => ({ text: "DENIED", x: -34, y: 36, land, o });
+const PENDING = (o = 1, land = PAST): StampS => ({ text: "PENDING", x: -10, y: 40, land, o });
 const VOID = (land = PAST): StampS => ({ text: "VOID", x: -26, y: 0, land });
 /** stamp: starts s2.4 o0 four frames before landing, lands s1 at `land`, 1.12 overshoot settles in 4 f */
 const stampK = (t: number, L: number) => {
@@ -298,7 +300,7 @@ const Hook = (t: number) => {
   return <>
     <Starfield t={t} o={0.15} /><Rays x={cx} y={820} t={t} o={0.12} />
     <Cam t={t} a={0} b={LEN(0)} from={{ s: 0.9 }} to={{ s: 1.15, y: 900 }}>
-      <WormSphere uid="w0" x={cx} y={820} r={300 * easeOut(prog(t, 0, 25))} t={t} />
+      <WormSphere uid="w0" x={cx} y={820} r={lerp(120, 300, easeOut(prog(t, 0, 25)))} t={t} />
       <Astronaut x={ax} y={ay + 6 * Math.sin(t * 0.12) * g} s={lerp(1.1, 0.4, f) * pop(t, 18, 10)} rot={lerp(-8, 200, f)} o={1 - prog(t, 104, 120)} />
       <Pulse x={cx} y={820} t={t} t0={110} />
     </Cam>
@@ -316,7 +318,7 @@ const TicketScene = (t: number) => {
       <Galaxy x={cx} y={720} s={1.5 * pop(t, 0, 20)} t={t} />
     </Cam>
     <Ticket p={pose} t={t} typed={prog(t, 14, 40)} />
-    <NumC v={Math.round(2500000 * easeOut(prog(t, 68, 118))).toLocaleString("en-US")} label="light-years" x={620} y={310} size={110} o={prog(t, 64, 72)} />
+    <NumC v={(2.5 * easeOut(prog(t, 68, 118))).toFixed(1) + "M"} label="million light-years" x={640} y={310} size={110} o={prog(t, 64, 72)} />
     <Off text="Your ticket" a={10} />
     <On text="To Andromeda" a={68} />
     <Src t={t}>Hubble / STScI 2025</Src>
@@ -364,14 +366,14 @@ const Name = (t: number) => {
       {t >= 95 && <Typed x={cx} y={1172} text="WORMHOLE" p={prog(t, 95, 115)} size={64} len={470} />}
     </Cam>
     <Home t={t} />
-    <Head v={Math.round(lerp(1935, 1957, easeOut(prog(t, 10, 40))))} label="John Wheeler" o={1} />
+    <Head v={Math.round(lerp(1935, 1957, easeOut(prog(t, 10, 40))))} label="Misner & Wheeler" o={1} />
     <Off text="John Wheeler" a={63} />
     <On text="Names it" a={100} />
     <Src t={t}>Misner & Wheeler 1957</Src>
   </>;
 };
 // 5 1962: the bridge snaps shut faster than light. DENIED
-const P5: Pose = { x: cx, y: 1120, s: 1.3, r: 0 };
+const P5: Pose = { x: cx, y: 1180, s: 1.3, r: 0 };
 const Shut = (t: number) => {
   const open = 1 - easeIn(prog(t, 30, 90)), S = 1, fy = 800, ph = 1.9;
   const dot = (tt: number) => { const u = lerp(1, 0.12, easeOut(prog(tt, 15, 95))), o2 = 1 - easeIn(prog(tt, 30, 90)); const [px, py] = funPt(o2, -1, u, ph); return [cx + S * px, fy + S * py]; };
@@ -398,7 +400,7 @@ const Open = (t: number) => {
   return <>
     <BigRings x={cx} y={760} t={t} o={0.12} />
     <Cam t={t} a={0} b={LEN(6)} from={{ s: 1 }} to={{ s: 1.15 }}>
-      <Funnel x={cx} y={740} s={0.9} open={easeIO(prog(t, 55, 95))} arrows={Array.from({ length: 6 }, (_, j) => prog(t, 70 + j * 6, 84 + j * 6))} />
+      <Funnel x={cx} y={740} s={0.9} open={easeIO(prog(t, 55, 95))} arrows={Array.from({ length: 4 }, (_, j) => prog(t, 70 + j * 9, 84 + j * 9))} />
     </Cam>
     <Ticket p={pose} t={t} stamps={[DENIED(0.3), PENDING(1, 137)]} />
     <Head v={Math.round(lerp(1962, 1988, easeOut(prog(t, 10, 36))))} label="Morris & Thorne" o={1} />
@@ -414,7 +416,7 @@ const Exotic = (t: number) => <>
   <Cam t={t} a={84} b={120} from={{ s: 1 }} to={{ s: 1.5, y: 780 }}>
     <CasimirPlates x={cx} y={780} s={1.3} t={t} pP={easeOut(prog(t, 0, 15))} pO={prog(t, 12, 40)} pI={prog(t, 20, 45)} pA={prog(t, 30, 60)} />
   </Cam>
-  <Lbl x={cx} y={1268} size={24} o={prog(t, 95, 105)}>{"TINY FORCE"}</Lbl>
+  <Lbl x={cx} y={560} size={26} o={prog(t, 95, 105)}>{"TINY FORCE"}</Lbl>
   <Home t={t} stamps={OLD} />
   <Head v="< 0" label="Negative energy" o={prog(t, 28, 36)} />
   <Off text="Exotic energy" a={12} />
@@ -443,7 +445,7 @@ const Time = (t: number) => {
     </Cam>
     {q > 0 && <g transform={`translate(800 580) scale(${q})`} style={{ filter: GLOW }}><Txt x={0} y={55} size={160}>?</Txt></g>}
     <Home t={t} stamps={OLD} />
-    <Head v={Math.round(lerp(1988, 1992, easeOut(prog(t, 94, 110))))} label="Hawking · conjecture" o={prog(t, 92, 100)} />
+    <Head v="1992" label="Hawking · conjecture" o={prog(t, 92, 100)} />
     <Off text="A time machine?" a={10} />
     <On text="Maybe forbidden" a={94} />
     <Src t={t}>Morris, Thorne & Yurtsever 1988 · Hawking 1992</Src>
@@ -479,7 +481,7 @@ const Void = (t: number) => <>
   <Head v="0" label="Wormholes seen" o={prog(t, 8, 16)} />
   <Off text="Never seen" a={10} />
   <On text="Ticket void" a={78} />
-  <Src t={t}>No observation to date</Src>
+  <Src t={t}>Morris & Thorne 1988 · Space.com</Src>
   <Flash t={t} t0={78} />
 </>;
 // 12 end: Andromeda faintly, naked eye
@@ -504,7 +506,7 @@ const End = (t: number) => {
   </>;
 };
 
-const TR: Trans[] = ["fade", "zoomIn", "zoomOut", "whipL", "whipL", "spin", "whipL", "zoomIn", "zoomOut", "spin", "whipL", "zoomOut", "fade", "iris"];
+const TR: Trans[] = ["cut", "zoomIn", "zoomOut", "whipL", "whipL", "spin", "whipL", "zoomIn", "zoomOut", "spin", "whipL", "zoomOut", "fade", "iris"];
 const SCENES: ((t: number) => React.ReactNode)[] = [Hook, TicketScene, Fold, Bridge, Name, Shut, Open, Exotic, Sphere, Time, Chip, Void, End];
 const PLAN: [Trans, Trans, (t: number) => React.ReactNode][] = SCENES.map((C, k) => [TR[k], TR[k + 1], C]);
 export const WormholeShort: React.FC<{ audio?: boolean }> = ({ audio = true }) => <Stage>
