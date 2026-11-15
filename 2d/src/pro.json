@@ -1,0 +1,34 @@
+{
+  "parts": [
+    {
+      "id": "pro1", "audio": "pro/part1.wav",
+      "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
+      "tc": 54, "word": "AI doučovač", "sparkBase": 76, "gap": 13, "stag": 1.2,
+      "chat": [
+        { "w": "u", "t": "Nerozumím zlomkům.", "typo": [10, "zlmo"] },
+        { "w": "b", "t": "Najdi společného jmenovatele." },
+        { "w": "b", "t": "Další krok zkus sám." }
+      ]
+    },
+    {
+      "id": "pro2", "audio": "pro/part2.wav",
+      "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
+      "tc": 54, "word": "Fotka úlohy", "sparkBase": 76, "gap": 13, "stag": 1.2,
+      "chat": [
+        { "w": "u", "t": "Vyfotil jsem úlohu." },
+        { "w": "b", "t": "Mám pět podobných příkladů." },
+        { "w": "b", "t": "Procvičíš stejný postup." }
+      ]
+    },
+    {
+      "id": "pro3", "audio": "pro/part3.wav",
+      "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
+      "tc": 54, "word": "Poznámky", "sparkBase": 76, "gap": 13, "stag": 1.6,
+      "chat": [
+        { "w": "u", "t": "Mám poznámky z hodiny.", "typo": [4, "ponz"] },
+        { "w": "b", "t": "Udělám z nich kartičky." },
+        { "w": "b", "t": "Otázka na jedné straně,\nodpověď na druhé." }
+      ]
+    }
+  ]
+}

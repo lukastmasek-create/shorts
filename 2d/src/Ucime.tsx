@@ -11,7 +11,7 @@ import SPEC from "./ucime.json";
 const cx = W / 2, cy = H / 2;
 const LS = 1.06, LCX = 473.75, LCY = 55.7;
 const logoXY = (lx: number, ly: number, y0: number) => [cx + (lx - LCX) * LS, y0 + (ly - LCY) * LS];
-const dk = (h: string) => `rgb(${[1, 3, 5].map(i => Math.round(parseInt(h.slice(i, i + 2), 16) * 0.66)).join(",")})`;
+export const dk = (h: string) => `rgb(${[1, 3, 5].map(i => Math.round(parseInt(h.slice(i, i + 2), 16) * 0.66)).join(",")})`;
 
 // ---------- object outlines (for object -> logo morphs) ----------
 const starPts = (k: number, ri: number): Pt[] => samp(Array.from({ length: k * 2 }, (_, i) => { const a = -Math.PI / 2 + (i / (k * 2)) * Math.PI * 2, r = i % 2 ? ri : 1; return [Math.cos(a) * r, Math.sin(a) * r] as Pt; }));
@@ -20,16 +20,16 @@ SH.pad = samp([[-0.55, -0.55], [0.55, -0.55], [0.95, -0.35], [1, 0.4], [0.8, 0.6
 SH.gear = starPts(8, 0.8);
 
 // ---------- extruded object (cheap depth stack, light from top-left) ----------
-const Extrude: React.FC<{ depth?: number; dark: string; children: (fill?: string) => React.ReactNode }> = ({ depth = 16, dark, children }) => (
+export const Extrude: React.FC<{ depth?: number; dark: string; children: (fill?: string) => React.ReactNode }> = ({ depth = 16, dark, children }) => (
   <g>{Array.from({ length: depth }, (_, i) => depth - i).map(d => <g key={d} transform={`translate(${d * 0.55} ${d})`}>{children(dark)}</g>)}{children()}</g>
 );
 
 // ---------- katana cut (two half-planes clip the same object) ----------
-const BIG = 4000;
+export const BIG = 4000;
 const half = (A: Pt, B: Pt, side: 1 | -1) => { const dx = B[0] - A[0], dy = B[1] - A[1], l = Math.hypot(dx, dy), nx = -dy / l * side, ny = dx / l * side, ux = dx / l, uy = dy / l;
   return [[A[0] - ux * BIG, A[1] - uy * BIG], [B[0] + ux * BIG, B[1] + uy * BIG], [B[0] + ux * BIG + nx * BIG, B[1] + uy * BIG + ny * BIG], [A[0] - ux * BIG + nx * BIG, A[1] - uy * BIG + ny * BIG]].map(p => p.join(",")).join(" "); };
 const G = 2.4, fall = (t0: number, t: number) => 0.5 * G * Math.max(0, t - t0) ** 2;
-const Katana: React.FC<{ t: number; tc: number; A: Pt; B: Pt; chip: Pt[]; id: string; children: React.ReactNode }> = ({ t, tc, A, B, chip, id, children }) => {
+export const Katana: React.FC<{ t: number; tc: number; A: Pt; B: Pt; chip: Pt[]; id: string; children: React.ReactNode }> = ({ t, tc, A, B, chip, id, children }) => {
   const s = Math.max(0, t - tc), p = easeOut(prog(t, tc, tc + 26)), n: Pt = [-(B[1] - A[1]), B[0] - A[0]], l = Math.hypot(n[0], n[1]);
   const nx = n[0] / l, ny = n[1] / l, shake = s < 10 ? Math.sin(s * 3.1) * (10 - s) * 0.8 : 0;
   const slash = prog(t, tc - 4, tc), mid: Pt = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
@@ -84,7 +84,7 @@ const CPS = 1.7;
 const typedAt = (states: string[], t: number, a: number) => states[Math.min(states.length - 1, Math.max(0, Math.floor((t - a) * CPS + Math.sin((t - a) * 0.9) * 0.55)))];
 
 // ---------- intro: object morphs into the blue logo tile, flies into the real logo ----------
-const Intro = (obj: string, n: number, l1: string, l2: string) => (t: number) => {
+export const Intro = (obj: string, n: number, l1: string, l2: string) => (t: number) => {
   const A = { m0: 6, m1: 34, f0: 26, f1: 36, p0: 34, p1: 48, pop: 40, gap: 0.9, r0: 200 };
   const LY = 800, [X0, Y0] = logoXY(26, 34.875, LY), u = prog(t, A.m0, A.m1) * 4, pm = easeIO(prog(t, A.p0, A.p1));
   const fa = prog(t, A.f0, A.f1), r = lerp(A.r0, 20.3125 * LS, pm), X = lerp(cx, X0, pm), Y = lerp(LY, Y0, pm), k = r / 20.3125, rot = 120 * (1 - easeIO(prog(t, A.m0, A.m1)));
@@ -107,13 +107,13 @@ const Intro = (obj: string, n: number, l1: string, l2: string) => (t: number) =>
 };
 
 // ---------- outro: logo + url pill ----------
-const Outro = (cta: string | null, teaser: string[]) => (t: number) => <>
+export const Outro = (cta: string | null, teaser: string[], tag = "Registrace zdarma") => (t: number) => <>
   <Rings x={cx} y={700} t={t} />
   <LogoRow y={700} t={t} a={14} gap={0.9} />
   <Tag text="ucimesehrou.org/cs" x={cx} y={900} t={t} a={34} kind="gold" size={26} />
   {cta ? <>
     <KText id="oc0" text={cta} x={cx} y={1130} size={72} t={t} a={38} f="h" wt={800} mode="rise" st={1} />
-    <Tag text="Registrace zdarma" x={cx} y={1290} t={t} a={46} kind="on" size={22} />
+    <Tag text={tag} x={cx} y={1290} t={t} a={46} kind="on" size={22} />
   </> : <>
     <Tag text="Další díl" x={cx} y={1130} t={t} a={38} kind="off" size={20} />
     {teaser.map((l, i) => <KText key={i} id={"ot" + i} text={l} x={cx} y={1250 + i * 110} size={72} t={t} a={42 + i * 5} f="h" wt={800} mode="rise" st={1} />)}
@@ -121,7 +121,7 @@ const Outro = (cta: string | null, teaser: string[]) => (t: number) => <>
 </>;
 
 // ---------- shared bits of the content scenes ----------
-const SparkWord: React.FC<{ id: string; t: number; wl: WL; y: number; a: number; leave: (k: number) => number; fill?: string }> = ({ t, wl, y, a, leave, fill = C.cream }) => (
+export const SparkWord: React.FC<{ id: string; t: number; wl: WL; y: number; a: number; leave: (k: number) => number; fill?: string }> = ({ t, wl, y, a, leave, fill = C.cream }) => (
   <g style={{ filter: SOFT }}>
     {wl.items.map((it, i) => {
       if (it.k < 0) return null;
@@ -133,26 +133,26 @@ const SparkWord: React.FC<{ id: string; t: number; wl: WL; y: number; a: number;
     })}
   </g>
 );
-const Pill3: React.FC<{ x: number; y: number; w: number; h: number; col: string; text: string; size: number; t: number; a: number; tc?: string; rx?: number }> = ({ x, y, w, h, col, text, size, t, a, tc = C.ink, rx = 30 }) => {
+export const Pill3: React.FC<{ x: number; y: number; w: number; h: number; col: string; text: string; size: number; t: number; a: number; tc?: string; rx?: number }> = ({ x, y, w, h, col, text, size, t, a, tc = C.ink, rx = 30 }) => {
   const k = pop(t, a, 10); if (k <= 0) return null;
   return <g transform={`translate(${x} ${y}) scale(${k}) rotate(${(1 - clamp(k)) * 8})`} opacity={clamp(k * 1.6)}>
     <Extrude depth={10} dark={dk(col)}>{f => <rect x={-w / 2} y={-h / 2} width={w} height={h} rx={rx} fill={f ?? col} />}</Extrude>
     <text textAnchor="middle" dominantBaseline="central" fontWeight={800} fontSize={size} fill={tc} fontFamily={FAM.b}>{text}</text>
   </g>;
 };
-const CutCard: React.FC<{ children: React.ReactNode; col: string; t: number }> = ({ children, col, t }) => {
+export const CutCard: React.FC<{ children: React.ReactNode; col: string; t: number }> = ({ children, col, t }) => {
   const k = pop(t, 20, 12);
   return <g transform={`translate(${cx} 560) scale(${k}) translate(${-cx} -560)`} opacity={clamp(k * 2)}>
     <Extrude depth={14} dark={dk(col)}>{f => <rect x={160} y={330} width={760} height={460} rx={38} fill={f ?? col} stroke={f ? undefined : C.cream} strokeWidth={f ? 0 : 4} />}</Extrude>
     {children}
   </g>;
 };
-const CUT_A: Pt = [140, 800], CUT_B: Pt = [940, 330], CHIP: Pt[] = [[160, 330], [370, 330], [160, 480]];
-const flash = (t: number, tc: number) => { const p = prog(t, tc, tc + 4); return p > 0 && p < 1 ? (1 - p) * 0.4 : 0; };
-const burst = (t: number, a: number, x: number, y: number, col: string, r0 = 60) => { const p = prog(t, a, a + 22); return p > 0 && p < 1 ? <circle cx={x} cy={y} r={r0 + 380 * easeOut(p)} fill="none" stroke={col} strokeWidth={5} opacity={(1 - p) * 0.8} /> : null; };
+export const CUT_A: Pt = [140, 800], CUT_B: Pt = [940, 330], CHIP: Pt[] = [[160, 330], [370, 330], [160, 480]];
+export const flash = (t: number, tc: number) => { const p = prog(t, tc, tc + 4); return p > 0 && p < 1 ? (1 - p) * 0.4 : 0; };
+export const burst = (t: number, a: number, x: number, y: number, col: string, r0 = 60) => { const p = prog(t, a, a + 22); return p > 0 && p < 1 ? <circle cx={x} cy={y} r={r0 + 380 * easeOut(p)} fill="none" stroke={col} strokeWidth={5} opacity={(1 - p) * 0.8} /> : null; };
 
-type Geo = { word: WL; y: number };
-const WORD_Y = 270;
+export type Geo = { word: WL; y: number };
+export const WORD_Y = 270;
 
 // ---------- part 1: subjects ----------
 const SUBJ: [string, string][] = [["Čeština", "#ffc933"], ["Matematika", "#7ee0b0"], ["Angličtina", "#8fd0ff"], ["Dějepis", "#c9b8ff"], ["Fyzika", "#f58fa0"], ["Chemie", "#d98cff"]];
@@ -328,8 +328,8 @@ const createFilm3D = (scs: Sc[], audio: string, fx: Fx) => {
 };
 
 // ---------- one part = intro + content + chat + outro, sparks born from the headline word ----------
-type PartSpec = typeof SPEC.parts[number];
-const makePart = (P: PartSpec, introObj: string, introLines: [string, string], s1: (tc: number, geo: () => Geo, leave: (k: number) => number) => (t: number) => React.ReactNode, outro: (t: number) => React.ReactNode, tcPart: number) => {
+export type PartSpec = { id: string; audio: string; lens: number[]; ks: number[]; tc: number; word: string; sparkBase: number; gap: number; stag: number; chat: { w: string; t: string; typo?: (number | string)[] }[] };
+export const makePart = (P: PartSpec, introObj: string, introLines: [string, string], s1: (tc: number, geo: () => Geo, leave: (k: number) => number) => (t: number) => React.ReactNode, outro: (t: number) => React.ReactNode, tcPart: number) => {
   const S = [0]; P.lens.forEach(l => S.push(S[S.length - 1] + l));
   const letters = [...P.word].filter(c => c !== " ").length, nb = P.chat.length;
   const grp = (i: number) => Math.min(nb - 1, Math.floor(i * nb / letters));
@@ -371,7 +371,7 @@ const makePart = (P: PartSpec, introObj: string, introLines: [string, string], s
   return createFilm3D(scs, P.audio, fx);
 };
 
-const [P1S, P2S, P3S] = SPEC.parts;
+const [P1S, P2S, P3S] = SPEC.parts as PartSpec[];
 const U1 = makePart(P1S, "book", ["Od 1. třídy", "po maturitu."], S1Subjects, Outro(null, ["Hry", "a únikovky"]), P1S.tc);
 const U2 = makePart(P2S, "pad", ["Hry, které", "baví."], S1Games, Outro(null, ["Chyby", "a třída"]), P2S.tc);
 const U3 = makePart(P3S, "gear", ["Chyba", "není konec."], S1Mistakes, Outro("Založit třídu zdarma", []), P3S.tc);

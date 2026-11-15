@@ -1,3 +1,4 @@
+import { ProPart1, ProPart2, ProPart3, PRO_FRAMES } from "./Pro";
 import React from "react";
 import { Composition } from "remotion";
 import { NoSleepShort, NOSLEEP_FRAMES } from "./NoSleep";
@@ -63,6 +64,9 @@ export const Root: React.FC = () => (
     <Composition id="UcimeDil1" component={UcimePart1} durationInFrames={UCIME_FRAMES[0]} fps={30} width={1080} height={1920} />
     <Composition id="UcimeDil2" component={UcimePart2} durationInFrames={UCIME_FRAMES[1]} fps={30} width={1080} height={1920} />
     <Composition id="UcimeDil3" component={UcimePart3} durationInFrames={UCIME_FRAMES[2]} fps={30} width={1080} height={1920} />
+    <Composition id="ProDil1" component={ProPart1} durationInFrames={PRO_FRAMES[0]} fps={30} width={1080} height={1920} />
+    <Composition id="ProDil2" component={ProPart2} durationInFrames={PRO_FRAMES[1]} fps={30} width={1080} height={1920} />
+    <Composition id="ProDil3" component={ProPart3} durationInFrames={PRO_FRAMES[2]} fps={30} width={1080} height={1920} />
     <Composition id="KodDil4" component={CodePart4} durationInFrames={CODE4_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
