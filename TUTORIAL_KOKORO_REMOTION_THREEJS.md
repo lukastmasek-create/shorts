@@ -5,7 +5,7 @@ This guide takes you from a script to generated narration and a rendered animate
 1. **Remotion + Three.js / React Three Fiber** — the main 3D cartoon shorts, with a React composition that can be previewed and rendered frame-by-frame.
 2. **Standalone Three.js Stage Kit** — the separate pop-up-book and low-poly projects under `ucimesehrou/`; these use the repository's `K` API and do **not** use Remotion.
 
-Use one route for a project. Do not try to place a standalone `registerStyle()` file inside a Remotion composition.
+Use one route for a project. Do not try to place a standalone `registerStyle()` file inside a Remotion composition. For storyboarding, polished transitions, fluid morphing, deterministic particles, and detailed motion craft, continue with [`ANIMATION_TUTORIALS.md`](ANIMATION_TUTORIALS.md). Unless the user explicitly requests otherwise, each finished video must be 60–70 seconds total (target 65 seconds; 1,950 frames at 30 fps).
 
 ## 1. Install the project tools
 

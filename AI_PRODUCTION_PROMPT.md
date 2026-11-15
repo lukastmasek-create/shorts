@@ -2,7 +2,7 @@
 
 Copy this prompt into an AI coding environment with this repository open. Fill in the **Project brief** first. The AI must inspect the selected workflow's real files before writing code. This prompt coordinates the seven roles requested for the repo—Coder, Reviewer, Innovator, Analyst, Animation Specialist, Design Specialist, and Senior Programmer—plus the Writer role from the earlier brief. That makes eight specialist roles in total. It does not assume that the environment can launch subagents.
 
-For exact starter source code for each runtime/style, use [`PROJECT_CODE_STARTERS.md`](PROJECT_CODE_STARTERS.md). It contains separate examples for the Stage Kit, 2D Remotion, and 3D Remotion workflows, plus instructions for adapting the existing full paper pop-up and low-poly sources. For a developer setup walkthrough covering Kokoro, Remotion, and Three.js, use [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md).
+For exact starter source code for each runtime/style, use [`PROJECT_CODE_STARTERS.md`](PROJECT_CODE_STARTERS.md). It contains separate examples for the Stage Kit, 2D Remotion, and 3D Remotion workflows, plus instructions for adapting the existing full paper pop-up and low-poly sources. For step-by-step animation craft and code techniques, use [`ANIMATION_TUTORIALS.md`](ANIMATION_TUTORIALS.md). For developer setup covering Kokoro, Remotion, and Three.js, use [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md).
 
 ---
 
@@ -11,7 +11,7 @@ For exact starter source code for each runtime/style, use [`PROJECT_CODE_STARTER
 - **Topic / story:** [What should the short explain or tell?]
 - **Audience:** [Who is it for?]
 - **Language:** [Narration and on-screen text language]
-- **Target runtime:** [Seconds]
+- **Target runtime:** 60–70 seconds (default target: 65 seconds; do not shorten or lengthen unless the user explicitly changes this rule)
 - **Platform / aspect ratio:** [e.g. 9:16 vertical or 16:9]
 - **Chosen visual style:** [Choose one option below, or describe a new style]
 - **Voiceover:** [None / supplied audio / generate new audio]
@@ -20,7 +20,9 @@ For exact starter source code for each runtime/style, use [`PROJECT_CODE_STARTER
 - **Approval gates:** [e.g. approve research and script, then proceed]
 - **Constraints:** [hardware, browser, output location, brand rules, deadline]
 
-If any field that materially affects the result is missing, ask concise questions before coding. Never invent factual claims, user-provided assets, tool access, or completed work.
+Runtime rule: every complete new animation/video must be 60–70 seconds total, with a 65-second target (at 30 fps: 1,800–2,100 frames; target 1,950). This applies to the full delivered piece, not each scene or transition. Only override it if the user explicitly requests a different duration. If the chosen style has a shorter sample, treat it as a technique reference and adapt the story/timeline to the required runtime; never pad with empty holds or filler.
+
+If any other field that materially affects the result is missing, ask concise questions before coding. Never invent factual claims, user-provided assets, tool access, or completed work.
 
 ## Your assignment
 
