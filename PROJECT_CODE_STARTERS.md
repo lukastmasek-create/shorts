@@ -2,6 +2,8 @@
 
 Use this file together with [`AI_PRODUCTION_PROMPT.md`](AI_PRODUCTION_PROMPT.md). These are runnable-shaped starting points for the repository's different runtimes. Pick **one** starter based on the requested video type; do not combine React/Remotion code with the standalone `K` Stage Kit. Replace the example story objects and wording with the approved project content. Reuse the existing style source for the two standalone Three.js styles so their established fold/camera mechanics are not accidentally discarded.
 
+**Production runtime requirement:** every complete new animation/video must be 60–70 seconds total (target 65 seconds: 1,950 frames at 30 fps). Short durations in minimal code snippets below (such as 6 or 8 seconds) are only for demonstrating one technique; do not use them as a finished deliverable duration. Scale the beat schedule, composition frame count, narration, and audio to the full 60–70 seconds. Do not stretch a short example with empty holds or filler.
+
 ## 0. Shared decision rule
 
 | Request | Code starter / canonical source |

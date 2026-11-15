@@ -1,12 +1,13 @@
 # Shorts — AI production prompts, workflows, and examples
 
-This repository is an instruction kit for AI assistants making short animated videos. It includes production prompts, style guides, source code, utilities, and example projects. Use the guide for the chosen workflow, verify paths and commands against the checkout, and report what was actually tested.
+This repository is an instruction kit for AI assistants making short animated videos. It includes production prompts, style guides, source code, utilities, and example projects. New finished animations should be 60–70 seconds total (target 65 seconds) unless the user explicitly requests a different length. Use the guide for the chosen workflow, verify paths and commands against the checkout, and report what was actually tested.
 
 ## Start here
 
 - [`AI_PRODUCTION_PROMPT.md`](AI_PRODUCTION_PROMPT.md): master prompt for a coordinated eight-role production team, workflow selection, production sequence, and professional quality gates.
 - [`PROJECT_CODE_STARTERS.md`](PROJECT_CODE_STARTERS.md): starter code and exact integration/render guidance for Stage Kit, 2D Remotion, 3D Remotion, paper pop-up, and low-poly styles.
 - [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md): setup and usage tutorial for Kokoro voice generation, Remotion, Three.js, previewing, and rendering.
+- [`ANIMATION_TUTORIALS.md`](ANIMATION_TUTORIALS.md): practical animation craft and code—beat timing, deterministic motion, fluid morphs, SVG transitions, particles, 3D motion, sound sync, and review.
 
 ## Choose a workflow
 
