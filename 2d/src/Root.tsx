@@ -26,6 +26,7 @@ import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
 import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
+import { MaterialyPart1, MaterialyPart2, MaterialyPart3, MATERIALY_FRAMES } from "./Materialy";
 import { UcimePart1, UcimePart2, UcimePart3, UCIME_FRAMES } from "./Ucime";
 import { CodePart1, CodePart2, CodePart3, CodePart4, CODE1_FRAMES, CODE2_FRAMES, CODE3_FRAMES, CODE4_FRAMES } from "./Code";
 
@@ -63,6 +64,9 @@ export const Root: React.FC = () => (
     <Composition id="UcimeDil1" component={UcimePart1} durationInFrames={UCIME_FRAMES[0]} fps={30} width={1080} height={1920} />
     <Composition id="UcimeDil2" component={UcimePart2} durationInFrames={UCIME_FRAMES[1]} fps={30} width={1080} height={1920} />
     <Composition id="UcimeDil3" component={UcimePart3} durationInFrames={UCIME_FRAMES[2]} fps={30} width={1080} height={1920} />
+    <Composition id="MaterialyDil1" component={MaterialyPart1} durationInFrames={MATERIALY_FRAMES[0]} fps={30} width={1080} height={1920} />
+    <Composition id="MaterialyDil2" component={MaterialyPart2} durationInFrames={MATERIALY_FRAMES[1]} fps={30} width={1080} height={1920} />
+    <Composition id="MaterialyDil3" component={MaterialyPart3} durationInFrames={MATERIALY_FRAMES[2]} fps={30} width={1080} height={1920} />
     <Composition id="KodDil4" component={CodePart4} durationInFrames={CODE4_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );

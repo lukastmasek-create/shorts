@@ -1,0 +1,34 @@
+{
+  "parts": [
+    {
+      "id": "materialy1", "audio": "materialy/part1.wav",
+      "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
+      "tc": 54, "word": "Materiály", "sparkBase": 76, "gap": 13, "stag": 1.2,
+      "chat": [
+        { "w": "u", "t": "Mám i fyziku?", "typo": [6, "fzi"] },
+        { "w": "b", "t": "Ano, 20 témat." },
+        { "w": "b", "t": "Výtahy ke všem předmětům." }
+      ]
+    },
+    {
+      "id": "materialy2", "audio": "materialy/part2.wav",
+      "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
+      "tc": 54, "word": "Čtyři úrovně", "sparkBase": 76, "gap": 13, "stag": 1.2,
+      "chat": [
+        { "w": "u", "t": "Jsem v 5. třídě.", "typo": [10, "tir"] },
+        { "w": "b", "t": "Zkus Základní učivo." },
+        { "w": "b", "t": "Je pro 4.–6. třídu." }
+      ]
+    },
+    {
+      "id": "materialy3", "audio": "materialy/part3.wav",
+      "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
+      "tc": 54, "word": "Ověř si", "sparkBase": 76, "gap": 13, "stag": 1.6,
+      "chat": [
+        { "w": "b", "t": "Máš to přečtené?" },
+        { "w": "u", "t": "Mám! Co dál?", "typo": [5, "to"] },
+        { "w": "b", "t": "Vyzkoušej si látku v testech." }
+      ]
+    }
+  ]
+}

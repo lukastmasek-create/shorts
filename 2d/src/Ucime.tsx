@@ -378,3 +378,7 @@ const U3 = makePart(P3S, "gear", ["Chyba", "není konec."], S1Mistakes, Outro("Z
 export const UCIME_FRAMES = [U1.frames, U2.frames, U3.frames];
 export const UcimePart1 = U1.Comp, UcimePart2 = U2.Comp, UcimePart3 = U3.Comp;
 void MONO; void BRAND; void DEPTH;
+
+// shared with Materialy.tsx
+export { SparkWord, Intro, Extrude, Katana, Pill3, CutCard, CUT_A, CUT_B, CHIP, flash, burst, WORD_Y, makePart, dk };
+export type { Geo, PartSpec };
