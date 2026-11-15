@@ -1,12 +1,13 @@
 // "The Moon Never Turns Its Back" short: tidal locking. Spec: 2d/newshort/DESIGN.md, script: 2d/newshort/SCRIPT.md.
-// Voice: not generated yet (see 2d/newshort). Pass props {"audio":true} once public/moon/voice.wav exists.
+// Voice: 2d/newshort/voice_moon.py -> voice.wav + frames.json (scene lengths); copy voice.wav to public/moon/. Props {"audio":true}.
 import React from "react";
 import { Audio, staticFile } from "remotion";
 import { Stage, Pill, Num, Ring, W, H, SW, INK, GLOW, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";
 import { Gauge, Txt } from "./kit2";
 import { SceneFx, Cam, Flash, Starfield, BigRings, GridBG, GhostBleed, Trans } from "./fx";
 
-export const MOON_FRAMES = 1140;
+import FR from "../newshort/frames.json";
+export const MOON_FRAMES = FR[FR.length - 1];
 const cx = W / 2;
 const D2R = Math.PI / 180;
 const E = { x: 540, y: 900 };
@@ -328,18 +329,14 @@ const B8 = (t: number) => {
   </>;
 };
 
-const SCENES: { a: number; b: number; inT: Trans; outT: Trans; C: (t: number) => React.ReactNode }[] = [
-  { a: 0, b: 165, inT: "zoomIn", outT: "zoomIn", C: B1 },
-  { a: 165, b: 300, inT: "zoomIn", outT: "whipL", C: B2 },
-  { a: 300, b: 465, inT: "whipL", outT: "zoomOut", C: B3 },
-  { a: 465, b: 630, inT: "zoomOut", outT: "whipL", C: B4 },
-  { a: 630, b: 765, inT: "whipL", outT: "spin", C: B5 },
-  { a: 765, b: 930, inT: "spin", outT: "whipUp", C: B6 },
-  { a: 930, b: 1035, inT: "whipUp", outT: "zoomIn", C: B7 },
-  { a: 1035, b: MOON_FRAMES, inT: "zoomIn", outT: "iris", C: B8 },
-];
+const ORIG = [165, 135, 165, 165, 135, 165, 105, 105]; // designed beat lengths; scenes are stretched to the voice (frames.json)
+const TR: [Trans, Trans][] = [["zoomIn", "zoomIn"], ["zoomIn", "whipL"], ["whipL", "zoomOut"], ["zoomOut", "whipL"], ["whipL", "spin"], ["spin", "whipUp"], ["whipUp", "zoomIn"], ["zoomIn", "iris"]];
+const BEATS = [B1, B2, B3, B4, B5, B6, B7, B8];
+const SCENES: { a: number; b: number; inT: Trans; outT: Trans; C: (t: number) => React.ReactNode }[] = BEATS.map((B, i) => ({
+  a: FR[i], b: FR[i + 1], inT: TR[i][0], outT: TR[i][1], C: (t: number) => B(t * ORIG[i] / (FR[i + 1] - FR[i])),
+}));
 
-export const MoonShort: React.FC<{ audio?: boolean }> = ({ audio = false }) => (
+export const MoonShort: React.FC<{ audio?: boolean }> = ({ audio = true }) => (
   <Stage>
     {audio && <Audio src={staticFile("moon/voice.wav")} />}
     {SCENES.map((s, i) => <SceneFx key={i} a={s.a} b={s.b} inT={s.inT} outT={s.outT}>{s.C}</SceneFx>)}
