@@ -96,10 +96,9 @@ const secs = (a: SceneDef[]) => a.reduce((x, s) => x + (s.len * s.k) / 30, 0);
 export const pickScenes = (kit: Record<string, SceneDef>, features: SceneDef[], extras: SceneDef[], seed: number, budgetS = 15): SceneDef[] => {
   const r = mulberry32(seed), shuffle = <T,>(a: T[]) => a.map(v => [r(), v] as const).sort((x, y) => x[0] - y[0]).map(x => x[1]);
   const head = [kit.logoMorph], tail = [kit.finale], pair = [kit.katanaCut, kit.sparkChat], mid: SceneDef[] = [];
-  const need = Math.min(3, features.length);
-  // heavier-weighted features first, but order inside the video is still random
-  const feats = [...features].sort((a, b) => (b.weight ?? 1) * (0.7 + r() * 0.6) - (a.weight ?? 1) * (0.7 + r() * 0.6));
-  for (const s of feats) { if (mid.filter(m => m.fam === "feature").length < Math.max(need, 3) || secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s); }
+  // heavier-weighted features first (with a little seeded jitter), the order inside the video is shuffled afterwards
+  const feats = features.map(f => [(f.weight ?? 1) * (0.7 + r() * 0.6), f] as const).sort((a, b) => b[0] - a[0]).map(x => x[1]);
+  for (const s of feats) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s);
   for (const s of shuffle(extras)) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s);
   const m = shuffle(mid), at = Math.floor(r() * (m.length + 1));        // katana + sparks as a pair somewhere in the middle
   return [...head, ...m.slice(0, at), ...pair, ...m.slice(at), ...tail];
