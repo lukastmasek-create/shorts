@@ -7,15 +7,22 @@
     "render": "remotion render src/index.ts BridgeShort out/bridge.mp4 --codec h264 --crf 16",
     "stills": "node scripts/bridge-stills.mjs",
     "studio:2d": "remotion studio 2d/src/index.ts",
-    "stills:2d": "node 2d/stills.mjs"
+    "stills:2d": "node 2d/stills.mjs",
+    "stills:hype": "node scripts/hype-stills.mjs",
+    "render:hype": "remotion render src/index.ts HypeShort out/hype/hype.mp4 --codec h264 --crf 18"
   },
   "dependencies": {
+    "@fontsource/archivo-black": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/playfair-display": "^5.3.0",
     "@react-three/fiber": "^9.8.2",
     "@react-three/postprocessing": "^3.2.2",
     "@remotion/bundler": "^4.0.543",
     "@remotion/cli": "^4.0.543",
+    "@remotion/motion-blur": "^4.0.543",
     "@remotion/renderer": "^4.0.543",
     "@remotion/three": "^4.0.543",
+    "@remotion/transitions": "^4.0.543",
     "postprocessing": "^6.39.6",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
@@ -23,6 +30,7 @@
     "three": "^0.187.0"
   },
   "devDependencies": {
+    "@sparticuz/chromium": "^153.0.0",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.187.0",

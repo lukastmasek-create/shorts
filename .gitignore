@@ -22,3 +22,6 @@ __pycache__/
 v16.wav
 # Aging mix: committed copy is public/aging/mix.wav (audio/aging_mix.py writes both)
 /aging/audio/mix.wav
+
+# Hype short: voice working files, stems, trimmed lines (the committed copy is public/hype/mix.wav)
+/hype_vo/

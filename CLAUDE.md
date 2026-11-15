@@ -41,6 +41,18 @@ Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastn�
 - Not done: hand-fixing words.json, voice audition, full render (do it on a GPU PC). Look is still flat-cartoon: no props on tables/walls beyond the basics.
 - `shadow/SCRIPT.md` = unused draft.
 
+## Sekce src/videos/hype/ (2026-11-15)
+Kinetic-typography hype promo `HypeShort` for ucimesehrou.org: 1080x1920, 30 fps, 1583 f = 52.8 s, audio in the comp.
+Invented brand `HROU.` (red capsule + white spark, Archivo Black, "learning, by play"); real URL only on the end card.
+Postup: `src/videos/hype/README.md`, script/fakty: `src/videos/hype/SCRIPT.md`.
+- Obraz: `story.tsx` (shot list, one shot per voice word + 4 bezvozové vsuvky), `components/*`, `three/Blocks.tsx` (jediný three.js záběr - oranžová kostka s vlastním GLSL materiálem, žádný EffectComposer kvůli swangle bugu).
+- Post FX jsou DOM/SVG overlaye (`components/ScreenFX.tsx`), ne GL chain z `bridge/` - film je ~95 % DOM type a composer pod swangle padá na první frame. Steel: bloom po DOF, display-referred grade, grain amount.
+- Vlastní transition stack `fx/transitions.tsx` (whip/zoom/stripes/glitch/laser/shape/flash/whiteout). `@remotion/transitions` je nainstalovaný, ale nepoužitý (TransitionSeries nedá prezentaci framy záběru).
+- Timing: `scripts/hype_timing.py` z `hype_vo/L*.wav` -> `src/videos/hype/timing.ts` (word boundaries = energie-gap snap, whisper je blokovaný). Zvuk: `audio/hype_mix.py` -> `public/hype/mix.wav` (-14 LUFS, -2.2 dBTP; hudba ~7 dB pod hlasem). `hype_vo/` je gitignored.
+- Stills/render na téhle krabici: `node scripts/hype-stills.mjs out/hype/s_ 22,150 0.4` (Chromium z npm `@sparticuz/chromium` -> /tmp/chromium, `LD_LIBRARY_PATH=/tmp/al2023/lib:/tmp`, `FONTCONFIG_FILE=/tmp/fonts.conf`, `--gl=swangle`). Full render ~1.1 s/frame, celý film ~30 min na 2 jádrech.
+- Fonty self-hosted v `public/hype/fonts/*.woff2` (@fontsource), `Hype.tsx` je načítá přes FontFace + delayRender, protože se proti nim měří velikost slov.
+- Zvuk NEBYL poslechnut člověkem, jen změřen. CTA věta: "FREE TO START."
+
 ## Repo hygiene (2026-11-15 cleanup)
 - Renders (`*.mp4`) are NOT committed (`.gitignore`). Render to `out/` or next to the short; share the file directly.
 - Voice: one committed copy per short, `public/<name>/voice.wav` (what `staticFile` loads). Voice scripts (`2d/voice_short.py`, `voice_lines.py`, `voice_uni.py`) write the working wav next to the short (gitignored) and copy it to `public/`. `audio/aging_mix.py` writes `public/aging/mix.wav` too.
