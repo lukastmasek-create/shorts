@@ -1,6 +1,9 @@
 # HROU — kinetic-type hype promo (ucimesehrou.org)
 
-One vertical motion-graphics film, 1080x1920, 30 fps, **1583 frames = 52.8 s**, audio inside the composition.
+One vertical motion-graphics film, 1080x1920, 30 fps, **1583 frames = 52.77 s**, audio inside the composition.
+Rendered file checked with ffprobe: h264 1080x1920 30 fps 8.0 Mb/s + AAC 317 kb/s, 52.77 s, 54.6 MB, CRF 18.
+Ten frames pulled back out of the finished file live in `stills/` (one per scene type: slam, planner + laser X,
+logo reveal, three.js block, quiz card, class list + shape wipe, timer gag, CTA, end card).
 Style: fast kinetic typography, hard colour flips (flat red / off-white / black + dot grid + red bokeh),
 custom transitions, heavy monotone voice-over, no face-cam, no laptop mockup, no burned-in subtitles beyond the
 designed kinetic words.
@@ -97,4 +100,8 @@ a frame, and its density), the per-section gains in the beat loop, and the `cue_
 - **The soundtrack was not auditioned by a human.** It is checked by measurement only: -14.0 LUFS integrated,
   -2.2 dBTP, voice ≈ 7 dB above the music while speaking, music blooming +4 dB in the gaps, held chord under the
   end card. If the balance feels off on a phone, start with the `duck` / `V * dbg(3.5)` constants.
-- **Not rendered in the cloud at 2K**, per the brief: the deliverable is 1080x1920 CRF 18.
+- **Not rendered in the cloud at 2K**, per the brief: the deliverable is 1080x1920 CRF 18 (54.6 MB, 8 Mb/s).
+- **Two bugs the stills did not catch, found in the render log:** the incoming shot used to cover the outgoing
+  word before the cut (fixed with late-reveal curves), and `ShapeMorph` did a negative modulo before its own
+  start frame, which crashed the first full render at frame 965. Both are fixed and the film rendered clean end
+  to end.
