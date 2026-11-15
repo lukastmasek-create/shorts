@@ -1,5 +1,6 @@
 import React from "react";
-import {AbsoluteFill, Audio, Sequence, interpolate, staticFile, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from "remotion";
+import {SceneFx} from "./fx";
 
 export const CONSTELLATION_FRAMES = 900;
 const W = 1080;
@@ -30,11 +31,11 @@ const defs = (
   </defs>
 );
 
-const Backdrop: React.FC<{children: React.ReactNode}> = ({children}) => (
+const Backdrop: React.FC<{t:number; children: React.ReactNode}> = ({children,t}) => (
   <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{position:"absolute",inset:0}}>
     {defs}
     <rect width={W} height={H} fill="url(#vignette)" />
-    {children}
+    <g transform={`translate(${W/2} ${H/2}) scale(${1+t*0.00012}) translate(-${W/2} -${H/2})`}>{children}</g>
   </svg>
 );
 
@@ -60,7 +61,7 @@ const SceneOne: React.FC = () => {
   const t=useCurrentFrame();
   const blink=1-pulse(t,68);
   const zoom=interpolate(t,[0,120],[1,1.12]);
-  return <Backdrop>
+  return <Backdrop t={t}>
     <Stars t={t} count={92} opacity={0.48}/>
     <g transform={`translate(540 760) scale(${zoom})`}>
       <circle r="162" fill="none" stroke={INK} strokeWidth="2" opacity=".22"/>
@@ -198,11 +199,11 @@ const SceneFive: React.FC = () => {
 
 export const ConstellationShort: React.FC = () => (
   <AbsoluteFill style={{backgroundColor:"#000"}}>
-    <Sequence from={0} durationInFrames={120}><SceneOne/></Sequence>
-    <Sequence from={120} durationInFrames={240}><SceneTwo/></Sequence>
-    <Sequence from={360} durationInFrames={240}><SceneThree/></Sequence>
-    <Sequence from={600} durationInFrames={150}><SceneFour/></Sequence>
-    <Sequence from={750} durationInFrames={150}><SceneFive/></Sequence>
+    <SceneFx a={0} b={120} inT="iris" outT="whipL" d={12}>{() => <SceneOne/>}</SceneFx>
+    <SceneFx a={120} b={360} inT="whipR" outT="zoomIn" d={12}>{() => <SceneTwo/>}</SceneFx>
+    <SceneFx a={360} b={600} inT="zoomOut" outT="whipUp" d={12}>{() => <SceneThree/>}</SceneFx>
+    <SceneFx a={600} b={750} inT="whipDown" outT="iris" d={12}>{() => <SceneFour/>}</SceneFx>
+    <SceneFx a={750} b={900} inT="iris" outT="fade" d={12}>{() => <SceneFive/>}</SceneFx>
     <Audio src={staticFile("constellation/voice.wav")} volume={0.92}/>
   </AbsoluteFill>
 );
