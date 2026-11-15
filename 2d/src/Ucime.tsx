@@ -84,11 +84,11 @@ const CPS = 1.7;
 const typedAt = (states: string[], t: number, a: number) => states[Math.min(states.length - 1, Math.max(0, Math.floor((t - a) * CPS + Math.sin((t - a) * 0.9) * 0.55)))];
 
 // ---------- intro: object morphs into the blue logo tile, flies into the real logo ----------
-export const Intro = (obj: string, n: number, l1: string, l2: string) => (t: number) => {
+export const Intro = (obj: string, n: number, l1: string, l2: string, chain: string[] = ["circle", "sq", "spark", "sq"]) => (t: number) => {
   const A = { m0: 6, m1: 34, f0: 26, f1: 36, p0: 34, p1: 48, pop: 40, gap: 0.9, r0: 200 };
   const LY = 800, [X0, Y0] = logoXY(26, 34.875, LY), u = prog(t, A.m0, A.m1) * 4, pm = easeIO(prog(t, A.p0, A.p1));
   const fa = prog(t, A.f0, A.f1), r = lerp(A.r0, 20.3125 * LS, pm), X = lerp(cx, X0, pm), Y = lerp(LY, Y0, pm), k = r / 20.3125, rot = 120 * (1 - easeIO(prog(t, A.m0, A.m1)));
-  const face = prog(t, A.f0 + 4, A.f1 + 6), names = [obj, "circle", "sq", "spark", "sq"];
+  const face = prog(t, A.f0 + 4, A.f1 + 6), names = [obj, ...chain];
   return <>
     <Rings x={cx} y={LY} t={t} />
     {t < A.p1 + 1 && <g opacity={pop(t, 0, 8)}>
@@ -253,25 +253,26 @@ const Chat = (items: ChatItem[], arr: number[], lay: () => Lay[]) => (t: number)
 // ---------- the engine: one world, one flying camera, CSS 3D layers ----------
 type Sc = { C: (t: number) => React.ReactNode; len: number; k: number; fy?: number };
 type Fx = { render: (f: number) => React.ReactNode; chase: (f: number) => [number, number, number] | null };
-const POS = (i: number): [number, number] => [i * 1450, i % 2 ? -850 : (i % 4 === 0 ? 0 : 300)];
+const POSV = (v: number) => (i: number): [number, number] => [(v === 2 ? -1 : 1) * i * 1450, (v === 1 ? -1 : 1) * (i % 2 ? -850 : (i % 4 === 0 ? 0 : 300))];
 const SF = [1.0, 1.14, 1.0, 1.1], ST = [1.12, 1.0, 1.08, 1.0], RT = [0, -2.5, 1.5, -2];
 const PERSP = 1600, ZF = 220, ZB = -300, KF = PERSP / (PERSP - ZF);
 
-const createFilm3D = (scs: Sc[], audio: string, fx: Fx) => {
+const createFilm3D = (scs: Sc[], audio: string, fx: Fx, v = 0) => {
+  const POS = POSV(v), rs = v === 1 ? -1 : 1;
   const n = scs.length, S = [0], R = [0]; let acc = 0;
   scs.forEach(s => { S.push(S[S.length - 1] + s.len); acc += s.len * s.k; R.push(Math.floor(acc + 0.5)); });
   const frames = R[n];
   const warp = (fr: number) => { let i = 0; for (let k = 0; k < n; k++) if (fr >= R[k]) i = k; return S[i] + (fr - R[i]) * (S[i + 1] - S[i]) / (R[i + 1] - R[i]); };
   const hold = (i: number, f: number): Cam => {
     const a = i === 0 ? 0 : S[i] + 10, b = S[i + 1] - 14, u = clamp((f - a) / (b - a)), e = easeIO(u), [px, py] = POS(i), sc = scs[i];
-    return { x: px + Math.sin(f * 0.05) * 9, y: py + (sc.fy ?? 0) + Math.cos(f * 0.041) * 7, s: lerp(SF[i % 4], ST[i % 4], e), r: RT[i % 4] * (1 - e * 0.6) + Math.sin(f * 0.03) * 0.5 };
+    return { x: px + Math.sin(f * 0.05) * 9, y: py + (sc.fy ?? 0) + Math.cos(f * 0.041) * 7, s: v === 1 ? lerp(ST[i % 4], SF[i % 4] * 0.96, e) : v === 2 ? lerp(SF[i % 4] * 0.9, ST[i % 4] * 1.1, e) : lerp(SF[i % 4], ST[i % 4], e), r: rs * RT[i % 4] * (1 - e * 0.6) + Math.sin(f * 0.03) * 0.5 };
   };
   const camBase = (f: number): Cam => {
     for (let i = 1; i < n; i++) {
       const d = S[i] - 14, a = S[i] + 10;
       if (f >= d && f < a) {
         const A = hold(i - 1, d), B = hold(i, a), u = (f - d) / (a - d), e = smoother(u), sw = Math.sin(Math.PI * e);
-        return { x: lerp(A.x, B.x, e), y: lerp(A.y, B.y, e), s: lerp(A.s, B.s, e) * (1 - 0.42 * sw), r: lerp(A.r, B.r, e) + (i % 2 ? -1 : 1) * 7 * sw };
+        return { x: lerp(A.x, B.x, e), y: lerp(A.y, B.y, e), s: lerp(A.s, B.s, e) * (1 - 0.42 * sw), r: lerp(A.r, B.r, e) + rs * (i % 2 ? -1 : 1) * 7 * sw };
       }
     }
     let i = 0; for (let k = 0; k < n; k++) if (f >= S[k] + 10) i = k;
@@ -329,7 +330,8 @@ const createFilm3D = (scs: Sc[], audio: string, fx: Fx) => {
 
 // ---------- one part = intro + content + chat + outro, sparks born from the headline word ----------
 export type PartSpec = { id: string; audio: string; lens: number[]; ks: number[]; tc: number; word: string; sparkBase: number; gap: number; stag: number; chat: { w: string; t: string; typo?: (number | string)[] }[] };
-export const makePart = (P: PartSpec, introObj: string, introLines: [string, string], s1: (tc: number, geo: () => Geo, leave: (k: number) => number) => (t: number) => React.ReactNode, outro: (t: number) => React.ReactNode, tcPart: number) => {
+export const makePart = (P: PartSpec, introObj: string, introLines: [string, string], s1: (tc: number, geo: () => Geo, leave: (k: number) => number) => (t: number) => React.ReactNode, outro: (t: number) => React.ReactNode, tcPart: number, v = 0, chain?: string[]) => {
+  const POS = POSV(v);
   const S = [0]; P.lens.forEach(l => S.push(S[S.length - 1] + l));
   const letters = [...P.word].filter(c => c !== " ").length, nb = P.chat.length;
   const grp = (i: number) => Math.min(nb - 1, Math.floor(i * nb / letters));
@@ -363,12 +365,12 @@ export const makePart = (P: PartSpec, introObj: string, introLines: [string, str
   };
   const leave = (k: number) => aL(k);
   const scs: Sc[] = [
-    { C: Intro(introObj, Number(P.id.slice(-1)), introLines[0], introLines[1]), len: P.lens[0], k: P.ks[0], fy: -80 },
+    { C: Intro(introObj, Number(P.id.slice(-1)), introLines[0], introLines[1], chain), len: P.lens[0], k: P.ks[0], fy: -80 },
     { C: s1(tcPart, () => ({ word: geo().word, y: WORD_Y }), leave), len: P.lens[1], k: P.ks[1] },
     { C: Chat(items, arr, () => geo().lay), len: P.lens[2], k: P.ks[2] },
     { C: outro, len: P.lens[3], k: P.ks[3] },
   ];
-  return createFilm3D(scs, P.audio, fx);
+  return createFilm3D(scs, P.audio, fx, v);
 };
 
 const [P1S, P2S, P3S] = SPEC.parts as PartSpec[];
