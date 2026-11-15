@@ -1,237 +1,373 @@
-// "CodeShort": showcase for ucimesehrou.org. Code types itself and draws line art. Original, silent, English on-screen text.
-// fx kit (SceneFx, Cam, backdrops), fast cuts (~2.8 s per scene), turtle sketches drawn in SVG.
+// "CodeShort" v2: cinematic showcase of the Kód na hraní section on ucimesehrou.org/cs/code (Czech, silent).
+// One continuous world + a flying camera (swoops, roll, motion blur) instead of scene cuts, kinetic type per letter,
+// morphing line shapes. Content = real features of the site: 3 files, line-by-line explanations, live preview,
+// našeptávač (autocomplete), fill-in exercises with hint/solution, AI pomocník, 9-step learning plan.
 import React from "react";
-import { Stage, Pill, Num, Ring, Icon, GLOW, INK, W, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";
-import { Txt, Box } from "./kit2";
-import { SceneFx, Cam, Starfield, GridBG, BigRings, Rays, GhostBleed, Flash, Trans } from "./fx";
+import { useCurrentFrame } from "remotion";
+import { GLOW, INK, FONT, W, H, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";
+import { BigRings } from "./fx";
 
-const FR = [0, 75, 165, 250, 335, 420, 505, 590, 680, 770];
-export const CODE_FRAMES = 770;
-const cx = W / 2;
+export const CODE_FRAMES = 1010;
+const cx = W / 2, cy = H / 2;
 const MONO = `ui-monospace,Menlo,"DejaVu Sans Mono",Consolas,monospace`;
+const rnd = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const back = (p: number) => { const c = 1.9, q = p - 1; return 1 + (c + 1) * q * q * q + c * q * q; };
+const smoother = (p: number) => { p = clamp(p); return p * p * p * (p * (p * 6 - 15) + 10); };
+const lerpC = (a: string, b: string, p: number) => { const f = (s: string) => [1, 3, 5].map(i => parseInt(s.slice(i, i + 2), 16)); const A = f(a), B = f(b); return `rgb(${A.map((v, i) => Math.round(lerp(v, B[i], clamp(p)))).join(",")})`; };
+const HTMLC = "#ff8a6b", CSSC = "#8fd0ff", JSC = "#ffc933", STRC = "#7ee0b0", KWC = "#ff9bd2";
 
-// ---------- turtle: build segments [x0,y0,x1,y1,heading] ----------
-type Seg = [number, number, number, number, number];
-const run = (fn: (f: (n: number) => void, r: (a: number) => void) => void): Seg[] => {
-  let x = 0, y = 0, a = -90; const s: Seg[] = [];
-  fn(n => { const q = a * Math.PI / 180, nx = x + Math.cos(q) * n, ny = y + Math.sin(q) * n; s.push([x, y, nx, ny, a]); x = nx; y = ny; }, d => { a += d; });
-  return s;
+// ---------- text measuring (deterministic: same Chromium measures and renders) ----------
+let mctx: CanvasRenderingContext2D | null = null;
+const mcache = new Map<string, number>();
+const adv = (ch: string, size: number, wt: number) => {
+  const k = `${ch}|${size}|${wt}`; let v = mcache.get(k);
+  if (v === undefined) { mctx = mctx || document.createElement("canvas").getContext("2d")!; mctx.font = `${wt} ${size}px ${FONT}`; v = mctx.measureText(ch).width; mcache.set(k, v); }
+  return v;
 };
-const rep = (n: number, f: () => void) => { for (let i = 0; i < n; i++) f(); };
-const SQUARE = run((f, r) => rep(4, () => { f(150); r(90); }));
-const PENT = run((f, r) => rep(5, () => { f(200); r(72); }));
-const STAR = run((f, r) => rep(5, () => { f(200); r(144); }));
-const STAR7 = run((f, r) => rep(7, () => { f(220); r(1080 / 7); }));
-const HEX = run((f, r) => rep(6, () => { f(150); r(60); }));
-const SPIRAL = run((f, r) => { for (let i = 1; i < 70; i++) { f(i * 3.5); r(91); } });
-const FLOWER = run((f, r) => rep(12, () => { rep(4, () => { f(70); r(90); }); r(30); }));
-const ZIG = run((f, r) => { rep(7, () => { f(70); r(70); f(70); r(-110); }); });
-const ROSE = run((f, r) => rep(36, () => { f(120); r(170); }));
+const tw = (s: string, size: number, wt = 800, sp = 0) => [...s].reduce((a, c) => a + adv(c, size, wt) + sp, 0) - sp;
 
-const Sketch: React.FC<{ segs: Seg[]; cx: number; cy: number; size: number; p: number; o?: number; sw?: number; arrow?: boolean }> = ({ segs, cx, cy, size, p, o = 1, sw = 5, arrow = true }) => {
-  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9, L = 0;
-  for (const s of segs) { x0 = Math.min(x0, s[0], s[2]); x1 = Math.max(x1, s[0], s[2]); y0 = Math.min(y0, s[1], s[3]); y1 = Math.max(y1, s[1], s[3]); L += Math.hypot(s[2] - s[0], s[3] - s[1]); }
-  const k = size / Math.max(x1 - x0, y1 - y0, 1), mx = (x0 + x1) / 2, my = (y0 + y1) / 2;
-  const X = (v: number) => cx + (v - mx) * k, Y = (v: number) => cy + (v - my) * k;
-  let left = clamp(p) * L, d = "", lx = NaN, ly = NaN, ex = X(0), ey = Y(0), ea = -90;
-  for (const s of segs) {
-    if (left <= 0) break;
-    const len = Math.hypot(s[2] - s[0], s[3] - s[1]), f = Math.min(1, left / len); left -= len;
-    const ax = X(s[0]), ay = Y(s[1]), bx = ax + (X(s[2]) - ax) * f, by = ay + (Y(s[3]) - ay) * f;
-    if (!(Math.abs(ax - lx) <= 0.01 && Math.abs(ay - ly) <= 0.01)) d += `M${ax.toFixed(1)} ${ay.toFixed(1)}`;
-    d += `L${bx.toFixed(1)} ${by.toFixed(1)}`; lx = bx; ly = by; ex = bx; ey = by; ea = s[4];
+// ---------- kinetic type ----------
+type KM = "rise" | "drop" | "pop" | "scatter" | "track";
+const KText: React.FC<{ id: string; text: string; x: number; y: number; size: number; t: number; a?: number; mode?: KM; st?: number; wt?: number; fill?: string; sp?: number; out?: number; seed?: number; glow?: boolean; o?: number }> =
+  ({ id, text, x, y, size, t, a = 0, mode = "rise", st = 3, wt = 900, fill = INK, sp = 0, out, seed = 1, glow = true, o = 1 }) => {
+    const ch = [...text], total = tw(text, size, wt, sp);
+    let px = x - total / 2;
+    const items = ch.map((c, i) => { const w = adv(c, size, wt); const it = { c, x: px, w, i }; px += w + sp; return it; });
+    const masked = mode === "rise" || mode === "drop";
+    return <g opacity={o} style={{ filter: glow ? GLOW : undefined }}>
+      {masked && <clipPath id={id}><rect x={x - total / 2 - 30} y={y - size * 0.98} width={total + 60} height={size * 1.28} /></clipPath>}
+      <g clipPath={masked ? `url(#${id})` : undefined}>
+        {items.map(({ c, x: X, w, i }) => {
+          if (c === " ") return null;
+          const p = prog(t, a + i * st, a + i * st + 15), e = back(p), eo = easeOut(p), pe = out === undefined ? 0 : easeIO(prog(t, out + i * st * 0.6, out + i * st * 0.6 + 11));
+          let tx = 0, ty = 0, sc = 1, rot = 0, op = clamp(p * 3);
+          if (mode === "rise") ty = (1 - e) * size * 1.15 - pe * size * 1.2;
+          else if (mode === "drop") ty = -(1 - e) * size * 1.15 + pe * size * 1.2;
+          else if (mode === "pop") { sc = Math.max(0, e); ty = -pe * size * 0.6; }
+          else if (mode === "scatter") { tx = (rnd(seed + i * 3) - 0.5) * 640 * (1 - eo); ty = (rnd(seed + i * 7 + 1) - 0.5) * 900 * (1 - eo) - pe * size; rot = (rnd(seed + i) - 0.5) * 160 * (1 - eo); op = clamp(p * 2.4); }
+          else if (mode === "track") { tx = (X + w / 2 - x) * (1 - eo) * 1.3; op = clamp(p * 2); }
+          if (pe > 0) op *= 1 - pe;
+          if (op <= 0.01 || (sc <= 0.01)) return null;
+          return <g key={i} transform={`translate(${X + w / 2 + tx} ${y + ty}) rotate(${rot}) scale(${sc})`} opacity={op}>
+            <text x={0} y={0} textAnchor="middle" fontWeight={wt} fontSize={size} letterSpacing={0} fill={fill} fontFamily={FONT}>{c}</text>
+          </g>;
+        })}
+      </g>
+    </g>;
+  };
+
+// ---------- morphing line shapes ----------
+const NPT = 140;
+type Pt = [number, number];
+const samp = (v: Pt[]): Pt[] => {
+  const n = v.length, L: number[] = [0];
+  for (let i = 0; i < n; i++) { const a = v[i], b = v[(i + 1) % n]; L.push(L[i] + Math.hypot(b[0] - a[0], b[1] - a[1])); }
+  const tot = L[n], out: Pt[] = []; let j = 0;
+  for (let k = 0; k < NPT; k++) {
+    const d = (k / NPT) * tot; while (L[j + 1] < d) j++;
+    const a = v[j], b = v[(j + 1) % n], f = (d - L[j]) / (L[j + 1] - L[j] || 1);
+    out.push([lerp(a[0], b[0], f), lerp(a[1], b[1], f)]);
   }
-  return <g opacity={o}>
-    {d && <path d={d} fill="none" stroke={INK} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" style={{ filter: GLOW }} />}
-    {arrow && p < 1 && <g transform={`translate(${ex} ${ey}) rotate(${ea})`} style={{ filter: GLOW }}><path d="M22 0 L-14 15 L-14 -15 Z" fill="#000" stroke={INK} strokeWidth={4} strokeLinejoin="round" /></g>}
+  return out;
+};
+const ngon = (k: number): Pt[] => samp(Array.from({ length: k }, (_, i) => { const a = -Math.PI / 2 + (i / k) * Math.PI * 2; return [Math.cos(a), Math.sin(a)] as Pt; }));
+const star = (k: number, ri: number): Pt[] => samp(Array.from({ length: k * 2 }, (_, i) => { const a = -Math.PI / 2 + (i / (k * 2)) * Math.PI * 2, r = i % 2 ? ri : 1; return [Math.cos(a) * r, Math.sin(a) * r] as Pt; }));
+const squircle: Pt[] = samp(Array.from({ length: 200 }, (_, i) => { const a = -Math.PI / 2 + (i / 200) * Math.PI * 2, c = Math.cos(a), s = Math.sin(a), n = 6; return [Math.sign(c) * Math.pow(Math.abs(c), 2 / n), Math.sign(s) * Math.pow(Math.abs(s), 2 / n)] as Pt; }));
+const SH: Record<string, Pt[]> = { circle: ngon(90), sq: squircle, star5: star(5, 0.45), spark: star(4, 0.28) };
+for (let k = 3; k <= 11; k++) SH["n" + k] = ngon(k);
+const Morph: React.FC<{ names: string[]; u: number; x: number; y: number; r?: number; sx?: number; sy?: number; rot?: number; sw?: number; o?: number; trail?: number; fill?: string }> =
+  ({ names, u, x, y, r = 100, sx, sy, rot = 0, sw = 6, o = 1, trail = 0, fill }) => {
+    const draw = (uu: number, k: number, op: number, key: number) => {
+      const i = Math.max(0, Math.min(names.length - 2, Math.floor(uu))), f = clamp(uu - i), e = easeIO(clamp((f - 0.12) / 0.76));
+      const A = SH[names[i]], B = SH[names[Math.min(names.length - 1, i + 1)]];
+      const a = rot * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), X = (sx ?? r) * k, Y = (sy ?? r) * k;
+      const d = A.map((p, j) => { const q = B[j], px = lerp(p[0], q[0], e) * X, py = lerp(p[1], q[1], e) * Y; return `${j ? "L" : "M"}${(x + px * ca - py * sa).toFixed(1)} ${(y + px * sa + py * ca).toFixed(1)}`; }).join("") + "Z";
+      return <path key={key} d={d} fill={key === 0 && fill ? fill : "none"} stroke={INK} strokeWidth={sw} strokeLinejoin="round" opacity={op} style={key === 0 ? { filter: GLOW } : undefined} />;
+    };
+    return <g opacity={o}>{Array.from({ length: trail + 1 }, (_, j) => trail - j).map(j => draw(u - j * 0.1, 1 + j * 0.07, j === 0 ? 1 : 0.32 / j, j))}</g>;
+  };
+
+// ---------- small UI pieces ----------
+const Tag: React.FC<{ text: string; x: number; y: number; t: number; a: number; size?: number; on?: boolean }> = ({ text, x, y, t, a, size = 22, on = false }) => {
+  const k = pop(t, a); if (k <= 0) return null;
+  const s = size * 1.5, w = tw(text.toUpperCase(), s, 800, s * 0.12) + s * 1.6, h = s * 1.9;
+  return <g transform={`translate(${x} ${y}) scale(${k})`}>
+    <rect x={-w / 2} y={-h / 2} width={w} height={h} rx={h / 2} fill={on ? INK : "#000"} stroke={INK} strokeWidth={3} />
+    <text textAnchor="middle" dominantBaseline="central" fontWeight={800} fontSize={s} letterSpacing={s * 0.12} fill={on ? "#000" : INK} fontFamily={FONT}>{text.toUpperCase()}</text>
   </g>;
 };
-
-// ---------- code window + typed text ----------
-const FS = 54, CW = FS * 0.602, LH = 78;
-const Win: React.FC<{ x: number; y: number; w: number; h: number; title: string; o?: number }> = ({ x, y, w, h, title, o = 1 }) => (
-  <g opacity={o}>
-    <rect x={x} y={y} width={w} height={h} rx={26} fill="#000" fillOpacity={0.7} stroke={INK} strokeWidth={4} style={{ filter: GLOW }} />
+const Win: React.FC<{ x: number; y: number; w: number; h: number; title: string; o?: number; s?: number }> = ({ x, y, w, h, title, o = 1, s = 1 }) => (
+  <g opacity={o} transform={`translate(${x + w / 2} ${y + h / 2}) scale(${s}) translate(${-x - w / 2} ${-y - h / 2})`}>
+    <rect x={x} y={y} width={w} height={h} rx={26} fill="#000" fillOpacity={0.78} stroke={INK} strokeWidth={4} style={{ filter: GLOW }} />
     <line x1={x} x2={x + w} y1={y + 62} y2={y + 62} stroke={INK} strokeWidth={2} opacity={0.3} />
     {[0, 1, 2].map(i => <circle key={i} cx={x + 38 + i * 30} cy={y + 31} r={9} fill="none" stroke={INK} strokeWidth={3} opacity={0.7} />)}
-    <text x={x + w - 30} y={y + 38} textAnchor="end" fontWeight={800} fontSize={20} letterSpacing={5} fill="#999">{title.toUpperCase()}</text>
+    <text x={x + w - 30} y={y + 38} textAnchor="end" fontWeight={800} fontSize={20} letterSpacing={5} fill="#999" fontFamily={FONT}>{title.toUpperCase()}</text>
   </g>
 );
-const KW = new Set(["function", "if", "let", "const", "else", "for"]);
-const tok = (s: string) => (s.match(/[A-Za-z_]+|\d+|\s+|./g) || []).map((m, i, a) => {
-  let c = "#8a8a8a", w = 500, u = false, it = false;
-  if (/^\d+$/.test(m)) { c = INK; w = 800; u = true; }
-  else if (/^[A-Za-z_]+$/.test(m)) { if (KW.has(m)) { c = "#bbb"; it = true; } else if (a[i + 1] === "(") { c = INK; w = 800; } else c = "#d0d0d0"; }
-  return { m, c, w, u, it };
+const TOKEN = /(<!DOCTYPE[^>]*>|<\/?[a-zA-Z][\w-]*|"[^"]*"|\/\/.*|@media|\b(?:const|let|function|if|else|for|return)\b)/;
+const hl = (s: string) => s.split(TOKEN).map((p, i) => {
+  if (i % 2 === 0) return { p, c: "#ececec" };
+  return { p, c: p.startsWith("<") ? CSSC : p.startsWith('"') ? STRC : p.startsWith("//") ? "#9d96bf" : KWC };
 });
-const Code: React.FC<{ x: number; y: number; lines: string[]; n: number; t: number }> = ({ x, y, lines, n, t }) => {
-  let left = Math.floor(n), cl = 0, cc = 0;
+const Code: React.FC<{ x: number; y: number; lines: string[]; n: number; t: number; size: number; caret?: boolean }> = ({ x, y, lines, n, t, size, caret = true }) => {
+  const cw = size * 0.602, lh = size * 1.6; let left = Math.floor(n), cl = 0, cc = 0;
   const vis = lines.map((ln, i) => { const v = ln.slice(0, Math.max(0, Math.min(ln.length, left))); if (left >= 0) { cl = i; cc = v.length; } left -= ln.length + 1; return v; });
   return <g style={{ filter: GLOW }}>
-    {vis.map((v, i) => <text key={i} x={x} y={y + i * LH} fontFamily={MONO} fontSize={FS} style={{ whiteSpace: "pre" }}>{tok(v).map((q, j) => <tspan key={j} fill={q.c} fontWeight={q.w} fontStyle={q.it ? "italic" : "normal"} textDecoration={q.u ? "underline" : undefined}>{q.m}</tspan>)}</text>)}
-    {Math.floor(t / 8) % 2 === 0 && n >= 0 && <rect x={x + cc * CW + 2} y={y + cl * LH - FS * 0.82} width={CW * 0.8} height={FS * 1.0} fill={INK} opacity={0.85} />}
+    {vis.map((v, i) => <text key={i} x={x} y={y + i * lh} fontFamily={MONO} fontSize={size} fontWeight={600} style={{ whiteSpace: "pre" }}>{hl(v).map((q, j) => <tspan key={j} fill={q.c}>{q.p}</tspan>)}</text>)}
+    {caret && n >= 0 && Math.floor(t / 7) % 2 === 0 && <rect x={x + cc * cw + 2} y={y + cl * lh - size * 0.82} width={cw * 0.75} height={size} fill={INK} opacity={0.9} />}
   </g>;
 };
-const typed = (t: number, a: number, cps = 1.6) => Math.max(-1, (t - a) * cps);
-const cam = (t: number, i: number, k = 1.05, y = 900) => ({ t, a: 0, b: FR[i + 1] - FR[i], to: { s: k, y } });
-
-// 0 hook: code types, square draws
-const Hook = (t: number) => <>
-  <Starfield t={t} o={0.8} />
-  <Cam {...cam(t, 0, 1.06)}>
-    <Pill text="Code can draw." x={cx} y={215} a={2} size={22} />
-    <Win x={90} y={290} w={900} h={400} title="program" o={pop(t, 0, 6)} />
-    <Code x={134} y={420} lines={["repeat(4, () => {", "  forward(150)", "  turn(90)", "})"]} n={typed(t, 5, 1.5)} t={t} />
-    <Win x={90} y={750} w={900} h={760} title="result" o={pop(t, 2, 6)} />
-    <Sketch segs={SQUARE} cx={cx} cy={1160} size={470} p={easeIO(prog(t, 36, 68))} />
-  </Cam>
-</>;
-// 1 change one number: pentagon -> star
-const Star = (t: number) => {
-  const star = t >= 44;
-  return <>
-    <GridBG t={t} o={0.1} />
-    <Cam {...cam(t, 1, 1.05)}>
-      <Pill text="Change one number." x={cx} y={215} a={2} size={20} />
-      <Win x={90} y={290} w={900} h={400} title="program" />
-      <rect x={134 + 9 * CW} y={420 + 2 * LH - FS * 0.85} width={CW * 3} height={FS * 1.1} rx={8} fill="#fff" opacity={star ? clamp(1 - (t - 44) / 14) * 0.6 : 0} />
-      <Code x={134} y={420} lines={["repeat(5, () => {", "  forward(200)", star ? "  turn(144)" : "  turn(72)", "})"]} n={star ? 99 : typed(t, 0, 2.4)} t={t} />
-      <Win x={90} y={750} w={900} h={760} title="result" />
-      <Sketch segs={star ? STAR : PENT} cx={cx} cy={1160} size={500} p={star ? easeIO(prog(t, 48, 80)) : easeIO(prog(t, 20, 42))} />
-    </Cam>
-    <Flash t={t} t0={46} />
-  </>;
-};
-// 2 variables: a box that remembers, hearts go down
-const Vars = (t: number) => {
-  const lives = 3 - (t >= 40 ? 1 : 0) - (t >= 62 ? 1 : 0), tc = t >= 62 ? 62 : t >= 40 ? 40 : -99;
-  const bump = 1 + 0.3 * Math.max(0, 1 - (t - tc) / 9);
-  return <>
-    <BigRings x={cx} y={640} t={t} o={0.1} />
-    <Cam {...cam(t, 2, 1.05)}>
-      <Pill text="Variables remember." x={cx} y={215} a={2} size={20} />
-      <Txt x={cx} y={430} size={36} color="#aaa" spacing={10} o={prog(t, 4, 12)}>LIVES</Txt>
-      <g opacity={pop(t, 2, 8)}><Box x={cx} y={640} w={380} h={320} sw={5} /></g>
-      <g transform={`translate(${cx} 735) scale(${bump}) translate(${-cx} -735)`}><Num v={lives} x={cx} y={735} size={230} /></g>
-      {[0, 1, 2].map(i => <Icon key={i} k="heart" x={340 + i * 200} y={1050} s={0.6} o={i < lives ? pop(t, 14 + i * 4) : 0.2} />)}
-      <Win x={90} y={1230} w={900} h={270} title="code" />
-      <Code x={134} y={1360} lines={["let lives = 3", "lives = lives - 1"]} n={t < 28 ? typed(t, 4, 2) : 14 + typed(t, 28, 2)} t={t} />
-    </Cam>
-  </>;
-};
-// 3 condition: fork, dot picks a side
-const A = (cx2: number) => ({ l1: 190, l2: Math.hypot(cx2 - cx, 380) });
-const Cond = (t: number) => {
-  const dot = (cx2: number, a: number, b: number) => {
-    const u = easeIO(prog(t, a, b)), { l1, l2 } = A(cx2), d = u * (l1 + l2);
-    return d < l1 ? [cx, 330 + d] : [lerp(cx, cx2, (d - l1) / l2), 520 + 380 * ((d - l1) / l2)];
-  };
-  const [d1x, d1y] = dot(280, 12, 38), [d2x, d2y] = dot(800, 46, 70);
-  const lit = (a: number, b: number) => (t >= a && t < b ? 1 : 0.28);
-  return <>
-    <Rays x={cx} y={520} t={t} o={0.08} n={28} />
-    <Cam {...cam(t, 3, 1.05)}>
-      <Pill text="Code can choose." x={cx} y={215} a={2} size={20} />
-      <g style={{ filter: GLOW }} opacity={pop(t, 0, 8)} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round">
-        <path d={`M${cx} 330V520M${cx} 520L280 900M${cx} 520L800 900`} />
-        <path d={`M${cx} 440L${cx + 70} 520L${cx} 600L${cx - 70} 520Z`} fill="#000" />
-      </g>
-      <Txt x={cx} y={534} size={54} o={pop(t, 4, 8)}>?</Txt>
-      <Txt x={cx + 170} y={420} size={34} color="#bbb" spacing={6} o={prog(t, 3, 10)}>RAINING?</Txt>
-      <circle cx={t < 44 ? d1x : d2x} cy={t < 44 ? d1y : d2y} r={16} fill={INK} style={{ filter: GLOW }} opacity={t > 11 && t < 72 ? 1 : 0} />
-      {/* umbrella (yes) */}
-      <g transform="translate(280 1030)" opacity={lit(38, 62)} style={{ filter: GLOW }} fill="none" stroke={INK} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M-110 10 A110 110 0 0 1 110 10 Q55 -20 0 10 Q-55 -20 -110 10 Z M0 10 V110 Q0 135 -28 130" />
-      </g>
-      {/* sun (no) */}
-      <g transform="translate(800 1030)" opacity={lit(66, 200)} style={{ filter: GLOW }} fill="none" stroke={INK} strokeWidth={6} strokeLinecap="round">
-        <circle r={55} />{Array.from({ length: 8 }, (_, i) => { const a = i * Math.PI / 4; return <line key={i} x1={Math.cos(a) * 85} y1={Math.sin(a) * 85} x2={Math.cos(a) * 120} y2={Math.sin(a) * 120} />; })}
-      </g>
-      <Pill text="Yes" x={280} y={1215} a={14} size={16} on={false} /><Pill text="No" x={800} y={1215} a={20} size={16} on={false} />
-      <Win x={90} y={1270} w={900} h={250} title="code" />
-      <Code x={134} y={1395} lines={["if (raining) {", "  umbrella()", "}"].slice(0, 3)} n={typed(t, 4, 1.8)} t={t} />
-    </Cam>
-  </>;
-};
-// 4 loop: flower of squares, counter
-const Loop = (t: number) => {
-  const p = prog(t, 8, 70), k = Math.min(12, Math.floor(p * 12) + 1);
-  return <>
-    <Rays x={cx} y={900} t={t} o={0.1} />
-    <Cam {...cam(t, 4, 1.05, 920)}>
-      <Pill text="Repeat. Don't retype." x={cx} y={215} a={2} size={20} />
-      <Win x={90} y={290} w={900} h={170} title="code" />
-      <Code x={134} y={415} lines={["repeat(12, () => square())"]} n={typed(t, 3, 3)} t={t} />
-      <Sketch segs={FLOWER} cx={cx} cy={930} size={700} p={p} sw={4} />
-      <Num v={`${k}×`} x={cx} y={1450} size={140} o={prog(t, 6, 12)} />
-    </Cam>
-  </>;
-};
-// 5 function: build once, use anywhere
-const House: React.FC<{ x: number; y: number; s: number; o: number }> = ({ x, y, s, o }) => (
-  <g transform={`translate(${x} ${y}) scale(${s})`} opacity={o} style={{ filter: GLOW }} fill="none" stroke={INK} strokeWidth={5} strokeLinejoin="round" strokeLinecap="round">
-    <path d="M-80 60V-20H80V60Z M-100 -20L0 -100L100 -20 M-22 60V10H22V60" />
-  </g>
+const Bolt: React.FC<{ x: number; y: number; s?: number }> = ({ x, y, s = 1 }) => (
+  <g transform={`translate(${x} ${y}) scale(${s})`} style={{ filter: GLOW }}><path d="M6 -26 L-14 4 H-2 L-8 28 L16 -6 H3 Z" fill={JSC} stroke="#000" strokeWidth={2} strokeLinejoin="round" /></g>
 );
-const Func = (t: number) => <>
-  <GridBG t={t} o={0.09} />
-  <Cam {...cam(t, 5, 1.05)}>
-    <Pill text="Build once." x={cx} y={215} a={2} size={20} />
-    <Pill text="Use anywhere." x={cx} y={1480} a={50} size={20} />
-    <Win x={90} y={290} w={900} h={250} title="code" />
-    <Code x={134} y={415} lines={["function house() {…}", "house() house() house()"]} n={t < 26 ? typed(t, 3, 2) : 21 + typed(t, 30, 2)} t={t} />
-    <g opacity={pop(t, 8, 8)}><Box x={cx} y={800} w={380} h={240} sw={5} /></g>
-    <Txt x={cx} y={820} size={60} weight={800} o={pop(t, 10, 8)}>house()</Txt>
-    <circle cx={lerp(60, cx - 190, easeIO(prog(t, 12, 30)))} cy={800} r={14} fill={INK} style={{ filter: GLOW }} opacity={t > 11 && t < 31 ? 1 : 0} />
-    {[250, 540, 830].map((x, i) => <g key={i}>
-      <line x1={cx} y1={920} x2={x} y2={1090} stroke={INK} strokeWidth={3} strokeDasharray="10 10" opacity={prog(t, 34 + i * 9, 40 + i * 9) * 0.7} />
-      <House x={x} y={1240} s={1.4 * pop(t, 38 + i * 9)} o={clamp(pop(t, 38 + i * 9))} />
-    </g>)}
-  </Cam>
-</>;
-// 6 remix: six sketches at once
-const GRID: [Seg[], number][] = [[SPIRAL, 0], [STAR7, 1], [HEX, 2], [FLOWER, 3], [ZIG, 4], [ROSE, 5]];
-const Remix = (t: number) => <>
-  <Starfield t={t} drift={0.3} o={0.7} />
-  <Pill text="Remix it." x={cx} y={215} a={2} size={22} />
-  <Cam {...cam(t, 6, 1.04, 960)}>
-    {GRID.map(([s, i]) => { const x = i % 2 ? 750 : 330, y = 520 + Math.floor(i / 2) * 440; return <g key={i}>
-      <Box x={x} y={y} w={400} h={400} sw={3} o={0.55 * pop(t, 3 + i * 3)} />
-      <Sketch segs={s} cx={x} cy={y} size={320} p={easeOut(prog(t, 8 + i * 4, 46 + i * 4))} sw={4} o={pop(t, 3 + i * 3)} />
-    </g>; })}
-  </Cam>
-</>;
-// 7 levels: four rings
-const LV = [["1 2 3", "LEVEL 1"], ["{ }", "LEVEL 2"], ["?", "LEVEL 3"], ["</>", "LEVEL 4"]];
-const Levels = (t: number) => <>
-  <BigRings x={cx} y={900} t={t} o={0.1} />
-  <Cam {...cam(t, 7, 1.05)}>
-    <Pill text="Start simple." x={cx} y={215} a={2} size={22} />
-    {LV.map(([g, l], i) => { const x = i % 2 ? 750 : 330, y = 620 + Math.floor(i / 2) * 470, k = pop(t, 8 + i * 9); return <g key={i} transform={`translate(${x} ${y}) scale(${k})`} opacity={clamp(k)}>
-      <circle r={150} fill="#000" stroke={INK} strokeWidth={6} style={{ filter: GLOW }} />
-      <text textAnchor="middle" dominantBaseline="central" fontFamily={MONO} fontWeight={800} fontSize={g.length > 3 ? 72 : 96} fill={INK} style={{ filter: GLOW }}>{g}</text>
-      <Txt x={0} y={215} size={28} color="#aaa" spacing={8}>{l}</Txt>
-    </g>; })}
-    <Pill text="Level up." x={cx} y={1480} a={46} size={22} on={false} />
-  </Cam>
-</>;
-// 8 end
-const End = (t: number) => <>
-  <BigRings x={cx} y={700} t={t} o={0.13} />
-  <GhostBleed x={cx} y={760} s={6} o={0.06}><text textAnchor="middle" fontFamily={MONO} fontWeight={800} fontSize={90} fill={INK}>{"</>"}</text></GhostBleed>
-  <Sketch segs={STAR} cx={cx} cy={620} size={460} p={easeIO(prog(t, 3, 38))} arrow={false} />
-  <g style={{ opacity: prog(t, 34, 44) }}><Ring x={cx} y={620} t={prog(t, 36, 70)} /></g>
-  <Txt x={cx} y={1000} size={64} weight={800} spacing={12} o={prog(t, 28, 38)}>UČÍME SE HROU</Txt>
-  <Pill text="Learn by playing." x={cx} y={1130} a={36} size={22} on={false} />
-  <Pill text="ucimesehrou.org" x={cx} y={1290} a={46} size={26} />
-</>;
+const typedN = (t: number, a: number, cps = 1.6) => Math.max(-1, (t - a) * cps);
 
-const SC: [(t: number) => React.ReactNode, Trans, Trans][] = [
-  [Hook, "fade", "whipL"], [Star, "whipL", "zoomIn"], [Vars, "zoomIn", "whipUp"], [Cond, "whipUp", "spin"], [Loop, "spin", "whipR"],
-  [Func, "whipR", "zoomOut"], [Remix, "zoomOut", "whipL"], [Levels, "whipL", "zoomIn"], [End, "zoomIn", "iris"],
-];
-export const CodeShort: React.FC = () => (
-  <Stage>
-    {SC.map(([C, inT, outT], i) => <SceneFx key={i} a={FR[i]} b={FR[i + 1]} inT={inT} outT={outT} d={7}>{C}</SceneFx>)}
-  </Stage>
-);
+// ---------- scenes (local t: camera arrives at t = 22) ----------
+// A: title, morphing hero, kinetic type
+const SceneA = (t: number) => {
+  const u = prog(t, 14, 104) * 4;
+  return <>
+    <BigRings x={cx} y={700} t={t} o={0.12} gap={190} />
+    <Morph names={["circle", "sq", "n3", "star5", "circle"]} u={u} x={cx} y={640} r={225} sw={6} trail={3} rot={t * 0.5} o={pop(t, 12, 12)} />
+    <KText id="a0" text="UČÍME SE HROU" x={cx} y={270} size={44} t={t} a={16} mode="track" st={2} sp={10} wt={800} fill="#bbb" />
+    <KText id="a1" text="KÓD" x={cx} y={1200} size={350} t={t} a={26} mode="rise" st={5} />
+    <KText id="a2" text="NA HRANÍ" x={cx} y={1380} size={178} t={t} a={44} mode="scatter" st={3} seed={4} />
+    <Tag text="HTML · CSS · JS" x={cx} y={1500} t={t} a={74} />
+  </>;
+};
+// B: one file splits into three
+const FILES: [string, string, string][] = [["index.html", "HTML", HTMLC], ["style.css", "CSS", CSSC], ["script.js", "JS", JSC]];
+const SceneB = (t: number) => {
+  const p = back(prog(t, 20, 46));
+  return <>
+    <KText id="b0" text="KÓD NA HRANÍ" x={cx} y={250} size={40} t={t} a={10} mode="track" st={2} sp={9} wt={800} fill="#bbb" />
+    {[2, 1, 0].map(i => {
+      const y = lerp(760, 480 + i * 235, p), k = pop(t, 14, 10);
+      return <g key={i} opacity={clamp(k * 1.5)}>
+        <rect x={90} y={y - 95} width={900} height={190} rx={22} fill="#000" stroke={INK} strokeWidth={4} style={{ filter: GLOW }} />
+        <path d={`M150 ${y - 40}h44l22 22v58h-66z M194 ${y - 40}v22h22`} fill="none" stroke={INK} strokeWidth={4} strokeLinejoin="round" />
+        <text x={260} y={y + 20} fontFamily={MONO} fontWeight={700} fontSize={58} fill={INK}>{FILES[i][0]}</text>
+        <g transform={`translate(840 ${y}) scale(${pop(t, 40 + i * 4)})`}><rect x={-70} y={-36} width={140} height={72} rx={36} fill={FILES[i][2]} /><text textAnchor="middle" dominantBaseline="central" fontWeight={900} fontSize={34} fill="#000" fontFamily={FONT}>{FILES[i][1]}</text></g>
+      </g>;
+    })}
+    <KText id="b1" text="TŘI MALÉ" x={cx} y={1290} size={140} t={t} a={34} mode="rise" st={4} />
+    <KText id="b2" text="SOUBORY." x={cx} y={1470} size={176} t={t} a={46} mode="drop" st={4} />
+  </>;
+};
+// C: line-by-line explanations, the spark hops
+const EL = [["<header>", "Horní část stránky"], ["<h1>", "Hlavní nadpis"], ["<img>", "Obrázek"], ["<hr>", "Vodorovná čára"], ["<h2>", "Podnadpis"]];
+const CODE_C = ["<header>", "  <h1>Učíme se hrou</h1>", "  <img src=\"kocka.png\" alt=\"Kočka\">", "  <hr>", "  <h2>Co umím</h2>", "</header>"];
+const SceneC = (t: number) => {
+  const T0 = 30, SP = 18, k = Math.min(4, Math.max(0, Math.floor((t - T0) / SP))), f = clamp((t - T0 - k * SP) / 9);
+  const prev = Math.max(0, k - 1), li = (i: number) => (i === 4 ? 4 : i), ly = (i: number) => 436 + li(i) * 60.8;
+  const hop = k === 0 ? 0 : easeOut(f), yL = lerp(ly(prev), ly(k), hop), hy = k === 0 ? 0 : Math.sin(Math.PI * f) * 34;
+  const bar = pop(t, 24, 8);
+  return <>
+    <Tag text="Klikni na řádek s jiskrou" x={cx} y={215} t={t} a={10} size={21} on />
+    <Win x={60} y={300} w={960} h={580} title="index.html" o={clamp(pop(t, 6, 10) * 2)} s={0.9 + 0.1 * clamp(pop(t, 6, 10))} />
+    <rect x={76} y={yL - 40} width={928} height={58} rx={12} fill="#fff" opacity={0.15 * bar} />
+    <Code x={150} y={436} lines={CODE_C} n={typedN(t, 8, 2.6)} t={t} size={38} caret={t < 30} />
+    {t > T0 - 10 && <Bolt x={108} y={yL - 12 - hy} s={1.1 + 0.35 * Math.sin(Math.PI * f)} />}
+    <g transform="translate(0 0)">
+      <rect x={60} y={940} width={960} height={420} rx={26} fill="#000" fillOpacity={0.6} stroke={INK} strokeWidth={3} opacity={bar} />
+      {t > T0 - 8 && <>
+        <text x={110} y={1030} fontFamily={MONO} fontWeight={800} fontSize={54} fill={CSSC} style={{ filter: GLOW }}>{EL[k][0]}</text>
+        <KText key={k} id={"c" + k} text={EL[k][1]} x={540} y={1190} size={86} t={t - (T0 + k * SP)} a={0} mode="rise" st={2} />
+      </>}
+      {[0, 1, 2, 3, 4].map(i => <circle key={i} cx={440 + i * 50} cy={1300} r={11} fill={i <= k && t > T0 ? INK : "none"} stroke={INK} strokeWidth={3} opacity={bar} />)}
+    </g>
+    <Tag text="Nebo spusť přehrávání" x={cx} y={1450} t={t} a={34} size={20} />
+  </>;
+};
+// D: live preview: three chips, code on top, result below
+const SceneD = (t: number) => {
+  const c1 = smoother(prog(t, 52, 62)), c2 = smoother(prog(t, 84, 94));
+  const l1 = "h1 { color: #3248f0; }", l2 = "header { background: #ffc933; }";
+  const pulse = (a: number) => { const p = prog(t, a, a + 22); return p > 0 && p < 1 ? <circle cx={cx} cy={1100} r={60 + 380 * easeOut(p)} fill="none" stroke={INK} strokeWidth={4} opacity={(1 - p) * 0.8} /> : null; };
+  return <>
+    {FILES.map(([, l, c], i) => <g key={l} transform={`translate(${cx - 240 + i * 240} 235) scale(${pop(t, 8 + i * 4)})`}><rect x={-90} y={-38} width={180} height={76} rx={38} fill={c} /><text textAnchor="middle" dominantBaseline="central" fontWeight={900} fontSize={36} fill="#000" fontFamily={FONT}>{l}</text></g>)}
+    <Win x={60} y={330} w={960} h={310} title="style.css" s={clamp(pop(t, 10, 10))} o={clamp(pop(t, 10, 10) * 2)} />
+    <Code x={110} y={440} lines={[l1, l2]} n={t < 50 ? typedN(t, 24, 1.2) : l1.length + 1 + typedN(t, 62, 1.5)} t={t} size={40} caret={t < 90} />
+    <path d={`M${cx} 650V760`} stroke={INK} strokeWidth={3} strokeDasharray="8 10" opacity={prog(t, 40, 50)} />
+    <Morph names={["circle", "n3"]} u={prog(t, 30, 60)} x={170} y={745} r={52} rot={90} sw={5} o={pop(t, 28, 10)} />
+    <Tag text="Živý náhled" x={cx + 60} y={745} t={t} a={36} size={22} on />
+    <Win x={60} y={830} w={960} h={600} title="výsledek" s={clamp(pop(t, 16, 10))} o={clamp(pop(t, 16, 10) * 2)} />
+    <rect x={110} y={930} width={860} height={190} rx={14} fill={lerpC("#2a2650", "#ffc933", c2)} stroke={INK} strokeWidth={3} opacity={pop(t, 24, 10)} />
+    <text x={cx} y={1050} textAnchor="middle" fontWeight={900} fontSize={76} fill={lerpC("#ffffff", "#3248f0", c1)} fontFamily={FONT} opacity={pop(t, 26, 10)}>Učíme se hrou</text>
+    <rect x={150} y={1180} width={780} height={22} rx={11} fill="none" stroke={INK} strokeWidth={3} opacity={0.6 * pop(t, 30, 10)} />
+    <rect x={150} y={1226} width={560} height={22} rx={11} fill="none" stroke={INK} strokeWidth={3} opacity={0.6 * pop(t, 34, 10)} />
+    <rect x={cx - 150} y={1290} width={300} height={84} rx={22} fill="#000" stroke={INK} strokeWidth={4} opacity={pop(t, 38, 10)} style={{ filter: GLOW }} /><text x={cx} y={1346} textAnchor="middle" fontWeight={800} fontSize={40} fill={INK} fontFamily={FONT} opacity={pop(t, 38, 10)}>Klikni</text>
+    {pulse(52)}{pulse(84)}
+    <KText id="d0" text="UVIDÍŠ TO HNED." x={cx} y={1560} size={74} t={t} a={60} mode="scatter" st={2} seed={9} />
+  </>;
+};
+// E: našeptávač (autocomplete popup)
+const SceneE = (t: number) => {
+  const sel = t < 56 ? 0 : t < 64 ? 1 : 2, done = t >= 80, size = 44, cw = size * 0.602, lh = size * 1.6;
+  const typed = t < 34 ? "" : t < 40 ? "<" : "<b";
+  const popK = done ? Math.max(0, 1 - prog(t, 80, 88)) : pop(t, 40, 10);
+  const items: [string, string][] = [["body", "<body>"], ["br", "prázdný tag"], ["button", "<button>"]];
+  return <>
+    <KText id="e0" text="NAŠEPTÁVAČ" x={cx} y={300} size={118} t={t} a={12} mode="pop" st={2} />
+    <Win x={60} y={400} w={960} h={310} title="index.html" s={clamp(pop(t, 8, 10))} o={clamp(pop(t, 8, 10) * 2)} />
+    <Code x={110} y={520} lines={["<body>", "  <h1>Ahoj!</h1>", done ? "  <button></button>" : "  " + typed]} n={99} t={t} size={size} caret={!done && t > 30} />
+    {popK > 0.02 && <g transform={`translate(0 ${lerp(-14, 0, popK)})`} opacity={clamp(popK * 1.4)}>
+      <rect x={170} y={750} width={620} height={items.length * 84 + 24} rx={20} fill="#000" stroke={INK} strokeWidth={4} style={{ filter: GLOW }} />
+      {items.map(([l, d], i) => <g key={l}>
+        {i === sel && <rect x={186} y={762 + i * 84} width={588} height={72} rx={14} fill={INK} />}
+        <text x={216} y={810 + i * 84} fontFamily={MONO} fontWeight={800} fontSize={42} fill={i === sel ? "#000" : INK}>{l}</text>
+        <text x={760} y={808 + i * 84} textAnchor="end" fontWeight={600} fontSize={30} fill={i === sel ? "#333" : "#999"} fontFamily={FONT}>{d}</text>
+      </g>)}
+    </g>}
+    <g transform={`translate(880 ${820}) scale(${pop(t, 58, 10) * (done ? 0 : 1)})`}><rect x={-80} y={-44} width={160} height={88} rx={18} fill="#000" stroke={INK} strokeWidth={5} style={{ filter: GLOW }} /><text textAnchor="middle" dominantBaseline="central" fontWeight={900} fontSize={40} letterSpacing={4} fill={INK} fontFamily={FONT}>TAB</text></g>
+    {done && t < 104 && <circle cx={110 + 10 * cw} cy={520 + 2 * lh - 14} r={30 + 220 * easeOut(prog(t, 80, 100))} fill="none" stroke={INK} strokeWidth={4} opacity={1 - prog(t, 80, 100)} />}
+    <KText id="e1" text="Tab doplní zbytek." x={cx} y={1150} size={72} t={t} a={30} mode="rise" st={2} fill="#ddd" />
+    <KText id="e2" text="HTML, CSS i JS." x={cx} y={1290} size={96} t={t} a={46} mode="drop" st={3} />
+  </>;
+};
+// F: fill-in exercise, hint, solution
+const SceneF = (t: number) => {
+  const cnt = Math.round(24 * easeOut(prog(t, 14, 40))), ok = t >= 62, cw = 38 * 0.602;
+  const word = "href".slice(0, Math.max(0, Math.min(4, Math.floor((t - 42) / 4))));
+  const x0 = 110;
+  return <>
+    <text x={cx} y={470} textAnchor="middle" fontWeight={900} fontSize={330} fill={INK} fontFamily={FONT} style={{ filter: GLOW }} opacity={pop(t, 10, 10)}>{cnt}</text>
+    <KText id="f0" text="CVIČENÍ" x={cx} y={600} size={96} t={t} a={22} mode="track" st={3} sp={14} wt={800} />
+    <Win x={60} y={700} w={960} h={420} title="cvičení" s={clamp(pop(t, 14, 10))} o={clamp(pop(t, 14, 10) * 2)} />
+    <g style={{ filter: GLOW }} opacity={pop(t, 22, 8)}>
+      <text x={x0} y={850} fontFamily={MONO} fontSize={38} fontWeight={600} fill={CSSC} style={{ whiteSpace: "pre" }}>{"<a "}</text>
+      {!ok && <rect x={x0 + 3 * cw - 4} y={850 - 36} width={4 * cw + 8} height={50} rx={8} fill="none" stroke={INK} strokeWidth={3} strokeDasharray="8 7" opacity={0.6 + 0.4 * Math.sin(t * 0.4)} />}
+      <text x={x0 + 3 * cw} y={850} fontFamily={MONO} fontSize={38} fontWeight={700} fill={ok ? KWC : "#777"} style={{ whiteSpace: "pre" }}>{t < 42 ? "___" : word}</text>
+      <text x={x0 + 7 * cw} y={850} fontFamily={MONO} fontSize={38} fontWeight={600} fill={STRC} style={{ whiteSpace: "pre" }}>{"=\"https://ucimesehrou.org\""}</text>
+      <text x={x0 + 33 * cw} y={850} fontFamily={MONO} fontSize={38} fontWeight={600} fill={CSSC}>{">"}</text>
+      <text x={x0} y={912} fontFamily={MONO} fontSize={38} fontWeight={600} fill="#ececec" style={{ whiteSpace: "pre" }}>{"  Učíme se hrou"}</text>
+      <text x={x0} y={974} fontFamily={MONO} fontSize={38} fontWeight={600} fill={CSSC}>{"</a>"}</text>
+    </g>
+    {ok && <g opacity={pop(t, 62, 10)}>
+      <circle cx={170} cy={1060} r={34} fill="none" stroke={STRC} strokeWidth={5} style={{ filter: GLOW }} />
+      <path d="M154 1060 L166 1073 L188 1048" fill="none" stroke={STRC} strokeWidth={6} strokeLinecap="round" strokeLinejoin="round" strokeDasharray="60" strokeDashoffset={60 * (1 - prog(t, 64, 76))} />
+      <text x={226} y={1072} fontWeight={700} fontSize={36} fill={STRC} fontFamily={FONT}>Odkaz má href. Hotovo!</text>
+    </g>}
+    {ok && <circle cx={x0 + 5 * cw} cy={835} r={30 + 300 * easeOut(prog(t, 62, 84))} fill="none" stroke={INK} strokeWidth={4} opacity={(1 - prog(t, 62, 84)) * 0.8} />}
+    <Tag text="Nápověda" x={330} y={1280} t={t} a={30} size={24} />
+    <Tag text="Řešení" x={740} y={1280} t={t} a={36} size={24} on />
+    <KText id="f1" text="Doplň mezery." x={cx} y={1450} size={100} t={t} a={40} mode="scatter" st={3} seed={21} />
+  </>;
+};
+// G: AI pomocník
+const SceneG = (t: number) => {
+  const grow = easeOut(prog(t, 44, 66)), dots = t >= 36 && t < 58;
+  return <>
+    <KText id="g0" text="AI POMOCNÍK" x={cx} y={330} size={122} t={t} a={12} mode="pop" st={2} />
+    <g opacity={pop(t, 20, 10)} style={{ filter: GLOW }}>
+      <rect x={300} y={470} width={720} height={140} rx={34} fill="#000" stroke={INK} strokeWidth={4} />
+      <text x={660} y={560} textAnchor="middle" fontWeight={700} fontSize={50} fill={INK} fontFamily={FONT}>Proč mi nejde tlačítko?</text>
+    </g>
+    <Morph names={["circle", "sq"]} u={grow} x={lerp(140, 520, grow)} y={lerp(830, 920, grow)} sx={lerp(58, 460, grow)} sy={lerp(58, 210, grow)} sw={5} o={pop(t, 30, 10)} fill={grow > 0.6 ? "rgba(0,0,0,.8)" : undefined} />
+    {dots && [0, 1, 2].map(i => <circle key={i} cx={110 + i * 30} cy={830 - Math.abs(Math.sin((t - i * 3) * 0.35)) * 18} r={8} fill={INK} />)}
+    <KText id="g1" text="Zkontroluj, jestli sedí" x={520} y={900} size={50} t={t} a={66} mode="rise" st={1.5} wt={800} />
+    <KText id="g2" text="id v getElementById." x={520} y={980} size={50} t={t} a={78} mode="rise" st={1.5} wt={800} fill="#ddd" />
+    <Tag text="Vidí, co máš v editoru" x={cx} y={1250} t={t} a={84} size={21} />
+    <Tag text="Zeptej se…" x={cx} y={1370} t={t} a={92} size={24} on />
+  </>;
+};
+// H: 9-step plan, camera flies down the path
+const PLAN: [string, string][] = [["Základ stránky", "1–2 týdny"], ["Styl stránky", "1–2 týdny"], ["Rozložení a telefon", "2 týdny"], ["První kód v JS", "1–2 týdny"], ["Podmínky a logika", "2 týdny"], ["Opakování a funkce", "2 týdny"], ["Seznamy a objekty", "1–2 týdny"], ["Interaktivní stránka", "2–3 týdny"], ["Velký projekt", "3–4 týdny"]];
+const PY = (k: number) => -740 + k * 425, PX = (k: number) => cx + (k % 2 ? 190 : -190);
+const nodeT = (k: number) => 22 + (121 * k) / 8 - 16;
+const SceneH = (t: number) => {
+  const d = PLAN.slice(0, 8).map((_, k) => `${k ? "" : `M${PX(0)} ${PY(0)}`}C${PX(k)} ${(PY(k) + PY(k + 1)) / 2} ${PX(k + 1)} ${(PY(k) + PY(k + 1)) / 2} ${PX(k + 1)} ${PY(k + 1)}`).join("");
+  return <>
+    <path d={d} fill="none" stroke={INK} strokeWidth={5} strokeLinecap="round" pathLength={1} style={{ filter: GLOW, strokeDasharray: `${prog(t, 10, 128)} 1.01` }} opacity={0.9} />
+    <path d={d} fill="none" stroke={INK} strokeWidth={2} strokeDasharray="6 14" opacity={0.25} />
+    <KText id="h0" text="UČEBNÍ PLÁN" x={cx} y={-960} size={120} t={t} a={6} mode="rise" st={4} />
+    <Tag text="9 kroků od nuly" x={cx} y={-850} t={t} a={20} size={22} on />
+    {PLAN.map(([title, time], k) => {
+      const a = nodeT(k), left = k % 2 === 0, w = tw(title, 48, 800), x = PX(k), y = PY(k), last = k === 8;
+      const tx = left ? x + 125 + w / 2 : x - 125 - w / 2;
+      return <g key={k}>
+        <Morph names={["circle", last ? "star5" : "n" + (k + 3)]} u={prog(t, a, a + 18)} x={x} y={y} r={last ? 120 : 92} sw={6} o={pop(t, a, 8)} rot={k * 7 + t * 0.2} trail={last ? 2 : 0} />
+        <text x={x} y={y + 22} textAnchor="middle" fontFamily={MONO} fontWeight={900} fontSize={last ? 20 : 60} fill={INK} opacity={last ? 0 : pop(t, a + 8, 8)}>{k + 1}</text>
+        <KText id={"h" + (k + 1)} text={title} x={tx} y={y - 4} size={48} t={t} a={a + 4} mode="rise" st={1.5} wt={800} />
+        <KText id={"ht" + k} text={time} x={left ? x + 125 + tw(time, 30, 600) / 2 : x - 125 - tw(time, 30, 600) / 2} y={y + 44} size={30} t={t} a={a + 14} mode="rise" st={1} wt={600} fill="#9a9a9a" glow={false} />
+      </g>;
+    })}
+    {t > nodeT(8) && <circle cx={PX(8)} cy={PY(8)} r={110 + 300 * easeOut(prog(t, nodeT(8) + 4, nodeT(8) + 36))} fill="none" stroke={INK} strokeWidth={4} opacity={1 - prog(t, nodeT(8) + 4, nodeT(8) + 36)} />}
+  </>;
+};
+// I: finale
+const SceneI = (t: number) => {
+  const w1 = prog(t, 18, 54), toRing = easeIO(prog(t, 70, 96));
+  return <>
+    <BigRings x={cx} y={640} t={t} o={0.14} gap={200} />
+    <Morph names={["circle", "sq", "circle", "star5"]} u={t < 66 ? w1 * 1 : 1 + toRing * 2} x={cx} y={t < 66 ? 600 : lerp(600, 560, toRing)} sx={t < 66 ? lerp(70, 330, w1) : 330 - 150 * toRing} sy={t < 66 ? lerp(70, 250, w1) : 250 - 70 * toRing} sw={6} trail={t > 66 ? 3 : 0} o={pop(t, 12, 10)} />
+    {t < 70 && <g opacity={prog(t, 44, 54)}>{[0, 1, 2].map(i => <circle key={i} cx={cx - 270 + i * 34} cy={400} r={9} fill="none" stroke={INK} strokeWidth={3} />)}<text x={cx} y={655} textAnchor="middle" fontFamily={MONO} fontWeight={900} fontSize={120} fill={INK} style={{ filter: GLOW }}>{"</>"}</text></g>}
+    <KText id="i0" text="BEZ INSTALACE." x={cx} y={1000} size={106} t={t} a={30} out={62} mode="rise" st={3} />
+    <KText id="i1" text="Vše běží v prohlížeči." x={cx} y={1100} size={54} t={t} a={44} out={62} mode="rise" st={1.5} wt={700} fill="#bbb" />
+    <KText id="i2" text="OBJEVUJ SVĚT," x={cx} y={1020} size={104} t={t} a={74} mode="scatter" st={3} seed={31} />
+    <KText id="i3" text="KDE UČENÍ BAVÍ." x={cx} y={1150} size={104} t={t} a={88} mode="scatter" st={3} seed={37} />
+    <Tag text="ucimesehrou.org/cs/code" x={cx} y={1330} t={t} a={108} size={24} on />
+  </>;
+};
+
+// ---------- the world: scenes + flying camera ----------
+const S = [0, 100, 205, 335, 445, 545, 650, 745, 880, 1010];
+const POS: [number, number][] = [[0, 0], [1500, -900], [2900, 300], [4300, -800], [5700, 400], [7100, -700], [8500, 300], [9900, -900], [11300, 0]];
+const SC: ((t: number) => React.ReactNode)[] = [SceneA, SceneB, SceneC, SceneD, SceneE, SceneF, SceneG, SceneH, SceneI];
+const SF = [1.0, 1.14, 1.0, 1.1, 1.0, 1.12, 1.0, 1.0, 1.12], ST = [1.12, 1.0, 1.08, 1.0, 1.1, 1.0, 1.1, 1.0, 0.94], RT = [0, -2.5, 1.5, -2, 2, -1.5, 2, 0, 0];
+type Cam = { x: number; y: number; s: number; r: number };
+const hold = (i: number, f: number): Cam => {
+  const a = i === 0 ? 0 : S[i] + 10, b = S[i + 1] - 14, u = clamp((f - a) / (b - a)), e = easeIO(u), [px, py] = POS[i];
+  let x = px + Math.sin(f * 0.05) * 9, y = py + Math.cos(f * 0.041) * 7, s = lerp(SF[i], ST[i], e), r = RT[i] * (1 - e * 0.6) + Math.sin(f * 0.03) * 0.5;
+  if (i === 7) { y = py - cy + PY(0) + (PY(8) - PY(0)) * u; x = px - cx + 540 - 95 * Math.cos(u * 8 * Math.PI); s = 1.0; r = -3 + 6 * u; }
+  return { x, y, s, r };
+};
+const camAt = (f: number): Cam => {
+  for (let i = 1; i <= 8; i++) {
+    const d = S[i] - 14, a = S[i] + 10;
+    if (f >= d && f < a) {
+      const A = hold(i - 1, d), B = hold(i, a), u = (f - d) / (a - d), e = smoother(u), sw = Math.sin(Math.PI * e);
+      return { x: lerp(A.x, B.x, e), y: lerp(A.y, B.y, e), s: lerp(A.s, B.s, e) * (1 - 0.42 * sw), r: lerp(A.r, B.r, e) + (i % 2 ? -1 : 1) * 7 * sw };
+    }
+  }
+  let i = 0; for (let k = 0; k < 9; k++) if (f >= S[k] + 10) i = k;
+  return hold(i, f);
+};
+const Dust: React.FC<{ c: Cam; par: number; n: number; o: number; rr: number }> = ({ c, par, n, o, rr }) => {
+  const spanX = W + 400, spanY = H + 400;
+  return <g fill={INK} opacity={o} transform={`translate(${cx} ${cy}) rotate(${c.r * par}) translate(${-cx} ${-cy})`}>
+    {Array.from({ length: n }, (_, i) => {
+      const bx = (rnd(i * 3 + rr) * spanX), by = (rnd(i * 5 + rr + 1) * spanY);
+      const x = (((bx - c.x * par) % spanX) + spanX) % spanX - 200, y = (((by - c.y * par) % spanY) + spanY) % spanY - 200;
+      return <circle key={i} cx={x} cy={y} r={1 + rnd(i + rr) * 2.4 * (par + 0.4)} opacity={0.25 + rnd(i + 9) * 0.6} />;
+    })}
+  </g>;
+};
+export const CodeShort: React.FC = () => {
+  const f = useCurrentFrame();
+  const c = camAt(f), p = camAt(f - 1);
+  const vx = Math.abs(c.x - p.x) * c.s, vy = Math.abs(c.y - p.y) * c.s;
+  const bx = Math.min(70, Math.max(0, vx - 12) * 0.22), by = Math.min(70, Math.max(0, vy - 12) * 0.22);
+  return (
+    <div style={{ width: W, height: H, background: "radial-gradient(ellipse 65% 45% at 50% 48%, #1b1b1b 0%, #090909 60%, #000 100%)", position: "relative", overflow: "hidden", fontFamily: FONT }}>
+      <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ position: "absolute", inset: 0 }}>
+        <defs><filter id="mb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation={`${bx} ${by}`} /></filter></defs>
+        <Dust c={c} par={0.12} n={46} o={0.5} rr={1} />
+        <g filter={bx + by > 1.2 ? "url(#mb)" : undefined}>
+          <Dust c={c} par={0.35} n={30} o={0.55} rr={7} />
+          <g transform={`translate(${cx} ${cy}) rotate(${c.r}) scale(${c.s}) translate(${-c.x} ${-c.y})`}>
+            {SC.map((Sc, i) => {
+              const a = i === 0 ? 0 : S[i] - 30, b = S[i + 1] + 22;
+              if (f < a || f > b) return null;
+              const [px, py] = POS[i];
+              return <g key={i} transform={`translate(${px - cx} ${py - cy})`}>{Sc(f - (S[i] - 12))}</g>;
+            })}
+          </g>
+        </g>
+        <defs><radialGradient id="vg" cx="50%" cy="50%" r="75%"><stop offset="55%" stopColor="#000" stopOpacity="0" /><stop offset="100%" stopColor="#000" stopOpacity="0.7" /></radialGradient></defs>
+        <rect width={W} height={H} fill="url(#vg)" />
+        <rect width={W} height={H} fill="#000" opacity={Math.max(1 - f / 8, prog(f, CODE_FRAMES - 14, CODE_FRAMES - 1))} />
+      </svg>
+    </div>
+  );
+};
