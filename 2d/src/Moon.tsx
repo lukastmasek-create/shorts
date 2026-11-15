@@ -152,7 +152,7 @@ const Clock: React.FC<{ x: number; y: number; p: number; kind: "A" | "B"; k?: nu
 const Padlock: React.FC<{ x: number; y: number; s: number; dy: number; o?: number }> = ({ x, y, s, dy, o = 1 }) => (
   <g transform={`translate(${x} ${y}) scale(${s})`} opacity={o} style={{ filter: GLOW }}>
     <path d="M-38 -5 V-45 C-38 -90 38 -90 38 -45 V-5" transform={`translate(0 ${dy})`} {...st} />
-    <rect x={-60} y={-5} width={120} height={95} rx={8} fill="#000" {...st} />
+    <rect x={-60} y={-5} width={120} height={95} rx={8} {...st} fill="#000" />
     <circle cy={38} r={9} fill={INK} />
   </g>
 );
@@ -290,7 +290,6 @@ const B7 = (t: number) => {
     <Starfield t={t} n={90} o={0.6} />
     <Cam {...cam(t, 105, 1.06, 540, 880)}>
       {t < 62 && Array.from({ length: 6 }, (_, i) => { const a = dirPt(M.x, M.y, phi + i * 60, R + 44), b = dirPt(M.x, M.y, phi + i * 60, R + 58); return <line key={i} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={INK} strokeWidth={3} strokeLinecap="round" opacity={0.8} />; })}
-      <line x1={dot.x} y1={dot.y} x2={100} y2={dot.y === M.y ? 820 : dot.y + (820 - dot.y) * 0} stroke={INK} strokeWidth={3} strokeLinecap="round" opacity={0.0} />
       {t >= 40 && <LockLink t={t} dot={dot} M={M} />}
       <line x1={90} x2={90} y1={790} y2={850} stroke={INK} strokeWidth={4} strokeLinecap="round" opacity={0.8} />
       <MoonDisc x={M.x} y={M.y} R={R} />
@@ -324,8 +323,8 @@ const B8 = (t: number) => {
       <path d={`M${M.x} ${M.y - R} A${R} ${R} 0 0 1 ${M.x} ${M.y + R}`} fill="none" stroke={INK} strokeWidth={4} strokeDasharray="10 14" strokeLinecap="round" opacity={0.6} />
       <Txt x={690} y={980} size={200} color="#aaa" o={pop(t, 20)}>?</Txt>
     </Cam>
-    <Pill text="NEAR SIDE" x={330} y={1230} a={25} on={false} />
-    <Pill text="NEVER SEEN" x={780} y={1230} a={40} />
+    <Pill text="NEAR SIDE" x={330} y={1310} a={25} on={false} />
+    <Pill text="NEVER SEEN" x={780} y={1310} a={40} />
   </>;
 };
 
