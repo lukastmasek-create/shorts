@@ -3,7 +3,7 @@
 import React from "react";
 import { Audio, staticFile } from "remotion";
 import { Stage, Pill, Num, Person, Cross, Ring, W, prog, easeOut, easeIO, lerp, pop, clamp, INK, GLOW } from "./kit";
-import { Icon2, Txt } from "./kit2";
+import { Txt } from "./kit2";
 import { SceneFx, Cam, Starfield, GridBG, BigRings, Rays, GhostBleed, Flash, Trans } from "./fx";
 import { Earth, Sun } from "./Jupiter";
 import FRAMES from "../diamond/frames.json";
@@ -18,18 +18,30 @@ const st = { fill: "none", stroke: INK, strokeWidth: 5, strokeLinecap: "round", 
 const hsh = (n: number) => { const s = Math.sin(n * 127.1 + 311.7) * 43758.5453; return s - Math.floor(s); };
 
 // ---- text helpers (all inside SAFE) ----
-const Src: React.FC<{ t: number; children: string }> = ({ t, children }) => <Txt x={cx} y={1510} size={20} color="#777" spacing={3} o={prog(t, 4, 14)}>{children.toUpperCase()}</Txt>;
+const Src: React.FC<{ t: number; children: string }> = ({ t, children }) => <Txt x={cx} y={1510} size={24} color="#999" spacing={3} o={prog(t, 4, 14)}>{children.toUpperCase()}</Txt>;
 const Lbl: React.FC<{ x: number; y: number; o?: number; size?: number; children: string }> = ({ x, y, o = 1, size = 22, children }) => <Txt x={x} y={y} size={size} color="#aaa" spacing={5} o={o}>{children}</Txt>;
-const psz = (s: string) => (s.length >= 20 ? 16 : s.length >= 16 ? 18 : s.length >= 12 ? 21 : 24);
+const psz = (s: string) => (s.length >= 18 ? 20 : s.length >= 14 ? 22 : 24);
 const Off: React.FC<{ text: string; a: number; o?: number }> = ({ text, a, o = 1 }) => <Pill text={text} x={cx} y={1330} a={a} on={false} size={psz(text)} o={o} />;
 const On: React.FC<{ text: string; a: number; o?: number }> = ({ text, a, o = 1 }) => <Pill text={text} x={cx} y={1440} a={a} size={psz(text)} o={o} />;
-const Head: React.FC<{ v: string | number; label: string; o: number }> = ({ v, label, o }) => <Num v={v} label={label} x={cx} y={310} size={130} o={o} />;
+/** big number + 24 px grey caption (kit Num caption is only 0.17 x size) */
+const NumC: React.FC<{ v: string | number; label: string; x: number; y: number; size?: number; o?: number }> = ({ v, label, x, y, size = 130, o = 1 }) => <g opacity={o}>
+  <Num v={v} x={x} y={y} size={size} />
+  <Txt x={x} y={y + size * 0.36 + 6} size={24} weight={600} color="#aaa" spacing={6}>{label.toUpperCase()}</Txt>
+</g>;
+const Head: React.FC<{ v: string | number; label: string; o: number }> = ({ v, label, o }) => <NumC v={v} label={label} x={cx} y={310} o={o} />;
 /** crossed-out mark, hidden until it starts drawing (kit Cross shows round-cap dots at p = 0) */
 const X: React.FC<{ x: number; y: number; r: number; p: number }> = ({ x, y, r, p }) => (p > 0 ? <Cross x={x} y={y} r={r} p={p} /> : null);
 /** ring pulse, only while it plays */
 const Pulse: React.FC<{ x: number; y: number; t: number; t0: number }> = ({ x, y, t, t0 }) => { const k = (t - t0) / 40; return k > 0 && k < 1.5 ? <Ring x={x} y={y} t={k} /> : null; };
 
 // ---- icons ----
+/** flame, tip up, ~56 x 95 px at s = 1; flicker is a pure function of t */
+const Flame: React.FC<{ x: number; y: number; s: number; t: number; i: number }> = ({ x, y, s, t, i }) => s <= 0 ? null : (
+  <g transform={`translate(${x} ${y + 42 * s}) scale(${s} ${s * (1 + 0.12 * Math.sin(t * 0.7 + i * 1.9))}) skewX(${6 * Math.sin(t * 0.5 + i * 2.3)}) translate(0 -42)`} style={{ filter: GLOW }}>
+    <path d="M0 -52 C6 -30 30 -18 28 10 C27 32 12 42 0 42 C-12 42 -27 32 -28 10 C-29 -8 -18 -14 -14 -30 C-8 -18 -4 -14 -2 -12 C2 -24 -2 -40 0 -52 Z" fill="#000" stroke={INK} strokeWidth={5 / s} strokeLinejoin="round" />
+    <path d="M0 -6 C6 6 12 14 10 24 C8 34 -8 34 -10 24 C-12 14 -6 6 0 -6 Z" fill={INK} opacity={0.85} />
+  </g>
+);
 /** 4-point star sparkle, ~120 px at s = 1. outline = dim "hidden" version */
 const Sparkle: React.FC<{ x: number; y: number; s?: number; o?: number; outline?: boolean }> = ({ x, y, s = 1, o = 1, outline }) => s <= 0 ? null : (
   <g transform={`translate(${x} ${y}) scale(${s})`} opacity={o} style={{ filter: outline ? undefined : GLOW }}>
@@ -232,24 +244,24 @@ const Hook = (t: number) => {
 const Graphite = (t: number) => {
   const px = lerp(1500, cx, easeOut(prog(t, 95, 115))), line = easeIO(prog(t, 112, 150));
   return <>
-    <GhostBleed x={880} y={1500} s={6} o={0.08}><Pencil x={0} y={0} s={0.5} /></GhostBleed>
+    <GhostBleed x={880} y={1650} s={6} o={0.08}><Pencil x={0} y={0} s={0.5} /></GhostBleed>
     <Cam t={t} a={0} b={LEN(1)} from={{ s: 1 }} to={{ s: 1.2, y: 820 }}>
       <Sparkle x={cx} y={300} s={1.6 * pop(t, 11, 10)} o={1 - 0.5 * prog(t, 100, 115)} />
       <Pulse x={cx} y={300} t={t} t0={15} />
       <X x={cx} y={300} r={110} p={prog(t, 100, 112)} />
       {[70, 0, -70].map((dy, i) => <g key={i} transform={`translate(${cx} ${640 + dy}) scale(1 0.42)`} opacity={[0.35, 0.6, 1][i]}><HexSheet x={0} y={0} w={700} h={380} a={34} p={easeOut(prog(t, 60 + i * 6, 92 + i * 6))} /></g>)}
       <Lbl x={cx} y={790} o={prog(t, 88, 100)}>{"STACKED CARBON SHEETS"}</Lbl>
-      {line > 0 && <path d={`M150 1185 ${Array.from({ length: 20 }, (_, i) => `L${150 + (i + 1) * 39 * line} ${1185 + (i % 2 ? -10 : 10)}`).join(" ")}`} {...st} strokeWidth={6} opacity={0.8} />}
-      <Pencil x={px} y={1080} s={1.7} o={prog(t, 95, 100)} />
+      {line > 0 && <path d={`M150 950 ${Array.from({ length: 20 }, (_, i) => `L${150 + (i + 1) * 39 * line} ${950 + (i % 2 ? -10 : 10)}`).join(" ")}`} {...st} strokeWidth={6} opacity={0.8} />}
+      <Pencil x={px} y={1040} s={1.7} o={prog(t, 95, 100)} />
     </Cam>
     <Off text="You expect sparkle" a={11} />
-    <On text="Graphite, like pencil" a={95} />
+    <On text="Pencil lead" a={95} />
     <Src t={t}>Kuchner & Seager 2005 · model</Src>
   </>;
 };
 // 2 the diamond hides km down
 const Hidden = (t: number) => {
-  const km = Math.round(lerp(0, 3, easeOut(prog(t, 10, 80)))), dl = easeIO(prog(t, 95, 123));
+  const dl = easeIO(prog(t, 95, 123));
   return <>
     <GridBG t={t} o={0.08} />
     <Cam t={t} a={0} b={LEN(2)} from={{ s: 1 }} to={{ s: 1.15, y: 1010 }}>
@@ -258,7 +270,7 @@ const Hidden = (t: number) => {
       {dl > 0 && <line x1={cx} x2={cx} y1={410} y2={lerp(410, 1055, dl)} stroke={INK} strokeWidth={3} strokeDasharray="10 12" opacity={0.85} />}
       <Sparkle x={cx} y={1120} s={pop(t, 60, 10)} o={0.4} outline={dl < 1} />
     </Cam>
-    <Num v={km} label="km down" x={820} y={760} size={110} o={prog(t, 8, 16)} />
+    <NumC v="FEW" label="km down · model" x={780} y={760} size={110} o={prog(t, 8, 16)} />
     <Off text="Under your boots" a={95} />
     <On text="A few km down" a={10} />
     <Src t={t}>Scientific American · model</Src>
@@ -266,7 +278,7 @@ const Hidden = (t: number) => {
 };
 // 3 even on Earth: 140+ km deep
 const Deep = (t: number) => {
-  const k = easeOut(prog(t, 90, 135)), gy = lerp(540, 1150, easeIO(prog(t, 90, 135))), R = 1700;
+  const k = easeOut(prog(t, 90, 135)), gy = lerp(540, 1000, easeIO(prog(t, 90, 135))), R = 1700;
   return <>
     <BigRings x={cx} y={-400} n={10} t={t} o={0.1} />
     <Cam t={t} a={0} b={LEN(3)} from={{ s: 1 }} to={{ s: 1.2, y: 900 }}>
@@ -277,12 +289,12 @@ const Deep = (t: number) => {
       </g>
       <Person x={250} y={505} s={1} fill={false} o={pop(t, 6)} />
       <g {...st} strokeWidth={3} strokeDasharray="12 10" opacity={0.7 * prog(t, 10, 30)}>
-        <path d="M380 482 V1300 H700 V482" />
-        {Array.from({ length: 8 }, (_, i) => <line key={i} x1={380} x2={350} y1={580 + i * 100} y2={580 + i * 100} strokeDasharray="none" />)}
+        <path d="M380 482 V1150 H700 V482" />
+        {Array.from({ length: 6 }, (_, i) => <line key={i} x1={380} x2={350} y1={580 + i * 100} y2={580 + i * 100} strokeDasharray="none" />)}
       </g>
       <Gem x={cx} y={gy} s={1.6 * pop(t, 20)} fill={prog(t, 130, 140)} o={lerp(0.6, 1, prog(t, 128, 136))} dash={t < 130} />
-      <Sparkle x={cx + 120} y={1040} s={0.45 * pop(t, 130)} />
-      <Pulse x={cx} y={1150} t={t} t0={140} />
+      <Sparkle x={cx + 120} y={890} s={0.45 * pop(t, 130)} />
+      <Pulse x={cx} y={1000} t={t} t0={140} />
     </Cam>
     <Head v={`${Math.round(lerp(0, 140, k))}${k >= 1 ? "+" : ""}`} label="km deep on Earth" o={prog(t, 84, 94)} />
     <Off text="Even on Earth" a={10} />
@@ -298,17 +310,17 @@ const Burn = (t: number) => {
     <Rays x={cx} y={900} t={t} o={0.15} />
     <Cam t={t} a={0} b={LEN(4)} from={{ s: 1 }} to={{ s: 1.15 }}>
       {O2.map(([x, y, ox, oy], i) => { const m = easeOut(prog(t, 12 + i * 8, 58)); return <Pill key={i} text="O2" x={x + ox * (1 - m)} y={y + oy * (1 - m) + 8 * Math.sin(t * 0.08 + i)} a={12 + i * 8} on={false} size={16} o={1 - 0.5 * gone} />; })}
-      {f > 0 && Array.from({ length: 12 }, (_, i) => { const an = (i / 12) * TAU; return <Icon2 key={i} k="flame" x={cx + Math.cos(an) * 285} y={820 + Math.sin(an) * 285} s={0.55 * f * (1 + 0.1 * Math.sin(t * 0.6 + i * 1.3))} />; })}
+      {f > 0 && Array.from({ length: 12 }, (_, i) => { const an = (i / 12) * TAU; return i === 9 ? null : <Flame key={i} x={cx + Math.cos(an) * 285} y={820 + Math.sin(an) * 285} s={0.75 * f} t={t} i={i} />; })}
       <Gem x={cx} y={820} s={2.2 * pop(t, 4)} fill={1 - gone} o={1 - 0.6 * gone} dash={gone > 0.5} />
       <Sparkle x={cx} y={560} s={0.9 * pop(t, 6)} o={1 - 0.5 * prog(t, 118, 130)} />
       <X x={cx} y={560} r={70} p={prog(t, 118, 128)} />
       <Thermometer x={900} y={800} lvl={lerp(0.08, 0.95, f)} o={prog(t, 60, 72)} />
     </Cam>
     <Flash t={t} t0={118} />
-    <Head v={Math.round(lerp(20, 800, f))} label="°C · diamond ignites" o={prog(t, 72, 82)} />
-    <Off text="If the air has oxygen" a={12} />
+    <Head v={Math.round(lerp(20, 800, f))} label="°C · ignites in oxygen" o={prog(t, 72, 82)} />
+    <Off text="Add oxygen" a={12} />
     <On text="It would burn" a={73} />
-    <Src t={t}>Lavoisier 1772 · Britannica</Src>
+    <Src t={t}>Diamond (Wikipedia) · Lavoisier 1772</Src>
   </>;
 };
 // 5 55 Cancri e, 41 light-years away
@@ -331,19 +343,19 @@ const Cancri = (t: number) => {
 };
 // 6 stats: 2x width, 8 Earth masses, 18-hour year
 const Stats = (t: number) => {
-  const yr = easeOut(prog(t, 95, 125)), oa = Math.max(0, t - 95) * 0.25;
+  const yr = easeOut(prog(t, 105, 130)), oa = Math.max(0, t - 105) * 0.25;
   return <>
     <GridBG t={t} o={0.1} />
     <Cam t={t} a={0} b={LEN(6)} from={{ s: 1 }} to={{ s: 1.06 }}>
-      <Num v="2×" label="Earth's width" x={cx} y={360} size={130} o={prog(t, 10, 20)} />
+      <NumC v="2×" label="Earth's width" x={cx} y={360} o={prog(t, 10, 20)} />
       <Earth x={210} y={315} r={50 * pop(t, 14)} />
       <FacetPlanet uid="k6a" x={860} y={315} r={100 * pop(t, 22)} t={t} />
-      <Num v={Math.round(lerp(0, 8, easeOut(prog(t, 47, 80))))} label="Earth masses" x={cx} y={740} size={130} o={prog(t, 45, 55)} />
+      <NumC v={Math.round(lerp(0, 8, easeOut(prog(t, 47, 80))))} label="Earth masses" x={cx} y={740} o={prog(t, 45, 55)} />
       {Array.from({ length: 8 }, (_, i) => <Earth key={i} x={140 + (i % 4) * 46} y={660 + Math.floor(i / 4) * 50} r={18 * pop(t, 50 + i * 4)} />)}
       <FacetPlanet uid="k6b" x={860} y={690} r={75 * pop(t, 52)} t={t} />
-      <Num v={Math.round(lerp(0, 18, yr))} label="hours in a year" x={cx} y={1120} size={130} o={prog(t, 92, 100)} />
-      <Clk x={210} y={1075} r={75} m={yr * 18 * 60} o={prog(t, 92, 100)} />
-      <g opacity={prog(t, 92, 100)} style={{ filter: GLOW }}>
+      <NumC v={`~${Math.round(lerp(0, 18, yr))}`} label="hours in a year" x={cx} y={1120} o={prog(t, 102, 110)} />
+      <Clk x={210} y={1075} r={75} m={yr * 18 * 60} o={prog(t, 102, 110)} />
+      <g opacity={prog(t, 102, 110)} style={{ filter: GLOW }}>
         <ellipse cx={860} cy={1075} rx={100} ry={45} fill="none" stroke={INK} strokeWidth={2.5} strokeDasharray="8 8" opacity={0.6} />
         <circle cx={860} cy={1075} r={14} fill={INK} />
         <circle cx={860 + Math.cos(oa) * 100} cy={1075 + Math.sin(oa) * 45} r={10} fill="#000" stroke={INK} strokeWidth={3} />
@@ -377,8 +389,8 @@ const Third = (t: number) => {
 // 8 2013: the star has more oxygen than carbon
 const ATOM = [[-66, -22], [-22, -22], [22, -22], [66, -22], [-44, -62], [0, -62], [44, -62], [0, -102]];
 const Chem = (t: number) => {
-  const nO = 8 * easeOut(prog(t, 40, 90)), nC = 6 * easeOut(prog(t, 60, 100));
-  const tilt = clamp((nO - nC) * 4, -14, 14), rad = (tilt * Math.PI) / 180, bx = 540, by = 1080, arm = 260;
+  const nO = 5 * easeOut(prog(t, 40, 90)), nC = 4 * easeOut(prog(t, 60, 100));
+  const tilt = clamp((nO - nC) * 7, -14, 14), rad = (tilt * Math.PI) / 180, bx = 540, by = 1080, arm = 260;
   const pan = (side: -1 | 1, n: number, sym: string) => {
     const ex = bx + side * arm * Math.cos(rad), ey = by - side * arm * Math.sin(rad); // left end (side -1) drops when tilt > 0
     const py = ey + 90;
@@ -400,8 +412,8 @@ const Chem = (t: number) => {
         <circle cx={bx} cy={by} r={10} fill={INK} />
         {pan(-1, nO, "O")}{pan(1, nC, "C")}
       </g>
-      <Lbl x={280} y={1290} o={prog(t, 40, 50)}>{"OXYGEN"}</Lbl>
-      <Lbl x={800} y={1290} o={prog(t, 60, 70)}>{"CARBON"}</Lbl>
+      <Lbl x={280} y={1250} o={prog(t, 40, 50)}>{"OXYGEN"}</Lbl>
+      <Lbl x={800} y={1250} o={prog(t, 60, 70)}>{"CARBON"}</Lbl>
       <Sparkle x={800} y={520} s={pop(t, 18)} o={1 - 0.5 * prog(t, 100, 112)} />
       <X x={800} y={520} r={70} p={prog(t, 100, 112)} />
     </Cam>
@@ -415,10 +427,10 @@ const Chem = (t: number) => {
 const Webb = (t: number) => <>
   <Starfield t={t} o={0.15} />
   <GhostBleed x={880} y={300} s={3} o={0.1}><JWST x={0} y={0} /></GhostBleed>
-  <Cam t={t} a={0} b={LEN(9)} from={{ s: 1 }} to={{ s: 1.2 }}>
-    <JWST x={cx} y={590} a={36} p={easeOut(prog(t, 40, 62))} />
-    <FacetPlanet uid="k9" x={cx} y={1050} r={200 * pop(t, 4, 10)} t={t} atm={easeOut(prog(t, 60, 100))} />
-    <X x={cx} y={1050} r={260} p={prog(t, 113, 125)} />
+  <Cam t={t} a={0} b={LEN(9)} from={{ s: 1 }} to={{ s: 1.15 }}>
+    <JWST x={cx} y={640} a={32} p={easeOut(prog(t, 40, 62))} />
+    <FacetPlanet uid="k9" x={cx} y={1010} r={180 * pop(t, 4, 10)} t={t} atm={easeOut(prog(t, 60, 100))} />
+    <X x={cx} y={1010} r={200} p={prog(t, 113, 125)} />
   </Cam>
   <Flash t={t} t0={113} />
   <Head v="2024" label="Webb" o={prog(t, 12, 20)} />
@@ -460,8 +472,8 @@ const Lucy = (t: number) => <>
     <LatticeDisc x={cx} y={860} r={180} g={36} p={easeOut(prog(t, 70, 113))} />
     <Sparkle x={cx} y={860} s={1.1 * pop(t, 95, 10)} o={1 - 0.5 * prog(t, 130, 140)} />
     <X x={cx} y={860} r={80} p={prog(t, 130, 140)} />
-    <Pill text="Lucy" x={cx} y={1210} a={40} on={false} size={18} />
   </Cam>
+  <Pill text="Lucy" x={cx} y={1235} a={40} on={false} size={18} />
   <Head v="~50" label="light-years" o={prog(t, 13, 22)} />
   <Off text="Crystal carbon core" a={70} />
   <On text="But it's a star" a={130} />
@@ -470,18 +482,16 @@ const Lucy = (t: number) => <>
 // 12 end: real, but too deep to see
 const GL = [[180, 1110], [330, 1200], [760, 1130], [900, 1240], [420, 1290], [650, 1190]];
 const End = (t: number) => {
-  const km = Math.round(lerp(0, 3, easeOut(prog(t, 20, 80))));
   return <>
     <GridBG t={t} o={0.08} />
     <Cam t={t} a={0} b={LEN(12)} from={{ s: 1 }} to={{ s: 1.15, y: 1020 }}>
       <Strata y0={380} y1={1320} latY={1060} p={prog(t, 20, 60)} lp={easeOut(prog(t, 40, 80))} />
       <Person x={cx} y={380} s={1.6} fill={false} o={pop(t, 4)} />
       {GL.map(([x, y], i) => { const k = Math.pow(Math.max(0, Math.sin(t * 0.2 + i * 1.7)), 4) * prog(t, 60, 75); return k > 0.02 ? <Sparkle key={i} x={x} y={y} s={0.3 * k} /> : null; })}
-      <Sparkle x={cx} y={1250} s={1.4 * pop(t, 60, 10) * (1 + 0.12 * Math.sin(t * 0.25))} />
-      <Pulse x={cx} y={1250} t={t} t0={130} />
+      <Sparkle x={cx} y={1180} s={1.4 * pop(t, 60, 10) * (1 + 0.12 * Math.sin(t * 0.25))} />
+      <Pulse x={cx} y={1180} t={t} t0={130} />
     </Cam>
-    <Num v={km} label="km down" x={820} y={760} size={110} o={prog(t, 18, 26)} />
-    <Off text="Real, too deep to see" a={11} />
+    <Off text="Too deep to see" a={11} />
     <On text="Still want to land?" a={101} />
   </>;
 };
