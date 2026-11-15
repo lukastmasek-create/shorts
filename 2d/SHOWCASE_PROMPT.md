@@ -43,6 +43,61 @@ This is the exact style already shown to and approved by the user (`2d/src/Code.
 9. **Repo hygiene.** Commit sources, `logo.ts`, the wav files and the audio script; never mp4; working copies in `<name>/audio/` are gitignored; push the session branch.
 10. **Feedback loop used last time.** First cut was too fast to read, so every scene got a slow factor and long scenes were split into separate parts; Czech on-screen text was requested explicitly (it overrides the old "English only" note in CLAUDE.md); the site's colours, fonts and the real logo replaced the generic white line art.
 
+## 1. Scene library and random order
+Build every video from a **library of scenes**; never reuse a fixed running order. Each scene is a component `C(t)` plus metadata, and the order, the picks, the transitions and the objects are chosen **at random per video** (seeded, so one video is reproducible).
+
+**Library** (scenes marked * already exist in `2d/src/Code.tsx`; write the others in the same style and same `createFilm` scene format). A scene may only be picked when the section really has the matching feature (`needs`), otherwise it is skipped.
+
+| id | what happens | needs (real feature in the section) | len / K | audio intensity |
+|---|---|---|---|---|
+| `logoMorph`* | object -> blob -> logo tile (face) -> real logo, pieces pop | always | 100-165 / 1.25-1.3 | 0.35-0.45 |
+| `cards3`* | one card splits into 3-4 cards (files, modes, levels, tabs) that fan out, chips pop | a list of 3-4 things | 105 / 1.3 | 0.65 |
+| `explainer`* | code or UI with a spark hopping line to line, explanation card with kinetic title per step | step-by-step explanations | 165 / 1.4 | 0.75 |
+| `livePreview`* | typed input on top, result below reacts with a pulse (colour, number, layout) | live result / preview | 110 / 1.3 | 0.85 |
+| `suggest`* | typed prefix, popup list, selection moves, key cap, completion burst | autocomplete / search / suggestions | 100 / 1.3 | 0.85 |
+| `exercise`* | counter counts up, fill-in blank gets answered, check mark draws, hint/solution pills | tasks / exercises / quizzes | 105 / 1.35 | 0.9 |
+| `chatAI`* | user bubble, assistant bubble grows from a dot, typed answer | AI helper / chat / support | 105 / 1.35 | 0.5 |
+| `pathPlan`* | camera flies down a curved path of numbered nodes whose shapes gain a side per step | steps / curriculum / roadmap | 135 / 1.5 | 0.95 |
+| `finale`* | big claim slam, window morph, motto, logo + URL | always (once, last) or `outro`* | 90-150 / 1.3 | 0.9-1.0 |
+| `katanaCut` | the title card or an object is sliced, halves part, corner chip falls, debris | always (at least once per part) | 60-90 / 1.3 | 0.85 |
+| `sparkChat` | word -> sparks (motion blur) -> chat, every spark becomes a typed sentence | always (follows `katanaCut` or a word scene) | 130-170 / 1.35 | 0.8 |
+| `terminalType` | big typewriter terminal / command line that types real commands or labels, lines morph into icons | any code or text feature | 90 / 1.3 | 0.7 |
+| `statCounter` | huge number counts up (Unbounded), ring fills, unit label, small bars grow | a real number (count of exercises, lessons, users, levels) | 80 / 1.3 | 0.8 |
+| `splitCompare` | screen splits with a slash line, before/after or with/without, slider sweeps | a real before/after | 100 / 1.3 | 0.85 |
+| `deck3D` | cards on a CSS 3D carousel rotate in perspective, front card highlighted | several features of the same kind | 110 / 1.35 | 0.85 |
+| `deviceZoom` | phone/laptop frame with the real UI drawn inside, camera dollies through the screen into the next scene | responsive / mobile / app | 100 / 1.3 | 0.8 |
+| `progressBadge` | progress bar fills, badge/level morphs polygon -> star, streak bolt, confetti sparks | points, levels, rewards | 90 / 1.3 | 0.9 |
+| `checklist` | rows tick one by one with draw-on check marks, row morphs into the next feature icon | a feature list | 90 / 1.3 | 0.75 |
+| `keyboardRain` | key caps fall and land into a word, word morphs into a window | typing, writing, editing | 80 / 1.3 | 0.8 |
+| `mapZoom` | camera pulls out from one object to reveal many (constellation of windows), then dives into one | many items/pages | 100 / 1.35 | 0.85 |
+
+**Random selection rules (apply in this order)**
+1. Seed: one integer per video (`Date.now() % 2**31` at authoring time, written to `scenes.json` and into the commit message; the same seed rebuilds the same video; never random per frame, never `Math.random()` inside a component).
+2. Pick N scenes so the total stays <= 15 s real time (`sum(len*K)/30 <= 15`; typically 5-7 scenes). Always: first = `logoMorph` (random source object), last = `finale` or `outro`. Always once: `katanaCut` and `sparkChat` (`sparkChat` directly after `katanaCut`, so the sparks come out of the cut word). The rest is a random draw without repeats from the scenes whose `needs` the section satisfies, weighted toward features that are most important in the real section.
+3. Shuffle the middle with the seed, then fix violations: no two scenes of the same family next to each other (`exercise`/`chatAI` family, `explainer`/`terminalType` family, etc.), `statCounter` never first after the intro.
+4. Randomize the details the same way: the intro object, scene positions on the path (zigzag direction, spacing), camera swoop roll sign, hold push-in or pull-out, transition type between scenes (swoop, whip, dolly-through, spark-chase, slash-wipe; never the same twice in a row), accent colour order of the four logo colours, which word becomes the sparks, katana angle and which corner chips off, chat sentence slots.
+5. Keep the pieces that must stay stable: palette, fonts, logo, readability rules (headline >= 1.2 s, sentence >= 1.4 s, text >= 44 px), safe area.
+6. Audio follows the picked list: the music script reads `scenes.json` (ids, len, K, intensity, event tables per scene id), so the arc (quiet -> pulse -> groove -> breather -> riser -> climax on the last logo hit) is rebuilt for any order; put the breather (lowest intensity scene) in the middle and the highest-intensity scene last-but-one.
+7. Report at the end: the seed, the picked order, which scenes were skipped because the section lacks the feature.
+
+```ts
+// deterministic seeded random for scene picking (Remotion must render every frame identically)
+const mulberry32 = (a: number) => () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+type SceneDef = { id: string; needs: string[]; len: number; k: number; fam: string; C: (t: number, r: () => number) => React.ReactNode };
+export const pickScenes = (lib: SceneDef[], have: Set<string>, seed: number, budgetS = 15): SceneDef[] => {
+  const r = mulberry32(seed), ok = lib.filter(s => s.needs.every(n => have.has(n)) && !["logoMorph", "finale", "katanaCut", "sparkChat"].includes(s.id));
+  const sh = [...ok].sort(() => r() - 0.5), by = (id: string) => lib.find(s => s.id === id)!;
+  const head = [by("logoMorph")], tail = [by("finale")], fixed = [by("katanaCut"), by("sparkChat")];
+  const secs = (a: SceneDef[]) => a.reduce((x, s) => x + (s.len * s.k) / 30, 0);
+  const mid: SceneDef[] = [];
+  for (const s of sh) { if (secs([...head, ...fixed, ...mid, s, ...tail]) > budgetS) continue; if (mid.length && mid[mid.length - 1].fam === s.fam) continue; mid.push(s); }
+  const at = Math.floor(r() * (mid.length + 1));                       // katana + sparks somewhere in the middle, always as a pair
+  return [...head, ...mid.slice(0, at), ...fixed, ...mid.slice(at), ...tail];
+};
+// every random detail inside a scene comes from the same seed: const rr = mulberry32(seed + sceneIndex * 101);
+```
+Write the picked list to `2d/<name>/scenes.json` (`{ seed, order: [{id, len, k, intensity}] }`) and have both the composition and the audio script read it, so picture and music can never disagree.
+
 ## 2. Camera and 3D (seamless, no cuts)
 - One continuous world, scenes placed along a path; camera = position + zoom + roll with smootherstep swoops, tiny handheld drift, motion blur only while moving fast. Transitions are camera moves, match cuts or "dolly through" (zoom into a letter/hole until it fills the frame, next scene is behind it). Never hard cut.
 - Real 3D feel without a 3D engine (CPU render, ~2.3 s/frame): wrap the SVG layers in CSS 3D and tilt the whole plane a few degrees with the camera, so layers get parallax:
