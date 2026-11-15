@@ -1,81 +1,75 @@
 # Shorts — AI production prompts, workflows, and examples
 
-This repository is a practical instruction kit for AI assistants making short animated videos. It contains detailed style rules, production steps, source code, reusable scripts, and completed examples. Treat the relevant workflow guide as the production prompt: follow it in order, use the repository's actual files and commands, and verify outputs rather than inventing missing assets or instructions.
+This repository is an instruction kit for AI assistants making short animated videos. It includes production prompts, style guides, source code, utilities, and example projects. Use the guide for the chosen workflow, verify paths and commands against the checkout, and report what was actually tested.
 
-## Choose the right workflow
+## Start here
 
-- [`AI_PRODUCTION_PROMPT.md`](AI_PRODUCTION_PROMPT.md): master AI prompt for a coordinated eight-role production team, workflow selection, implementation guidance, and review criteria.
-- [`PROJECT_CODE_STARTERS.md`](PROJECT_CODE_STARTERS.md): exact starter code and project-specific entry/render instructions for Stage Kit, 2D Remotion, 3D Remotion, paper pop-up, and low-poly styles.
+- [`AI_PRODUCTION_PROMPT.md`](AI_PRODUCTION_PROMPT.md): master prompt for a coordinated eight-role production team, workflow selection, production sequence, and professional quality gates.
+- [`PROJECT_CODE_STARTERS.md`](PROJECT_CODE_STARTERS.md): starter code and exact integration/render guidance for Stage Kit, 2D Remotion, 3D Remotion, paper pop-up, and low-poly styles.
+- [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md): setup and usage tutorial for Kokoro voice generation, Remotion, Three.js, previewing, and rendering.
 
-| Goal | Start here | Entry point / commands |
+## Choose a workflow
+
+| Goal | Read first | Main entry point |
 |---|---|---|
-| New 3D cartoon story short (Three.js in Remotion) | [`SKILL.md`](SKILL.md), then [`references/STYLE_BIBLE.md`](references/STYLE_BIBLE.md) | `src/index.ts`; `npm run studio`; `npm run render` (BridgeShort) |
-| New flat 2D line-art short (Remotion) | [`2d/README.md`](2d/README.md), [`2d/STYLE.md`](2d/STYLE.md) | `2d/src/index.ts`; `npm run studio:2d`; `npx remotion render 2d/src/index.ts <CompositionId> out/<name>.mp4 --codec h264 --crf 16` |
-| Učíme se hrou pop-up book animation | [`ucimesehrou/README.md`](ucimesehrou/README.md), [`ucimesehrou/PROMPT_TEMPLATE.md`](ucimesehrou/PROMPT_TEMPLATE.md) | `cd ucimesehrou && node build.cjs`; MP4 render requires Chrome (see its README) |
-| Inspect existing stories and finished shorts | `aging/`, `2d/`, `sun/`, `shadow/`, `chance/`, `ucimesehrou/` | Each project may have its own script, assets, and instructions |
+| 3D cartoon story short (Three.js in Remotion) | [`SKILL.md`](SKILL.md), [`references/STYLE_BIBLE.md`](references/STYLE_BIBLE.md) | `src/index.ts` → `src/Root.tsx`; compositions `BridgeShort`, `AgingShort` |
+| Flat 2D line-art short (Remotion) | [`2d/README.md`](2d/README.md), [`2d/STYLE.md`](2d/STYLE.md) | `2d/src/index.ts` → `2d/src/Root.tsx` |
+| Paper pop-up book (standalone Three.js) | [`ucimesehrou/README.md`](ucimesehrou/README.md), [`ucimesehrou/PROMPT_TEMPLATE.md`](ucimesehrou/PROMPT_TEMPLATE.md) | `ucimesehrou/src/style.js` + shared Stage/Sound kits |
+| Low-poly miniature journey (standalone Three.js) | [`ucimesehrou/low-poly/README.md`](ucimesehrou/low-poly/README.md) | `ucimesehrou/low-poly/src/style.js` + shared Stage/Sound kits |
 
-These are distinct workflows. Do not apply the 3D skill's look, tools, or output assumptions to a 2D or pop-up-book project unless the user asks for that combination.
+These are separate workflows. Do not mix their APIs or visual rules unless the user explicitly asks for a hybrid.
 
-## 3D short workflow map
+## Repository map
 
-- [`SKILL.md`](SKILL.md): detailed AI-facing prompt/runbook for the 3D cartoon-story workflow. Includes story, script, voice, animation, rendering, sound, and QA guidance.
-- [`src/videos/bridge/`](src/videos/bridge/): bridge short source, the working reference implementation for the 3D workflow.
-- [`src/videos/aging/`](src/videos/aging/): aging short composition/source.
-- [`src/Root.tsx`](src/Root.tsx): registered root Remotion compositions.
-- [`audio/`](audio/): Python audio generation and mixing tools; [`audio/cues.md`](audio/cues.md) documents cues.
-- [`scripts/`](scripts/): still rendering, frame rendering, bridge sandbox merge, shot helpers, voice, side-by-side, and QA utilities.
-- [`references/STYLE_BIBLE.md`](references/STYLE_BIBLE.md), [`references/reports/`](references/reports/): style research and measured reports. Reference video frames/contact sheets are not included in this checkout.
-- [`aging/SCRIPT.md`](aging/SCRIPT.md), [`aging/SHOTPLAN.md`](aging/SHOTPLAN.md), [`SCRIPT_example.md`](SCRIPT_example.md): story and planning examples.
+- `src/videos/bridge/`: full 3D cartoon bridge short and the source reference implementation for the 3D style.
+- `src/videos/aging/`: 3D aging short source; project script and shot plan are in `aging/`.
+- `src/Root.tsx`: root 3D Remotion composition registry.
+- `2d/`: separate 2D Remotion project, with its own root, visual kit, stories, and prompt/style guides.
+- `ucimesehrou/`: standalone Three.js pop-up book project; `ucimesehrou/low-poly/` is the low-poly variant.
+- `audio/`: Python audio synthesis/mix tools; `scripts/`: voice, still rendering, QA, and related production helpers.
+- `references/STYLE_BIBLE.md` and `references/reports/`: style research and measured reports. The private reference videos, frames, and contact sheets are not in this checkout.
+- `CLAUDE.md`: environment-specific setup, rendering notes, and project status.
+- `2d/chance/` and `2d/sun/`: scripts for those shorts are in the 2D project. `shadow/` is an unused draft.
 
-## Tutorials
+## Common commands
 
-- [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md): install and run Kokoro voice generation, connect narration to Remotion, animate a Three.js scene from frames, preview/render, plus the separate standalone Stage Kit workflows.
-
-## Setup and common commands
-
-Install Node dependencies from the repository root:
+Install root JavaScript dependencies:
 
 ```bash
-npm install
+npm ci
+```
+
+Typecheck the root Remotion project:
+
+```bash
 npx tsc --noEmit
 ```
 
-Open the 3D Remotion project:
+Start the 3D Remotion Studio or the separate 2D Studio:
 
 ```bash
 npm run studio
-```
-
-Open the separate 2D Remotion project:
-
-```bash
 npm run studio:2d
 ```
 
-Render the registered BridgeShort composition (the package script's output is `out/bridge.mp4`):
+Render the root `BridgeShort`, or an existing composition by its actual registered ID:
 
 ```bash
 npm run render
-```
-
-For other compositions, use the exact entry point and composition ID, e.g.:
-
-```bash
 npx remotion render src/index.ts AgingShort out/aging.mp4 --codec h264 --crf 16
 npx remotion render 2d/src/index.ts MonoShort out/mono.mp4 --codec h264 --crf 16
 ```
 
-Rendering has substantial hardware and disk requirements. Check the relevant project notes before attempting full-resolution rendering. `scripts/bridge-stills.mjs` supports `COMP`, `BRIDGE_ENTRY`, `REMOTION_TMP`, `CHROME_PATH`, `GL`, and `INPUT_PROPS`; see its usage/comments and `CLAUDE.md` for this environment's known constraints. Don't delete shared temporary files or large assets without the user's approval.
+For voice generation, use [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md) and the exact usage in `scripts/voice.py`. Rendering can be GPU-, browser-, and disk-intensive; consult `CLAUDE.md` and the selected workflow guide before attempting a full render. Do not delete shared temp folders or user assets without approval.
 
-## Working rules for AI assistants
+## Files and generated assets
 
-1. Read the workflow guide and local project notes before editing. Confirm which short and visual style the user means.
-2. Check that cited paths and commands exist in this checkout. Do not assume a template directory or external asset is present.
-3. Keep new stories, characters, narration, and sound original; use style research as guidance, not as content to copy.
-4. Preserve existing project conventions. Make focused edits and keep 2D, 3D, and standalone projects separate.
-5. Research factual claims, keep source notes with the script, and flag uncertainty rather than presenting guesses as facts.
-6. After changes, run the applicable typecheck/build/render/QA steps when feasible. State what was and was not tested.
+- Rendered MP4s are not tracked; write them under `out/` and deliver them separately.
+- Kokoro model weights are not included. Keep model binaries out of Git.
+- The composition assets that are present are served from `public/`. For new Remotion media, place the approved file under `public/<project>/` and load it with `staticFile()`.
+- The repository may omit optional model assets (such as Kenney `.glb` props); inspect project code and notes before assuming an asset exists.
+- Keep stories, characters, narration, and sound original. Research factual claims and retain source notes with the script.
 
 ## License
 
-The code and documentation are MIT licensed; see [`LICENSE`](LICENSE). Reference materials, where present, are for style study only and must not be republished or copied as original content.
+Code and documentation are MIT licensed; see [`LICENSE`](LICENSE). Reference research is for style study only; do not republish or copy private reference content.

@@ -6,7 +6,7 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 
 ## Sekce ucimesehrou/
 Samostatná 15,7 s pop-up animace Učíme se hrou (three.js bez Remotionu), nezávislá na zbytku repa. Zdroj `ucimesehrou/src/`, `node build.cjs` -> `index.html`, `node render.cjs 32` -> MP4 (potřebuje GPU PC nebo hodně času, cloud ~10 s/snímek). Postup a úpravy v `ucimesehrou/README.md`.
-Podsložka `ucimesehrou/low-poly/`: druhá verze, 12,8 s 3D low-poly (jeden jeřábový záběr po ostrově, koncová obrazovka se SVG ikonami). Používá `ucimesehrou/src/stage.js` a `sound.js` (nesahat). Zdroj `low-poly/src/style.js` (rozvrh `T` nahoře řídí obraz i zvuk), `node build.cjs` -> `index.html` + `storyboard.html`, `node render.cjs 32` -> `low-poly/video/ucimesehrou-3d.mp4`. Přiložené MP4 má 12 vzorků (cloud bez GPU), na GPU přerenderovat s 64.
+Podsložka `ucimesehrou/low-poly/`: druhá verze, 12,8 s 3D low-poly (jeden jeřábový záběr po ostrově, koncová obrazovka se SVG ikonami). Používá `ucimesehrou/src/stage.js` a `sound.js` (nesahat). Zdroj `low-poly/src/style.js` (rozvrh `T` nahoře řídí obraz i zvuk), `node build.cjs` -> `index.html` + `storyboard.html`, `node render.cjs 32` -> `low-poly/video/ucimesehrou-3d.mp4` (MP4 se do gitu necommituje). Poslední render měl 12 vzorků (cloud bez GPU), na GPU přerenderovat s 64.
 
 ## Sekce 2d/
 Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastní entry `2d/src/index.ts`, komp. MonoShort/CalmShort/DegreeShort. Postup: `2d/README.md`, styl: `2d/STYLE.md`.
@@ -35,8 +35,19 @@ Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastn�
 - X axis: camera looks +z, so story +x is screen-LEFT.
 - Seated actors (`fo.mode: "sit"`) sit at ground level: lift y to the seat height (bench 0.4, chair 0.45).
 - Stills: `COMP=AgingShort GL=swangle REMOTION_TMP=/tmp/remotion-tmp CHROME_PATH=/opt/pw-browsers/chromium node scripts/bridge-stills.mjs out/a/s_ 60,420 0.5` (~13 s/frame on CPU: full video ~7 h, render on a GPU PC).
-- Audio is inside the composition (`<Audio>` of `public/aging/mix.wav`, a copy of `aging/audio/mix.wav`; re-copy after re-running aging_mix.py), so one render gives video + sound, no ffmpeg/mux needed. Final: `npx remotion render src/index.ts AgingShort out/aging.mp4 --codec h264 --crf 16 --scale 1.3333`, then mux voice: `ffmpeg -i out/aging.mp4 -i aging/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k out/aging_final.mp4`.
+- Audio is inside the composition (`<Audio>` of `public/aging/mix.wav`; aging_mix.py writes it plus the gitignored working copy `aging/audio/mix.wav`), so one render gives video + sound, no ffmpeg/mux needed. Final: `npx remotion render src/index.ts AgingShort out/aging.mp4 --codec h264 --crf 16 --scale 1.3333`, then mux voice: `ffmpeg -i out/aging.mp4 -i aging/audio/mix.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 192k out/aging_final.mp4`.
 - Look polish done: face age marks (eye bags / forehead lines / crow's feet via Outfit.age in bridge/toon.ts), golden sets side-lit (SUN_SET in world.ts) + lifted golden shade, calmer track colour, lighter bouncer.
 - Sound done: `python audio/aging_mix.py` (numpy+scipy; venv needs `pip install scipy`) -> `aging/audio/mix.wav` (48 kHz stereo, 67.5 s = 2025 f, -16.3 LUFS, -3.6 dBTP, no clipping). Original C-major 96 bpm score (pizzicato + music box + brushes, vibes in the confusion/explainer parts, pad + final sting), SFX table keyed to story frames (whooshes on cuts, stamp, sprint patter + skid, "?" bwoops, cane clatter, fridge, brain bloops, snail, book thuds, engine + horn, hand bell, bird chirps). Music ducks under the voice. NOT auditioned by a human: balance (music ~14 dB under voice) may need tuning in the script constants. If story.ts cut/kick frames change, update the frame lists in audio/aging_mix.py.
 - Not done: hand-fixing words.json, voice audition, full render (do it on a GPU PC). Look is still flat-cartoon: no props on tables/walls beyond the basics.
 - `shadow/SCRIPT.md` = unused draft.
+
+## Repo hygiene (2026-11-15 cleanup)
+- Renders (`*.mp4`) are NOT committed (`.gitignore`). Render to `out/` or next to the short; share the file directly.
+- Voice: one committed copy per short, `public/<name>/voice.wav` (what `staticFile` loads). Voice scripts (`2d/voice_short.py`, `voice_lines.py`, `voice_uni.py`) write the working wav next to the short (gitignored) and copy it to `public/`. `audio/aging_mix.py` writes `public/aging/mix.wav` too.
+- `sun/` and `chance/` moved to `2d/sun/`, `2d/chance/`. `__pycache__/` ignored.
+- Old renders/duplicate wavs are still in git history (~250 MB `.git`); only a history rewrite would shrink it.
+
+## Cloud container findings (2026-11-15, no GitHub-release / Hugging Face / Chrome CDN access; only github.com, npm, PyPI)
+- Kokoro without GitHub releases: npm `kokoro-fp32a-shards` + `kokoro-fp32b-shards` + `kokoro-fp32c-shards` (concatenate `kokoro-fp32.part0..18.bin` -> 325,532,232-byte ONNX, sha256 8fbea51e...) and voices from npm `kokoro-js` (`voices/am_michael.bin` = float32 (510,1,256); save as npz `voices-v1.0.bin` with key `am_michael`). Works with pip `kokoro-onnx`; reproduced BoredShort line bit-exact. Symlink both into `2d/voice/` (gitignored).
+- faster-whisper model is on Hugging Face (blocked): voice_short.py now writes pause-based `cues.json` and skips words.json.
+- Browser without Chrome CDN: npm `@sparticuz/chromium` (brotli: chromium.br + al2023/swiftshader/fonts tar.br, decompress with pip `brotli`). Run with `LD_LIBRARY_PATH=<dir>/lib FONTCONFIG_FILE=<dir>/fonts.conf` (reads fonts from /tmp/fonts: put Inter TTFs there, converted from npm `inter-ui` woff2 with fontTools) and `--browser-executable=<dir>/chromium`. Box has 2 cores: `--concurrency=2`.

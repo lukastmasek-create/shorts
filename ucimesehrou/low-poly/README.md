@@ -14,7 +14,7 @@ Jen three.js 0.187.0 z CDN, žádné modely ani textury: všechno je v kódu (ik
 | `../src/stage.js`, `../src/sound.js` | Renderovací a zvukový kit, sdílené s pop-up animací (beze změn). |
 | `build.cjs` | Slepí šablony, kity a styl do `index.html` a `storyboard.html`. |
 | `render.cjs` | Vyrenderuje MP4 (1920×1080, 30 fps, zvuk kolem -15 LUFS). |
-| `video/ucimesehrou-3d.mp4` | Hotové video (12 vzorků na snímek, viz níže). |
+| `video/ucimesehrou-3d.mp4` | Výstup renderu (není v gitu, `*.mp4` je v `.gitignore`). |
 
 ## Render MP4
 Stejně jako u pop-up animace: Node a Google Chrome, balíčky z `ucimesehrou/package.json`.

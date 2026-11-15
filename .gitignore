@@ -1,12 +1,24 @@
 node_modules
 out
-
-2d/voice/*.onnx
-2d/voice/*.bin
-2d/voice/v16.wav
 venv
-voice/*.onnx
-voice/*.bin
+__pycache__/
+*.pyc
+.DS_Store
+
+# Renders: never committed (render locally, keep the file next to the short or in out/)
+*.mp4
+*.mov
+*.webm
+
+# Kokoro TTS models (downloaded each session)
+*.onnx
 /voice/
-/2d/voice/*.onnx
 /2d/voice/*.bin
+
+# Voice working files. The committed copy is public/<name>/voice.wav (what the comps load);
+# the voice scripts write their working wav next to the short and copy it to public/.
+/2d/**/voice*.wav
+/2d/**/v16.wav
+v16.wav
+# Aging mix: committed copy is public/aging/mix.wav (audio/aging_mix.py writes both)
+/aging/audio/mix.wav
