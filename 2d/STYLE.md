@@ -53,7 +53,7 @@ Check: `COMP=FxDemo node 2d/stills.mjs out/fx_ 30,55,63,114,124,175,183,215 0.4`
 The following GitHub skill repositories and starred projects (identified as "made with Claude" using design skills) are integrated into the MONO Style instructions for **Argon 4.0 High** prompts:
 
 ### 1. GSAP Skills Integration (`greensock/gsap-skills`)
-**Source:** Official GreenSock AI skills (12.8k+ stars, referenced in `hustle-x/hustle-design-kit`, `Harikrish0406/claude-skills`, `hustinooo28/claudeskillgraphics`, `frankxai/awesome-motion-design-agent-skills`).
+**Source:** Official GreenSock AI skills (~18.5k stars as of 2026-11-15, referenced in `hustle-x/hustle-design-kit`, `Harikrish0406/claude-skills`, `hustinooo28/claudeskillgraphics`, `frankxai/awesome-motion-design-agent-skills`). Skills live under `skills/<name>/SKILL.md` in the upstream repo.
 **Skills Included (Exact Content from Repo):**
 - **gsap-core**: Core API: `gsap.to()` / `from()` / `fromTo()`, easing, duration, stagger, defaults. (Use for MONO Pop-in overshoot: `power2.inOut`).
 - **gsap-timeline**: Timelines: sequencing, position parameter, labels, nesting, playback. (Use for 5-scene sequencing in Učíme se hrou showcase [15.7s] and 5 Videos [60-70s each]).
@@ -65,7 +65,7 @@ The following GitHub skill repositories and starred projects (identified as "mad
 - **gsap-frameworks**: Vue, Svelte, etc.: lifecycle, scoping selectors, cleanup on unmount.
 
 ### 2. LottieFiles Motion Design Skill Integration (`LottieFiles/motion-design-skill`)
-**Source:** Universal motion design principles for AI agents (1.8k-3.1k stars, referenced in `hustle-x/hustle-design-kit`, `Harikrish0406/claude-skills`, `hustinooo28/claudeskillgraphics`, `frankxai/awesome-motion-design-agent-skills`).
+**Source:** Universal motion design principles for AI agents (~3.1k stars as of 2026-11-15, referenced in `hustle-x/hustle-design-kit`, `Harikrish0406/claude-skills`, `hustinooo28/claudeskillgraphics`, `frankxai/awesome-motion-design-agent-skills`). Files live under `skills/motion-design/` (`SKILL.md`, `director/`, `patterns/`, `reference/`) in the upstream repo.
 **Skills Included (Exact Content from Repo):**
 - **SKILL.md (Core)**: 8-step checklist, motion personality archetypes, duration/easing tables, property selection guide, common patterns, and quality rules. (Apply to MONO Whip Blur ~5f, Ring Pulse 3 circles).
 - **director/core-philosophy.md**: Three Pillars deep dive. (Use for Učíme se hrou/Topics emotion mapping).
@@ -94,7 +94,7 @@ When generating prompts for **MONO Style** animations (e.g., **Učíme se hrou**
 5. **Output** Self-contained HTML/SVG or Canvas script (1080x1920, 30 fps) + Visual Storyboard Artifact.
 
 ---
-**Integration Note:** This section was added to `2d/STYLE.md` in branch `arena/1cbbc7a5-shorts` (Commit: [face847d920c9f5440d3c2317d113289c8c56c84 -> new commit]).
+**Integration Note:** This section was added via PR #6 (branch `arena/1cbbc7a5-shorts`, merged into `main` 2026-11-15). Upstream file lists and star counts re-verified against the live repos on 2026-11-15.
 References:
-- `greensock/gsap-skills` (GitHub, ~12.8k+ stars, cited in `hustle-x/hustle-design-kit`, `Harikrish0406/claude-skills`, `hustinooo28/claudeskillgraphics`, `frankxai/awesome-motion-design-agent-skills`)
-- `LottieFiles/motion-design-skill` (GitHub, ~1.8k-3.1k stars, cited in same starred projects)
+- `greensock/gsap-skills` (GitHub, ~18.5k stars as of 2026-11-15, cited in `hustle-x/hustle-design-kit`, `Harikrish0406/claude-skills`, `hustinooo28/claudeskillgraphics`, `frankxai/awesome-motion-design-agent-skills`)
+- `LottieFiles/motion-design-skill` (GitHub, ~3.1k stars as of 2026-11-15, cited in same starred projects)

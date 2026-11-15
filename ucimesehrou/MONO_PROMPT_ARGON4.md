@@ -45,7 +45,7 @@
 - **Scene 4 (9.3s - 12.4s):** [Progress Visibility] Class scene (Parent/Student/Teacher circles). Pull tab chart icon slides out. Pills: "POKROK VIDĚT".
   - **GSAP:** `gsap-scrolltrigger` logic (adapted for layout slide/zoom) + `gsap-utils` (normalize progress).
   - **LottieFiles:** **State Feedback** (Progress bar fill) + **Choreography** (Parent/Student/Teacher circles movement).
-  - **Transition:** Whip-Down (`whipD`).
+  - **Transition:** Whip-Down (`whipDown`).
 - **Scene 5 (12.4s - 15.7s):** [Motto] World globe icon (white line). Four pills: "ZŠ", "SŠ", "PŘIJÍMAČKY", "MATURITA". Motto pill: "OBJEVUJ SVĚT, KDE UČENÍ BAVÍ."
   - **GSAP:** `gsap-timeline` final sequence (Iris wipe end).
   - **LottieFiles:** **Quality Checklist** (reference/quality-checklist.md) + **Iris Wipe** (Rule 3: `iris` circle wipe).
