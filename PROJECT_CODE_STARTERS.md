@@ -174,13 +174,13 @@ export const NewShort: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: '#050505', color: '#fff', overflow: 'hidden' }}>
       <svg width={1080} height={1920} viewBox="0 0 1080 1920" role="img" aria-label="Animated line-art illustration">
         <defs>
-          <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+          <filter id="new-short-glow" x="-80%" y="-80%" width="260%" height="260%">
             <feGaussianBlur stdDeviation="9" result="blur" />
             <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
         </defs>
         <path d="M100 1040 H980" fill="none" stroke="#777" strokeWidth="4" strokeDasharray="12 14" />
-        <circle cx={x} cy="950" r={82 * pulse} fill="none" stroke="#fff" strokeWidth="8" opacity={reveal} filter="url(#glow)" />
+        <circle cx={x} cy="950" r={82 * pulse} fill="none" stroke="#fff" strokeWidth="8" opacity={reveal} filter="url(#new-short-glow)" />
         <path d={`M${x - 28} 950 l22 24 48 -54`} fill="none" stroke="#fff" strokeWidth="12" strokeLinecap="round" strokeLinejoin="round" opacity={reveal} />
         <text x="540" y="350" fill="#fff" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="68" fontWeight="800" letterSpacing="5">YOUR ORIGINAL IDEA</text>
         <text x="540" y="1510" fill="#aaa" textAnchor="middle" fontFamily="Arial, sans-serif" fontSize="34" letterSpacing="3">REPLACE WITH APPROVED STORY TEXT</text>
@@ -204,7 +204,7 @@ Render it with:
 npx remotion render 2d/src/index.ts NewShort out/new-short.mp4 --codec h264 --crf 16
 ```
 
-Replace the sample words, illustration, timing, and colors; remove every generic placeholder. Use `2d/src/fx.tsx` for new scenes that need the established transitions, and follow `2d/STYLE.md` for safe areas and visual rules.
+Replace the sample words, illustration, timing, and colors; remove every generic placeholder. Use `2d/src/fx.tsx` for new scenes that need the established transitions, and follow `2d/STYLE.md` for safe areas and visual rules. SVG IDs are document-global: assign unique filter/clipPath/gradient IDs per mounted scene, or define shared `<defs>` once above overlapping scenes. Never mount multiple `<filter id="glow">` definitions during a crossfade.
 
 For a simple scene-to-scene push without adding a transition dependency, use this deterministic helper in the component and apply the returned values to the incoming/outgoing wrappers:
 
@@ -217,13 +217,74 @@ function pushTransition(frame: number, start: number, duration: number, directio
   const distance = 1080;
   return {
     progress: p,
-    incoming: { opacity: p, transform: `translateX(${direction * distance * (1 - p)}px)` },
-    outgoing: { opacity: 1 - p, transform: `translateX(${-direction * distance * p}px)` },
+    // Both scenes remain opaque: their 1080px-wide cards travel edge-to-edge with no fade-to-black dip.
+    incoming: { opacity: 1, transform: `translateX(${direction * distance * (1 - p)}px)` },
+    outgoing: { opacity: 1, transform: `translateX(${-direction * distance * p}px)` },
   };
 }
 ```
 
-Pre-render both scene components for that frame, wrap them in absolutely positioned containers, and apply these styles. Outside the transition window, render only the active scene at opacity `1` and `translateX(0)`. Keep transition duration intentional (normally 8–16 frames at 30 fps); don't chain identical pushes by default. Use the existing `SceneFx` kit for the repo's richer zoom/whip/iris transitions rather than recreating them inconsistently.
+Pre-render both scene components for that frame, wrap them in full-frame opaque absolutely positioned containers, and apply these styles. Outside the transition window, render only the active scene at opacity `1` and `translateX(0)`. Keep transition duration intentional (normally 8–16 frames at 30 fps); don't chain identical pushes by default. Use the existing `SceneFx` kit for the repo's richer zoom/whip/iris transitions rather than recreating them inconsistently. Check transition start/middle/end for background gaps and clipping.
+
+### Fluid shape morph (SVG, deterministic, no morphing dependency)
+
+For a 2D liquid/blob transition, morph between two designed shapes that have the **same number of corresponding points**, with the same winding and starting landmark. This avoids brittle interpolation of arbitrary SVG path strings. Example utility and use:
+
+```tsx
+import React from 'react';
+import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from 'remotion';
+
+const DROP_POINTS: [number, number][] = [
+  [0, -100], [58, -38], [82, 20], [70, 62], [38, 92], [0, 104], [-38, 92], [-70, 62], [-82, 20], [-58, -38],
+];
+const CLOUD_POINTS: [number, number][] = [
+  [-92, 32], [-86, -10], [-58, -26], [-43, -68], [-7, -83], [24, -60], [59, -67], [82, -38], [93, -8], [82, 31],
+];
+
+function morphPoints(a: [number, number][], b: [number, number][], t: number): [number, number][] {
+  if (a.length !== b.length) throw new Error('Morph paths must have matching point counts');
+  return a.map(([x, y], i): [number, number] => [x + (b[i][0] - x) * t, y + (b[i][1] - y) * t]);
+}
+
+function smoothClosedPath(points: [number, number][]): string {
+  const mid = (a: [number, number], b: [number, number]): [number, number] => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  const first = mid(points[points.length - 1], points[0]);
+  let d = `M ${first[0]} ${first[1]}`;
+  for (let i = 0; i < points.length; i++) {
+    const end = mid(points[i], points[(i + 1) % points.length]);
+    d += ` Q ${points[i][0]} ${points[i][1]} ${end[0]} ${end[1]}`;
+  }
+  return `${d} Z`;
+}
+
+export const FluidMorph: React.FC = () => {
+  const frame = useCurrentFrame();
+  const t = interpolate(frame, [24, 66], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+    easing: Easing.inOut(Easing.cubic),
+  });
+  const points = morphPoints(DROP_POINTS, CLOUD_POINTS, t);
+  return (
+    <AbsoluteFill style={{ backgroundColor: '#050505' }}>
+      <svg width={1080} height={1920} viewBox="0 0 1080 1920" aria-label="A water drop morphs into a cloud">
+        <path d={smoothClosedPath(points)} transform="translate(540 900)" fill="#78d7ff" />
+      </svg>
+    </AbsoluteFill>
+  );
+};
+```
+
+The helper validates point count; art direction must still ensure point correspondence (e.g. top aligns to top, clockwise outline to clockwise outline) or the shape twists. Add intermediate key shapes for a longer morph; do not stretch one interpolation across unrelated forms. Animate color/scale/position on the same timeline if needed, keep the subject's area roughly stable, and inspect the whole morph for pinching or self-intersection. For richer fluid movement, add a small deterministic secondary wave to matched points using `Math.sin(frame * frequency + pointIndex * phase)`; never use `Math.random()` per frame. In Three.js, use a baked or parametrically updated mesh with stable vertex topology instead of interpolating unrelated geometries.
+
+### Other clean animation techniques
+
+- **Draw-on:** SVG `pathLength={1}`, `strokeDasharray="1 1"`, and a frame-driven `strokeDashoffset={1 - progress}`; suitable for arrows, contour lines, diagrams, and writing-on effects.
+- **Particle flow:** derive every particle's phase from a stable seed/index and absolute frame; wrap position with modulo so arbitrary seeking reproduces the same frame.
+- **Squash and stretch:** preserve approximate volume (scale one axis up while another compresses), add anticipation, then settle; use sparingly for graphic/cartoon subjects.
+- **Match cut:** align a subject's screen position/size across scenes, then transform its meaning/material instead of sliding the whole frame.
+- **Parallax:** move foreground, subject, and background at different controlled speeds; do not let layers drift enough to expose empty edges.
+- **Camera reveal:** move the camera toward the next focal point; maintain a clear target and avoid intersecting geometry.
 
 ## 3. 3D cartoon-world Remotion starter
 

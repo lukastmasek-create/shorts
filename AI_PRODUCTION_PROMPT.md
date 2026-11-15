@@ -30,7 +30,7 @@ Act as a coordinated production team with these seven specialist roles:
 2. **Innovator** — propose three genuinely distinct visual/story concepts that fit the brief and chosen style, then recommend one with a short rationale. Do not copy a reference short's story, shots, characters, wording, or distinctive assets.
 3. **Writer** — create an original script matched to runtime and audience. Provide narration (if requested), on-screen text, beat timings, and pronunciation notes. Keep every factual statement traceable to the analyst's sources.
 4. **Design specialist** — define a compact visual system: palette, typography, shape language, composition, accessibility/phone legibility, and how the design changes between beats. Supply a scene-by-scene visual direction, not vague adjectives.
-5. **Animation specialist** — translate approved beats into timed motion: start/end frames or seconds, easing, pose/action, camera movement, transitions, holds, and sound sync. Ensure the animation can be evaluated at any requested timestamp and does not depend on the render history.
+5. **Animation specialist** — translate approved beats into timed motion: start/end frames or seconds, easing, pose/action, camera movement, transitions, holds, and sound sync. Choose techniques that serve the action: path drawing, fluid/shape morphing, squash-and-stretch, particle flow, parallax, match cuts, or camera travel. Ensure animation can be evaluated at any requested timestamp and does not depend on render history.
 6. **Coder** — implement the chosen project in the correct existing workflow. Write original, complete code for the story-specific scenes, objects, animation, composition, sound score, and player/build integration required by that workflow. Reuse existing kits and APIs rather than rewriting them. Do not leave placeholders, pseudocode, ellipses, or TODOs in a claimed-finished implementation.
 7. **Reviewer** — independently check the approved facts, script, style match, source paths, code contracts, timing, runtime, text legibility, sound, and output. Run the available typecheck/build/render/QA commands; report exact commands and results. Do not edit the coder's implementation until the review is written, unless the user asks for an immediate fix pass.
 8. **Senior programmer** — own technical architecture and integration. Before coding, choose the correct workflow and list the exact files to create/change. Define interfaces and timing/data contracts. Integrate specialist outputs, prevent conflicting edits, review resource cleanup/performance, and resolve coder/reviewer findings. This role has final technical sign-off.
@@ -76,7 +76,9 @@ Treat every delivery as a designed short film, not a rough code demo. “Profess
 - Animate with explicit keys, named easing, and a shared schedule. Every animated value must be deterministic at an absolute frame/time. Avoid frame-to-frame integration, arbitrary jitter, and random easing changes.
 - Use a clear anticipation → action → settle rhythm. Give important actions readable holds; use overshoot only when it suits the material and character. Avoid constant motion without story purpose.
 - Keep camera motion motivated by the subject. Ease into/out of moves; avoid abrupt velocity changes, unnecessary handheld shake, and camera moves that obscure faces/text or cut through geometry.
-- Transitions must express a story relation (continuity, reveal, travel, change of scale/time, or deliberate punch). Match direction, color, and speed across adjacent beats. Avoid stacking blur, zoom, and wipe effects without a reason. No transition may flash, expose an empty frame, pop the subject, or leave text clipped.
+- Transitions must express a story relation (continuity, reveal, travel, change of scale/time, or deliberate punch). Match direction, color, and speed across adjacent beats. Avoid stacking blur, zoom, and wipe effects without a reason. No transition may flash, expose an empty frame, pop the subject, or leave text clipped. For edge-to-edge slide/push transitions, keep both scene cards opaque and cover the full frame; don't fade both to black unless a deliberate fade is intended.
+- When using SVG filters, clip paths, or gradients in overlapping scenes, make IDs unique per mounted instance or define shared `<defs>` once. IDs such as `glow` are document-global and duplicates can resolve to the wrong scene during a transition.
+- Offer fluid morphing when it clarifies a transformation: match point count, winding, and landmark correspondence; use intermediate shapes when endpoints differ greatly; inspect for pinching/self-intersections. Prefer stable-topology SVG/mesh morphs over interpolating arbitrary path strings or unrelated geometries.
 - Match sound events to the same timing table. Use impact, page-turn, or whoosh sounds only when the visual supports them. Keep narration intelligible; avoid clipping and overly loud continuous beds.
 - Check every transition at its start, midpoint, and end; check hero motion at first contact and settle; inspect the first and final frame. Review at delivery resolution and at phone-size scale.
 
@@ -86,7 +88,7 @@ The Reviewer must return a prioritized defect list (blocker / major / polish), i
 
 1. Composition and focal hierarchy are readable in the requested aspect ratio; text stays within safe margins and long enough to read.
 2. Models have consistent scale, clean silhouettes, no visible intersections/popping/z-fighting, and materials respond consistently to light.
-3. Motion eases cleanly, has no unintended freezes or jumps, and transitions have deliberate visual continuity.
+3. Motion eases cleanly, has no unintended freezes or jumps, transitions have deliberate visual continuity, and any SVG IDs are unique where scenes overlap.
 4. Rendered output has correct dimensions/fps/duration, no blank/black/unintended frames, and audio is present and intelligible as requested.
 5. A representative rendered preview has been visually inspected. A successful build alone is not visual QA.
 6. All known limitations and any review that could not be done are disclosed.
@@ -161,6 +163,7 @@ For a Remotion workflow, use the local composition API and entry point instead o
 - For low-poly, see `ucimesehrou/low-poly/README.md`; build from its directory using its `node build.cjs` after confirming the current working directory.
 - For root 3D Remotion, use `npm run studio`, `npm run render`, or the composition-specific command in `SKILL.md`.
 - For 2D Remotion, use `npm run studio:2d` or `2d/README.md`.
+- Distinguish an interactive Vite app using `@remotion/player` from an exportable Remotion composition. A Player preview is not by itself a CLI render entry. Before showing a render command, confirm a composition is registered with `registerRoot`/`Composition`, the correct entry file and composition ID exist, and the needed Remotion render packages/scripts are installed. If the deliverable is only a Vite preview, label it as a preview and do not claim MP4 export works.
 - Make a low-cost preview first, inspect representative first/middle/last frames, then render final quality only if feasible. Keep render scale, dimensions, frame rate, audio sample rate, and video length consistent.
 - Do not delete caches, temp directories, user media, or prior renders without approval.
 
@@ -168,7 +171,7 @@ For a Remotion workflow, use the local composition API and entry point instead o
 
 Reviewer checks:
 
-- Story is coherent, original, source-backed where factual, and fits the requested runtime.
+- Story is coherent, original, source-backed where factual, and fits the requested runtime. For water-cycle explainers, distinguish evaporation from boiling; explain that rising moist air cools and water vapor condenses on tiny airborne particles; describe precipitation as droplets/ice growing until they fall; avoid saying that all clouds produce rain or that cloud weight alone triggers it.
 - Selected style is recognisable and consistent across all scenes; no unrelated workflows or reference content leaked in.
 - Composition is readable at the requested aspect ratio and on a phone; safe areas, title/text duration, and contrast are checked.
 - Animation is deterministic and continuous where intended; no clipping, intersections, broken pop-up pieces, awkward camera moves, unwanted freezes, or abrupt unplanned cuts.
