@@ -21,6 +21,7 @@ import { ChanceShort, CHANCE_FRAMES } from "./Chance";
 import { NeutronShort, NS_FRAMES } from "./Neutron";
 import { JupiterShort, JUP_FRAMES } from "./Jupiter";
 import { DiamondShort, DIAMOND_FRAMES } from "./Diamond";
+import { WormholeShort, WORMHOLE_FRAMES } from "./Wormhole";
 import { FutureShort, FUT_FRAMES } from "./Future";
 import { NoHumansShort, NOHUMANS_FRAMES } from "./NoHumans";
 import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
@@ -49,6 +50,7 @@ export const Root: React.FC = () => (
     <Composition id="ChanceShort" component={ChanceShort} durationInFrames={CHANCE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="JupiterShort" component={JupiterShort} durationInFrames={JUP_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="DiamondShort" component={DiamondShort} durationInFrames={DIAMOND_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="WormholeShort" component={WormholeShort} durationInFrames={WORMHOLE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="FutureShort" component={FutureShort} durationInFrames={FUT_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ParallelShort" component={ParallelShort} durationInFrames={PARALLEL_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="MillenniumShort" component={MillenniumShort} durationInFrames={MILLENNIUM_FRAMES} fps={30} width={1080} height={1920} />
