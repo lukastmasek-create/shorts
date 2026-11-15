@@ -1,0 +1,233 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 150,
+  "phrases": [
+   {
+    "text": "What if you could fall through a wormhole and come out in another galaxy?",
+    "a": 10,
+    "b": 130
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 150,
+  "len": 147,
+  "phrases": [
+   {
+    "text": "Your ticket: Andromeda,",
+    "a": 10,
+    "b": 57
+   },
+   {
+    "text": "two and a half million light-years away.",
+    "a": 68,
+    "b": 127
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 297,
+  "len": 148,
+  "phrases": [
+   {
+    "text": "Fold space like paper,",
+    "a": 11,
+    "b": 52
+   },
+   {
+    "text": "poke through,",
+    "a": 57,
+    "b": 77
+   },
+   {
+    "text": "and the long way gets short.",
+    "a": 88,
+    "b": 127
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 445,
+  "len": 159,
+  "phrases": [
+   {
+    "text": "Nineteen thirty-five.",
+    "a": 11,
+    "b": 46
+   },
+   {
+    "text": "Einstein and Rosen find a bridge in the math.",
+    "a": 65,
+    "b": 137
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 604,
+  "len": 137,
+  "phrases": [
+   {
+    "text": "Nineteen fifty-seven.",
+    "a": 10,
+    "b": 47
+   },
+   {
+    "text": "John Wheeler names it the wormhole.",
+    "a": 63,
+    "b": 118
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 741,
+  "len": 146,
+  "phrases": [
+   {
+    "text": "But that bridge snaps shut faster than light can cross.",
+    "a": 10,
+    "b": 97
+   },
+   {
+    "text": "Denied.",
+    "a": 111,
+    "b": 123
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 887,
+  "len": 169,
+  "phrases": [
+   {
+    "text": "Nineteen eighty-eight.",
+    "a": 10,
+    "b": 40
+   },
+   {
+    "text": "Morris and Thorne say one could stay open.",
+    "a": 55,
+    "b": 123
+   },
+   {
+    "text": "Pending.",
+    "a": 137,
+    "b": 148
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1056,
+  "len": 144,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 12,
+    "b": 69
+   },
+   {
+    "text": "(segment 1)",
+    "a": 84,
+    "b": 124
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1200,
+  "len": 134,
+  "phrases": [
+   {
+    "text": "From outside,",
+    "a": 11,
+    "b": 35
+   },
+   {
+    "text": "it would look like a sphere showing another sky.",
+    "a": 47,
+    "b": 112
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1334,
+  "len": 170,
+  "phrases": [
+   {
+    "text": "The same math could build a time machine.",
+    "a": 10,
+    "b": 76
+   },
+   {
+    "text": "Hawking suspected physics forbids it.",
+    "a": 94,
+    "b": 153
+   }
+  ]
+ },
+ {
+  "scene": 10,
+  "start": 1504,
+  "len": 164,
+  "phrases": [
+   {
+    "text": "Twenty twenty-two.",
+    "a": 10,
+    "b": 35
+   },
+   {
+    "text": "A quantum chip simulates one.",
+    "a": 49,
+    "b": 103
+   },
+   {
+    "text": "Not a real tunnel.",
+    "a": 111,
+    "b": 147
+   }
+  ]
+ },
+ {
+  "scene": 11,
+  "start": 1668,
+  "len": 133,
+  "phrases": [
+   {
+    "text": "No wormhole has ever been seen.",
+    "a": 10,
+    "b": 64
+   },
+   {
+    "text": "Your ticket is void.",
+    "a": 78,
+    "b": 111
+   }
+  ]
+ },
+ {
+  "scene": 12,
+  "start": 1801,
+  "len": 150,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 12,
+    "b": 91
+   },
+   {
+    "text": "(segment 1)",
+    "a": 104,
+    "b": 130
+   }
+  ]
+ }
+]
