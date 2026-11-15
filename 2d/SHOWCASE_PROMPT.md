@@ -43,16 +43,6 @@ This is the exact style already shown to and approved by the user (`2d/src/Code.
 9. **Repo hygiene.** Commit sources, `logo.ts`, the wav files and the audio script; never mp4; working copies in `<name>/audio/` are gitignored; push the session branch.
 10. **Feedback loop used last time.** First cut was too fast to read, so every scene got a slow factor and long scenes were split into separate parts; Czech on-screen text was requested explicitly (it overrides the old "English only" note in CLAUDE.md); the site's colours, fonts and the real logo replaced the generic white line art.
 
-## 1. Timeline per 15 s part (450 frames, tune but keep the order)
-| s | beat |
-|---|---|
-| 0-2 | **Object -> logo morph.** A different object each part (keycap, speech bubble, play button, gear, folder...) is a cream outline blob that morphs (resampled-polygon morph) into the blue logo tile, face draws on, tile flies into the real logo, the other logo pieces pop around it. |
-| 2-4 | **Kinetic title** (typewriter + slam) with the section name, one keyword in Pangolin neon. |
-| 4-5.5 | **Katana cut** through the title card / an object of the section: slash flash, two halves slide apart, a corner chip breaks off and falls, debris crumbles, small screen shake. |
-| 5.5-7.5 | The cut word **dissolves into fast glowing sparks** (letters become sparks), camera whips along them (this is the transition). |
-| 7.5-13 | Sparks fly into a **chat window**; every spark lands in a slot and becomes a bubble; each bubble types one real sentence about the section. |
-| 13-15 | Sparks that are left converge, morph into the logo tile, URL tag `ucimesehrou.org/<path>`, hold 1 s, fade. A multi-part series ends with a spark that flies out of frame toward "Další díl". |
-
 ## 2. Camera and 3D (seamless, no cuts)
 - One continuous world, scenes placed along a path; camera = position + zoom + roll with smootherstep swoops, tiny handheld drift, motion blur only while moving fast. Transitions are camera moves, match cuts or "dolly through" (zoom into a letter/hole until it fills the frame, next scene is behind it). Never hard cut.
 - Real 3D feel without a 3D engine (CPU render, ~2.3 s/frame): wrap the SVG layers in CSS 3D and tilt the whole plane a few degrees with the camera, so layers get parallax:
