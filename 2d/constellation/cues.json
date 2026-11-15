@@ -1,0 +1,69 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 828,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 54
+   },
+   {
+    "text": "(segment 1)",
+    "a": 69,
+    "b": 106
+   },
+   {
+    "text": "(segment 2)",
+    "a": 121,
+    "b": 194
+   },
+   {
+    "text": "(segment 3)",
+    "a": 204,
+    "b": 248
+   },
+   {
+    "text": "(segment 4)",
+    "a": 261,
+    "b": 290
+   },
+   {
+    "text": "(segment 5)",
+    "a": 300,
+    "b": 368
+   },
+   {
+    "text": "(segment 6)",
+    "a": 382,
+    "b": 455
+   },
+   {
+    "text": "(segment 7)",
+    "a": 466,
+    "b": 490
+   },
+   {
+    "text": "(segment 8)",
+    "a": 507,
+    "b": 595
+   },
+   {
+    "text": "(segment 9)",
+    "a": 612,
+    "b": 660
+   },
+   {
+    "text": "(segment 10)",
+    "a": 676,
+    "b": 750
+   },
+   {
+    "text": "(segment 11)",
+    "a": 762,
+    "b": 808
+   }
+  ]
+ }
+]
