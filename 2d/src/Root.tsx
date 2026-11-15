@@ -19,6 +19,7 @@ import { AboveShort, ABOVE_FRAMES } from "./Above";
 import { SunShort, SUN_FRAMES } from "./Sun";
 import { ChanceShort, CHANCE_FRAMES } from "./Chance";
 import { NeutronShort, NS_FRAMES } from "./Neutron";
+import { Neutron65Short, N65_FRAMES } from "./Neutron65";
 import { JupiterShort, JUP_FRAMES } from "./Jupiter";
 import { FutureShort, FUT_FRAMES } from "./Future";
 import { NoHumansShort, NOHUMANS_FRAMES } from "./NoHumans";
@@ -50,6 +51,7 @@ export const Root: React.FC = () => (
     <Composition id="FutureShort" component={FutureShort} durationInFrames={FUT_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ParallelShort" component={ParallelShort} durationInFrames={PARALLEL_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="MillenniumShort" component={MillenniumShort} durationInFrames={MILLENNIUM_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="Neutron65Short" component={Neutron65Short} durationInFrames={N65_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NeutronShort" component={NeutronShort} durationInFrames={NS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NoHumansShort" component={NoHumansShort} durationInFrames={NOHUMANS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />

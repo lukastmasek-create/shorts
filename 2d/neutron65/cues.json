@@ -1,0 +1,183 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 193,
+  "phrases": [
+   {
+    "text": "What if you fell into a neutron star?",
+    "a": 13,
+    "b": 74
+   },
+   {
+    "text": "Gravity would tear you apart before you ever touched it.",
+    "a": 92,
+    "b": 174
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 193,
+  "len": 267,
+  "phrases": [
+   {
+    "text": "A neutron star is a dead sun's core,",
+    "a": 12,
+    "b": 80
+   },
+   {
+    "text": "crushed to twenty kilometers wide.",
+    "a": 94,
+    "b": 146
+   },
+   {
+    "text": "One sugar cube of it weighs a billion tons.",
+    "a": 168,
+    "b": 251
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 460,
+  "len": 193,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 67
+   },
+   {
+    "text": "(segment 1)",
+    "a": 86,
+    "b": 102
+   },
+   {
+    "text": "(segment 2)",
+    "a": 106,
+    "b": 172
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 653,
+  "len": 336,
+  "phrases": [
+   {
+    "text": "Beat two.",
+    "a": 11,
+    "b": 28
+   },
+   {
+    "text": "Gravity is two hundred billion times stronger than Earth's.",
+    "a": 46,
+    "b": 147
+   },
+   {
+    "text": "Your feet are pulled millions of g's harder than your head,",
+    "a": 162,
+    "b": 262
+   },
+   {
+    "text": "so you stretch like spaghetti.",
+    "a": 274,
+    "b": 316
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 989,
+  "len": 315,
+  "phrases": [
+   {
+    "text": "Beat three.",
+    "a": 11,
+    "b": 29
+   },
+   {
+    "text": "The magnetic field is a trillion times stronger than any magnet.",
+    "a": 48,
+    "b": 161
+   },
+   {
+    "text": "It squeezes your atoms into needles,",
+    "a": 177,
+    "b": 240
+   },
+   {
+    "text": "and chemistry stops working.",
+    "a": 249,
+    "b": 294
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1304,
+  "len": 200,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 28
+   },
+   {
+    "text": "(segment 1)",
+    "a": 36,
+    "b": 105
+   },
+   {
+    "text": "(segment 2)",
+    "a": 122,
+    "b": 182
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1504,
+  "len": 161,
+  "phrases": [
+   {
+    "text": "But wait.",
+    "a": 10,
+    "b": 24
+   },
+   {
+    "text": "What happens in the exact instant your atoms hit that crust?",
+    "a": 42,
+    "b": 143
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1665,
+  "len": 297,
+  "phrases": [
+   {
+    "text": "That motion has nowhere to go.",
+    "a": 11,
+    "b": 62
+   },
+   {
+    "text": "It becomes hundreds of megatons of heat.",
+    "a": 78,
+    "b": 142
+   },
+   {
+    "text": "You do not die in the dark.",
+    "a": 161,
+    "b": 205
+   },
+   {
+    "text": "You become a flash of X-rays.",
+    "a": 222,
+    "b": 280
+   }
+  ]
+ }
+]
