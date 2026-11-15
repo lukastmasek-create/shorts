@@ -378,7 +378,9 @@ export const FilmStrip: React.FC<{ f: number; at?: number; y?: number; speed?: n
 /** the red play triangle that morphs -> diamond -> rounded square (shape morph beat) */
 export const ShapeMorph: React.FC<{ f: number; at?: number; cx?: number; cy?: number; size?: number; color?: string }> = ({ f, at = 0, cx = W / 2, cy = H / 2, size = 320, color = C.red }) => {
   const seg = 26;
-  const t = ((f - at) / seg) % 3;
+  // positive modulo: the mock is rendered from frames before its own start (the shot stack overlaps)
+  const raw = (f - at) / seg;
+  const t = ((raw % 3) + 3) % 3;
   const shapes: [number, number][][] = [
     [
       [0, -1],
