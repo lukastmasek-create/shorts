@@ -1,5 +1,5 @@
 # UniverseShort — "What if you could escape your own universe?" (1754 f, 58.5 s, Kokoro am_michael)
-Voice: `python 2d/voice_uni.py` (per-line TTS, scene lengths from voice) -> 2d/voice/uni/ ; copy voice.wav to public/universe/. FR list in Universe.tsx = 2d/voice/uni/frames.json.
+Voice: `python 2d/voice_uni.py` (per-line TTS, scene lengths from voice) -> 2d/voice/uni/ ; the script copies voice.wav to public/universe/ (committed copy). FR list in Universe.tsx = 2d/voice/uni/frames.json.
 1 What if you could escape your own universe?
 2 Everything you know lives inside it. Every star. Every atom. Every second.
 3 Take one step past the edge, and you leave. No space. No time.

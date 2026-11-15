@@ -13,9 +13,14 @@ COMP=CalmShort node 2d/stills.mjs out/c_ 90,400 0.5
 npx remotion render 2d/src/index.ts NoSleepShort out/nosleep.mp4 --codec h264 --crf 16
 COMP=NoSleepShort node 2d/stills.mjs out/ns_ 100,880 0.5
 ```
-`BlackHoleShort` (BlackHole.tsx, 1560 f, 52 s, English Kokoro voice): script `blackhole/script.txt`, voice `blackhole/voice.wav` + `words.json` (copy in `public/blackhole/`), render `blackhole/blackhole.mp4`. CPU render ~7 min: `npx remotion render 2d/src/index.ts BlackHoleShort out/bh.mp4 --codec h264 --crf 18 --gl=swangle --browser-executable=/opt/pw-browsers/chromium`.
-`ImmortalShort` (Immortal.tsx, 1590 f, 53 s, English Kokoro voice): script/voice/render in `immortal/`, voice copy in `public/immortal/`. Render like BlackHoleShort.
+`BlackHoleShort` (BlackHole.tsx, 1560 f, 52 s, English Kokoro voice): script `blackhole/script.txt`, voice `public/blackhole/voice.wav`, `blackhole/words.json`, render `out/bh.mp4` (not committed). CPU render ~7 min: `npx remotion render 2d/src/index.ts BlackHoleShort out/bh.mp4 --codec h264 --crf 18 --gl=swangle --browser-executable=/opt/pw-browsers/chromium`.
+`ImmortalShort` (Immortal.tsx, 1590 f, 53 s, English Kokoro voice): script + words in `immortal/`, voice in `public/immortal/`. Render like BlackHoleShort.
 Ideas list (100 "what if" titles): `ideas/SHORTS_IDEAS.md`.
 Status of ideas 26-50 (one by one, sourced facts, SOURCES.md per short): 26 LiesShort done, 27 BoredShort, 28 DeleteShort done (fx kit).
 Transitions + full-screen kit: `src/fx.tsx` (SceneFx, Cam, Flash, backdrops, SAFE/spread), demo comp `FxDemo`. Rules in `STYLE.md` ("Transitions & full screen"). Use it for all new shorts.
-Voice for new shorts: `python 2d/voice_short.py <name>` (reads `2d/<name>/script.txt`, one line per scene; writes voice.wav, words.json, frames.json there).
+Voice for new shorts: `python 2d/voice_short.py <name>` (reads `2d/<name>/script.txt`, one line per scene; writes voice.wav, words.json, frames.json there and copies voice.wav to `public/<name>/voice.wav`).
+
+## What is in git
+- Committed: `src/*.tsx`, per-short `script.txt`, `words.json`, `frames.json`, `DESCRIPTION.md`, `SOURCES.md`, and the voice in `public/<name>/voice.wav` (the only copy, the one the comp loads).
+- Not committed (`.gitignore`): renders (`*.mp4`, keep them in `out/` or next to the short) and working voice files (`2d/**/voice*.wav`, `v16.wav`). Re-make the voice with the voice scripts, or copy it back from `public/`.
+- `sun/` and `chance/` live here too (`2d/sun/SCRIPT.md`, `2d/chance/SCRIPT.md`), like the other 2D shorts.

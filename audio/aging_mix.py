@@ -1,6 +1,6 @@
 """Sound for the aging short: synthesized SFX + an original light score, ducked under the Kokoro voice.
 usage: python audio/aging_mix.py      (needs numpy + scipy; voice at aging/voice/voice.wav)
-out:   aging/audio/mix.wav (48 kHz stereo 16-bit, exactly 2025 frames long = 67.5 s), cues printed.
+out:   aging/audio/mix.wav + public/aging/mix.wav (committed copy the comp loads) (48 kHz stereo 16-bit, exactly 2025 frames long = 67.5 s), cues printed.
 All event times are frames of the AgingShort composition (30 fps); keep them in step with src/videos/aging/story.ts.
 Mix rules (bridge short): voice unchanged, music about +3 dB over a plain bed, SFX about -6 dB under the voice peaks.
 """
@@ -226,6 +226,8 @@ sfx = norm_to(sfx, -22.0, "momentary")
 mix = voice + music + sfx
 mix = sc(norm_to(mix, -16.0, "integrated"), 0.89)  # short-form target about -16 LUFS, soft-limited under -1 dBFS
 write_wav(os.path.join(OUT, "mix.wav"), mix, bits=16)
+os.makedirs(os.path.join(ROOT, "public", "aging"), exist_ok=True)
+write_wav(os.path.join(ROOT, "public", "aging", "mix.wav"), mix, bits=16)
 for name, x in (("voice", voice), ("music", music), ("sfx", sfx), ("mix", mix)):
     print(f"{name:6s} integrated {integrated(x):6.1f} LUFS  peak {20*np.log10(np.abs(x).max()+1e-12):6.1f} dBFS")
 print(f"mix true peak {true_peak(mix):.1f} dBTP, length {mix.shape[1]/SR:.3f} s (video {DUR:.3f} s)")

@@ -1,4 +1,4 @@
-// "Control probability" short: 2D mono line-art + voice (public/chance/voice.wav, script in chance/SCRIPT.md)
+// "Control probability" short: 2D mono line-art + voice (public/chance/voice.wav, script in 2d/chance/SCRIPT.md)
 import React from "react";
 import { Audio, staticFile } from "remotion";
 import { Stage, Scene, Pill, Num, Person, Ground, Ring, Cross, W, INK, GLOW, SW, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";

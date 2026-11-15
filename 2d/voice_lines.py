@@ -1,4 +1,4 @@
-"""Per-line Kokoro TTS placed at scene starts -> 2d/voice/voice.wav (~65 s) + words.json. usage: python 2d/voice_lines.py [voice=am_michael]"""
+"""Per-line Kokoro TTS placed at scene starts -> 2d/voice/voice.wav (~65 s) + words.json, copied to public/nosleep/voice.wav (committed copy). usage: python 2d/voice_lines.py [voice=am_michael]"""
 import json, subprocess, sys, numpy as np, soundfile as sf
 from kokoro_onnx import Kokoro
 from faster_whisper import WhisperModel
@@ -28,3 +28,4 @@ subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", f"{D}/voice.wav", "-
 a, _ = sf.read(f"{D}/v16.wav", dtype="float32")
 segs, _ = WhisperModel("small.en", device="cpu", compute_type="int8").transcribe(a, word_timestamps=True)
 json.dump([{"word": x.word.strip(), "start": round(float(x.start), 2), "end": round(float(x.end), 2)} for g in segs for x in g.words], open(f"{D}/words.json", "w"), indent=1)
+import os, shutil; os.remove(f"{D}/v16.wav"); os.makedirs("public/nosleep", exist_ok=True); shutil.copy(f"{D}/voice.wav", "public/nosleep/voice.wav")
