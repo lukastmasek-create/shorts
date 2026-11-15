@@ -1,0 +1,28 @@
+{
+  "fps": 30,
+  "shots": [
+    { "id": "burst",   "dur": 45, "t": "cut",   "tl": 0 },
+    { "id": "uceni",   "dur": 24, "t": "flash", "tl": 3 },
+    { "id": "nuda",    "dur": 24, "t": "cut",   "tl": 0 },
+    { "id": "ne",      "dur": 30, "t": "glitch","tl": 6 },
+    { "id": "znate",   "dur": 30, "t": "whip",  "tl": 8 },
+    { "id": "sesit",   "dur": 66, "t": "slice", "tl": 10 },
+    { "id": "wall",    "dur": 45, "t": "cut",   "tl": 0 },
+    { "id": "zeptate", "dur": 60, "t": "whip",  "tl": 8 },
+    { "id": "tohle",   "dur": 24, "t": "zoom",  "tl": 8 },
+    { "id": "graph",   "dur": 75, "t": "cut",   "tl": 0 },
+    { "id": "logo",    "dur": 90, "t": "laser", "tl": 12 },
+    { "id": "prompt",  "dur": 90, "t": "whip",  "tl": 8 },
+    { "id": "levels",  "dur": 60, "t": "flash", "tl": 3 },
+    { "id": "kurzy",   "dur": 60, "t": "slice", "tl": 10 },
+    { "id": "hry",     "dur": 60, "t": "zoom",  "tl": 8 },
+    { "id": "unik",    "dur": 75, "t": "glitch","tl": 6 },
+    { "id": "zebricky","dur": 45, "t": "whip",  "tl": 8 },
+    { "id": "vysvetl", "dur": 60, "t": "cut",   "tl": 0 },
+    { "id": "zdarma",  "dur": 66, "t": "flash", "tl": 3 },
+    { "id": "reklam",  "dur": 36, "t": "shape", "tl": 10 },
+    { "id": "chips",   "dur": 90, "t": "zoom",  "tl": 8 },
+    { "id": "motto",   "dur": 75, "t": "slice", "tl": 10 },
+    { "id": "cta",     "dur": 90, "t": "whip",  "tl": 8 }
+  ]
+}
