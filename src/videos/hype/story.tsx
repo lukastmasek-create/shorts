@@ -10,7 +10,7 @@ import { KineticWord, WordMode } from "./components/KineticWord";
 import { LINES, INSERTS, TOTAL, TLine } from "./timing";
 import { WeekPlanner, QuizCard, NodeGraph, SubjectGrid, LevelTrack, FilmStrip, ShapeMorph, ProgressChart, ClassList, EscapeRoom, MockNote } from "./components/mocks";
 import { StudyTimer, StackedList, Arrow } from "./components/gags";
-import { Starburst, Blob, QuestionMarks, LaserX, Strike } from "./components/shapes";
+import { Starburst, Blob, QuestionMarks, LaserX, Strike, OrbMeter } from "./components/shapes";
 import { LogoReveal, CTA, EndCard } from "./components/brand";
 import { MicroLabel, Brackets } from "./components/ui";
 import { Cube3D } from "./three/Blocks";
@@ -331,6 +331,7 @@ const PARENT = (gf: number) => <ProgressChart f={gf - L("L9").words[5].from} at=
 const TEACHER = (gf: number) => <ClassList f={gf - L("L9").words[9].from} at={0} y={780} />;
 
 lineShots("L9", {
+  mode: (i) => (i === 8 ? "stretch" : "slam"), // "STRETCH" as an element: the word itself warps
   bg: (i) => ["red", "white", "grid", "black", "red", "grid", "white", "grid", "grid", "black", "grid", "red", "grid"][i] ?? "grid",
   target: (i) => [720, 640, 900, 700, 640, 760, 420, 340, 1080, 820, 380, 360, 780][i] ?? 900,
   y: (i) => (i >= 1 ? 380 : 900),
@@ -369,11 +370,22 @@ push({
   label: "gag",
   draw: (f) => (
     <>
+      <Brackets inset={40} size={70} opacity={0.55} />
       <MicroLabel x={44} y={72} size={24} color={rgba(C.white, 0.5)}>
         THE USUAL WAY · v7 · FINAL_FINAL
       </MicroLabel>
+      <MicroLabel x={44} y={118} size={24} color={C.red}>
+        ● REC
+      </MicroLabel>
+      <MicroLabel x={W - 250} y={118} size={24} color={rgba(C.white, 0.55)}>
+        CAMERA 02
+      </MicroLabel>
       <StudyTimer f={f} at={0} y={520} speed={47} />
       <Arrow f={f} x={806} y={952} len={200} rot={184} />
+      <OrbMeter f={f} cx={175} cy={1700} r={54} progress={0.42} />
+      <MicroLabel x={248} y={1686} size={22} color={rgba(C.white, 0.6)}>
+        and wait for the explanation
+      </MicroLabel>
     </>
   ),
 }, true);

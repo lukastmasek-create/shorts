@@ -28,10 +28,18 @@ export const inStyle = (t: Tr, p: number): React.CSSProperties => {
     }
     case "zoom": {
       const e = easeOutExp(q);
-      return { transform: `scale(${mix(0.32, 1, e)})`, filter: q < 0.999 ? `blur(${(1 - e) * 24}px)` : undefined, opacity: clamp01(q * 1.8) };
+      // hold the previous word readable until the last third, then fly through it
+      return { transform: `scale(${mix(0.3, 1, e)})`, filter: q < 0.999 ? `blur(${(1 - e) * 24}px)` : undefined, opacity: clamp01((q - 0.28) / 0.72) };
     }
-    case "stripes":
-      return { transform: `scale(${mix(1.05, 1, easeOutExp(q))})`, opacity: clamp01(q * 2.2) };
+    case "stripes": {
+      const period = 190;
+      const bar = Math.pow(q, 1.35) * period;
+      return {
+        WebkitMaskImage: `repeating-linear-gradient(to bottom, #000 0 ${bar}px, transparent ${bar}px ${period}px)`,
+        maskImage: `repeating-linear-gradient(to bottom, #000 0 ${bar}px, transparent ${bar}px ${period}px)`,
+        transform: `scale(${mix(1.04, 1, clamp01(q))})`,
+      };
+    }
     case "glitch": {
       const e = clamp01(q);
       return {
@@ -41,11 +49,12 @@ export const inStyle = (t: Tr, p: number): React.CSSProperties => {
       };
     }
     case "laser":
-      return { clipPath: `inset(0 ${(1 - easeOutExp(q)) * 100}% 0 0)` };
+      return { clipPath: `inset(0 ${(1 - Math.pow(q, 1.6)) * 100}% 0 0)` };
     case "shape":
-      return { clipPath: `circle(${easeOutExp(q) * 145}% at 50% 46%)` };
+      // the blob grows late, so the outgoing word stays whole and the circle lands on the cut
+      return { clipPath: `circle(${Math.pow(q, 2.2) * 150}% at 50% 46%)` };
     case "whiteout":
-      return { transform: `scale(${mix(1.08, 1, easeOutExp(q))})`, opacity: clamp01(q * 2.2) };
+      return { transform: `scale(${mix(1.08, 1, easeOutExp(q))})`, opacity: clamp01((q - 0.35) / 0.65) };
     case "flash":
     case "cut":
     default:
