@@ -1,6 +1,8 @@
 # Šablona zadání pro další animaci
 
-Kit (`src/stage.js`, `src/sound.js`), styl card a zdroj referenčního stylu se vkládají pokaždé stejné, jako referenční zdroj poslouží `src/style.js`. Měníš jen položky v `[HRANATÝCH ZÁVORKÁCH]`. Styl card, font a materiály zvuků musí patřit ke zvolenému stylu.
+Pro širší zadání (výběr stylu, role týmu, approval gates, implementation/review contract) začni v repo-root `AI_PRODUCTION_PROMPT.md`. Tato šablona je přesná varianta pro samostatnou animaci používající Stage Kit.
+
+Kit (`src/stage.js`, `src/sound.js`), styl card a zdroj referenčního stylu se vkládají pokaždé stejné, jako referenční zdroj poslouží `src/style.js`. Měníš jen položky v `[HRANATÝCH ZÁVORKÁCH]`. Styl card, font a materiály zvuků musí patřit ke zvolenému stylu. Pokud prostředí neumí spouštět samostatné subagenty, jeden AI má projít uvedené role postupně a nesmí tvrdit, že vytvořil tým agentů.
 
 ```text
 I want a short 3D motion graphic made with three.js in the "[STYLE NAME]" style. Below is the complete source of a reference animation in this exact style, plus the small rendering kit and sound kit it runs on. Use them as your style guide and rebuild the animation around my content.

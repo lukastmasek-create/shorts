@@ -1,42 +1,75 @@
-# Claude Animated Shorts
+# Shorts — AI production prompts, workflows, and examples
 
-The free Claude skill from the video **"How to Make Viral Animated Shorts Using Claude (Full Workflow)"**.
+This repository is an instruction kit for AI assistants making short animated videos. It includes production prompts, style guides, source code, utilities, and example projects. Use the guide for the chosen workflow, verify paths and commands against the checkout, and report what was actually tested.
 
-It makes 55-70 s vertical animated story shorts: 2D characters in a colourful 3D world, with ink outlines, a painted town, lens blur, gliding cameras, a march score and sound effects. Everything is rendered with three.js inside Remotion on your own PC, with no AI video generator.
+## Start here
 
-Proven on **The Bridge That Fell for a Song**, a 67 s short about the 1831 Broughton bridge.
+- [`AI_PRODUCTION_PROMPT.md`](AI_PRODUCTION_PROMPT.md): master prompt for a coordinated eight-role production team, workflow selection, production sequence, and professional quality gates.
+- [`PROJECT_CODE_STARTERS.md`](PROJECT_CODE_STARTERS.md): starter code and exact integration/render guidance for Stage Kit, 2D Remotion, 3D Remotion, paper pop-up, and low-poly styles.
+- [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md): setup and usage tutorial for Kokoro voice generation, Remotion, Three.js, previewing, and rendering.
 
-## What's inside
-| Path | What it is |
-|---|---|
-| `SKILL.md` | The skill: the full pipeline, every rule, every fix, and the final look values |
-| `CLAUDE.md` | Project notes for Claude sessions: setup, render workarounds (cloud / old Mac), current status |
-| `src/videos/bridge/` | The full source of the bridge short (template for new 3D shorts): world, characters, ink, lens blur, grade, story/camera |
-| `src/videos/aging/` | Second 3D short (`AgingShort`), built on the bridge engine. Script and shot plan in `aging/` |
-| `audio/` | The synthesized sound: SFX, march music, the mix with ducking and loudness (`aging_mix.py` for the aging short) |
-| `scripts/` | Stills, side-by-side sheets, shot merge, frame-by-frame QA and voice (Kokoro + faster-whisper) helpers |
-| `2d/` | Separate flat white line-art shorts (SVG in Remotion), own entry `2d/src/index.ts`. See `2d/README.md` |
-| `ucimesehrou/` | Samostatná sekce: 15,7 s animace Učíme se hrou ve stylu papírové pop-up knihy (čisté three.js, bez Remotionu). Viz `ucimesehrou/README.md`. Podsložka `ucimesehrou/low-poly/` je druhá verze, 12,8 s 3D low-poly ostrov. |
-| `public/` | Static files the compositions load: one `voice.wav` per short (`public/<name>/`), `aging/mix.wav` |
-| `references/STYLE_BIBLE.md` | The script and visual formula measured from 20 reference shorts |
-| `references/reports/` | Seven measured reports: motion, depth, textures, characters, lighting, outlines, grade |
+## Choose a workflow
 
-Not in the repo: the reference frames and contact sheets, the Kenney `.glb` props (`public/bridge/kenney/`, the code falls back to a plainer world without them), Kokoro models, and all rendered videos.
+| Goal | Read first | Main entry point |
+|---|---|---|
+| 3D cartoon story short (Three.js in Remotion) | [`SKILL.md`](SKILL.md), [`references/STYLE_BIBLE.md`](references/STYLE_BIBLE.md) | `src/index.ts` → `src/Root.tsx`; compositions `BridgeShort`, `AgingShort` |
+| Flat 2D line-art short (Remotion) | [`2d/README.md`](2d/README.md), [`2d/STYLE.md`](2d/STYLE.md) | `2d/src/index.ts` → `2d/src/Root.tsx` |
+| Paper pop-up book (standalone Three.js) | [`ucimesehrou/README.md`](ucimesehrou/README.md), [`ucimesehrou/PROMPT_TEMPLATE.md`](ucimesehrou/PROMPT_TEMPLATE.md) | `ucimesehrou/src/style.js` + shared Stage/Sound kits |
+| Low-poly miniature journey (standalone Three.js) | [`ucimesehrou/low-poly/README.md`](ucimesehrou/low-poly/README.md) | `ucimesehrou/low-poly/src/style.js` + shared Stage/Sound kits |
 
-## What is (not) committed
-- Renders (`*.mp4`) are gitignored: render into `out/` and share the file directly.
-- Each short's voice is committed once, as `public/<name>/voice.wav`. The voice scripts write a working copy next to the short (gitignored) and copy it to `public/`.
+These are separate workflows. Do not mix their APIs or visual rules unless the user explicitly asks for a hybrid.
 
-## Install
-1. Copy this folder to `~/.claude/skills/cartoon-3d-short/` (clone it there, or download the ZIP).
-2. You need [Remotion](https://www.remotion.dev/) with `@remotion/three`, plus Node, Python 3 and ffmpeg.
-3. In Claude Code, say: *"Use the cartoon short skill and make a short about …"*.
+## Repository map
 
-Claude then follows `SKILL.md`: topic and facts, then script, then voice, then the shot plan in `story.ts`, then stills, then renders. Agents check your frames against the reports and the frames, and you get the final 2K render and sound mix.
+- `src/videos/bridge/`: full 3D cartoon bridge short and the source reference implementation for the 3D style.
+- `src/videos/aging/`: 3D aging short source; project script and shot plan are in `aging/`.
+- `src/Root.tsx`: root 3D Remotion composition registry.
+- `2d/`: separate 2D Remotion project, with its own root, visual kit, stories, and prompt/style guides.
+- `ucimesehrou/`: standalone Three.js pop-up book project; `ucimesehrou/low-poly/` is the low-poly variant.
+- `audio/`: Python audio synthesis/mix tools; `scripts/`: voice, still rendering, QA, and related production helpers.
+- `references/STYLE_BIBLE.md` and `references/reports/`: style research and measured reports. The private reference videos, frames, and contact sheets are not in this checkout.
+- `CLAUDE.md`: environment-specific setup, rendering notes, and project status.
+- `2d/chance/` and `2d/sun/`: scripts for those shorts are in the 2D project. `shadow/` is an unused draft.
 
-## Notes
-- Set `REMOTION_TMP` to a folder on a big drive. Every Remotion bundle copies `public/` into the temp folder.
-- Story, characters and voice should always be your own. Use the references for the look, not the content.
+## Common commands
+
+Install root JavaScript dependencies:
+
+```bash
+npm ci
+```
+
+Typecheck the root Remotion project:
+
+```bash
+npx tsc --noEmit
+```
+
+Start the 3D Remotion Studio or the separate 2D Studio:
+
+```bash
+npm run studio
+npm run studio:2d
+```
+
+Render the root `BridgeShort`, or an existing composition by its actual registered ID:
+
+```bash
+npm run render
+npx remotion render src/index.ts AgingShort out/aging.mp4 --codec h264 --crf 16
+npx remotion render 2d/src/index.ts MonoShort out/mono.mp4 --codec h264 --crf 16
+```
+
+For voice generation, use [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKORO_REMOTION_THREEJS.md) and the exact usage in `scripts/voice.py`. Rendering can be GPU-, browser-, and disk-intensive; consult `CLAUDE.md` and the selected workflow guide before attempting a full render. Do not delete shared temp folders or user assets without approval.
+
+## Files and generated assets
+
+- Rendered MP4s are not tracked; write them under `out/` and deliver them separately.
+- Kokoro model weights are not included. Keep model binaries out of Git.
+- The composition assets that are present are served from `public/`. For new Remotion media, place the approved file under `public/<project>/` and load it with `staticFile()`.
+- The repository may omit optional model assets (such as Kenney `.glb` props); inspect project code and notes before assuming an asset exists.
+- Keep stories, characters, narration, and sound original. Research factual claims and retain source notes with the script.
 
 ## License
-The code and docs are MIT (see `LICENSE`). The reference frames are included for style study only.
+
+Code and documentation are MIT licensed; see [`LICENSE`](LICENSE). Reference research is for style study only; do not republish or copy private reference content.
