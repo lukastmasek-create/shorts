@@ -182,17 +182,17 @@ const SceneFive: React.FC = () => {
       <circle r="128" fill="none" stroke={INK} strokeWidth="3" opacity=".8" filter="url(#glow)"/>
       <circle r="92" fill="none" stroke={INK} strokeWidth="2" opacity={.35+beat*.6}/>
       <path d="M0 -72 L17 -20 L68 0 L17 20 L0 72 L-17 20 L-68 0 L-17 -20 Z" fill="none" stroke={INK} strokeWidth="3"/>
-      <circle r="11+beat*12" fill={INK} opacity={.42+beat*.58} filter="url(#glow)"/>
+      <circle r={11+beat*12} fill={INK} opacity={.42+beat*.58} filter="url(#glow)"/>
     </g>
     <path d="M0 1040 V1760 H1080 V1040" fill="none" stroke={INK} strokeWidth="2" opacity=".4"/>
-    <g transform="translate(540 1450)" fill="none" stroke={INK} strokeWidth="3" opacity=".82">
+    <g transform="translate(540 1260)" fill="none" stroke={INK} strokeWidth="3" opacity=".82">
       <path d="M-310 80 C-280 -10 -220 -30 -180 10 C-130 55 -110 100 -50 80 C0 62 10 -15 65 -25 C125 -35 145 30 190 50 C235 70 280 20 310 0"/>
       <path d="M-255 -95 Q-200 -175 -145 -95 T-35 -95 T75 -95 T185 -95 T295 -95" opacity=".42"/>
       <circle cx="0" cy="18" r={20+beat*15} strokeWidth="2.5" filter="url(#glow)"/>
       <path d="M-82 150 Q0 92 82 150 M-45 175 Q0 145 45 175" opacity={.32+beat*.55}/>
     </g>
-    <Copy y={1760} size={32}>Something beneath the surface</Copy>
-    <Copy y={1810} size={28} opacity={.72}>just noticed you looking.</Copy>
+    <Copy y={1485} size={32}>Something beneath the surface</Copy>
+    <Copy y={1535} size={28} opacity={.72}>just noticed you looking.</Copy>
   </Backdrop>;
 };
 
