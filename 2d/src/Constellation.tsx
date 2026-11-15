@@ -1,5 +1,5 @@
 import React from "react";
-import {AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame} from "remotion";
+import {AbsoluteFill, Audio, Easing, interpolate, staticFile, useCurrentFrame} from "remotion";
 import {SceneFx} from "./fx";
 
 export const CONSTELLATION_FRAMES = 900;
@@ -12,6 +12,10 @@ const clamp = (v: number) => Math.max(0, Math.min(1, v));
 const ease = (v: number) => {
   const x = clamp(v);
   return x * x * (3 - 2 * x);
+};
+const easeOut = (v: number) => {
+  const x = clamp(v);
+  return 1 - Math.pow(1 - x, 3);
 };
 const pulse = (t: number, period: number, offset = 0) => {
   const p = ((t + offset) % period) / period;
@@ -59,13 +63,15 @@ const Stars: React.FC<{t:number; count?:number; drift?:number; opacity?:number}>
 
 const SceneOne: React.FC = () => {
   const t=useCurrentFrame();
-  const blink=1-pulse(t,68);
-  const zoom=interpolate(t,[0,120],[1,1.12]);
+  const beat=pulse(t,54);
+  const missed=interpolate(t,[48,54,62,70],[0,1,1,0],{extrapolateLeft:"clamp",extrapolateRight:"clamp",easing:Easing.inOut(Easing.cubic)});
+  const blink=(.22+beat*.78)*(1-missed*.92);
+  const zoom=interpolate(t,[0,24,120],[1,1.12,1.04],{extrapolateLeft:"clamp",extrapolateRight:"clamp",easing:Easing.inOut(Easing.cubic)});
   return <Backdrop t={t}>
     <Stars t={t} count={92} opacity={0.48}/>
     <g transform={`translate(540 760) scale(${zoom})`}>
-      <circle r="162" fill="none" stroke={INK} strokeWidth="2" opacity=".22"/>
-      <circle r="222" fill="none" stroke={INK} strokeWidth="1.5" opacity=".12"/>
+      <circle r={162+beat*52} fill="none" stroke={INK} strokeWidth="2" opacity={.12+beat*.32}/>
+      <circle r={222+beat*72} fill="none" stroke={INK} strokeWidth="1.5" opacity={.06+beat*.16}/>
       <path d="M-310 0 H-72 M72 0 H310" stroke={MUTED} strokeWidth="2" opacity=".35"/>
       <circle r="48" fill="none" stroke={INK} strokeWidth="4" opacity={blink} filter="url(#glow)"/>
       <path d="M0 -65 L16 -18 L61 0 L16 18 L0 65 L-16 18 L-61 0 L-16 -18 Z"
@@ -94,21 +100,24 @@ const LINKS = [
 
 const SceneTwo: React.FC = () => {
   const t=useCurrentFrame();
-  const p=ease(t/105);
-  return <Backdrop>
+  const p=easeOut(t/115);
+  const breath=1+Math.sin(t*.055)*.012;
+  return <Backdrop t={t}>
     <Stars t={t} count={90} opacity={.24}/>
     <g opacity=".18" stroke={MUTED} strokeWidth="1">
       <path d="M120 380 H960 M120 700 H960 M120 1020 H960"/>
       <path d="M220 260 V1160 M540 260 V1160 M860 260 V1160"/>
     </g>
-    <g>
+    <g transform={`translate(540 700) scale(${breath}) translate(-540 -700)`}>
       {LINKS.map(([a,b],i)=>{
         const [x1,y1]=BODY[a], [x2,y2]=BODY[b];
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={INK} strokeWidth="2.3" opacity={.16+p*.66}/>;
+        const draw=easeOut((t-i*1.3)/54);
+        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} pathLength={1} strokeDasharray="1 1" strokeDashoffset={1-draw} stroke={INK} strokeWidth="2.3" opacity={.16+draw*.66}/>;
       })}
       {BODY.map(([x,y],i)=>{
         const sx=(i*173+81)%W, sy=(i*251+190)%H;
-        const px=sx+(x-sx)*p, py=sy+(y-sy)*p;
+        const arrive=easeOut((t-(i%8)*2.5)/88);
+        const px=sx+(x-sx)*arrive, py=sy+(y-sy)*arrive;
         const beat=i<12?pulse(t,54):i%3===0?pulse(t,72,17):pulse(t,90,28);
         return <g key={i} filter="url(#glow)">
           <circle cx={px} cy={py} r={2.8+beat*2.1} fill={INK} opacity={.35+p*.65}/>
@@ -129,7 +138,7 @@ const CITY = [
 const SceneThree: React.FC = () => {
   const t=useCurrentFrame();
   const beat=pulse(t,48);
-  return <Backdrop>
+  return <Backdrop t={t}>
     <Stars t={t} count={76} opacity={.22}/>
     <path d="M0 1190 H1080" stroke={INK} strokeWidth="3" opacity=".7"/>
     {CITY.map((b,i)=>(
@@ -137,36 +146,39 @@ const SceneThree: React.FC = () => {
         <path d={`M${b.x} 1190 V${1190-b.h} H${b.x+b.w} V1190`} opacity=".72"/>
         {Array.from({length:4},(_,row)=>Array.from({length:3},(_,col)=>{
           const x=b.x+27+col*42, y=1190-b.h+55+row*61;
-          const on=pulse(t,48,(row*8+col*13+i*9)%48);
+          const on=pulse(t,48,(row*3+col*5+i*7)%16);
           return <rect key={`${row}-${col}`} x={x} y={y} width="12" height="20" fill={on>.2?INK:"#000"} opacity={.28+on*.72} filter={on>.65?"url(#glow)":undefined}/>;
         }))}
       </g>
     ))}
-    <g fill="none" stroke={INK} strokeWidth="2.5" opacity={.56+beat*.3}>
+    <g fill="none" stroke={INK} strokeWidth="2.5" opacity={.48+beat*.38} strokeDasharray="10 18" strokeDashoffset={-t*1.5}>
       <path d="M70 1260 C240 1215 310 1295 430 1250 S670 1215 770 1260 S930 1300 1030 1240"/>
       <path d="M150 1350 C280 1280 350 1335 470 1290 S710 1280 850 1330"/>
       <path d="M180 1230 L295 1310 L420 1240 L540 1300 L670 1235 L790 1315 L930 1245"/>
     </g>
-    <circle cx={interpolate(t,[0,240],[115,975])} cy={interpolate(t,[0,240],[1245,1280])} r="10" fill={INK} filter="url(#glow)"/>
+    <circle cx={interpolate(t,[0,240],[115,975],{extrapolateLeft:"clamp",extrapolateRight:"clamp"})} cy={interpolate(t,[0,240],[1245,1280],{extrapolateLeft:"clamp",extrapolateRight:"clamp"})} r={8+beat*5} fill={INK} filter="url(#glow)"/>
     <Copy y={1500} size={34}>The city begins to breathe.</Copy>
   </Backdrop>;
 };
 
 const SceneFour: React.FC = () => {
   const t=useCurrentFrame();
-  const p=ease(t/110);
+  const p=easeOut(t/125);
   const x=interpolate(t,[0,150],[540,770]);
-  return <Backdrop>
+  const starY=interpolate(t,[0,150],[770,606]);
+  const step=Math.sin(t*.22);
+  const bob=Math.abs(step)*5;
+  return <Backdrop t={t}>
     <Stars t={t} count={72} opacity={.32}/>
     <path d="M60 950 C210 830 340 920 470 770 S700 850 1020 610" fill="none" stroke={INK} strokeWidth="2.5" strokeDasharray="10 15" opacity={.28+p*.52}/>
-    <path d={`M60 950 C210 830 340 920 470 770 S700 850 ${60+(x-540)*1.75} ${950-(x-540)*1.5}`} fill="none" stroke={INK} strokeWidth="4" strokeDasharray="900" strokeDashoffset={900-p*900} filter="url(#glow)"/>
-    <g transform={`translate(${x} 1150)`} stroke={INK} fill="none" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
-      <circle cy="-145" r="34"/>
-      <path d="M0 -110 V20 M0 -70 L-65 -18 M0 -70 L62 -27 M0 20 L-48 130 M0 20 L50 130"/>
+    <path d={`M60 950 C210 830 340 920 470 770 S700 850 ${x} ${starY}`} pathLength={1} fill="none" stroke={INK} strokeWidth="4" strokeDasharray="1 1" strokeDashoffset={1-p} filter="url(#glow)"/>
+    <g transform={`translate(${x} ${1150-bob})`} stroke={INK} fill="none" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cy={-145+ bob*.35} r="34"/>
+      <path d={`M0 -110 V20 M0 -70 L${-65-step*18} -18 M0 -70 L${62+step*18} -27 M0 20 L${-48-step*35} 130 M0 20 L${50+step*35} 130`}/>
       <path d="M-90 135 H90" strokeWidth="2" opacity=".35"/>
     </g>
-    <path d="M770 580 L796 606 L770 632 L744 606 Z" fill="none" stroke={INK} strokeWidth="3" filter="url(#glow)"/>
-    <circle cx="770" cy="606" r="7" fill={INK}/>
+    <path d={`M${x} ${starY-26} L${x+26} ${starY} L${x} ${starY+26} L${x-26} ${starY} Z`} fill="none" stroke={INK} strokeWidth="3" filter="url(#glow)"/>
+    <circle cx={x} cy={starY} r="7" fill={INK}/>
     <Copy y={1460} size={32}>Your path is visible from above.</Copy>
     <Copy y={1520} size={25} opacity={.62}>EVERY STEP LEAVES A TRACE</Copy>
   </Backdrop>;
@@ -175,10 +187,11 @@ const SceneFour: React.FC = () => {
 const SceneFive: React.FC = () => {
   const t=useCurrentFrame();
   const beat=pulse(t,56);
-  const scale=1+beat*.09;
-  return <Backdrop>
+  const scale=interpolate(t,[0,18,48,150],[.86,1.08,1,1],{extrapolateLeft:"clamp",extrapolateRight:"clamp",easing:Easing.inOut(Easing.cubic)})+beat*.08;
+  const reveal=easeOut(t/34);
+  return <Backdrop t={t}>
     <Stars t={t} count={56} opacity={.2}/>
-    <path d="M0 1040 Q270 1000 540 1040 T1080 1040" fill="none" stroke={INK} strokeWidth="3" opacity=".72"/>
+    <path d="M0 1040 Q270 1000 540 1040 T1080 1040" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1-reveal} fill="none" stroke={INK} strokeWidth="3" opacity=".72"/>
     <g transform={`translate(540 720) scale(${scale})`}>
       <circle r="128" fill="none" stroke={INK} strokeWidth="3" opacity=".8" filter="url(#glow)"/>
       <circle r="92" fill="none" stroke={INK} strokeWidth="2" opacity={.35+beat*.6}/>
