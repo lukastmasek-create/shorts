@@ -7,7 +7,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs'), http = require('http'), path = require('path'), cp = require('child_process');
 let FF = 'ffmpeg'; try { FF = require('ffmpeg-static'); } catch (e) {}
-const samples = +(process.argv[2] || 32), out = path.resolve(process.argv[3] || path.join(__dirname, 'video')), FPS = 30;
+const samples = +(process.argv[2] || 32), out = path.resolve(process.argv[3] || path.join(__dirname, 'video')), FPS = +(process.env.FPS_IN || 30);
 fs.mkdirSync(out, { recursive: true });
 const server = http.createServer((q, r) => { const u = q.url.split('?')[0], f = path.join(__dirname, u === '/' ? 'index.html' : u); fs.readFile(f, (e, d) => { if (e) { r.writeHead(404); r.end(); } else { r.writeHead(200, { 'Content-Type': f.endsWith('.html') ? 'text/html; charset=utf-8' : 'application/octet-stream' }); r.end(d); } }); });
 (async () => {
@@ -37,7 +37,7 @@ const server = http.createServer((q, r) => { const u = q.url.split('?')[0], f = 
   }
   await br.close(); server.close();
   const mp4 = `${out}/popcorn.mp4`;
-  cp.execSync(`"${FF}" -y -v error -framerate ${FPS} -i "${out}/f%04d.jpg" -i "${out}/score.wav" -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:v libx264 -preset slow -crf 16 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart -shortest "${mp4}"`, { stdio: 'inherit' });
+  cp.execSync(`"${FF}" -y -v error -framerate ${FPS} -i "${out}/f%04d.jpg" -i "${out}/score.wav" -af loudnorm=I=-16:TP=-1.5:LRA=11 -c:v libx264 -preset slow -crf 16 -vf fps=30 -pix_fmt yuv420p -c:a aac -b:a 192k -movflags +faststart -shortest "${mp4}"`, { stdio: 'inherit' });
   for (const f of fs.readdirSync(out)) if (/^f\d+\.jpg$|^score\.wav$/.test(f)) fs.unlinkSync(path.join(out, f));
   console.log('hotovo:', mp4);
 })();
