@@ -57,6 +57,9 @@ Every video is assembled from two kinds of scenes. The order, the picks, the tra
 | `splitCompare` | slash line splits the screen, real before/after | 100 / 1.3 | 0.85 |
 | `deck3D` | cards on a CSS 3D carousel | 110 / 1.35 | 0.85 |
 | `deviceZoom` | phone/laptop frame with the real UI inside, camera dives through the screen | 100 / 1.3 | 0.8 |
+| `logoSplitMenu` | the logo is sliced or pulled into two halves, in the gap appear buttons for the real sections of the page (real labels); a cursor glides in, the camera zooms to the button it will click, press + ripple, the button expands (match cut) into the clicked section's scene | 120-150 / 1.3 | 0.7 |
+| `pickItem` | inside the section, a list of real options (a course, a subject, a plan, a tool...): the cursor hovers two of them, picks one (press + ripple), the chosen item's window flies in from the side with overshoot and settles | 100-120 / 1.3 | 0.8 |
+| `scrollDive` | the camera descends vertically through the stacked sections of the page in their real order (section panels as simplified windows with their real titles), parallax layers at different speeds, slow start, gradual acceleration, soft landing on the next scene | 100-130 / 1.4 | 0.9 |
 | `finale`* / `outro`* | claim slam, window morph, logo + URL pill | 90-150 / 1.3 | 0.9-1.0 |
 (* already exists in `2d/src/Code.tsx`: `IntroScene`, `SceneFiles`, `SceneFinale`, `OutroScene`. Do NOT reuse the other scenes of that video (explainer, preview, autocomplete, exercise, AI chat, plan path): they belong to that one section.)
 
@@ -139,29 +142,50 @@ const TypeLine: React.FC<{ text: string; x: number; y: number; t: number; a: num
   return <text x={x} y={y} fontFamily={MONO} fontSize={44} fill={C.cream}>{s}{Math.floor(t / 7) % 2 === 0 && <tspan fill={C.yellow}>▌</tspan>}</text>;
 };
 ```
-**Katana cut** two half-planes of the cut line clip the same object; slash flash first, then halves slide apart, a corner chip is masked out of one half and falls with gravity, spin and one small bounce, debris crumbles from the cut edge:
+**Katana cut** (known bug to avoid: the corner chip must NOT be missing before the slash; the object stays whole and unclipped until the blade has crossed it). Order of events, always: (1) object whole, nothing masked or clipped, (2) the slash line sweeps across it in ~5 frames, (3) at `tc` the two halves part along the cut, (4) only 5 frames later a crack flashes at a corner and the chip breaks off, falls with spin and one bounce, (5) debris crumbles from the cut edge, small screen shake. Check stills at `tc-2` (must look untouched), `tc`, `tc+4` (halves apart, corner still attached), `tc+8` (chip leaving), `tc+20`.
 ```tsx
 const BIG = 4000;
 const half = (A: Pt, B: Pt, side: 1 | -1) => { const dx = B[0] - A[0], dy = B[1] - A[1], l = Math.hypot(dx, dy), nx = -dy / l * side, ny = dx / l * side, ux = dx / l, uy = dy / l;
   return [[A[0] - ux * BIG, A[1] - uy * BIG], [B[0] + ux * BIG, B[1] + uy * BIG], [B[0] + ux * BIG + nx * BIG, B[1] + uy * BIG + ny * BIG], [A[0] - ux * BIG + nx * BIG, A[1] - uy * BIG + ny * BIG]].map(p => p.join(",")).join(" "); };
-const G = 2.4, fall = (t0: number, t: number) => 0.5 * G * Math.max(0, t - t0) ** 2;       // px/frame^2
+const G = 2.4, fall = (s: number) => 0.5 * G * Math.max(0, s) ** 2;                // px/frame^2, s = frames since the event
+const GLOWB = "drop-shadow(0 0 10px #6ee7ff) drop-shadow(0 0 28px #2ab7ff)";
 const Katana: React.FC<{ t: number; tc: number; A: Pt; B: Pt; chip: Pt[]; id: string; children: React.ReactNode }> = ({ t, tc, A, B, chip, id, children }) => {
-  const s = Math.max(0, t - tc), p = easeOut(prog(t, tc, tc + 26)), n: Pt = [-(B[1] - A[1]), B[0] - A[0]], l = Math.hypot(n[0], n[1]);
-  const nx = n[0] / l, ny = n[1] / l, shake = s < 10 ? Math.sin(s * 3.1) * (10 - s) * 0.8 : 0;
-  const slash = prog(t, tc - 4, tc), mid: Pt = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
+  const s = t - tc, sweep = easeOut(prog(t, tc - 5, tc));
+  const blade = <line x1={A[0]} y1={A[1]} x2={lerp(A[0], B[0], sweep)} y2={lerp(A[1], B[1], sweep)} stroke="#fff" strokeWidth={7 * (1 - clamp(s / 8))} strokeLinecap="round" style={{ filter: GLOWB }} opacity={t >= tc - 5 && s < 9 ? 1 : 0} />;
+  if (s < 0) return <g>{children}{blade}</g>;                                          // 1+2: whole object, blade sweeping
+  const p = easeOut(prog(t, tc, tc + 26)), sep = 34 * p, shake = s < 10 ? Math.sin(s * 3.1) * (10 - s) * 0.8 : 0;
+  const nrm: Pt = [-(B[1] - A[1]), B[0] - A[0]], l = Math.hypot(nrm[0], nrm[1]), nx = nrm[0] / l, ny = nrm[1] / l, mid: Pt = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
+  const chipOn = s >= 5, cs = s - 5, poly = chip.map(q => q.join(",")).join(" ");     // 4: chip only after the crack
   return <g transform={`translate(${shake} ${-shake * 0.6})`}>
-    <clipPath id={id + "a"}><polygon points={half(A, B, 1)} /></clipPath><clipPath id={id + "b"}><polygon points={half(A, B, -1)} /></clipPath>
-    <mask id={id + "m"}><rect x={-BIG} y={-BIG} width={2 * BIG} height={2 * BIG} fill="#fff" /><polygon points={chip.map(q => q.join(",")).join(" ")} fill="#000" /></mask>
-    <g clipPath={`url(#${id}a)`} transform={`translate(${nx * 34 * p} ${ny * 34 * p}) rotate(${-2.5 * p} ${mid[0]} ${mid[1]})`}>{children}</g>
-    <g clipPath={`url(#${id}b)`}><g mask={`url(#${id}m)`} transform={`translate(${-nx * 34 * p} ${-ny * 34 * p + fall(tc + 6, t) * 0.25}) rotate(${3 * p} ${mid[0]} ${mid[1]})`}>{children}</g></g>
-    <clipPath id={id + "c"}><polygon points={chip.map(q => q.join(",")).join(" ")} /></clipPath>
-    <g opacity={s > 0 ? 1 : 0}><g transform={`translate(${-nx * 34 * p + s * 3} ${-ny * 34 * p + Math.min(fall(tc + 2, t), 520)}) rotate(${s * 7} ${chip[0][0]} ${chip[0][1]})`}><g clipPath={`url(#${id}c)`}>{children}</g></g></g>
-    {Array.from({ length: 16 }, (_, i) => { const u = i / 15, px = lerp(A[0], B[0], u), py = lerp(A[1], B[1], u), vx = (rnd(i) - 0.5) * 6, vy = -rnd(i + 5) * 3; return s > 0 && <rect key={i} x={px + vx * s} y={py + vy * s + fall(tc, t) * 0.6} width={7} height={7} rx={2} fill={C.cream} opacity={clamp(1 - s / 40)} transform={`rotate(${s * (rnd(i + 9) - 0.5) * 30} ${px + vx * s} ${py})`} />; })}
-    <line x1={A[0]} y1={A[1]} x2={lerp(A[0], B[0], easeOut(slash))} y2={lerp(A[1], B[1], easeOut(slash))} stroke="#fff" strokeWidth={6 * (1 - clamp(s / 8))} strokeLinecap="round" style={{ filter: "drop-shadow(0 0 10px #6ee7ff) drop-shadow(0 0 28px #2ab7ff)" }} opacity={slash > 0 && s < 10 ? 1 : 0} />
+    <clipPath id={id + "a"}><polygon points={half(A, B, 1)} /></clipPath><clipPath id={id + "b"}><polygon points={half(A, B, -1)} /></clipPath><clipPath id={id + "c"}><polygon points={poly} /></clipPath>
+    <mask id={id + "m"}><rect x={-BIG} y={-BIG} width={2 * BIG} height={2 * BIG} fill="#fff" />{chipOn && <polygon points={poly} fill="#000" />}</mask>
+    <g clipPath={`url(#${id}a)`} transform={`translate(${nx * sep} ${ny * sep}) rotate(${-2.5 * p} ${mid[0]} ${mid[1]})`}>{children}</g>
+    <g clipPath={`url(#${id}b)`}><g mask={`url(#${id}m)`} transform={`translate(${-nx * sep} ${-ny * sep + fall(s - 6) * 0.25}) rotate(${3 * p} ${mid[0]} ${mid[1]})`}>{children}</g></g>
+    {chipOn && <g clipPath={`url(#${id}b)`} transform={`translate(${-nx * sep} ${-ny * sep + fall(s - 6) * 0.25}) rotate(${3 * p} ${mid[0]} ${mid[1]})`}>
+      <g transform={`translate(${cs * 3} ${Math.min(fall(cs), 520)}) rotate(${cs * 7} ${chip[0][0]} ${chip[0][1]})`}><g clipPath={`url(#${id}c)`}>{children}</g></g></g>}
+    {chipOn && cs < 6 && <polyline points={poly} fill="none" stroke="#fff" strokeWidth={4} opacity={1 - cs / 6} style={{ filter: GLOWB }} />}   {/* crack flash at the corner */}
+    {Array.from({ length: 16 }, (_, i) => { const u = i / 15, px = lerp(A[0], B[0], u), py = lerp(A[1], B[1], u), vx = (rnd(i) - 0.5) * 6, vy = -rnd(i + 5) * 3; return <rect key={i} x={px + vx * s} y={py + vy * s + fall(s) * 0.6} width={7} height={7} rx={2} fill={C.cream} opacity={clamp(1 - s / 40)} transform={`rotate(${s * (rnd(i + 9) - 0.5) * 30} ${px + vx * s} ${py})`} />; })}
+    {blade}
   </g>;
 };
 ```
-(`chip` = a triangle at one corner of the object, on side B of the cut. Add a white flash frame at `tc`.)
+(`chip` = a triangle at one corner of the object on side B of the cut. Add a one-frame white flash at `tc`. Titles and text inside the object are sliced with it, they do not dissolve before the cut.)
+
+**Cursor, click and the accelerating dive** (for `logoSplitMenu`, `pickItem`, `scrollDive`): the cursor moves on a eased path with a tiny overshoot, the camera zooms to the click target BEFORE the click (so the viewer sees where it lands), the click is a press (button drops by its depth offset) + ripple, then the button expands into the next scene.
+```tsx
+const Cursor: React.FC<{ x: number; y: number; press?: number; o?: number }> = ({ x, y, press = 0, o = 1 }) => (
+  <g transform={`translate(${x} ${y}) scale(${1 - 0.12 * press})`} opacity={o} style={{ filter: "drop-shadow(0 4px 6px rgba(0,0,0,.5))" }}>
+    <path d="M0 0 L0 38 L10 29 L17 44 L25 40 L18 26 L31 26 Z" fill={C.cream} stroke={C.ink} strokeWidth={3} strokeLinejoin="round" />
+  </g>
+);
+const Ripple: React.FC<{ x: number; y: number; t: number; a: number }> = ({ x, y, t, a }) => { const p = prog(t, a, a + 18); return p > 0 && p < 1 ? <circle cx={x} cy={y} r={20 + 120 * easeOut(p)} fill="none" stroke={C.yellow} strokeWidth={5 * (1 - p)} opacity={1 - p} /> : null; };
+const lerpPath = (pts: Pt[], u: number): Pt => { const f = clamp(u) * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(f)), e = easeIO(f - i); return [lerp(pts[i][0], pts[i + 1][0], e), lerp(pts[i][1], pts[i + 1][1], e)]; };
+// button press: depth 8 px -> 2 px while pressed;  camera zoom to the click target:  { x: bx, y: by, s: 1.0 -> 1.6 } over the 20 frames before the press
+// slow-start accelerating vertical dive: long ramp, no pauses, soft landing (quintic in-out starts very slowly, speeds up, then settles)
+const easeIO5 = (u: number) => (u < 0.5 ? 16 * u ** 5 : 1 - ((-2 * u + 2) ** 5) / 2);
+const dive = (u: number, y0: number, y1: number) => lerp(y0, y1, easeIO5(clamp(u)));         // use >= 40 frames, blur from speed as in the camera
+```
+Logo split: draw the real logo pieces (`LogoRow`) clipped by two half-planes (`half()` above, vertical cut line through the middle), slide the halves left/right with easeOut + a small roll, keep the buttons in the gap in front of a dark slot; the halves close again at the end of the scene.
 
 **Sparks with motion blur** deterministic particles on quadratic Béziers, drawn as a tapered trail of N samples behind the head (that trail IS the motion blur); spawn them from letter positions of a word, fade the letter as its spark leaves:
 ```tsx
@@ -188,6 +212,7 @@ D minor, ~100 bpm, bar grid chosen so the final logo hit is on a downbeat. Quiet
 
 ## 5. Build and check
 - Files: `2d/src/<Name>.tsx` with `createFilm(...)` per part, register `KodX`-style compositions in `Root.tsx`, `npx tsc --noEmit` clean.
+- Always check the katana frames `tc-2`, `tc`, `tc+4`, `tc+8` (object whole before the cut, corner attached until the crack), the frame just before each click (cursor over the right target, camera already zoomed), and the middle of the dive.
 - Check stills at: end of logo morph, mid title, the cut frame (+0, +6, +20), mid spark flight, each bubble, last frame; fix overlaps and cut-off text. Check that no text starts during a fast camera move.
 - Render per part: `npx remotion render 2d/src/index.ts <CompId> out/<name>-dilN.mp4 --codec h264 --crf 18 --audio-codec aac --gl=swangle --browser-executable=/opt/pw-browsers/chromium --concurrency=2` (run as a tracked background job, ~2.3 s/frame).
 - Commit sources + wavs, never mp4. Deliver each mp4 directly; report length, what was invented, and that the mix was measured but not auditioned.
