@@ -1,0 +1,716 @@
+[
+ {
+  "beat": 0,
+  "word": "No",
+  "start": 0.0267,
+  "end": 0.32
+ },
+ {
+  "beat": 0,
+  "word": "way.",
+  "start": 0.32,
+  "end": 0.4373
+ },
+ {
+  "beat": 1,
+  "word": "Homework?",
+  "start": 0.8317,
+  "end": 1.2744
+ },
+ {
+  "beat": 2,
+  "word": "Dead.",
+  "start": 1.5477,
+  "end": 1.8464
+ },
+ {
+  "beat": 3,
+  "word": "Boring?",
+  "start": 2.1232,
+  "end": 2.4912
+ },
+ {
+  "beat": 4,
+  "word": "Gone.",
+  "start": 2.7946,
+  "end": 3.104
+ },
+ {
+  "beat": 5,
+  "word": "Meet",
+  "start": 3.4853,
+  "end": 3.808
+ },
+ {
+  "beat": 5,
+  "word": "OO-chee-meh",
+  "start": 3.808,
+  "end": 4.32
+ },
+ {
+  "beat": 5,
+  "word": "seh",
+  "start": 4.32,
+  "end": 4.32
+ },
+ {
+  "beat": 5,
+  "word": "HROHW.",
+  "start": 4.32,
+  "end": 4.744
+ },
+ {
+  "beat": 6,
+  "word": "You",
+  "start": 5.193,
+  "end": 5.1957
+ },
+ {
+  "beat": 6,
+  "word": "know",
+  "start": 5.1957,
+  "end": 5.441
+ },
+ {
+  "beat": 6,
+  "word": "the",
+  "start": 5.441,
+  "end": 5.705
+ },
+ {
+  "beat": 6,
+  "word": "drill.",
+  "start": 5.705,
+  "end": 5.7637
+ },
+ {
+  "beat": 7,
+  "word": "The",
+  "start": 6.1264,
+  "end": 6.1744
+ },
+ {
+  "beat": 7,
+  "word": "boring",
+  "start": 6.1744,
+  "end": 6.6544
+ },
+ {
+  "beat": 7,
+  "word": "way.",
+  "start": 6.6544,
+  "end": 6.6917
+ },
+ {
+  "beat": 8,
+  "word": "Study.",
+  "start": 7.1477,
+  "end": 7.4837
+ },
+ {
+  "beat": 9,
+  "word": "Study!",
+  "start": 7.7992,
+  "end": 8.1458
+ },
+ {
+  "beat": 10,
+  "word": "STUDY!!",
+  "start": 8.456,
+  "end": 8.8346
+ },
+ {
+  "beat": 11,
+  "word": "Homework",
+  "start": 9.2424,
+  "end": 9.477
+ },
+ {
+  "beat": 11,
+  "word": "till",
+  "start": 9.477,
+  "end": 9.7357
+ },
+ {
+  "beat": 11,
+  "word": "midnight.",
+  "start": 9.7357,
+  "end": 9.9624
+ },
+ {
+  "beat": 12,
+  "word": "Timers.",
+  "start": 10.3477,
+  "end": 10.6704
+ },
+ {
+  "beat": 12,
+  "word": "Deadlines.",
+  "start": 10.6704,
+  "end": 11.2224
+ },
+ {
+  "beat": 13,
+  "word": "Worksheets.",
+  "start": 11.5338,
+  "end": 11.9471
+ },
+ {
+  "beat": 13,
+  "word": "Stacks",
+  "start": 11.9471,
+  "end": 12.1311
+ },
+ {
+  "beat": 13,
+  "word": "of",
+  "start": 12.1311,
+  "end": 12.4058
+ },
+ {
+  "beat": 13,
+  "word": "them.",
+  "start": 12.4058,
+  "end": 12.4991
+ },
+ {
+  "beat": 14,
+  "word": "Late",
+  "start": 12.8258,
+  "end": 13.1218
+ },
+ {
+  "beat": 14,
+  "word": "night.",
+  "start": 13.1218,
+  "end": 13.3778
+ },
+ {
+  "beat": 14,
+  "word": "No",
+  "start": 13.3778,
+  "end": 13.3778
+ },
+ {
+  "beat": 14,
+  "word": "idea.",
+  "start": 13.3778,
+  "end": 13.6685
+ },
+ {
+  "beat": 15,
+  "word": "Are",
+  "start": 14.1573,
+  "end": 14.3119
+ },
+ {
+  "beat": 15,
+  "word": "you",
+  "start": 14.3119,
+  "end": 14.3119
+ },
+ {
+  "beat": 15,
+  "word": "kidding",
+  "start": 14.3119,
+  "end": 14.7866
+ },
+ {
+  "beat": 15,
+  "word": "me?",
+  "start": 14.7866,
+  "end": 14.7866
+ },
+ {
+  "beat": 16,
+  "word": "And",
+  "start": 15.3037,
+  "end": 15.589
+ },
+ {
+  "beat": 16,
+  "word": "then.",
+  "start": 15.589,
+  "end": 15.6823
+ },
+ {
+  "beat": 17,
+  "word": "Everything",
+  "start": 16.2858,
+  "end": 16.8911
+ },
+ {
+  "beat": 17,
+  "word": "changes.",
+  "start": 16.8911,
+  "end": 17.1605
+ },
+ {
+  "beat": 18,
+  "word": "Meet",
+  "start": 17.6125,
+  "end": 17.9351
+ },
+ {
+  "beat": 18,
+  "word": "OO-chee-meh",
+  "start": 17.9351,
+  "end": 18.4471
+ },
+ {
+  "beat": 18,
+  "word": "seh",
+  "start": 18.4471,
+  "end": 18.4471
+ },
+ {
+  "beat": 18,
+  "word": "HROHW.",
+  "start": 18.4471,
+  "end": 18.8711
+ },
+ {
+  "beat": 19,
+  "word": "Learning",
+  "start": 19.3802,
+  "end": 19.7509
+ },
+ {
+  "beat": 19,
+  "word": "that",
+  "start": 19.7509,
+  "end": 19.7189
+ },
+ {
+  "beat": 19,
+  "word": "feels",
+  "start": 19.7189,
+  "end": 20.1269
+ },
+ {
+  "beat": 19,
+  "word": "like",
+  "start": 20.1269,
+  "end": 20.1269
+ },
+ {
+  "beat": 19,
+  "word": "a",
+  "start": 20.1269,
+  "end": 20.3989
+ },
+ {
+  "beat": 19,
+  "word": "game.",
+  "start": 20.3989,
+  "end": 20.4469
+ },
+ {
+  "beat": 20,
+  "word": "You",
+  "start": 20.9964,
+  "end": 21.2444
+ },
+ {
+  "beat": 20,
+  "word": "just",
+  "start": 21.2444,
+  "end": 21.2684
+ },
+ {
+  "beat": 20,
+  "word": "play.",
+  "start": 21.2684,
+  "end": 21.6044
+ },
+ {
+  "beat": 21,
+  "word": "Pick",
+  "start": 21.973,
+  "end": 22.1543
+ },
+ {
+  "beat": 21,
+  "word": "a",
+  "start": 22.1543,
+  "end": 22.1596
+ },
+ {
+  "beat": 21,
+  "word": "course.",
+  "start": 22.1596,
+  "end": 22.533
+ },
+ {
+  "beat": 22,
+  "word": "Answer.",
+  "start": 22.8434,
+  "end": 23.2807
+ },
+ {
+  "beat": 23,
+  "word": "Get",
+  "start": 23.5201,
+  "end": 23.6561
+ },
+ {
+  "beat": 23,
+  "word": "it",
+  "start": 23.6561,
+  "end": 23.9228
+ },
+ {
+  "beat": 23,
+  "word": "right.",
+  "start": 23.9228,
+  "end": 24.0375
+ },
+ {
+  "beat": 24,
+  "word": "Wrong?",
+  "start": 24.2937,
+  "end": 24.5711
+ },
+ {
+  "beat": 24,
+  "word": "You",
+  "start": 24.5711,
+  "end": 24.6751
+ },
+ {
+  "beat": 24,
+  "word": "get",
+  "start": 24.6751,
+  "end": 24.6697
+ },
+ {
+  "beat": 24,
+  "word": "the",
+  "start": 24.6697,
+  "end": 25.0057
+ },
+ {
+  "beat": 24,
+  "word": "reason.",
+  "start": 25.0057,
+  "end": 25.1577
+ },
+ {
+  "beat": 25,
+  "word": "Points.",
+  "start": 25.5996,
+  "end": 25.8289
+ },
+ {
+  "beat": 25,
+  "word": "Levels.",
+  "start": 25.8289,
+  "end": 26.1756
+ },
+ {
+  "beat": 25,
+  "word": "Rewards.",
+  "start": 26.1756,
+  "end": 26.6822
+ },
+ {
+  "beat": 26,
+  "word": "Farm.",
+  "start": 27.1228,
+  "end": 27.4588
+ },
+ {
+  "beat": 27,
+  "word": "City.",
+  "start": 27.7897,
+  "end": 28.1204
+ },
+ {
+  "beat": 28,
+  "word": "Pets.",
+  "start": 28.4129,
+  "end": 28.7329
+ },
+ {
+  "beat": 29,
+  "word": "Escape",
+  "start": 29.0051,
+  "end": 29.2505
+ },
+ {
+  "beat": 29,
+  "word": "rooms.",
+  "start": 29.2505,
+  "end": 29.6611
+ },
+ {
+  "beat": 30,
+  "word": "Daily",
+  "start": 29.9854,
+  "end": 30.1934
+ },
+ {
+  "beat": 30,
+  "word": "quiz.",
+  "start": 30.1934,
+  "end": 30.5774
+ },
+ {
+  "beat": 31,
+  "word": "Review",
+  "start": 30.8688,
+  "end": 31.1915
+ },
+ {
+  "beat": 31,
+  "word": "what's",
+  "start": 31.1915,
+  "end": 31.2955
+ },
+ {
+  "beat": 31,
+  "word": "hard.",
+  "start": 31.2955,
+  "end": 31.5995
+ },
+ {
+  "beat": 32,
+  "word": "Leaderboards.",
+  "start": 31.9888,
+  "end": 32.5382
+ },
+ {
+  "beat": 33,
+  "word": "Shop.",
+  "start": 32.8806,
+  "end": 33.0566
+ },
+ {
+  "beat": 33,
+  "word": "Frames.",
+  "start": 33.0566,
+  "end": 33.4059
+ },
+ {
+  "beat": 33,
+  "word": "Rewards.",
+  "start": 33.4059,
+  "end": 33.8886
+ },
+ {
+  "beat": 34,
+  "word": "Code",
+  "start": 34.2403,
+  "end": 34.563
+ },
+ {
+  "beat": 34,
+  "word": "lessons.",
+  "start": 34.563,
+  "end": 34.8216
+ },
+ {
+  "beat": 35,
+  "word": "Three-d",
+  "start": 35.1675,
+  "end": 35.4075
+ },
+ {
+  "beat": 35,
+  "word": "town.",
+  "start": 35.4075,
+  "end": 35.7435
+ },
+ {
+  "beat": 36,
+  "word": "Your",
+  "start": 36.1032,
+  "end": 36.4205
+ },
+ {
+  "beat": 36,
+  "word": "own",
+  "start": 36.4205,
+  "end": 36.5885
+ },
+ {
+  "beat": 36,
+  "word": "room.",
+  "start": 36.5885,
+  "end": 36.6739
+ },
+ {
+  "beat": 37,
+  "word": "Your",
+  "start": 36.9728,
+  "end": 37.2848
+ },
+ {
+  "beat": 37,
+  "word": "own",
+  "start": 37.2848,
+  "end": 37.3755
+ },
+ {
+  "beat": 37,
+  "word": "avatar.",
+  "start": 37.3755,
+  "end": 37.6715
+ },
+ {
+  "beat": 38,
+  "word": "Teachers",
+  "start": 38.012,
+  "end": 38.364
+ },
+ {
+  "beat": 38,
+  "word": "too.",
+  "start": 38.364,
+  "end": 38.6946
+ },
+ {
+  "beat": 39,
+  "word": "Eight",
+  "start": 39.0,
+  "end": 39.3866
+ },
+ {
+  "beat": 39,
+  "word": "languages.",
+  "start": 39.3866,
+  "end": 39.6933
+ },
+ {
+  "beat": 40,
+  "word": "Five",
+  "start": 40.0493,
+  "end": 40.1906
+ },
+ {
+  "beat": 40,
+  "word": "levels",
+  "start": 40.1906,
+  "end": 40.476
+ },
+ {
+  "beat": 40,
+  "word": "per",
+  "start": 40.476,
+  "end": 40.6226
+ },
+ {
+  "beat": 40,
+  "word": "course.",
+  "start": 40.6226,
+  "end": 40.9986
+ },
+ {
+  "beat": 41,
+  "word": "Quizzes.",
+  "start": 41.4381,
+  "end": 41.7368
+ },
+ {
+  "beat": 41,
+  "word": "Pets.",
+  "start": 41.7368,
+  "end": 41.9208
+ },
+ {
+  "beat": 41,
+  "word": "Code.",
+  "start": 41.9208,
+  "end": 42.3554
+ },
+ {
+  "beat": 41,
+  "word": "A",
+  "start": 42.3554,
+  "end": 42.5074
+ },
+ {
+  "beat": 41,
+  "word": "whole",
+  "start": 42.5074,
+  "end": 42.7821
+ },
+ {
+  "beat": 41,
+  "word": "town.",
+  "start": 42.7821,
+  "end": 42.8941
+ },
+ {
+  "beat": 42,
+  "word": "All",
+  "start": 43.3064,
+  "end": 43.6237
+ },
+ {
+  "beat": 42,
+  "word": "yours.",
+  "start": 43.6237,
+  "end": 43.7917
+ },
+ {
+  "beat": 43,
+  "word": "Free",
+  "start": 44.1306,
+  "end": 44.3786
+ },
+ {
+  "beat": 43,
+  "word": "to",
+  "start": 44.3786,
+  "end": 44.3786
+ },
+ {
+  "beat": 43,
+  "word": "start.",
+  "start": 44.3786,
+  "end": 44.6639
+ },
+ {
+  "beat": 44,
+  "word": "Play",
+  "start": 45.1186,
+  "end": 45.4706
+ },
+ {
+  "beat": 44,
+  "word": "now.",
+  "start": 45.4706,
+  "end": 45.5399
+ },
+ {
+  "beat": 45,
+  "word": "OO-chee-meh",
+  "start": 46.0223,
+  "end": 46.633
+ },
+ {
+  "beat": 45,
+  "word": "seh",
+  "start": 46.633,
+  "end": 46.8223
+ },
+ {
+  "beat": 45,
+  "word": "HROHW",
+  "start": 46.8223,
+  "end": 47.3317
+ },
+ {
+  "beat": 45,
+  "word": "dot",
+  "start": 47.3317,
+  "end": 47.5903
+ },
+ {
+  "beat": 45,
+  "word": "ORG.",
+  "start": 47.5903,
+  "end": 47.841
+ }
+]

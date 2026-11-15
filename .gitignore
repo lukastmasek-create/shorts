@@ -22,3 +22,10 @@ __pycache__/
 v16.wav
 # Aging mix: committed copy is public/aging/mix.wav (audio/aging_mix.py writes both)
 /aging/audio/mix.wav
+
+# Hype short working files. Committed: public/hype/voice/voice.wav, public/hype/mix.wav and the
+# generated timing table (src/videos/hype/timing.generated.ts). Everything else here is disposable.
+/hype/voice-work/
+/hype/voice/*.wav
+/hype/audio/
+.venv-tools/

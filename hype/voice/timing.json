@@ -1,0 +1,1400 @@
+{
+ "fps": 30,
+ "total": 1574,
+ "voiceEnd": 1448,
+ "segs": [
+  {
+   "i": 0,
+   "from": 0,
+   "dur": 20,
+   "el": "word",
+   "text": "NO WAY.",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 0,
+   "land": 0,
+   "shake": 0.5,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "No",
+     "f": 1,
+     "e": 10
+    },
+    {
+     "w": "way.",
+     "f": 10,
+     "e": 13
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "from": 20,
+   "dur": 23,
+   "el": "word-homework",
+   "text": "HOMEWORK?",
+   "bg": "blue",
+   "mode": "slam",
+   "tr": "flash",
+   "trFrames": 2,
+   "head": 2,
+   "land": 4,
+   "shake": 0.6,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "Homework?",
+     "f": 5,
+     "e": 18
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "from": 43,
+   "dur": 11,
+   "el": "word",
+   "text": "DEAD.",
+   "bg": "coral",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.5,
+   "hit": 0.9,
+   "words": [
+    {
+     "w": "Dead.",
+     "f": 3,
+     "e": 12
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "from": 54,
+   "dur": 27,
+   "el": "word",
+   "text": "BORING?",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "stripes",
+   "trFrames": 7,
+   "head": 2,
+   "land": 9,
+   "shake": 0.5,
+   "hit": 0.9,
+   "words": [
+    {
+     "w": "Boring?",
+     "f": 10,
+     "e": 21
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "from": 81,
+   "dur": 6,
+   "el": "word-gone",
+   "text": "GONE.",
+   "bg": "cream",
+   "mode": "stretch",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.6,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "Gone.",
+     "f": 3,
+     "e": 12
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "from": 87,
+   "dur": 60,
+   "el": "extrude",
+   "text": "MEET\nU\u010c\u00cdME SE HROU.",
+   "bg": "blue",
+   "mode": "extrude",
+   "tr": "zoom",
+   "trFrames": 8,
+   "head": 8,
+   "land": 16,
+   "shake": 0.5,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "Meet",
+     "f": 18,
+     "e": 27
+    },
+    {
+     "w": "OO-chee-meh",
+     "f": 27,
+     "e": 43
+    },
+    {
+     "w": "seh",
+     "f": 43,
+     "e": 43
+    },
+    {
+     "w": "HROHW.",
+     "f": 43,
+     "e": 55
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "from": 147,
+   "dur": 34,
+   "el": "homework",
+   "text": "YOU KNOW\nTHE DRILL",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 2,
+   "land": 8,
+   "shake": 0.0,
+   "hit": 0.6,
+   "words": [
+    {
+     "w": "You",
+     "f": 9,
+     "e": 9
+    },
+    {
+     "w": "know",
+     "f": 9,
+     "e": 16
+    },
+    {
+     "w": "the",
+     "f": 16,
+     "e": 24
+    },
+    {
+     "w": "drill.",
+     "f": 24,
+     "e": 26
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "from": 181,
+   "dur": 22,
+   "el": "boring",
+   "text": "THE BORING WAY",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.0,
+   "hit": 0.4,
+   "words": [
+    {
+     "w": "The",
+     "f": 3,
+     "e": 4
+    },
+    {
+     "w": "boring",
+     "f": 4,
+     "e": 19
+    },
+    {
+     "w": "way.",
+     "f": 19,
+     "e": 20
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "from": 203,
+   "dur": 22,
+   "el": "stack",
+   "text": "STUDY.",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "stripes",
+   "trFrames": 7,
+   "head": 2,
+   "land": 9,
+   "shake": 0.0,
+   "hit": 0.7,
+   "words": [
+    {
+     "w": "Study.",
+     "f": 11,
+     "e": 22
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "from": 225,
+   "dur": 24,
+   "el": "stack",
+   "text": "STUDY.",
+   "bg": "deep",
+   "mode": "slam",
+   "tr": "glitch",
+   "trFrames": 5,
+   "head": 2,
+   "land": 7,
+   "shake": 0.4,
+   "hit": 0.9,
+   "words": [
+    {
+     "w": "Study!",
+     "f": 9,
+     "e": 19
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "from": 249,
+   "dur": 23,
+   "el": "stack-wall",
+   "text": "STUDY.",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.6,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "STUDY!!",
+     "f": 5,
+     "e": 16
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "from": 272,
+   "dur": 27,
+   "el": "timer",
+   "text": "HOMEWORK\nTILL MIDNIGHT",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 4,
+   "land": 4,
+   "shake": 0.0,
+   "hit": 0.6,
+   "words": [
+    {
+     "w": "Homework",
+     "f": 5,
+     "e": 12
+    },
+    {
+     "w": "till",
+     "f": 12,
+     "e": 20
+    },
+    {
+     "w": "midnight.",
+     "f": 20,
+     "e": 27
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "from": 299,
+   "dur": 35,
+   "el": "timerbig",
+   "text": "TIMERS. DEADLINES.",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 4,
+   "land": 10,
+   "shake": 0.0,
+   "hit": 0.7,
+   "words": [
+    {
+     "w": "Timers.",
+     "f": 11,
+     "e": 21
+    },
+    {
+     "w": "Deadlines.",
+     "f": 21,
+     "e": 38
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "from": 334,
+   "dur": 42,
+   "el": "worksheets",
+   "text": "WORKSHEETS",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "stripes",
+   "trFrames": 7,
+   "head": 4,
+   "land": 11,
+   "shake": 0.0,
+   "hit": 0.6,
+   "words": [
+    {
+     "w": "Worksheets.",
+     "f": 12,
+     "e": 24
+    },
+    {
+     "w": "Stacks",
+     "f": 24,
+     "e": 30
+    },
+    {
+     "w": "of",
+     "f": 30,
+     "e": 38
+    },
+    {
+     "w": "them.",
+     "f": 38,
+     "e": 41
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "from": 376,
+   "dur": 44,
+   "el": "word",
+   "text": "LATE NIGHT.\nNO IDEA.",
+   "bg": "indigo",
+   "mode": "tracking-in",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 2,
+   "land": 8,
+   "shake": 0.0,
+   "hit": 0.6,
+   "words": [
+    {
+     "w": "Late",
+     "f": 9,
+     "e": 18
+    },
+    {
+     "w": "night.",
+     "f": 18,
+     "e": 25
+    },
+    {
+     "w": "No",
+     "f": 25,
+     "e": 25
+    },
+    {
+     "w": "idea.",
+     "f": 25,
+     "e": 34
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "from": 420,
+   "dur": 20,
+   "el": "kidding",
+   "text": "ARE YOU\nKIDDING ME?",
+   "bg": "coral",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 4,
+   "land": 4,
+   "shake": 0.7,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "Are",
+     "f": 5,
+     "e": 9
+    },
+    {
+     "w": "you",
+     "f": 9,
+     "e": 9
+    },
+    {
+     "w": "kidding",
+     "f": 9,
+     "e": 24
+    },
+    {
+     "w": "me?",
+     "f": 24,
+     "e": 24
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "from": 440,
+   "dur": 46,
+   "el": "whisper",
+   "text": "AND THEN",
+   "bg": "deep",
+   "mode": "slam",
+   "tr": "laser",
+   "trFrames": 8,
+   "head": 10,
+   "land": 18,
+   "shake": 0.0,
+   "hit": 0.3,
+   "words": [
+    {
+     "w": "And",
+     "f": 19,
+     "e": 28
+    },
+    {
+     "w": "then.",
+     "f": 28,
+     "e": 30
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "from": 486,
+   "dur": 26,
+   "el": "word",
+   "text": "EVERYTHING\nCHANGES",
+   "bg": "blue",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.7,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "Everything",
+     "f": 3,
+     "e": 21
+    },
+    {
+     "w": "changes.",
+     "f": 21,
+     "e": 29
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "from": 512,
+   "dur": 65,
+   "el": "logo",
+   "text": "",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "zoom",
+   "trFrames": 5,
+   "head": 10,
+   "land": 15,
+   "shake": 0.0,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "Meet",
+     "f": 16,
+     "e": 26
+    },
+    {
+     "w": "OO-chee-meh",
+     "f": 26,
+     "e": 41
+    },
+    {
+     "w": "seh",
+     "f": 41,
+     "e": 41
+    },
+    {
+     "w": "HROHW.",
+     "f": 41,
+     "e": 54
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "from": 577,
+   "dur": 41,
+   "el": "sub",
+   "text": "LEARNING THAT FEELS LIKE A GAME",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 4,
+   "land": 4,
+   "shake": 0.0,
+   "hit": 0.4,
+   "words": [
+    {
+     "w": "Learning",
+     "f": 4,
+     "e": 16
+    },
+    {
+     "w": "that",
+     "f": 16,
+     "e": 15
+    },
+    {
+     "w": "feels",
+     "f": 15,
+     "e": 27
+    },
+    {
+     "w": "like",
+     "f": 27,
+     "e": 27
+    },
+    {
+     "w": "a",
+     "f": 27,
+     "e": 35
+    },
+    {
+     "w": "game.",
+     "f": 35,
+     "e": 36
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "from": 618,
+   "dur": 30,
+   "el": "word",
+   "text": "YOU JUST PLAY",
+   "bg": "cream",
+   "mode": "stretch",
+   "tr": "shape",
+   "trFrames": 9,
+   "head": 2,
+   "land": 11,
+   "shake": 0.0,
+   "hit": 0.7,
+   "words": [
+    {
+     "w": "You",
+     "f": 12,
+     "e": 19
+    },
+    {
+     "w": "just",
+     "f": 19,
+     "e": 20
+    },
+    {
+     "w": "play.",
+     "f": 20,
+     "e": 30
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "from": 648,
+   "dur": 34,
+   "el": "player",
+   "text": "PICK A COURSE",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 4,
+   "land": 10,
+   "shake": 0.0,
+   "hit": 0.6,
+   "words": [
+    {
+     "w": "Pick",
+     "f": 11,
+     "e": 17
+    },
+    {
+     "w": "a",
+     "f": 17,
+     "e": 17
+    },
+    {
+     "w": "course.",
+     "f": 17,
+     "e": 28
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "from": 682,
+   "dur": 23,
+   "el": "quiz",
+   "text": "ANSWER.",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 3,
+   "land": 3,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Answer.",
+     "f": 3,
+     "e": 16
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "from": 705,
+   "dur": 15,
+   "el": "quizright",
+   "text": "GET IT RIGHT.",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 0,
+   "land": 0,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Get",
+     "f": 1,
+     "e": 5
+    },
+    {
+     "w": "it",
+     "f": 5,
+     "e": 13
+    },
+    {
+     "w": "right.",
+     "f": 13,
+     "e": 16
+    }
+   ]
+  },
+  {
+   "i": 24,
+   "from": 720,
+   "dur": 39,
+   "el": "explain",
+   "text": "WRONG?\nHERE'S WHY.",
+   "bg": "blue",
+   "mode": "slam",
+   "tr": "glitch",
+   "trFrames": 5,
+   "head": 3,
+   "land": 8,
+   "shake": 0.0,
+   "hit": 0.5,
+   "words": [
+    {
+     "w": "Wrong?",
+     "f": 9,
+     "e": 17
+    },
+    {
+     "w": "You",
+     "f": 17,
+     "e": 20
+    },
+    {
+     "w": "get",
+     "f": 20,
+     "e": 20
+    },
+    {
+     "w": "the",
+     "f": 20,
+     "e": 30
+    },
+    {
+     "w": "reason.",
+     "f": 30,
+     "e": 35
+    }
+   ]
+  },
+  {
+   "i": 25,
+   "from": 759,
+   "dur": 51,
+   "el": "points",
+   "text": "POINTS.\nLEVELS. REWARDS.",
+   "bg": "coral",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 2,
+   "land": 8,
+   "shake": 0.0,
+   "hit": 0.9,
+   "words": [
+    {
+     "w": "Points.",
+     "f": 9,
+     "e": 16
+    },
+    {
+     "w": "Levels.",
+     "f": 16,
+     "e": 26
+    },
+    {
+     "w": "Rewards.",
+     "f": 26,
+     "e": 41
+    }
+   ]
+  },
+  {
+   "i": 26,
+   "from": 810,
+   "dur": 13,
+   "el": "screen-farm",
+   "text": "FARM",
+   "bg": "blue",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Farm.",
+     "f": 4,
+     "e": 14
+    }
+   ]
+  },
+  {
+   "i": 27,
+   "from": 823,
+   "dur": 27,
+   "el": "screen-city",
+   "text": "CITY",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "stripes",
+   "trFrames": 7,
+   "head": 2,
+   "land": 9,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "City.",
+     "f": 11,
+     "e": 21
+    }
+   ]
+  },
+  {
+   "i": 28,
+   "from": 850,
+   "dur": 11,
+   "el": "pets",
+   "text": "PETS",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Pets.",
+     "f": 2,
+     "e": 12
+    }
+   ]
+  },
+  {
+   "i": 29,
+   "from": 861,
+   "dur": 36,
+   "el": "escape",
+   "text": "ESCAPE ROOMS",
+   "bg": "coral",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 2,
+   "land": 8,
+   "shake": 0.0,
+   "hit": 0.9,
+   "words": [
+    {
+     "w": "Escape",
+     "f": 9,
+     "e": 17
+    },
+    {
+     "w": "rooms.",
+     "f": 17,
+     "e": 29
+    }
+   ]
+  },
+  {
+   "i": 30,
+   "from": 897,
+   "dur": 21,
+   "el": "daily",
+   "text": "DAILY QUIZ",
+   "bg": "blue",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Daily",
+     "f": 3,
+     "e": 9
+    },
+    {
+     "w": "quiz.",
+     "f": 9,
+     "e": 20
+    }
+   ]
+  },
+  {
+   "i": 31,
+   "from": 918,
+   "dur": 33,
+   "el": "review",
+   "text": "REVIEW\nWHAT'S HARD",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "glitch",
+   "trFrames": 5,
+   "head": 2,
+   "land": 7,
+   "shake": 0.0,
+   "hit": 0.6,
+   "words": [
+    {
+     "w": "Review",
+     "f": 8,
+     "e": 18
+    },
+    {
+     "w": "what's",
+     "f": 18,
+     "e": 21
+    },
+    {
+     "w": "hard.",
+     "f": 21,
+     "e": 30
+    }
+   ]
+  },
+  {
+   "i": 32,
+   "from": 951,
+   "dur": 25,
+   "el": "boards",
+   "text": "LEADERBOARDS",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 2,
+   "land": 8,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Leaderboards.",
+     "f": 9,
+     "e": 25
+    }
+   ]
+  },
+  {
+   "i": 33,
+   "from": 976,
+   "dur": 46,
+   "el": "shop",
+   "text": "SHOP.\nFRAMES. REWARDS.",
+   "bg": "coral",
+   "mode": "slam",
+   "tr": "stripes",
+   "trFrames": 7,
+   "head": 2,
+   "land": 9,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Shop.",
+     "f": 10,
+     "e": 16
+    },
+    {
+     "w": "Frames.",
+     "f": 16,
+     "e": 26
+    },
+    {
+     "w": "Rewards.",
+     "f": 26,
+     "e": 41
+    }
+   ]
+  },
+  {
+   "i": 34,
+   "from": 1022,
+   "dur": 21,
+   "el": "code",
+   "text": "CODE LESSONS",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 4,
+   "land": 4,
+   "shake": 0.0,
+   "hit": 0.7,
+   "words": [
+    {
+     "w": "Code",
+     "f": 5,
+     "e": 15
+    },
+    {
+     "w": "lessons.",
+     "f": 15,
+     "e": 23
+    }
+   ]
+  },
+  {
+   "i": 35,
+   "from": 1043,
+   "dur": 35,
+   "el": "town",
+   "text": "3D TOWN",
+   "bg": "blue",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 5,
+   "land": 11,
+   "shake": 0.0,
+   "hit": 0.9,
+   "words": [
+    {
+     "w": "Three-d",
+     "f": 12,
+     "e": 19
+    },
+    {
+     "w": "town.",
+     "f": 19,
+     "e": 29
+    }
+   ]
+  },
+  {
+   "i": 36,
+   "from": 1078,
+   "dur": 21,
+   "el": "room",
+   "text": "YOUR OWN ROOM",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 4,
+   "land": 4,
+   "shake": 0.0,
+   "hit": 0.6,
+   "words": [
+    {
+     "w": "Your",
+     "f": 5,
+     "e": 15
+    },
+    {
+     "w": "own",
+     "f": 15,
+     "e": 20
+    },
+    {
+     "w": "room.",
+     "f": 20,
+     "e": 22
+    }
+   ]
+  },
+  {
+   "i": 37,
+   "from": 1099,
+   "dur": 32,
+   "el": "avatars",
+   "text": "YOUR AVATAR",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "stripes",
+   "trFrames": 7,
+   "head": 2,
+   "land": 9,
+   "shake": 0.0,
+   "hit": 0.7,
+   "words": [
+    {
+     "w": "Your",
+     "f": 10,
+     "e": 20
+    },
+    {
+     "w": "own",
+     "f": 20,
+     "e": 22
+    },
+    {
+     "w": "avatar.",
+     "f": 22,
+     "e": 31
+    }
+   ]
+  },
+  {
+   "i": 38,
+   "from": 1131,
+   "dur": 31,
+   "el": "teacher",
+   "text": "TEACHERS TOO",
+   "bg": "coral",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 2,
+   "land": 8,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Teachers",
+     "f": 9,
+     "e": 20
+    },
+    {
+     "w": "too.",
+     "f": 20,
+     "e": 30
+    }
+   ]
+  },
+  {
+   "i": 39,
+   "from": 1162,
+   "dur": 30,
+   "el": "langs",
+   "text": "8 LANGUAGES",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "glitch",
+   "trFrames": 5,
+   "head": 2,
+   "land": 7,
+   "shake": 0.0,
+   "hit": 0.7,
+   "words": [
+    {
+     "w": "Eight",
+     "f": 8,
+     "e": 20
+    },
+    {
+     "w": "languages.",
+     "f": 20,
+     "e": 29
+    }
+   ]
+  },
+  {
+   "i": 40,
+   "from": 1192,
+   "dur": 40,
+   "el": "levels",
+   "text": "5 LEVELS\nPER COURSE",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "stripes",
+   "trFrames": 7,
+   "head": 2,
+   "land": 9,
+   "shake": 0.0,
+   "hit": 0.7,
+   "words": [
+    {
+     "w": "Five",
+     "f": 9,
+     "e": 14
+    },
+    {
+     "w": "levels",
+     "f": 14,
+     "e": 22
+    },
+    {
+     "w": "per",
+     "f": 22,
+     "e": 27
+    },
+    {
+     "w": "course.",
+     "f": 27,
+     "e": 38
+    }
+   ]
+  },
+  {
+   "i": 41,
+   "from": 1232,
+   "dur": 64,
+   "el": "montage",
+   "text": "QUIZZES.\nPETS.\nCODE.\nA WHOLE TOWN.",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "whip",
+   "trFrames": 6,
+   "head": 4,
+   "land": 10,
+   "shake": 0.0,
+   "hit": 0.9,
+   "words": [
+    {
+     "w": "Quizzes.",
+     "f": 11,
+     "e": 20
+    },
+    {
+     "w": "Pets.",
+     "f": 20,
+     "e": 26
+    },
+    {
+     "w": "Code.",
+     "f": 26,
+     "e": 39
+    },
+    {
+     "w": "A",
+     "f": 39,
+     "e": 43
+    },
+    {
+     "w": "whole",
+     "f": 43,
+     "e": 51
+    },
+    {
+     "w": "town.",
+     "f": 51,
+     "e": 55
+    }
+   ]
+  },
+  {
+   "i": 42,
+   "from": 1296,
+   "dur": 23,
+   "el": "word",
+   "text": "ALL YOURS.",
+   "bg": "blue",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.6,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "All",
+     "f": 3,
+     "e": 13
+    },
+    {
+     "w": "yours.",
+     "f": 13,
+     "e": 18
+    }
+   ]
+  },
+  {
+   "i": 43,
+   "from": 1319,
+   "dur": 31,
+   "el": "word",
+   "text": "FREE TO START.",
+   "bg": "coral",
+   "mode": "tracking-in",
+   "tr": "flash",
+   "trFrames": 2,
+   "head": 2,
+   "land": 4,
+   "shake": 0.0,
+   "hit": 0.8,
+   "words": [
+    {
+     "w": "Free",
+     "f": 5,
+     "e": 12
+    },
+    {
+     "w": "to",
+     "f": 12,
+     "e": 12
+    },
+    {
+     "w": "start.",
+     "f": 12,
+     "e": 21
+    }
+   ]
+  },
+  {
+   "i": 44,
+   "from": 1350,
+   "dur": 13,
+   "el": "word",
+   "text": "PLAY NOW.",
+   "bg": "cream",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 2,
+   "land": 2,
+   "shake": 0.7,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "Play",
+     "f": 4,
+     "e": 14
+    },
+    {
+     "w": "now.",
+     "f": 14,
+     "e": 16
+    }
+   ]
+  },
+  {
+   "i": 45,
+   "from": 1363,
+   "dur": 91,
+   "el": "cta",
+   "text": "ucimesehrou.org",
+   "bg": "yellow",
+   "mode": "slam",
+   "tr": "shape",
+   "trFrames": 9,
+   "head": 8,
+   "land": 17,
+   "shake": 0.0,
+   "hit": 1.0,
+   "words": [
+    {
+     "w": "OO-chee-meh",
+     "f": 18,
+     "e": 36
+    },
+    {
+     "w": "seh",
+     "f": 36,
+     "e": 42
+    },
+    {
+     "w": "HROHW",
+     "f": 42,
+     "e": 57
+    },
+    {
+     "w": "dot",
+     "f": 57,
+     "e": 65
+    },
+    {
+     "w": "ORG.",
+     "f": 65,
+     "e": 72
+    }
+   ]
+  },
+  {
+   "i": 46,
+   "from": 1454,
+   "dur": 108,
+   "el": "endcard",
+   "text": "",
+   "bg": "indigo",
+   "mode": "slam",
+   "tr": "cut",
+   "trFrames": 0,
+   "head": 0,
+   "land": 0,
+   "shake": 0.0,
+   "hit": 0.4,
+   "words": []
+  }
+ ]
+}
