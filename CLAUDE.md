@@ -8,6 +8,8 @@ User prefers caveman-style terse replies. User is on Mac (zsh): use `pip3`/`pyth
 Samostatná 15,7 s pop-up animace Učíme se hrou (three.js bez Remotionu), nezávislá na zbytku repa. Zdroj `ucimesehrou/src/`, `node build.cjs` -> `index.html`, `node render.cjs 32` -> MP4 (potřebuje GPU PC nebo hodně času, cloud ~10 s/snímek). Postup a úpravy v `ucimesehrou/README.md`.
 Podsložka `ucimesehrou/low-poly/`: druhá verze, 12,8 s 3D low-poly (jeden jeřábový záběr po ostrově, koncová obrazovka se SVG ikonami). Používá `ucimesehrou/src/stage.js` a `sound.js` (nesahat). Zdroj `low-poly/src/style.js` (rozvrh `T` nahoře řídí obraz i zvuk), `node build.cjs` -> `index.html` + `storyboard.html`, `node render.cjs 32` -> `low-poly/video/ucimesehrou-3d.mp4` (MP4 se do gitu necommituje). Poslední render měl 12 vzorků (cloud bez GPU), na GPU přerenderovat s 64.
 
+Podsložka `ucimesehrou/showcase/`: jednosouborová stránka (`index.html`, bez knihoven) pro ucimesehrou.org, ukázka programování ve stylu 2d line-art (psaný kód kreslí obrázek, 4 animace základů, hřiště se želvou v workeru, úrovně ZŠ/SŠ/přijímačky/maturita). Upravuje se přímo v souboru.
+
 ## Sekce 2d/
 Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastní entry `2d/src/index.ts`, komp. MonoShort/CalmShort/DegreeShort. Postup: `2d/README.md`, styl: `2d/STYLE.md`.
 
