@@ -470,3 +470,7 @@ const P4 = createFilm([
 ], "code/part4.wav");
 export const CODE1_FRAMES = P1.frames, CODE2_FRAMES = P2.frames, CODE3_FRAMES = P3.frames, CODE4_FRAMES = P4.frames;
 export const CodePart1 = P1.Comp, CodePart2 = P2.Comp, CodePart3 = P3.Comp, CodePart4 = P4.Comp;
+
+// shared building blocks for further showcase films (Ucime.tsx)
+export { FontGate, KText, Morph, SH, samp, Tag, Win, Rings, LogoRow, Dust, C, FAM, MONO, NEON, SOFT, WARM, BRAND, DEPTH, rnd, back, smoother, lerpC, adv, tw };
+export type { Pt, Cam };
