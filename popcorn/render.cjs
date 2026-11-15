@@ -4,7 +4,7 @@
 // env: CHROME=/cesta/k/chrome, FRAMES=N (jen prvních N snímků na test),
 //      LOCAL_ASSETS=<složka s three.module.js, three.core.js a fonts/{fonts.css,map.json,*.woff2}> pro render bez přístupu na CDN.
 // Přerušený render naváže, kde skončil (hotové snímky f0000.jpg... se přeskočí).
-const { chromium } = require('playwright-core');
+const { chromium } = require('playwright');
 const fs = require('fs'), http = require('http'), path = require('path'), cp = require('child_process');
 let FF = 'ffmpeg'; try { FF = require('ffmpeg-static'); } catch (e) {}
 const samples = +(process.argv[2] || 32), out = path.resolve(process.argv[3] || path.join(__dirname, 'video')), FPS = 30;
@@ -12,7 +12,7 @@ fs.mkdirSync(out, { recursive: true });
 const server = http.createServer((q, r) => { const u = q.url.split('?')[0], f = path.join(__dirname, u === '/' ? 'index.html' : u); fs.readFile(f, (e, d) => { if (e) { r.writeHead(404); r.end(); } else { r.writeHead(200, { 'Content-Type': f.endsWith('.html') ? 'text/html; charset=utf-8' : 'application/octet-stream' }); r.end(d); } }); });
 (async () => {
   await new Promise((ok) => server.listen(0, ok));
-  const br = await chromium.launch({ executablePath: process.env.CHROME || undefined, args: ['--no-sandbox', '--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=default', '--enable-unsafe-swiftshader'] });
+  const br = await chromium.launch({ executablePath: process.env.CHROME || undefined, args: ['--no-sandbox', '--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=' + (process.env.ANGLE || 'default'), '--enable-unsafe-swiftshader'] });
   const p = await br.newPage({ viewport: { width: 1920, height: 1080 } });
   p.on('pageerror', (e) => console.log('[page error]', e.message));
   const A = process.env.LOCAL_ASSETS;
