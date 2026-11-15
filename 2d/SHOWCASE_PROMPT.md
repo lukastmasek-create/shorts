@@ -43,60 +43,70 @@ This is the exact style already shown to and approved by the user (`2d/src/Code.
 9. **Repo hygiene.** Commit sources, `logo.ts`, the wav files and the audio script; never mp4; working copies in `<name>/audio/` are gitignored; push the session branch.
 10. **Feedback loop used last time.** First cut was too fast to read, so every scene got a slow factor and long scenes were split into separate parts; Czech on-screen text was requested explicitly (it overrides the old "English only" note in CLAUDE.md); the site's colours, fonts and the real logo replaced the generic white line art.
 
-## 1. Scene library and random order
-Build every video from a **library of scenes**; never reuse a fixed running order. Each scene is a component `C(t)` plus metadata, and the order, the picks, the transitions and the objects are chosen **at random per video** (seeded, so one video is reproducible).
+## 1. Scenes: a small generic kit + animations built from the real section
+Every video is assembled from two kinds of scenes. The order, the picks, the transitions and the objects are random per video (seeded, reproducible).
 
-**Library** (scenes marked * already exist in `2d/src/Code.tsx`; write the others in the same style and same `createFilm` scene format). A scene may only be picked when the section really has the matching feature (`needs`), otherwise it is skipped.
+**A. Generic kit** (same for every section; write each as a `createFilm` scene in the style above)
+| id | what happens | len / K | audio intensity |
+|---|---|---|---|
+| `logoMorph`* | random object -> blob -> blue logo tile (face) -> real logo, pieces pop | 100-165 / 1.25-1.3 | 0.35-0.45 |
+| `cards3`* | one card splits into 3-4 cards that fan out (use the section's real items), chips pop | 105 / 1.3 | 0.65 |
+| `katanaCut` | the title card or an object is sliced, halves part, corner chip falls, debris | 60-90 / 1.3 | 0.85 |
+| `sparkChat` | a word becomes sparks (motion blur), they fly into a chat, every spark becomes a typed sentence | 130-170 / 1.35 | 0.8 |
+| `statCounter` | one real number counts up huge, ring fills | 80 / 1.3 | 0.8 |
+| `splitCompare` | slash line splits the screen, real before/after | 100 / 1.3 | 0.85 |
+| `deck3D` | cards on a CSS 3D carousel | 110 / 1.35 | 0.85 |
+| `deviceZoom` | phone/laptop frame with the real UI inside, camera dives through the screen | 100 / 1.3 | 0.8 |
+| `finale`* / `outro`* | claim slam, window morph, logo + URL pill | 90-150 / 1.3 | 0.9-1.0 |
+(* already exists in `2d/src/Code.tsx`: `IntroScene`, `SceneFiles`, `SceneFinale`, `OutroScene`. Do NOT reuse the other scenes of that video (explainer, preview, autocomplete, exercise, AI chat, plan path): they belong to that one section.)
 
-| id | what happens | needs (real feature in the section) | len / K | audio intensity |
-|---|---|---|---|---|
-| `logoMorph`* | object -> blob -> logo tile (face) -> real logo, pieces pop | always | 100-165 / 1.25-1.3 | 0.35-0.45 |
-| `cards3`* | one card splits into 3-4 cards (files, modes, levels, tabs) that fan out, chips pop | a list of 3-4 things | 105 / 1.3 | 0.65 |
-| `explainer`* | code or UI with a spark hopping line to line, explanation card with kinetic title per step | step-by-step explanations | 165 / 1.4 | 0.75 |
-| `livePreview`* | typed input on top, result below reacts with a pulse (colour, number, layout) | live result / preview | 110 / 1.3 | 0.85 |
-| `suggest`* | typed prefix, popup list, selection moves, key cap, completion burst | autocomplete / search / suggestions | 100 / 1.3 | 0.85 |
-| `exercise`* | counter counts up, fill-in blank gets answered, check mark draws, hint/solution pills | tasks / exercises / quizzes | 105 / 1.35 | 0.9 |
-| `chatAI`* | user bubble, assistant bubble grows from a dot, typed answer | AI helper / chat / support | 105 / 1.35 | 0.5 |
-| `pathPlan`* | camera flies down a curved path of numbered nodes whose shapes gain a side per step | steps / curriculum / roadmap | 135 / 1.5 | 0.95 |
-| `finale`* | big claim slam, window morph, motto, logo + URL | always (once, last) or `outro`* | 90-150 / 1.3 | 0.9-1.0 |
-| `katanaCut` | the title card or an object is sliced, halves part, corner chip falls, debris | always (at least once per part) | 60-90 / 1.3 | 0.85 |
-| `sparkChat` | word -> sparks (motion blur) -> chat, every spark becomes a typed sentence | always (follows `katanaCut` or a word scene) | 130-170 / 1.35 | 0.8 |
-| `terminalType` | big typewriter terminal / command line that types real commands or labels, lines morph into icons | any code or text feature | 90 / 1.3 | 0.7 |
-| `statCounter` | huge number counts up (Unbounded), ring fills, unit label, small bars grow | a real number (count of exercises, lessons, users, levels) | 80 / 1.3 | 0.8 |
-| `splitCompare` | screen splits with a slash line, before/after or with/without, slider sweeps | a real before/after | 100 / 1.3 | 0.85 |
-| `deck3D` | cards on a CSS 3D carousel rotate in perspective, front card highlighted | several features of the same kind | 110 / 1.35 | 0.85 |
-| `deviceZoom` | phone/laptop frame with the real UI drawn inside, camera dollies through the screen into the next scene | responsive / mobile / app | 100 / 1.3 | 0.8 |
-| `progressBadge` | progress bar fills, badge/level morphs polygon -> star, streak bolt, confetti sparks | points, levels, rewards | 90 / 1.3 | 0.9 |
-| `checklist` | rows tick one by one with draw-on check marks, row morphs into the next feature icon | a feature list | 90 / 1.3 | 0.75 |
-| `keyboardRain` | key caps fall and land into a word, word morphs into a window | typing, writing, editing | 80 / 1.3 | 0.8 |
-| `mapZoom` | camera pulls out from one object to reveal many (constellation of windows), then dives into one | many items/pages | 100 / 1.35 | 0.85 |
+**B. Feature scenes: one bespoke animation per real part of the section `[]`** (this is the core of every video)
+1. List the real parts of the section: open its page and components in the site repo and write down every distinct feature the user sees or does (widgets, tools, lists, forms, games, dashboards, settings, rewards...). Take each one's real labels, numbers, colours and layout.
+2. For each important feature (at least 3, at most 5 per video) write ONE scene `feature_<name>`: redraw that component as SVG in the video style (same structure, same real labels, simplified), then animate what actually happens when someone uses it, in 3-5 s: the input is typed (typewriter), the thing reacts (pulse, morph, count, fill), the result appears. The animation must show the function, not decorate it: a viewer who has never seen the page should understand what the part does.
+3. Choose the motion by UI pattern (starting points, then adapt to the real component):
+   - list / ranking / leaderboard: rows slide in, bars race and reorder, the winner row morphs into a badge
+   - quiz / test / question: question card flips in, options pop, the right one morphs into a check mark, score counts up
+   - form / input / search: typed text, suggestions fan out, one is picked and morphs into the result card
+   - editor / workspace: split panes, typed content on one side, live result on the other, file tabs morph between each other
+   - chat / assistant: bubbles grow from dots, answer types in
+   - dashboard / progress / levels: bars grow, ring fills, level shape gains a side, streak spark hops
+   - shop / rewards / collection: items fall into a basket or shelf, prices tick, a chest morphs open
+   - calendar / schedule / plan: days fill one by one, a path or timeline is flown by the camera
+   - lesson / video / reading: a page turns in 3D, highlighted words become sparks that fill a notebook
+   - settings / themes / profile: a colour or theme swap sweeps across the UI, an avatar morphs between states
+   - map / world / game board: camera pulls out over the board, pieces move, one tile is dived into
+4. Give every feature scene metadata: `{ id: "feature_x", fam: "feature", len, k, intensity, needs: [real feature tag], weight }`, and a short event table for the audio script (typing ticks, zaps, chime on success...). Feature scenes always use the real section labels as on-screen text (Czech).
+5. A feature scene may be skipped only if the feature turns out not to be visual; never replace it with a made-up one.
 
 **Random selection rules (apply in this order)**
-1. Seed: one integer per video (`Date.now() % 2**31` at authoring time, written to `scenes.json` and into the commit message; the same seed rebuilds the same video; never random per frame, never `Math.random()` inside a component).
-2. Pick N scenes so the total stays <= 15 s real time (`sum(len*K)/30 <= 15`; typically 5-7 scenes). Always: first = `logoMorph` (random source object), last = `finale` or `outro`. Always once: `katanaCut` and `sparkChat` (`sparkChat` directly after `katanaCut`, so the sparks come out of the cut word). The rest is a random draw without repeats from the scenes whose `needs` the section satisfies, weighted toward features that are most important in the real section.
-3. Shuffle the middle with the seed, then fix violations: no two scenes of the same family next to each other (`exercise`/`chatAI` family, `explainer`/`terminalType` family, etc.), `statCounter` never first after the intro.
-4. Randomize the details the same way: the intro object, scene positions on the path (zigzag direction, spacing), camera swoop roll sign, hold push-in or pull-out, transition type between scenes (swoop, whip, dolly-through, spark-chase, slash-wipe; never the same twice in a row), accent colour order of the four logo colours, which word becomes the sparks, katana angle and which corner chips off, chat sentence slots.
-5. Keep the pieces that must stay stable: palette, fonts, logo, readability rules (headline >= 1.2 s, sentence >= 1.4 s, text >= 44 px), safe area.
-6. Audio follows the picked list: the music script reads `scenes.json` (ids, len, K, intensity, event tables per scene id), so the arc (quiet -> pulse -> groove -> breather -> riser -> climax on the last logo hit) is rebuilt for any order; put the breather (lowest intensity scene) in the middle and the highest-intensity scene last-but-one.
-7. Report at the end: the seed, the picked order, which scenes were skipped because the section lacks the feature.
+1. Seed: one integer per video (`Date.now() % 2**31` at authoring time, saved in `scenes.json` and in the commit message; the same seed rebuilds the same video; never `Math.random()` inside a component, never random per frame).
+2. Fit <= 15 s real time per video (`sum(len*K)/30 <= 15`, usually 5-7 scenes). Always: first `logoMorph` (random source object), last `finale` or `outro`. Always once: `katanaCut`, directly followed by `sparkChat` (the sparks come out of the cut word). `cards3` is used when the section has 3-4 real items. Then fill the rest with feature scenes first (at least 3 when the section has them, they win over the generic extras), and generic extras (`statCounter`, `splitCompare`, `deck3D`, `deviceZoom`) only if time is left and a real number/before-after/screens exist.
+3. Shuffle the middle with the seed, then fix violations: two scenes of the same pattern never touch, `statCounter` is never directly after the intro, the lowest-intensity feature scene goes in the middle (breather), the highest-intensity one second to last.
+4. Randomize the details with the same seed: intro object, scene positions on the path (zigzag direction, spacing), swoop roll sign, hold push-in or pull-out, transition type between scenes (swoop, whip, dolly-through, spark-chase, slash-wipe; never the same twice in a row), accent colour order of the four logo colours, which word becomes the sparks, katana angle and which corner chips off, chat sentence slots, which of the real items go on the 3 cards.
+5. Stable parts that are never random: palette, fonts, logo, readability rules (headline >= 1.2 s, sentence >= 1.4 s, text >= 44 px), safe area, <= 15 s.
+6. Audio follows the picked list: the music script reads `scenes.json` (ids, len, K, intensity, event tables per scene id) and rebuilds the arc (quiet -> pulse -> groove -> breather -> riser -> climax on the last logo hit) for any order.
+7. Report: the seed, the picked order, which real features got scenes, which were skipped and why.
 
 ```ts
 // deterministic seeded random for scene picking (Remotion must render every frame identically)
 const mulberry32 = (a: number) => () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-type SceneDef = { id: string; needs: string[]; len: number; k: number; fam: string; C: (t: number, r: () => number) => React.ReactNode };
-export const pickScenes = (lib: SceneDef[], have: Set<string>, seed: number, budgetS = 15): SceneDef[] => {
-  const r = mulberry32(seed), ok = lib.filter(s => s.needs.every(n => have.has(n)) && !["logoMorph", "finale", "katanaCut", "sparkChat"].includes(s.id));
-  const sh = [...ok].sort(() => r() - 0.5), by = (id: string) => lib.find(s => s.id === id)!;
-  const head = [by("logoMorph")], tail = [by("finale")], fixed = [by("katanaCut"), by("sparkChat")];
-  const secs = (a: SceneDef[]) => a.reduce((x, s) => x + (s.len * s.k) / 30, 0);
-  const mid: SceneDef[] = [];
-  for (const s of sh) { if (secs([...head, ...fixed, ...mid, s, ...tail]) > budgetS) continue; if (mid.length && mid[mid.length - 1].fam === s.fam) continue; mid.push(s); }
-  const at = Math.floor(r() * (mid.length + 1));                       // katana + sparks somewhere in the middle, always as a pair
-  return [...head, ...mid.slice(0, at), ...fixed, ...mid.slice(at), ...tail];
+type SceneDef = { id: string; fam: string; len: number; k: number; weight?: number; C: (t: number, r: () => number) => React.ReactNode };
+const secs = (a: SceneDef[]) => a.reduce((x, s) => x + (s.len * s.k) / 30, 0);
+// kit = generic scenes by id, features = the bespoke feature_* scenes written for the section, extras = optional generic ones
+export const pickScenes = (kit: Record<string, SceneDef>, features: SceneDef[], extras: SceneDef[], seed: number, budgetS = 15): SceneDef[] => {
+  const r = mulberry32(seed), shuffle = <T,>(a: T[]) => a.map(v => [r(), v] as const).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+  const head = [kit.logoMorph], tail = [kit.finale], pair = [kit.katanaCut, kit.sparkChat], mid: SceneDef[] = [];
+  const need = Math.min(3, features.length);
+  // heavier-weighted features first, but order inside the video is still random
+  const feats = [...features].sort((a, b) => (b.weight ?? 1) * (0.7 + r() * 0.6) - (a.weight ?? 1) * (0.7 + r() * 0.6));
+  for (const s of feats) { if (mid.filter(m => m.fam === "feature").length < Math.max(need, 3) || secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s); }
+  for (const s of shuffle(extras)) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s);
+  const m = shuffle(mid), at = Math.floor(r() * (m.length + 1));        // katana + sparks as a pair somewhere in the middle
+  return [...head, ...m.slice(0, at), ...pair, ...m.slice(at), ...tail];
 };
 // every random detail inside a scene comes from the same seed: const rr = mulberry32(seed + sceneIndex * 101);
 ```
-Write the picked list to `2d/<name>/scenes.json` (`{ seed, order: [{id, len, k, intensity}] }`) and have both the composition and the audio script read it, so picture and music can never disagree.
+Write the picked list to `2d/<name>/scenes.json` (`{ seed, order: [{id, len, k, intensity}] }`) and make both the composition and the audio script read it, so picture and music can never disagree.
 
 ## 2. Camera and 3D (seamless, no cuts)
 - One continuous world, scenes placed along a path; camera = position + zoom + roll with smootherstep swoops, tiny handheld drift, motion blur only while moving fast. Transitions are camera moves, match cuts or "dolly through" (zoom into a letter/hole until it fills the frame, next scene is behind it). Never hard cut.
