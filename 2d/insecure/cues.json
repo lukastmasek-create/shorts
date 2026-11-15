@@ -1,0 +1,186 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 163,
+  "phrases": [
+   {
+    "text": "What if you could see everyone's insecurities,",
+    "a": 11,
+    "b": 75
+   },
+   {
+    "text": "floating right above their heads?",
+    "a": 93,
+    "b": 147
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 163,
+  "len": 372,
+  "phrases": [
+   {
+    "text": "You would see them on the winners too.",
+    "a": 10,
+    "b": 60
+   },
+   {
+    "text": "In 1978,",
+    "a": 80,
+    "b": 124
+   },
+   {
+    "text": "psychologists described top achievers who secretly felt like frauds.",
+    "a": 135,
+    "b": 265
+   },
+   {
+    "text": "They called it the impostor phenomenon.",
+    "a": 288,
+    "b": 352
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 535,
+  "len": 382,
+  "phrases": [
+   {
+    "text": "And everyone thinks their flaw is on display.",
+    "a": 13,
+    "b": 85
+   },
+   {
+    "text": "In 2000,",
+    "a": 105,
+    "b": 133
+   },
+   {
+    "text": "students wore an embarrassing T-shirt into a room.",
+    "a": 142,
+    "b": 229
+   },
+   {
+    "text": "They guessed half the room noticed.",
+    "a": 248,
+    "b": 296
+   },
+   {
+    "text": "Fewer than one in four did.",
+    "a": 312,
+    "b": 361
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 917,
+  "len": 252,
+  "phrases": [
+   {
+    "text": "Nerves hide well too.",
+    "a": 10,
+    "b": 50
+   },
+   {
+    "text": "In 2003,",
+    "a": 68,
+    "b": 102
+   },
+   {
+    "text": "nervous speakers rated how anxious they looked.",
+    "a": 106,
+    "b": 176
+   },
+   {
+    "text": "The audience saw less.",
+    "a": 195,
+    "b": 236
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 1169,
+  "len": 296,
+  "phrases": [
+   {
+    "text": "After talking to a stranger,",
+    "a": 12,
+    "b": 61
+   },
+   {
+    "text": "people underestimate how much they were liked.",
+    "a": 68,
+    "b": 131
+   },
+   {
+    "text": "It's called the liking gap.",
+    "a": 152,
+    "b": 189
+   },
+   {
+    "text": "With new roommates,",
+    "a": 207,
+    "b": 271
+   },
+   {
+    "text": "it lasted for months.",
+    "a": 275,
+    "b": 279
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1465,
+  "len": 359,
+  "phrases": [
+   {
+    "text": "Even showing a flaw looks different from outside.",
+    "a": 10,
+    "b": 91
+   },
+   {
+    "text": "In 2018,",
+    "a": 114,
+    "b": 154
+   },
+   {
+    "text": "people judged their own vulnerability as weakness,",
+    "a": 168,
+    "b": 253
+   },
+   {
+    "text": "and the same move by others as courage.",
+    "a": 266,
+    "b": 342
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1824,
+  "len": 251,
+  "phrases": [
+   {
+    "text": "So if you could see everyone's insecurities,",
+    "a": 10,
+    "b": 81
+   },
+   {
+    "text": "you'd learn one thing.",
+    "a": 92,
+    "b": 123
+   },
+   {
+    "text": "Nobody is watching yours as closely as you are.",
+    "a": 142,
+    "b": 231
+   }
+  ]
+ }
+]

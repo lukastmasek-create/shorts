@@ -46,3 +46,8 @@ Flat 2D white line-art shorts (SVG v Remotionu), oddělené od 3D kódu. Vlastn�
 - Voice: one committed copy per short, `public/<name>/voice.wav` (what `staticFile` loads). Voice scripts (`2d/voice_short.py`, `voice_lines.py`, `voice_uni.py`) write the working wav next to the short (gitignored) and copy it to `public/`. `audio/aging_mix.py` writes `public/aging/mix.wav` too.
 - `sun/` and `chance/` moved to `2d/sun/`, `2d/chance/`. `__pycache__/` ignored.
 - Old renders/duplicate wavs are still in git history (~250 MB `.git`); only a history rewrite would shrink it.
+
+## Cloud container findings (2026-11-15, no GitHub-release / Hugging Face / Chrome CDN access; only github.com, npm, PyPI)
+- Kokoro without GitHub releases: npm `kokoro-fp32a-shards` + `kokoro-fp32b-shards` + `kokoro-fp32c-shards` (concatenate `kokoro-fp32.part0..18.bin` -> 325,532,232-byte ONNX, sha256 8fbea51e...) and voices from npm `kokoro-js` (`voices/am_michael.bin` = float32 (510,1,256); save as npz `voices-v1.0.bin` with key `am_michael`). Works with pip `kokoro-onnx`; reproduced BoredShort line bit-exact. Symlink both into `2d/voice/` (gitignored).
+- faster-whisper model is on Hugging Face (blocked): voice_short.py now writes pause-based `cues.json` and skips words.json.
+- Browser without Chrome CDN: npm `@sparticuz/chromium` (brotli: chromium.br + al2023/swiftshader/fonts tar.br, decompress with pip `brotli`). Run with `LD_LIBRARY_PATH=<dir>/lib FONTCONFIG_FILE=<dir>/fonts.conf` (reads fonts from /tmp/fonts: put Inter TTFs there, converted from npm `inter-ui` woff2 with fontTools) and `--browser-executable=<dir>/chromium`. Box has 2 cores: `--concurrency=2`.
