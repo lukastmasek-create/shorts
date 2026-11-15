@@ -24,12 +24,14 @@ import { FutureShort, FUT_FRAMES } from "./Future";
 import { NoHumansShort, NOHUMANS_FRAMES } from "./NoHumans";
 import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
 import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
+import { MoonShort, MOON_FRAMES } from "./Moon";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 
 export const Root: React.FC = () => (
   <>
     <Composition id="MonoShort" component={MonoShort} durationInFrames={MONO_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="CalmShort" component={CalmShort} durationInFrames={CALM_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="MoonShort" component={MoonShort} durationInFrames={MOON_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="DegreeShort" component={DegreeShort} durationInFrames={DEGREE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="SimShort" component={SimShort} durationInFrames={SIM_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="Dim4Short" component={Dim4Short} durationInFrames={DIM4_FRAMES} fps={30} width={1080} height={1920} />
