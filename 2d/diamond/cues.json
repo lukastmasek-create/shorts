@@ -1,0 +1,223 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 136,
+  "phrases": [
+   {
+    "text": "What if you landed on a planet made entirely of diamond?",
+    "a": 14,
+    "b": 114
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 136,
+  "len": 169,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 45
+   },
+   {
+    "text": "(segment 1)",
+    "a": 60,
+    "b": 147
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 305,
+  "len": 139,
+  "phrases": [
+   {
+    "text": "The diamond would hide a few kilometers down,",
+    "a": 10,
+    "b": 80
+   },
+   {
+    "text": "under your boots.",
+    "a": 95,
+    "b": 123
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 444,
+  "len": 177,
+  "phrases": [
+   {
+    "text": "Even Earth's diamonds mostly form over a hundred and forty kilometers deep.",
+    "a": 10,
+    "b": 155
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 621,
+  "len": 154,
+  "phrases": [
+   {
+    "text": "And if the air held oxygen,",
+    "a": 12,
+    "b": 58
+   },
+   {
+    "text": "a hot diamond world would burn.",
+    "a": 73,
+    "b": 132
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 775,
+  "len": 173,
+  "phrases": [
+   {
+    "text": "The famous candidate,",
+    "a": 10,
+    "b": 41
+   },
+   {
+    "text": "fifty-five Cancri e,",
+    "a": 50,
+    "b": 90
+   },
+   {
+    "text": "is forty-one light-years away.",
+    "a": 103,
+    "b": 153
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 948,
+  "len": 140,
+  "phrases": [
+   {
+    "text": "Twice Earth's width,",
+    "a": 10,
+    "b": 38
+   },
+   {
+    "text": "eight Earth masses,",
+    "a": 47,
+    "b": 117
+   },
+   {
+    "text": "a year of eighteen hours.",
+    "a": 122,
+    "b": 124
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1088,
+  "len": 144,
+  "phrases": [
+   {
+    "text": "In twenty twelve,",
+    "a": 12,
+    "b": 38
+   },
+   {
+    "text": "a model said a third of it might be diamond.",
+    "a": 53,
+    "b": 121
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1232,
+  "len": 130,
+  "phrases": [
+   {
+    "text": "Then its star turned out to have more oxygen than carbon.",
+    "a": 11,
+    "b": 100
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1362,
+  "len": 153,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 12,
+    "b": 100
+   },
+   {
+    "text": "(segment 1)",
+    "a": 113,
+    "b": 130
+   }
+  ]
+ },
+ {
+  "scene": 10,
+  "start": 1515,
+  "len": 189,
+  "phrases": [
+   {
+    "text": "The closest real thing is mostly carbon,",
+    "a": 10,
+    "b": 83
+   },
+   {
+    "text": "likely crystal,",
+    "a": 95,
+    "b": 120
+   },
+   {
+    "text": "circling a dead star.",
+    "a": 130,
+    "b": 169
+   }
+  ]
+ },
+ {
+  "scene": 11,
+  "start": 1704,
+  "len": 175,
+  "phrases": [
+   {
+    "text": "A dead star named Lucy has a crystallized carbon core.",
+    "a": 13,
+    "b": 113
+   },
+   {
+    "text": "But it's a star.",
+    "a": 130,
+    "b": 153
+   }
+  ]
+ },
+ {
+  "scene": 12,
+  "start": 1879,
+  "len": 149,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 87
+   },
+   {
+    "text": "(segment 1)",
+    "a": 101,
+    "b": 127
+   }
+  ]
+ }
+]
