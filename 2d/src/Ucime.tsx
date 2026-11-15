@@ -35,7 +35,7 @@ const Katana: React.FC<{ t: number; tc: number; A: Pt; B: Pt; chip: Pt[]; id: st
   const slash = prog(t, tc - 4, tc), mid: Pt = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
   return <g transform={`translate(${shake} ${-shake * 0.6})`}>
     <clipPath id={id + "a"}><polygon points={half(A, B, 1)} /></clipPath><clipPath id={id + "b"}><polygon points={half(A, B, -1)} /></clipPath>
-    <mask id={id + "m"}><rect x={-BIG} y={-BIG} width={2 * BIG} height={2 * BIG} fill="#fff" /><polygon points={chip.map(q => q.join(",")).join(" ")} fill="#000" /></mask>
+    <mask id={id + "m"}><rect x={-BIG} y={-BIG} width={2 * BIG} height={2 * BIG} fill="#fff" /><polygon points={chip.map(q => q.join(",")).join(" ")} fill={s > 0 ? "#000" : "#fff"} /></mask>
     <g clipPath={`url(#${id}a)`} transform={`translate(${nx * 34 * p} ${ny * 34 * p}) rotate(${-2.5 * p} ${mid[0]} ${mid[1]})`}>{children}</g>
     <g clipPath={`url(#${id}b)`}><g mask={`url(#${id}m)`} transform={`translate(${-nx * 34 * p} ${-ny * 34 * p + fall(tc + 6, t) * 0.25}) rotate(${3 * p} ${mid[0]} ${mid[1]})`}>{children}</g></g>
     <clipPath id={id + "c"}><polygon points={chip.map(q => q.join(",")).join(" ")} /></clipPath>
@@ -222,12 +222,13 @@ const S1Mistakes = (tc: number, geo: () => Geo, leave: (k: number) => number) =>
   </>;
 };
 
-// ---------- chat scene ----------
-type ChatItem = { who: "u" | "b"; lines: string[]; states: string[] };
-type Lay = { w: number; h: number; xc: number };
+// ---------- chat scene: every spark that lands writes one word ----------
+type WInfo = { line: number; text: string; states: string[]; arr: number };
+type ChatItem = { who: "u" | "b"; lines: string[]; words: WInfo[]; arrB: number };
+type Lay = { w: number; h: number; xc: number; wx: { x: number; w: number }[] };
 const BSIZE = 46, BLH = 62, YBOT = 1390, BGAP = 26;
-const Chat = (items: ChatItem[], arr: number[], lay: () => Lay[]) => (t: number) => {
-  const L = lay(), e = arr.map(a => easeOut(prog(t, a, a + 10))), nb = items.length;
+const Chat = (items: ChatItem[], lay: () => Lay[]) => (t: number) => {
+  const L = lay(), arr = items.map(i => i.arrB), e = arr.map(a => easeOut(prog(t, a, a + 10))), nb = items.length;
   const bottom = (j: number) => { let b = YBOT; for (let i = j + 1; i < nb; i++) b -= e[i] * (L[i].h + BGAP); return b; };
   return <>
     <Rings x={cx} y={800} t={t} />
@@ -237,16 +238,21 @@ const Chat = (items: ChatItem[], arr: number[], lay: () => Lay[]) => (t: number)
       {items.map((it, j) => {
         if (t < arr[j] - 1) return null;
         const l = L[j], g = easeOut(prog(t, arr[j], arr[j] + 12)), yb = bottom(j), yc = yb - l.h / 2, col = it.who === "u" ? C.blue : C.surf2, depth = it.who === "u" ? "#2433b8" : "#0a0918";
-        const s = typedAt(it.states, t, arr[j] + 10).split("\n"), x0 = l.xc - l.w / 2 + 36, last = s[s.length - 1];
+        const x0 = l.xc - l.w / 2 + 36, ly = (q: number) => yb - l.h + 28 + BLH * (q + 1) - 14;
+        const shown = it.words.map((w, k) => ({ w, k })).filter(({ w }) => t >= w.arr);
+        const lastW = shown.length ? shown[shown.length - 1] : null;
         return <g key={j}>
           <Morph names={["circle", "sq"]} u={g} x={l.xc} y={yc + 7} sx={lerp(14, l.w / 2, g)} sy={lerp(14, l.h / 2, g)} sw={0} fill={depth} />
           <Morph names={["circle", "sq"]} u={g} x={l.xc} y={yc} sx={lerp(14, l.w / 2, g)} sy={lerp(14, l.h / 2, g)} sw={4} stroke={it.who === "u" ? "#8fa0ff" : C.edge} fill={col} trail={g < 0.9 ? 2 : 0} glow="none" />
-          {g > 0.7 && s.map((ln, q) => <text key={q} x={x0} y={yb - l.h + 28 + BLH * (q + 1) - 14} fontWeight={600} fontSize={BSIZE} fill={it.who === "u" ? "#fff" : C.cream} fontFamily={FAM.b} style={{ whiteSpace: "pre" }}>{ln}</text>)}
-          {g > 0.7 && Math.floor(t / 6) % 2 === 0 && t < arr[j] + 10 + it.states.length / CPS + 14 && <rect x={x0 + tw(last, BSIZE, 600, "b") + 4} y={yb - l.h + 28 + BLH * s.length - 14 - BSIZE * 0.82} width={9} height={BSIZE} fill={C.yellow} />}
+          {g > 0.5 && shown.map(({ w, k }) => {
+            const st = typedAt(w.states, t, w.arr), pp = pop(t, w.arr, 7);
+            return <text key={k} x={x0 + l.wx[k].x} y={ly(w.line) - (1 - clamp(pp)) * 14} opacity={clamp(pp * 2)} fontWeight={600} fontSize={BSIZE} fill={it.who === "u" ? "#fff" : C.cream} fontFamily={FAM.b} style={{ whiteSpace: "pre" }}>{st}</text>;
+          })}
+          {g > 0.5 && lastW && Math.floor(t / 6) % 2 === 0 && t < lastW.w.arr + lastW.w.states.length / CPS + 14 && <rect x={x0 + l.wx[lastW.k].x + tw(typedAt(lastW.w.states, t, lastW.w.arr), BSIZE, 600, "b") + 4} y={ly(lastW.w.line) - BSIZE * 0.82} width={9} height={BSIZE} fill={C.yellow} />}
         </g>;
       })}
     </g>
-    {items.map((_, j) => burst(t, arr[j], L[j].xc, YBOT - L[j].h / 2, C.yellow, 24))}
+    {items.map((it, j) => it.words.map((w, k) => { const p = prog(t, w.arr, w.arr + 16); return p > 0 && p < 1 ? <circle key={j + "-" + k} cx={L[j].xc - L[j].w / 2 + 36 + L[j].wx[k].x + L[j].wx[k].w / 2} cy={YBOT - L[j].h + 28 + BLH * (w.line + 1) - 14 - BSIZE * 0.3} r={20 + 110 * easeOut(p)} fill="none" stroke={C.yellow} strokeWidth={4} opacity={(1 - p) * 0.8} /> : null; }))}
   </>;
 };
 
@@ -331,24 +337,35 @@ const createFilm3D = (scs: Sc[], audio: string, fx: Fx) => {
 type PartSpec = typeof SPEC.parts[number];
 const makePart = (P: PartSpec, introObj: string, introLines: [string, string], s1: (tc: number, geo: () => Geo, leave: (k: number) => number) => (t: number) => React.ReactNode, outro: (t: number) => React.ReactNode, tcPart: number) => {
   const S = [0]; P.lens.forEach(l => S.push(S[S.length - 1] + l));
-  const letters = [...P.word].filter(c => c !== " ").length, nb = P.chat.length;
-  const grp = (i: number) => Math.min(nb - 1, Math.floor(i * nb / letters));
-  const first = (g: number) => { for (let i = 0; i < letters; i++) if (grp(i) === g) return i; return 0; };
-  const aL = (i: number) => P.sparkBase + grp(i) * P.gap + (i - first(grp(i))) * P.stag;       // scene-1 local t
-  const dur = (i: number) => 34 + rnd(i + 7) * 8;
-  const fS = (i: number) => S[1] - 12 + aL(i);                                              // virtual frame
-  const arr = P.chat.map((_, j) => Math.min(...Array.from({ length: letters }, (_, i) => i).filter(i => grp(i) === j).map(i => fS(i) + dur(i))) - (S[2] - 12));
-  const items: ChatItem[] = P.chat.map(c => ({ who: c.w as "u" | "b", lines: c.t.split("\n"), states: typeStates(c.t, (c as { typo?: number[] }).typo as [number, string] | undefined) }));
+  const letters = [...P.word].filter(c => c !== " ").length;
+  type Tk = { j: number; line: number; text: string; typo?: [number, string] };
+  const toks: Tk[] = [];
+  P.chat.forEach((c, j) => c.t.split("\n").forEach((ln, q) => ln.split(" ").forEach((text, k) => { const ty = (c as { typo?: (number | string)[] }).typo; toks.push({ j, line: q, text, typo: ty && ty[0] === toks.filter(z => z.j === j).length ? [ty[1] as number, ty[2] as string] : undefined }); })));
+  const W_ = toks.length;
+  const letterOf = (s: number) => W_ > 1 ? Math.round(s * (letters - 1) / (W_ - 1)) : 0;
+  const aL = (s: number) => P.sparkBase + s * P.stag;                                       // scene-1 local t
+  const dur = (s: number) => 34 + rnd(s + 7) * 8;
+  const fS = (s: number) => S[1] - 12 + aL(s);                                              // virtual frame
+  const arrW = toks.map((_, s) => fS(s) + dur(s) - (S[2] - 12));                            // chat-local t
+  const items: ChatItem[] = P.chat.map((c, j) => {
+    const mine = toks.map((z, s) => ({ z, s })).filter(({ z }) => z.j === j);
+    return { who: c.w as "u" | "b", lines: c.t.split("\n"), arrB: arrW[mine[0].s] - 8, words: mine.map(({ z, s }) => ({ line: z.line, text: z.text, states: typeStates(z.text, z.typo), arr: arrW[s] })) };
+  });
   let geoC: { word: WL; lay: Lay[]; sparks: Spark[] } | null = null;
   const geo = () => {
     if (geoC) return geoC;
     const word = layoutWord(P.word, cx, 84, 800, "h", 940);
-    const lay: Lay[] = items.map(it => { const w = Math.min(860, Math.max(...it.lines.map(l => tw(l, BSIZE, 600, "b"))) + 72), h = it.lines.length * BLH + 44; return { w, h, xc: it.who === "u" ? 1010 - w / 2 : 70 + w / 2 }; });
-    const [p1x, p1y] = POS(1), [p2x, p2y] = POS(2), sp: Spark[] = [];
-    word.items.filter(q => q.k >= 0).forEach(q => {
-      const i = q.k, j = grp(i), x0 = q.x + q.w / 2 + p1x - cx, y0 = WORD_Y - word.size * 0.35 + p1y - cy;
-      const x1 = lay[j].xc + p2x - cx + (rnd(i + 2) - 0.5) * 30, y1 = YBOT - lay[j].h / 2 + p2y - cy;
-      sp.push({ x0, y0, x1, y1, cx: (x0 + x1) / 2 + (rnd(i) - 0.5) * 700, cy: (y0 + y1) / 2 - 250 - rnd(i + 3) * 450, a: fS(i), dur: dur(i), w: 5 + rnd(i + 1) * 5 });
+    const lay: Lay[] = items.map(it => {
+      const w = Math.min(860, Math.max(...it.lines.map(l => tw(l, BSIZE, 600, "b"))) + 72), h = it.lines.length * BLH + 44;
+      const wx = it.words.map((wd, k) => { const same = it.words.filter((z, q) => q < k && z.line === wd.line); const pre = same.map(z => z.text).join(" ") + (same.length ? " " : ""); return { x: tw(pre + "|", BSIZE, 600, "b") - tw("|", BSIZE, 600, "b"), w: tw(wd.text, BSIZE, 600, "b") }; });
+      return { w, h, xc: it.who === "u" ? 1010 - w / 2 : 70 + w / 2, wx };
+    });
+    const [p1x, p1y] = POS(1), [p2x, p2y] = POS(2), sp: Spark[] = [], letterItems = word.items.filter(q => q.k >= 0);
+    toks.forEach((z, s) => {
+      const q = letterItems[letterOf(s)], j = z.j, k = items[j].words.findIndex((wd, idx) => idx >= 0 && wd.arr === arrW[s]);
+      const x0 = q.x + q.w / 2 + p1x - cx, y0 = WORD_Y - word.size * 0.35 + p1y - cy;
+      const x1 = lay[j].xc - lay[j].w / 2 + 36 + lay[j].wx[k].x + lay[j].wx[k].w / 2 + p2x - cx, y1 = YBOT - lay[j].h + 28 + BLH * (z.line + 1) - 14 - BSIZE * 0.3 + p2y - cy;
+      sp.push({ x0, y0, x1, y1, cx: (x0 + x1) / 2 + (rnd(s) - 0.5) * 700, cy: (y0 + y1) / 2 - 250 - rnd(s + 3) * 450, a: fS(s), dur: dur(s), w: 5 + rnd(s + 1) * 5 });
     });
     return (geoC = { word, lay, sparks: sp });
   };
@@ -361,11 +378,11 @@ const makePart = (P: PartSpec, introObj: string, introLines: [string, string], s
       return [h.reduce((a, q) => a + q[0], 0) / h.length, h.reduce((a, q) => a + q[1], 0) / h.length, w];
     },
   };
-  const leave = (k: number) => aL(k);
+  const leave = (k: number) => { for (let s = 0; s < W_; s++) if (letterOf(s) === k) return aL(s); return P.sparkBase + 4 + (k % 3) * 3; };
   const scs: Sc[] = [
     { C: Intro(introObj, Number(P.id.slice(-1)), introLines[0], introLines[1]), len: P.lens[0], k: P.ks[0], fy: -80 },
     { C: s1(tcPart, () => ({ word: geo().word, y: WORD_Y }), leave), len: P.lens[1], k: P.ks[1] },
-    { C: Chat(items, arr, () => geo().lay), len: P.lens[2], k: P.ks[2] },
+    { C: Chat(items, () => geo().lay), len: P.lens[2], k: P.ks[2] },
     { C: outro, len: P.lens[3], k: P.ks[3] },
   ];
   return createFilm3D(scs, P.audio, fx);

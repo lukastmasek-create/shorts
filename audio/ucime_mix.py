@@ -193,20 +193,27 @@ def spec_build(idx, P):
     for tl in np.arange(28, 46, 2.0): X(tick(0.1, seed=int(tl * 10), f=3000 + 90 * tl), L1(float(tl)), 0.6)
     X(katana_hit(1.0), L1(tc), 1.0); X(boom(0.8, 42, 1.4, seed=12), L1(tc), 0.9)
     for k in range(6): X(zap(0.2, 600 + 90 * k, 1100 + 130 * k, 0.1), L1(tc + 8 + 3 * k), 0.45, -0.3 + 0.12 * k)
-    letters = len([c for c in P["word"] if c != " "]); nb = len(P["chat"])
-    grp = lambda i: min(nb - 1, int(np.floor(i * nb / letters)))
-    first = lambda g: min(i for i in range(letters) if grp(i) == g)
-    aL = lambda i: P["sparkBase"] + grp(i) * P["gap"] + (i - first(grp(i))) * P["stag"]
-    dur = lambda i: 34 + float(rndj(i + 7)) * 8
-    for i in range(letters):
-        X(fizz(dur(i) / FPS * 1.2, 0.22, seed=100 + i), L1(aL(i)), 0.8)
+    toks = []
+    for j, c in enumerate(P["chat"]):
+        ty = c.get("typo")
+        for k, wd in enumerate([w for w in c["t"].replace("\n", " ").split(" ")]):
+            toks.append((j, wd, ty[1:] if ty and ty[0] == k else None))
+    Wn = len(toks)
+    aL = lambda s: P["sparkBase"] + s * P["stag"]
+    dur = lambda s: 34 + float(rndj(s + 7)) * 8
+    arrW = [aL(s) + dur(s) + (S[1] - 12) - (S[2] - 12) for s in range(Wn)]
+    for s in range(Wn):
+        X(fizz(dur(s) / FPS * 1.2, 0.22, seed=100 + s), L1(aL(s)), 0.8)
     X(riser(max(1.0, LT(2, 8) - L1(P["sparkBase"])), 0.6, seed=41 + idx, f0=500, f1=9000), L1(P["sparkBase"]), 0.7)
     L2 = lambda tl: LT(2, tl)
-    for j, c in enumerate(P["chat"]):
-        arr = min(aL(i) + dur(i) for i in range(letters) if grp(i) == j) + (S[1] - 12) - (S[2] - 12)
-        X(bloop(0.3, 300, 800, 0.2), L2(arr), 0.8, 0.2); M(pan(pluck(m2f([74, 77, 81][j % 3] - 12), 0.7, r, 0.6, bright=0.5), -0.3 + 0.3 * j), L2(arr), 0.5, 0, 0.7)
-        nst = len(c["t"].replace("\n", "")) + (2 * len(c["typo"][1]) if "typo" in c else 0)
-        for q in range(nst): X(tick(0.14, seed=500 + 31 * j + q, f=3200 + 400 * (q % 3)), L2(arr + 10 + q / CPS), 0.7, ((q % 5) - 2) * 0.08)
+    seen = set()
+    for s, (j, wd, ty) in enumerate(toks):
+        if j not in seen:
+            seen.add(j); X(bloop(0.3, 300, 800, 0.2), L2(arrW[s] - 8), 0.8, 0.2)
+            M(pan(pluck(m2f([74, 77, 81][j % 3] - 12), 0.7, r, 0.6, bright=0.5), -0.3 + 0.3 * j), L2(arrW[s]), 0.5, 0, 0.7)
+        X(bloop(0.16, 520 + 30 * (s % 4), 700 + 30 * (s % 4), 0.08), L2(arrW[s]), 0.7, 0.2)
+        nst = len(wd) + (2 * len(ty[1]) if ty else 0)
+        for q in range(nst): X(tick(0.14, seed=500 + 31 * s + q, f=3200 + 400 * (q % 3)), L2(arrW[s] + q / CPS), 0.7, ((q % 5) - 2) * 0.08)
     L3 = lambda tl: LT(3, tl)
     logo_notes(3, 14, 0.9, 0.45)
     for k, q in enumerate((74, 78, 81, 86)): M(st(glock(m2f(q), 0.6, r, 2.0)), L3(36) + 0.06 * k, 0.45, 0, 0.9)

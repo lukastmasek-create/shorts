@@ -3,9 +3,9 @@
     {
       "id": "ucime1", "audio": "ucime/part1.wav",
       "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
-      "tc": 54, "word": "Kurzy a testy", "sparkBase": 76, "gap": 13, "stag": 1.2,
+      "tc": 54, "word": "Kurzy a testy", "sparkBase": 76, "gap": 13, "stag": 3.2,
       "chat": [
-        { "w": "u", "t": "Procvičím zlomky?", "typo": [10, "zlmo"] },
+        { "w": "u", "t": "Procvičím zlomky?", "typo": [1, 2, "mo"] },
         { "w": "b", "t": "Vyber kurz a ročník." },
         { "w": "b", "t": "Pět úrovní obtížnosti." }
       ]
@@ -13,7 +13,7 @@
     {
       "id": "ucime2", "audio": "ucime/part2.wav",
       "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
-      "tc": 54, "word": "Únikovky", "sparkBase": 76, "gap": 13, "stag": 1.6,
+      "tc": 54, "word": "Únikovky a hádanky", "sparkBase": 76, "gap": 13, "stag": 2.6,
       "chat": [
         { "w": "u", "t": "Utečeme z laboratoře?" },
         { "w": "b", "t": "Najdi předměty,\nvyřeš hádanky." },
@@ -23,10 +23,10 @@
     {
       "id": "ucime3", "audio": "ucime/part3.wav",
       "lens": [100, 104, 96, 72], "ks": [1.2, 1.2, 1.2, 1.2],
-      "tc": 54, "word": "Chyby se dějí", "sparkBase": 76, "gap": 13, "stag": 1.2,
+      "tc": 54, "word": "Chyby se dějí", "sparkBase": 76, "gap": 13, "stag": 2.8,
       "chat": [
         { "w": "b", "t": "Našel jsi chybu. Skvělé!" },
-        { "w": "u", "t": "Opravil jsem ji!", "typo": [8, "to"] },
+        { "w": "u", "t": "Opravil jsem ji!", "typo": [1, 0, "jse"] },
         { "w": "b", "t": "Teď už to znáš!" }
       ]
     }
