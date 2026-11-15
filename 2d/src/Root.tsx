@@ -26,6 +26,7 @@ import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
 import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
+import { ConstellationShort, CONSTELLATION_FRAMES } from "./Constellation";
 
 export const Root: React.FC = () => (
   <>
@@ -55,5 +56,6 @@ export const Root: React.FC = () => (
     <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ClocksShort" component={ClocksShort} durationInFrames={CLOCKS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="InsecureShort" component={InsecureShort} durationInFrames={INSECURE_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="ConstellationShort" component={ConstellationShort} durationInFrames={CONSTELLATION_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
