@@ -3,7 +3,7 @@
 // Timings live in materialy.json (mirrored by audio/materialy_mix.py). Engine pieces are shared from Ucime.tsx / Code.tsx.
 import React from "react";
 import { W, prog, easeOut, easeIO, pop, clamp } from "./kit";
-import { KText, SH, samp, Tag, Rings, LogoRow, C, FAM, NEON, WARM } from "./Code";
+import { KText, Morph, SH, samp, Tag, Rings, LogoRow, C, FAM, NEON, WARM } from "./Code";
 import { SparkWord, Extrude, Katana, Pill3, CutCard, CUT_A, CUT_B, CHIP, flash, burst, WORD_Y, makePart, dk } from "./Ucime";
 import type { Geo } from "./Ucime";
 import SPEC from "./materialy.json";
@@ -47,8 +47,9 @@ const S1Levels = (tc: number, geo: () => Geo, leave: (k: number) => number) => (
   return <>
     <Rings x={cx} y={760} t={t} />
     <KSpark t={t} geo={geo} leave={leave} />
-    <Katana t={t} tc={tc} A={CUT_A} B={CUT_B} chip={CHIP} id="m2">
+    <Katana t={t} tc={tc} A={[140, 330]} B={[940, 800]} chip={[[920, 330], [720, 330], [920, 480]]} id="m2">
       <CutCard col={C.green} t={t}>
+        {[0, 1, 2, 3].map(i => { const k = pop(t, 22 + i * 4, 10); return <rect key={i} x={250 + i * 140} y={560 - i * 70 + (1 - k) * 80} width={130} height={170 + i * 70} rx={14} fill={[C.coral, C.yellow, C.blue, "#fff"][i]} opacity={0.35 * k} />; })}
         <text x={cx} y={640} textAnchor="middle" fontWeight={800} fontSize={300} fill={C.yellow} fontFamily={FAM.h} style={{ filter: WARM }} opacity={pop(t, 24, 10)}>{cnt}</text>
         <text x={cx} y={752} textAnchor="middle" fontSize={96} fill="#f2fbff" fontFamily={FAM.p} style={{ filter: NEON }} opacity={pop(t, 36, 10)}>úrovně</text>
       </CutCard>
@@ -60,6 +61,7 @@ const S1Levels = (tc: number, geo: () => Geo, leave: (k: number) => number) => (
       const y = 935 + i * 142, w = 860, h = 126;
       return <g key={title} transform={`translate(${cx} ${y}) scale(${k}) rotate(${(1 - clamp(k)) * 6})`} opacity={clamp(k * 1.6)}>
         <Extrude depth={9} dark={dkc(col)}>{f => <rect x={-w / 2} y={-h / 2} width={w} height={h} rx={30} fill={f ?? col} />}</Extrude>
+        <Morph names={["n3", "circle", "star5"]} u={clamp((t - tc - 14 - i * 5) / 14) * 2} x={w / 2 - 70} y={0} r={26} sw={5} stroke={i === 3 || i === 0 ? C.ink : "#fff"} glow="none" />
         <text x={-w / 2 + 34} y={-12} fontWeight={800} fontSize={44} fill={i === 3 || i === 0 ? C.ink : "#fff"} fontFamily={FAM.b}>{title}</text>
         <text x={-w / 2 + 34} y={36} fontWeight={600} fontSize={44} fill={i === 3 || i === 0 ? "#3a3350" : "#e8ecff"} fontFamily={FAM.b}>{hint}</text>
       </g>;
@@ -75,7 +77,7 @@ const S1Quiz = (tc: number, geo: () => Geo, leave: (k: number) => number) => (t:
   return <>
     <Rings x={cx} y={760} t={t} />
     <KSpark t={t} geo={geo} leave={leave} />
-    <Katana t={t} tc={tc} A={CUT_A} B={CUT_B} chip={CHIP} id="m3">
+    <Katana t={t} tc={tc} A={[120, 600]} B={[960, 520]} chip={[[160, 330], [370, 330], [160, 430]]} id="m3">
       <CutCard col={C.coral} t={t}>
         <g transform={`translate(${cx} 560) scale(${Math.max(0.04, fw)} 1) translate(${-cx} -560)`}>
           <text x={cx} y={640} textAnchor="middle" fontWeight={800} fontSize={300} fill={C.yellow} fontFamily={FAM.h} style={{ filter: WARM }} opacity={pop(t, 24, 10)}>{flip < 0.5 ? "?" : "!"}</text>
@@ -93,6 +95,7 @@ const S1Quiz = (tc: number, geo: () => Geo, leave: (k: number) => number) => (t:
       return <g key={o} transform={`translate(${cx + sx} ${y}) scale(${k})`} opacity={clamp(k * 1.6)}>
         <Extrude depth={8} dark={i === 0 && right > 0 ? "#0e7d48" : i === 1 && wrong > 0 && right <= 0 ? "#d63f24" : "#0a0918"}>{f => <rect x={-w / 2} y={-h / 2} width={w} height={h} rx={28} fill={f ?? col} stroke={f ? undefined : C.edge} strokeWidth={f ? 0 : 3} />}</Extrude>
         <text textAnchor="middle" dominantBaseline="central" fontWeight={800} fontSize={46} fill="#fff" fontFamily={FAM.b}>{o}</text>
+        {i === 0 && right <= 0 && <Morph names={["n3", "circle"]} u={clamp((t - tc - 20) / 12)} x={w / 2 - 60} y={0} r={24} sw={5} stroke="#fff" glow="none" />}
         {i === 0 && right > 0 && <path d="M300 2 L322 24 L360 -20" transform="translate(-30 0)" fill="none" stroke="#fff" strokeWidth={9} strokeLinecap="round" strokeLinejoin="round" strokeDasharray="120" strokeDashoffset={120 * (1 - right)} />}
       </g>;
     })}
