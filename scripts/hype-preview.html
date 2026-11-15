@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HypeShort — Učíme se hrou</title>
+<style>
+  :root { --cream:#f6f4ee; --ink:#16132b; --blue:#3248f0; --coral:#ff5a3c; --yellow:#ffc933; --green:#17a864; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#0c0a24; color:var(--cream);
+         font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  header { padding:26px 24px 10px; max-width:1180px; margin:0 auto; }
+  h1 { margin:0 0 6px; font-size:22px; letter-spacing:-.01em; }
+  .sub { color:#a9a4c8; font-size:14px; }
+  .badges { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+  .badge { font-size:12px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+           padding:6px 11px; border-radius:999px; background:#1c1936; border:1px solid #35305f; color:#cfcae8; }
+  main { max-width:1180px; margin:0 auto; padding:16px 24px 80px; display:grid; gap:22px;
+         grid-template-columns:minmax(0,420px) minmax(0,1fr); align-items:start; }
+  @media (max-width:900px){ main { grid-template-columns:1fr; } }
+  .player { position:relative; background:#000; border-radius:22px; overflow:hidden;
+            border:1px solid #35305f; aspect-ratio:9/16; box-shadow:0 24px 60px rgba(0,0,0,.5); }
+  video { width:100%; height:100%; display:block; object-fit:contain; background:#000; }
+  .empty { position:absolute; inset:0; display:grid; place-content:center; gap:10px; text-align:center; padding:26px; }
+  .empty b { font-size:16px; }
+  .empty span { color:#a9a4c8; font-size:13px; }
+  .bar { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; align-items:center; }
+  .btn { display:inline-flex; align-items:center; gap:8px; text-decoration:none; font-weight:800; font-size:14px;
+         padding:11px 16px; border-radius:999px; background:var(--yellow); color:var(--ink);
+         border:2px solid var(--ink); box-shadow:0 4px 0 var(--ink); }
+  .btn.alt { background:var(--cream); }
+  .btn.off { opacity:.4; pointer-events:none; }
+  .note { color:#8f89b0; font-size:12.5px; margin-top:10px; }
+  h2 { font-size:13px; text-transform:uppercase; letter-spacing:.14em; color:#8f89b0; margin:0 0 12px; }
+  .beats { display:grid; grid-template-columns:repeat(auto-fill,minmax(148px,1fr)); gap:10px; }
+  .beat { background:#12102a; border:1px solid #2b2650; border-radius:12px; overflow:hidden; }
+  .beat img { width:100%; display:block; aspect-ratio:9/16; object-fit:cover; background:#1c1936; }
+  .beat div { padding:6px 8px 7px; }
+  .beat b { display:block; font-size:11px; letter-spacing:.04em; color:#cfcae8; overflow:hidden;
+            text-overflow:ellipsis; white-space:nowrap; }
+  .beat span { font-size:10.5px; color:#7d78a0; }
+  .shotgrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .shotgrid img { width:100%; border-radius:10px; border:1px solid #2b2650; display:block; }
+  a.sheet { color:#cfcae8; }
+</style>
+</head>
+<body>
+<header>
+  <h1>HypeShort — Učíme se hrou</h1>
+  <div class="sub">1080×1920 · 30 fps · 47 beats · 52.5 s · kinetic typography, English trailer voice, 128 BPM mix</div>
+  <div class="badges">
+    <span class="badge">Remotion 4</span><span class="badge">three.js</span><span class="badge">Unbounded 800</span>
+    <span class="badge">voice + music + SFX</span><span class="badge">no full cloud render?</span>
+  </div>
+</header>
+<main>
+  <section>
+    <div class="player" id="player">
+      <video id="vid" controls playsinline preload="metadata"></video>
+      <div class="empty" id="empty">
+        <b>The film is still rendering</b>
+        <span>This page refreshes itself automatically. Meanwhile, scrub the timeline live in the
+          <a class="sheet" href="https://3000-ij6u8x2f8l0i5tyoqn7qi.e2b.app/" target="_blank" rel="noopener">Remotion Studio</a>.</span>
+      </div>
+    </div>
+    <div class="bar">
+      <a class="btn" id="dl" href="#" download>↓ Download MP4</a>
+      <a class="btn alt" id="studio" href="https://3000-ij6u8x2f8l0i5tyoqn7qi.e2b.app/" target="_blank" rel="noopener">Remotion Studio</a>
+    </div>
+    <p class="note">Studio = scrub every frame with the real timeline. The MP4 is the rendered film
+      (H.264, mono-safe loudness −14 LUFS).</p>
+  </section>
+  <section>
+    <h2>Beat sheet — 47 spoken beats</h2>
+    <div class="beats" id="beats"></div>
+    <h2 style="margin-top:26px">QA contact sheets (every beat)</h2>
+    <div class="shotgrid">
+      <a href="/files/final1.jpg" target="_blank"><img src="/files/final1.jpg" alt="beats 1-12"></a>
+      <a href="/files/final2.jpg" target="_blank"><img src="/files/final2.jpg" alt="beats 13-24"></a>
+      <a href="/files/final3.jpg" target="_blank"><img src="/files/final3.jpg" alt="beats 25-36"></a>
+      <a href="/files/final4.jpg" target="_blank"><img src="/files/final4.jpg" alt="beats 37-47"></a>
+    </div>
+  </section>
+</main>
+<script>
+  const BEATS = /*__BEATS__*/[];
+  const SHOTS = /*__SHOTS__*/[];
+  const VIDEO = "__VIDEO__";
+  const SMALL = "__SMALL__";
+
+  const vid = document.getElementById("vid");
+  const empty = document.getElementById("empty");
+  const dl = document.getElementById("dl");
+  if (VIDEO || SMALL) {
+    vid.src = VIDEO || SMALL;
+    empty.remove();
+    dl.href = VIDEO || SMALL;
+    dl.setAttribute("download", "HypeShort-1080x1920.mp4");
+  } else {
+    dl.classList.add("off");
+    setTimeout(() => location.reload(), 20000);
+  }
+
+  const shotOf = (i) => SHOTS.includes(`beat_${i}.jpg`) ? `/files/beat_${i}.jpg` : null;
+  document.getElementById("beats").innerHTML = BEATS.map((b) => {
+    const src = shotOf(b.i);
+    return `<div class="beat">
+      ${src ? `<a href="${src}" target="_blank"><img loading="lazy" src="${src}" alt="beat ${b.i}"></a>` : ""}
+      <div><b>${b.i} · ${b.el}</b><span>${b.t.toFixed(2)}s · ${b.bg} · ${b.text}</span></div>
+    </div>`;
+  }).join("");
+</script>
+</body>
+</html>
