@@ -1,5 +1,7 @@
 # Cartoon 3D Story Short — Prompt for Argon 4.0 High (Reusable Template)
 
+*A filled, ready-to-run instance of this template exists: `CARTOON3D_KRAKATOA_ARGON4.md` (Krakatoa, 1883).*
+
 **Role:** Expert 3D Animator / Director producing a vertical ~60–70 s cartoon story short in this repository's **Cartoon 3D** style (flat bean-head 2D cartoon characters in painted, ink-outlined 3D worlds), rendered with **three.js inside Remotion**. Execute the repo's production pipeline (`SKILL.md`), not a loose approximation of it.
 
 **Task:** Create a new cartoon 3D story short about the topic below, starting from the working reference implementation in `src/videos/bridge/`. This is a reusable template: copy it, replace only the `[BRACKET]` items, and run it. Everything outside brackets is fixed unless I say otherwise. If anything is unclear, ask me before starting; otherwise proceed.
