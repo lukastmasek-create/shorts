@@ -41,104 +41,89 @@
  {
   "scene": 2,
   "start": 460,
-  "len": 193,
+  "len": 170,
   "phrases": [
    {
-    "text": "(segment 0)",
+    "text": "You do not drift down.",
     "a": 10,
-    "b": 67
+    "b": 45
    },
    {
-    "text": "(segment 1)",
-    "a": 86,
-    "b": 102
+    "text": "You fall,",
+    "a": 63,
+    "b": 79
    },
    {
-    "text": "(segment 2)",
-    "a": 106,
-    "b": 172
+    "text": "until you reach two thirds of the speed of light.",
+    "a": 83,
+    "b": 149
    }
   ]
  },
  {
   "scene": 3,
-  "start": 653,
-  "len": 336,
+  "start": 630,
+  "len": 307,
   "phrases": [
    {
-    "text": "Beat two.",
-    "a": 11,
-    "b": 28
-   },
-   {
     "text": "Gravity is two hundred billion times stronger than Earth's.",
-    "a": 46,
-    "b": 147
+    "a": 10,
+    "b": 112
    },
    {
     "text": "Your feet are pulled millions of g's harder than your head,",
-    "a": 162,
-    "b": 262
+    "a": 129,
+    "b": 230
    },
    {
     "text": "so you stretch like spaghetti.",
-    "a": 274,
-    "b": 316
+    "a": 245,
+    "b": 288
    }
   ]
  },
  {
   "scene": 4,
-  "start": 989,
-  "len": 315,
+  "start": 937,
+  "len": 283,
   "phrases": [
    {
-    "text": "Beat three.",
-    "a": 11,
-    "b": 29
-   },
-   {
     "text": "The magnetic field is a trillion times stronger than any magnet.",
-    "a": 48,
-    "b": 161
+    "a": 11,
+    "b": 122
    },
    {
     "text": "It squeezes your atoms into needles,",
-    "a": 177,
-    "b": 240
+    "a": 141,
+    "b": 207
    },
    {
     "text": "and chemistry stops working.",
-    "a": 249,
-    "b": 294
+    "a": 218,
+    "b": 262
    }
   ]
  },
  {
   "scene": 5,
-  "start": 1304,
-  "len": 200,
+  "start": 1220,
+  "len": 177,
   "phrases": [
    {
     "text": "(segment 0)",
-    "a": 11,
-    "b": 28
+    "a": 10,
+    "b": 80
    },
    {
     "text": "(segment 1)",
-    "a": 36,
-    "b": 105
-   },
-   {
-    "text": "(segment 2)",
-    "a": 122,
-    "b": 182
+    "a": 98,
+    "b": 159
    }
   ]
  },
  {
   "scene": 6,
-  "start": 1504,
+  "start": 1397,
   "len": 161,
   "phrases": [
    {
@@ -155,7 +140,7 @@
  },
  {
   "scene": 7,
-  "start": 1665,
+  "start": 1558,
   "len": 297,
   "phrases": [
    {

@@ -30,7 +30,6 @@ const Hook = (t: number) => {
   const k = pop(t, 6, 14), pulse = (Math.sin(t / 5) + 1) / 2;
   return <>
     <Starfield t={t} /><BigRings y={760} t={t} />
-    <Pill text="Hook" x={cx} y={260} a={4} />
     <Cam t={t} a={0} b={193} from={{ s: 0.9 }} to={{ s: 1.18, y: 800 }}>
       <G x={cx} y={760} s={2 * k}>
         <circle r={145} {...st} /><ellipse rx={145} ry={52} {...st} /><ellipse rx={52} ry={145} {...st} />
@@ -47,7 +46,6 @@ const Setting = (t: number) => {
   const tilt = easeOut(prog(t, 50, 110)) * 11;
   return <>
     <Starfield t={t} o={0.6} /><GridBG t={t} o={0.07} />
-    <Pill text="Setting" x={cx} y={260} a={4} />
     <Cam t={t} a={0} b={267} from={{ s: 1 }} to={{ s: 1.08, y: 760 }}>
       <G x={cx} y={720} s={1.45 * pop(t, 6, 12)}>
         <line y1={-170} y2={175} {...st} /><path d="M-95 175 H95" {...st} />
@@ -64,11 +62,10 @@ const Setting = (t: number) => {
 };
 // 2 BEAT 1: you fall, 2/3 light speed
 const Beat1 = (t: number) => {
-  const p = easeIO(prog(t, 15, 150));
+  const p = easeIO(prog(t, 15, 130));
   return <>
     <Starfield t={t} drift={2.2} /><Rays x={cx} y={1700} t={t * 2} o={0.16} />
     <NS x={cx} y={1760} r={lerp(40, 120, p)} t={t} />
-    <Pill text="Beat 1" x={cx} y={260} a={4} />
     <Num v={`${fmt(lerp(0, 64, p))}%`} label="of light speed" x={cx} y={560} size={190} o={prog(t, 12, 22)} />
     {Array.from({ length: 9 }, (_, i) => <line key={i} x1={cx - 160 + i * 40} x2={cx - 160 + i * 40} y1={800 + (i % 3) * 40} y2={800 + (i % 3) * 40 + 340 * p} stroke="#fff" strokeWidth={3} opacity={0.45} />)}
     <Person x={cx} y={lerp(980, 1230, p)} s={2.6} />
@@ -79,25 +76,23 @@ const Beat1 = (t: number) => {
 };
 // 3 BEAT 2: gravity, tidal stretch
 const Beat2 = (t: number) => {
-  const s = easeIO(prog(t, 120, 250)), ap = prog(t, 255, 320);
+  const s = easeIO(prog(t, 110, 215)), ap = prog(t, 225, 290);
   return <>
     <Starfield t={t} o={0.5} /><NS x={cx} y={1900} r={150} t={t} beams={false} />
-    <Pill text="Beat 2" x={cx} y={260} a={4} />
-    <Num v={`${fmt(lerp(0, 200, easeOut(prog(t, 40, 120))))} billion g`} label="gravity vs Earth" x={cx} y={470} size={96} o={prog(t, 38, 48)} />
+    <Num v={`${fmt(lerp(0, 200, easeOut(prog(t, 20, 90))))} billion g`} label="gravity vs Earth" x={cx} y={470} size={96} o={prog(t, 18, 28)} />
     {[-300, 300].map(d => <line key={d} x1={cx + d} x2={cx + d} y1={620} y2={1500} stroke="#fff" strokeWidth={4} strokeDasharray="10 18" opacity={0.45 * prog(t, 130, 150)} />)}
     <Cam t={t} a={0} b={336} from={{ s: 1 }} to={{ s: 1.12, y: 1000 }}>
-      <g opacity={1 - prog(t, 250, 262)} transform={`translate(${cx} 1150) scale(${lerp(1, 0.25, s)} 1)`}><g transform={`scale(1 ${lerp(1, 6, s)})`}><Person x={0} y={0} s={3.4} glow={false} /></g></g>
-      {Array.from({ length: 44 }, (_, i) => { const a = i * 2.4, r = 6 + (i % 3); return <circle key={i} cx={cx + Math.sin(a) * (14 + 300 * ap * (i % 5) / 4)} cy={600 + i * 20 + 30 * ap * Math.cos(a)} r={r} fill="#fff" opacity={prog(t, 250, 262) * (1 - prog(t, 320, 335))} style={{ filter: GLOW }} />; })}
+      <g opacity={1 - prog(t, 215, 225)} transform={`translate(${cx} 1150) scale(${lerp(1, 0.25, s)} 1)`}><g transform={`scale(1 ${lerp(1, 6, s)})`}><Person x={0} y={0} s={3.4} glow={false} /></g></g>
+      {Array.from({ length: 44 }, (_, i) => { const a = i * 2.4, r = 6 + (i % 3); return <circle key={i} cx={cx + Math.sin(a) * (14 + 300 * ap * (i % 5) / 4)} cy={600 + i * 20 + 30 * ap * Math.cos(a)} r={r} fill="#fff" opacity={prog(t, 215, 225) * (1 - prog(t, 285, 300))} style={{ filter: GLOW }} />; })}
     </Cam>
-    <Pill text="Feet pulled harder than head" x={cx} y={1480} a={160} on={false} size={15} />
+    <Pill text="Feet pulled harder than head" x={cx} y={1480} a={130} on={false} size={15} />
   </>;
 };
 // 4 BEAT 3: magnetic field -> atoms to needles, chemistry crossed out
 const Beat3 = (t: number) => {
-  const n = easeIO(prog(t, 150, 215)), xr = prog(t, 245, 285);
+  const n = easeIO(prog(t, 150, 215)), xr = prog(t, 225, 262);
   return <>
     <Starfield t={t} o={0.5} /><GridBG t={t} o={0.07} />
-    <Pill text="Beat 3" x={cx} y={260} a={4} />
     {[-340, -170, 170, 340].map((d, i) => <path key={i} d={`M${cx + d} 400 Q${cx + d * 1.5} 800 ${cx + d} 1200`} fill="none" stroke="#fff" strokeWidth={3} strokeDasharray="10 14" opacity={0.35 * prog(t, 25 + i * 4, 45 + i * 4)} />)}
     <Cam t={t} a={0} b={315} from={{ s: 1 }} to={{ s: 1.15, y: 800 }}>
       <G x={cx} y={720} s={1.4 * pop(t, 6, 12)}>
@@ -107,7 +102,7 @@ const Beat3 = (t: number) => {
       <Cross x={cx} y={720} r={230} p={xr} />
     </Cam>
     <Num v={`1 trillion`} label="gauss · magnetic field" x={cx} y={1300} size={120} o={prog(t, 30, 42)} />
-    <Pill text="Chemistry stops working" x={cx} y={1480} a={245} on={false} size={15} />
+    <Pill text="Chemistry stops working" x={cx} y={1480} a={225} on={false} size={15} />
   </>;
 };
 // 5 BEAT 4: land and flatten on solid crust
@@ -115,7 +110,6 @@ const Beat4 = (t: number) => {
   const drop = prog(t, 95, 125), fl = easeOut(prog(t, 125, 150));
   return <>
     <Starfield t={t} o={0.4} /><GridBG t={t} o={0.08} scroll={0.8} />
-    <Pill text="Beat 4" x={cx} y={260} a={4} />
     <rect x={-50} y={1250} width={W + 100} height={800} fill="#fff" opacity={0.07} />
     <path d={`M-50 1250 H${W + 50}`} stroke="#fff" strokeWidth={6} style={{ filter: GLOW }} />
     <path d={`M-50 1290 H${W + 50}`} stroke="#fff" strokeWidth={2} opacity={0.3} />
@@ -130,7 +124,6 @@ const Beat4 = (t: number) => {
 // 6 MYSTERY: ring pulses + question
 const Mystery = (t: number) => <>
   <Starfield t={t} /><BigRings y={800} t={t * 1.5} />
-  <Pill text="Mystery" x={cx} y={260} a={4} />
   <Cam t={t} a={0} b={161} from={{ s: 0.9 }} to={{ s: 1.2, y: 800 }}>
     {[0, 1, 2].map(i => { const p = ((t / 45) + i / 3) % 1; return <circle key={i} cx={cx} cy={800} r={160 + 260 * p} fill="none" stroke="#fff" strokeWidth={4} opacity={(1 - p) * 0.8} style={{ filter: GLOW }} />; })}
     <G x={cx} y={800} s={pop(t, 6, 12)}><circle r={170} {...st} /><text textAnchor="middle" y={85} fontWeight={900} fontSize={230} fill="#fff" stroke="none">?</text></G>
@@ -142,7 +135,6 @@ const Payoff = (t: number) => {
   const burst = easeOut(prog(t, 200, 235));
   return <>
     <Starfield t={t} drift={burst * 3 + 0.2} /><Rays x={cx} y={760} t={t * 2} o={0.05 + 0.3 * burst} len={1900} />
-    <Pill text="Payoff" x={cx} y={260} a={4} />
     <Num v={`${fmt(lerp(0, 300, easeOut(prog(t, 78, 140))))} Mt`} label="of heat · TNT equivalent" x={cx} y={560} size={190} o={prog(t, 76, 86)} />
     <Cam t={t} a={0} b={327} from={{ s: 1 }} to={{ s: 1.15, y: 900 }}>
       <G x={cx} y={1050} s={burst}><circle r={80} fill="#fff" />{Array.from({ length: 12 }, (_, i) => <line key={i} transform={`rotate(${i * 30})`} y1={-130} y2={-300} {...st} strokeWidth={7} />)}</G>
