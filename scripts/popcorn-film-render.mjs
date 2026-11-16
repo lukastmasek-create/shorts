@@ -40,7 +40,7 @@ const browser = await pc.launch({
 });
 const page = await browser.newPage();
 page.on('pageerror', (e) => console.log('PAGEERROR:', String(e).slice(0, 300)));
-await page.goto(`http://127.0.0.1:${server.address().port}/index.html?manual=1`, { waitUntil: 'load', timeout: 120000 });
+await page.goto(`http://127.0.0.1:${server.address().port}/index.html?manual=1&noplayer=1`, { waitUntil: 'load', timeout: 120000 });
 console.log(`building stage ${W}x${H}, ${SAMPLES} samples, ${FPS} fps, shutter ${BLUR}, shadow x${SHADOW}`);
 await page.evaluate((sh, w, h, s, blur) => {
   window.__shadowScale = sh;

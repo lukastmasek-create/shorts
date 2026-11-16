@@ -18,7 +18,7 @@ const server = http.createServer((req, res) => {
   fs.createReadStream(p).pipe(res);
 });
 await new Promise((r) => server.listen(0, '127.0.0.1', r));
-const url = `http://127.0.0.1:${server.address().port}/index.html?manual=1`;
+const url = `http://127.0.0.1:${server.address().port}/index.html?manual=1&noplayer=1`;
 const pc = (await import('puppeteer-core')).default;
 const browser = await pc.launch({ headless: true, executablePath: EXE, args: ['--no-sandbox', '--enable-unsafe-swiftshader', '--use-gl=angle', '--use-angle=swiftshader', '--disable-dev-shm-usage'], env: { ...process.env, LD_LIBRARY_PATH: '/tmp/cb/lib' }, protocolTimeout: 0 });
 const page = await browser.newPage();
