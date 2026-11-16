@@ -7,13 +7,16 @@
 Needs Node 18+ (nothing else, ffmpeg and the browser come from npm).
 
 ```bash
-git clone --single-branch --branch claude/magical-davinci-gmwwt8 https://github.com/lukastmasek-create/shorts.git
+git clone --depth 1 --single-branch --branch claude/magical-davinci-gmwwt8 --filter=blob:none --sparse https://github.com/lukastmasek-create/shorts.git
 cd shorts
+git sparse-checkout set xray-cable
 cd xray-cable
 npm install
 npx playwright install chromium
 node render.cjs
 ```
+
+This downloads only that branch's latest commit and only the `xray-cable` folder (a few hundred KB), not the rest of the repo.
 
 Result: `out/xray_cable.mp4` (1920x1080, 30 fps, sound at -15 LUFS). The log prints `GPU: ...`; if it says SwiftShader it is using the CPU and will be very slow.
 
