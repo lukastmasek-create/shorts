@@ -27,6 +27,7 @@ import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
 import { NestedShort, NESTED_FRAMES } from "./Nested";
+import { TunnelShort, TUNNEL_FRAMES } from "./Tunnel";
 
 export const Root: React.FC = () => (
   <>
@@ -57,5 +58,6 @@ export const Root: React.FC = () => (
     <Composition id="ClocksShort" component={ClocksShort} durationInFrames={CLOCKS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="InsecureShort" component={InsecureShort} durationInFrames={INSECURE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="NestedShort" component={NestedShort} durationInFrames={NESTED_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="TunnelShort" component={TunnelShort} durationInFrames={TUNNEL_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );

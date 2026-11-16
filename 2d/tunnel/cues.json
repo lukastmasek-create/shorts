@@ -1,0 +1,207 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 130,
+  "phrases": [
+   {
+    "text": "What if you dropped a ball into a tunnel straight through the Earth?",
+    "a": 14,
+    "b": 101
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 130,
+  "len": 232,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 78
+   },
+   {
+    "text": "(segment 1)",
+    "a": 89,
+    "b": 121
+   },
+   {
+    "text": "(segment 2)",
+    "a": 142,
+    "b": 212
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 362,
+  "len": 198,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 81
+   },
+   {
+    "text": "(segment 1)",
+    "a": 100,
+    "b": 122
+   },
+   {
+    "text": "(segment 2)",
+    "a": 129,
+    "b": 177
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 560,
+  "len": 243,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 68
+   },
+   {
+    "text": "(segment 1)",
+    "a": 79,
+    "b": 124
+   },
+   {
+    "text": "(segment 2)",
+    "a": 143,
+    "b": 224
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 803,
+  "len": 164,
+  "phrases": [
+   {
+    "text": "In a simple uniform-Earth model,",
+    "a": 12,
+    "b": 66
+   },
+   {
+    "text": "it peaks near eight kilometers a second.",
+    "a": 81,
+    "b": 141
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 967,
+  "len": 291,
+  "phrases": [
+   {
+    "text": "It reaches the far side in about forty-two minutes.",
+    "a": 11,
+    "b": 100
+   },
+   {
+    "text": "Real Earth is denser at the core,",
+    "a": 117,
+    "b": 177
+   },
+   {
+    "text": "so a 2015 study says thirty-eight.",
+    "a": 190,
+    "b": 270
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1258,
+  "len": 174,
+  "phrases": [
+   {
+    "text": "In that model,",
+    "a": 12,
+    "b": 35
+   },
+   {
+    "text": "any straight tunnel takes forty-two minutes,",
+    "a": 43,
+    "b": 114
+   },
+   {
+    "text": "even a short one.",
+    "a": 125,
+    "b": 152
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1432,
+  "len": 186,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 12,
+    "b": 50
+   },
+   {
+    "text": "(segment 1)",
+    "a": 54,
+    "b": 58
+   },
+   {
+    "text": "(segment 2)",
+    "a": 68,
+    "b": 93
+   },
+   {
+    "text": "(segment 3)",
+    "a": 108,
+    "b": 166
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1618,
+  "len": 216,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 60
+   },
+   {
+    "text": "(segment 1)",
+    "a": 69,
+    "b": 110
+   },
+   {
+    "text": "(segment 2)",
+    "a": 129,
+    "b": 196
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1834,
+  "len": 152,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 80
+   },
+   {
+    "text": "(segment 1)",
+    "a": 96,
+    "b": 133
+   }
+  ]
+ }
+]
