@@ -186,9 +186,9 @@ const Stage: React.FC<{ plan: Plan; track: (f: number) => CameraSample; draw: (f
           <g transform={stageTransform(view, HOME)}>{d.world}</g>
           {d.screen}
           <Grain f={f} />
-          <rect width="1920" height="1080" fill="#0B0C10" opacity={fade} />
         </g>
       </svg>
+      <div style={{ position: "absolute", inset: 0, background: "#0B0C10", opacity: fade, pointerEvents: "none" }} />
     </div>
   </FontGate>;
 };
