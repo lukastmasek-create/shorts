@@ -1,8 +1,11 @@
 # builds steam-engine.html: lib/stage.js + lib/sound.js + styles/steam-engine.js + player, all inline
 r=lambda p:open(p).read()
+import sys
+name=sys.argv[1] if len(sys.argv)>1 else 'steam-engine'
+title=sys.argv[2] if len(sys.argv)>2 else 'Steam Engine Exploded View'
 html='''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Steam Engine Exploded View</title>
+<title>@@TITLE@@</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Space+Grotesk:wght@700&display=swap">
 <style>
 html,body{margin:0;height:100%;background:#14171f;color:#e9e6df;font:14px system-ui,sans-serif}
@@ -56,5 +59,5 @@ $('snd').onclick = () => { soundOn = !soundOn; $('snd').setAttribute('aria-press
 $('loop').onclick = () => { loop = !loop; $('loop').setAttribute('aria-pressed', loop); $('loop').textContent = loop ? 'Loop on' : 'Loop off'; };
 draw(render ? undefined : 10); window.READY = true;
 </script></body></html>'''
-html=html.replace('@@STAGE@@',r('lib/stage.js')).replace('@@SOUND@@',r('lib/sound.js')).replace('@@STYLE@@',r('styles/steam-engine.js'))
-open('steam-engine.html','w').write(html); print(len(html)//1024,'KB')
+html=html.replace('@@STAGE@@',r('lib/stage.js')).replace('@@SOUND@@',r('lib/sound.js')).replace('@@STYLE@@',r('styles/'+name+'.js')).replace('@@TITLE@@',title)
+open(name+'.html','w').write(html); print(len(html)//1024,'KB')

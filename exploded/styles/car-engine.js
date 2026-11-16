@@ -11,7 +11,7 @@
     { id: 'block', name: 'CYLINDER', side: 1, lab: [90, 200] },
     { id: 'piston', name: 'PISTON', side: 1, lab: [110, 140] },
     { id: 'conrod', name: 'CONNECTING ROD', side: -1, lab: [-140, 100] },
-    { id: 'crank', name: 'CRANKSHAFT', side: -1, lab: [60, -190] },
+    { id: 'crank', name: 'CRANKSHAFT', side: 1, lab: [40, -200] },
     { id: 'flywheel', name: 'FLYWHEEL', side: 1, lab: [110, -150] },
   ];
   // The timeline, shared by picture and sound.
@@ -482,7 +482,9 @@
       k.play('swish', T.push, { gain: 0.5, dur: 0.38 });
       k.play('thud', T.push + 0.42, { gain: 0.45, f: 150 }); k.play('tock', T.push + 0.42, { gain: 0.6, f: 480 });
       k.play('tick', T.seat + 0.1, { gain: 0.35, f: 4600 });
-      k.play('tick', 11.4, { gain: 0.3, f: 5200 });
+      for (let i = 0; i < 12; i++) k.play('tick', 0.18 + i * 0.05, { gain: 0.22, f: 3800 + i * 160, pan: -0.5 + i / 12 });   // title letters
+      const words = [T.seat + 0.15, ...strokes.filter(([t]) => t > T.seat + 0.3 && t < 11.3).map(([t]) => t), 11.45, 11.7];
+      words.forEach((t, i) => { k.play('whoosh', t - 0.12, { gain: 0.28, dur: 0.3, top: 2200 }); k.play('stamp', t + 0.02, { gain: 0.3 }); });   // each word lands
     },
   });
 }
