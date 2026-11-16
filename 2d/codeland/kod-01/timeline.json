@@ -1,0 +1,158 @@
+{
+ "id": "KodLandDil1",
+ "seed": 20261116,
+ "frames": 420,
+ "scenes": [
+  {
+   "id": "intro",
+   "start": 0,
+   "end": 90
+  },
+  {
+   "id": "feature",
+   "start": 90,
+   "end": 319
+  },
+  {
+   "id": "end",
+   "start": 319,
+   "end": 420
+  }
+ ],
+ "cues": {
+  "intro": {
+   "logo": {
+    "start": 0,
+    "end": 58
+   },
+   "hero": {
+    "start": 34,
+    "end": 46
+   },
+   "heroStagger": 3
+  },
+  "t1": {
+   "start": 90,
+   "end": 114
+  },
+  "t2": {
+   "start": 198,
+   "end": 224
+  },
+  "res": 224,
+  "type": {
+   "start": 138,
+   "end": 152
+  },
+  "mark": {
+   "pulse": {
+    "start": 224,
+    "end": 244
+   },
+   "check": {
+    "start": 226,
+    "end": 240
+   },
+   "lap": 30
+  },
+  "statSpan": {
+   "start": 230,
+   "end": 242
+  },
+  "exit": {
+   "start": 297,
+   "end": 319
+  },
+  "logoEnd": {
+   "start": 312,
+   "end": 336
+  },
+  "urlEnter": {
+   "start": 330,
+   "end": 342
+  },
+  "urlDone": 342,
+  "urlHold": 60,
+  "cursor": {
+   "appear": 112,
+   "start": [
+    1500,
+    790
+   ],
+   "blank": [
+    376,
+    532
+   ],
+   "button": [
+    1410,
+    376
+   ],
+   "click1": 134,
+   "click2": 188,
+   "approach1": 116,
+   "approach2": 160,
+   "lead": 4,
+   "pressIn": 3,
+   "release": 6,
+   "exit": {
+    "start": 197,
+    "end": 207
+   }
+  },
+  "pressIn": 3,
+  "release": 6,
+  "heroDone": 52,
+  "click1": 134,
+  "click2": 188
+ },
+ "camera": [
+  {
+   "frame": 0,
+   "x": 960,
+   "y": 540,
+   "zoom": 1.08
+  },
+  {
+   "frame": 52,
+   "x": 960,
+   "y": 540,
+   "zoom": 1
+  },
+  {
+   "frame": 198,
+   "x": 960,
+   "y": 540,
+   "zoom": 1
+  },
+  {
+   "frame": 218,
+   "x": 960,
+   "y": 548,
+   "zoom": 1.04
+  },
+  {
+   "frame": 319,
+   "x": 960,
+   "y": 548,
+   "zoom": 1.04
+  }
+ ],
+ "features": [
+  {
+   "id": "cviceni-zkontrolovat",
+   "hero": true,
+   "actionStart": 188,
+   "resultStart": 224,
+   "resultEnd": 297
+  }
+ ],
+ "coverage": [
+  "Cvičení „Doplň stav při najetí“: doplnění místa v kódu, tlačítko Zkontrolovat, zpráva „Jupí, splněno! Můžeš jít na další.“, počet Splněno 1 z 43"
+ ],
+ "invented": [
+  "Doplněné slovo „:hover“ je řešení cvičení doplni-css-hover, ale psaní a kliknutí jsou nasazené. Počítadlo 1 z 43 ukazuje stav po prvním splněném cvičení (skutečný stavový řádek webu)."
+ ],
+ "skipped": [
+  "Neúspěšná kontrola (seznam chybějících bodů) – kvůli limitu 15 s; Nápověda / Řešení; Doplň ostatních 42 cvičení"
+ ]
+}

@@ -1,0 +1,181 @@
+{
+ "id": "KodLandDil2",
+ "seed": 20261116,
+ "frames": 420,
+ "scenes": [
+  {
+   "id": "intro",
+   "start": 0,
+   "end": 90
+  },
+  {
+   "id": "feature",
+   "start": 90,
+   "end": 319
+  },
+  {
+   "id": "end",
+   "start": 319,
+   "end": 420
+  }
+ ],
+ "cues": {
+  "intro": {
+   "logo": {
+    "start": 0,
+    "end": 58
+   },
+   "hero": {
+    "start": 34,
+    "end": 46
+   },
+   "heroStagger": 3
+  },
+  "t1": {
+   "start": 90,
+   "end": 114
+  },
+  "xIn": {
+   "start": 96,
+   "end": 118
+  },
+  "s0Exit": {
+   "start": 161,
+   "end": 169
+  },
+  "s1": {
+   "start": 164,
+   "end": 176
+  },
+  "s1Exit": {
+   "start": 221,
+   "end": 229
+  },
+  "s2": {
+   "start": 224,
+   "end": 236
+  },
+  "bar1": {
+   "start": 162,
+   "end": 174
+  },
+  "bar2": {
+   "start": 222,
+   "end": 234
+  },
+  "res": 237,
+  "mark": {
+   "pulse": {
+    "start": 237,
+    "end": 257
+   },
+   "check": {
+    "start": 239,
+    "end": 253
+   },
+   "lap": 30
+  },
+  "exit": {
+   "start": 297,
+   "end": 319
+  },
+  "logoEnd": {
+   "start": 312,
+   "end": 336
+  },
+  "urlEnter": {
+   "start": 330,
+   "end": 342
+  },
+  "urlDone": 342,
+  "urlHold": 60,
+  "cursor": {
+   "appear": 112,
+   "start": [
+    1500,
+    790
+   ],
+   "p1": [
+    1760,
+    430
+   ],
+   "p2": [
+    1760,
+    500
+   ],
+   "click1": 160,
+   "click2": 220,
+   "approach1": 134,
+   "approach2": 204,
+   "lead": 4,
+   "lead2": 3,
+   "pressIn": 3,
+   "release": 6,
+   "exit": {
+    "start": 231,
+    "end": 243
+   }
+  },
+  "pressIn": 3,
+  "release": 6,
+  "heroDone": 52,
+  "click1": 160,
+  "click2": 220,
+  "codeLines": [
+   "<header>",
+   "  <h1>Učíme se hrou</h1>",
+   "</header>",
+   "<main>"
+  ]
+ },
+ "camera": [
+  {
+   "frame": 0,
+   "x": 960,
+   "y": 540,
+   "zoom": 1.08
+  },
+  {
+   "frame": 52,
+   "x": 960,
+   "y": 540,
+   "zoom": 1
+  },
+  {
+   "frame": 224,
+   "x": 960,
+   "y": 540,
+   "zoom": 1
+  },
+  {
+   "frame": 241,
+   "x": 960,
+   "y": 546,
+   "zoom": 1.03
+  },
+  {
+   "frame": 319,
+   "x": 960,
+   "y": 546,
+   "zoom": 1.03
+  }
+ ],
+ "features": [
+  {
+   "id": "radek-po-radku",
+   "hero": true,
+   "actionStart": 220,
+   "resultStart": 237,
+   "resultEnd": 297
+  }
+ ],
+ "coverage": [
+  "Klikni na řádek s jiskrou: <header> a <h1> z index.html, vysvětlení „Horní část stránky“ a „Hlavní nadpis“, příkaz v nadpisu vysvětlení"
+ ],
+ "invented": [
+  "Výřez čtyř řádků index.html je zkrácen o odsazení (řádky 9–12 souboru, skutečné texty); text vysvětlení pod nadpisem je vynechán, protože by byl pod 44 px."
+ ],
+ "skipped": [
+  "Tlačítko Přehrát, přepínání souborů style.css / script.js, AI pomocník (odpověď přichází z API a nejde ji ověřit ze zdrojáků), Učební plán (9 kroků), Volný editor a Čistý list"
+ ]
+}

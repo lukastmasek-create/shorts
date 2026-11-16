@@ -33,8 +33,38 @@ SCENE_SFX = {
 def kind_of(sid): return "feature" if sid.startswith("feature") and sid not in SCENE_SFX else sid
 
 
+def build_events(S, out_path):
+    """Explicit-cue mode (scenes.json has "events"): every cue is placed exactly, nothing is random or skipped.
+    events: [{id, t (s), kind, gain, pan}]; optional bed {kind, gain, every, dur}: a very quiet air/cloth texture so no gap is silent; peak: target peak (0.7 = -3 dBFS)."""
+    r = rng(int(S.get("seed", 1)))
+    dur = S["frames"] / S.get("fps", 30); N = ns(dur + 1.0); buf = np.zeros((2, N)); peaks = []
+    bed = S.get("bed")
+    if bed:                                                                           # quiet air under everything (same approved 'whoosh' source, very low level)
+        t, k = 0.0, 0
+        while t < dur:
+            x = pan(KINDS[bed.get("kind", "whoosh")](bed.get("dur", 0.9), 0.5, seed=int(r.integers(1, 10**6))), 0.4 * (1 if k % 2 == 0 else -1))
+            place(buf, x, t, bed.get("gain", 0.08)); t += bed.get("every", 0.5); k += 1
+    for ev in S["events"]:
+        x = pan(KINDS[ev["kind"]](seed=int(r.integers(1, 10**6))), ev.get("pan", 0.0)) * ev.get("gain", 1.0)
+        peaks.append((float(np.max(np.abs(x))), ev["id"]))
+        place(buf, x, max(0.0, ev["t"]), 1.0)
+    buf = buf[:, : ns(dur)]
+    pk = np.max(np.abs(buf)) + 1e-9; buf = buf / pk * S.get("peak", 0.7)
+    f = ns(0.25); buf[:, -f:] *= np.linspace(1, 0, f)[None, :]                         # short end fade
+    peaks.sort(reverse=True); a, b = peaks[0], peaks[1]
+    print(f"hero cue '{a[1]}' peaks {20*np.log10(a[0]/b[0]):.1f} dB above the next loudest event '{b[1]}'")
+    sil = np.abs(buf).max(axis=0) < 1e-5; run = best = 0; end_run = 0
+    for i, s in enumerate(sil):
+        run = run + 1 if s else 0; best = max(best, run)
+    print(f"longest digital silence {best / SR:.3f} s;  first sample cue at {min(e['t'] for e in S['events']):.3f} s")
+    print("per-second RMS (dBFS):", " ".join(f"{20*np.log10(np.sqrt(np.mean(buf[:, i*SR:(i+1)*SR]**2)) + 1e-12):.0f}" for i in range(int(np.ceil(dur)))))
+    write_wav(out_path, buf, bits=16)
+    print(f"{len(S['events'])} events, {dur:.2f} s, integrated {integrated(buf):.1f} LUFS, true peak {true_peak(buf):.1f} dBTP, sample peak {20*np.log10(np.max(np.abs(buf))):.1f} dBFS -> {out_path}")
+
+
 def build(scn_path, out_path):
     S = json.load(open(scn_path, encoding="utf-8")); r = rng(int(S.get("seed", 1)))
+    if "events" in S: return build_events(S, out_path)
     dur = S["frames"] / S.get("fps", 30); N = ns(dur + 1.0); buf = np.zeros((2, N)); n_events = 0
     for sc in S["order"]:
         sid = kind_of(sc["id"]); evs = SCENE_SFX.get(sid, [])

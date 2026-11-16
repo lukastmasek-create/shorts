@@ -1,0 +1,300 @@
+{
+ "part": "kod-02",
+ "frames": 420,
+ "items": [
+  {
+   "id": "hero",
+   "scene": "intro",
+   "role": "hero",
+   "text": "Řádek po řádku",
+   "sizePx": 160,
+   "bbox": [
+    462.5,
+    561,
+    1457.5,
+    743
+   ],
+   "completeFrame": 52,
+   "leaveFrame": 90,
+   "holdFrames": 38,
+   "budgetFrames": 36,
+   "graphemes": 14,
+   "contrast": 10.13,
+   "widthPx": 995,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "code-1",
+   "scene": "feature",
+   "role": "code",
+   "text": "<header>",
+   "sizePx": 52,
+   "bbox": [
+    947.6,
+    399.9,
+    1204.7,
+    449
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 297,
+   "holdFrames": 183,
+   "budgetFrames": 42,
+   "graphemes": 8,
+   "contrast": 10.69,
+   "widthPx": 249.6,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "code-2",
+   "scene": "feature",
+   "role": "code",
+   "text": "  <h1>Učíme se hrou</h1>",
+   "sizePx": 52,
+   "bbox": [
+    947.6,
+    465.8,
+    1718.9,
+    524
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 297,
+   "holdFrames": 183,
+   "budgetFrames": 52,
+   "graphemes": 24,
+   "contrast": 10.69,
+   "widthPx": 748.8,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "code-3",
+   "scene": "feature",
+   "role": "code",
+   "text": "</header>",
+   "sizePx": 52,
+   "bbox": [
+    947.6,
+    537.9,
+    1236.9,
+    594
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 297,
+   "holdFrames": 183,
+   "budgetFrames": 42,
+   "graphemes": 9,
+   "contrast": 10.69,
+   "widthPx": 280.8,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "code-4",
+   "scene": "feature",
+   "role": "code",
+   "text": "<main>",
+   "sizePx": 52,
+   "bbox": [
+    947.6,
+    613.1,
+    1140.5,
+    659
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 297,
+   "holdFrames": 183,
+   "budgetFrames": 42,
+   "graphemes": 6,
+   "contrast": 10.69,
+   "widthPx": 187.2,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "x0-title",
+   "scene": "feature",
+   "role": "body",
+   "text": "Vyber řádek",
+   "sizePx": 52,
+   "bbox": [
+    136,
+    542,
+    447.4,
+    595
+   ],
+   "completeFrame": 118,
+   "leaveFrame": 161,
+   "holdFrames": 43,
+   "budgetFrames": 42,
+   "graphemes": 11,
+   "contrast": 12.97,
+   "widthPx": 311.4,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "x1-chip",
+   "scene": "feature",
+   "role": "code",
+   "text": "<header>",
+   "sizePx": 52,
+   "bbox": [
+    272,
+    421,
+    521.6,
+    460
+   ],
+   "completeFrame": 177,
+   "leaveFrame": 221,
+   "holdFrames": 44,
+   "budgetFrames": 42,
+   "graphemes": 8,
+   "contrast": 10.82,
+   "widthPx": 249.6,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "x1-title",
+   "scene": "feature",
+   "role": "body",
+   "text": "Horní část stránky",
+   "sizePx": 52,
+   "bbox": [
+    136,
+    542,
+    595.6,
+    595
+   ],
+   "completeFrame": 177,
+   "leaveFrame": 221,
+   "holdFrames": 44,
+   "budgetFrames": 42,
+   "graphemes": 18,
+   "contrast": 12.97,
+   "widthPx": 459.6,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "x2-chip",
+   "scene": "feature",
+   "role": "code",
+   "text": "<h1>",
+   "sizePx": 53.34,
+   "bbox": [
+    251.4,
+    411.3,
+    382.3,
+    451.6
+   ],
+   "completeFrame": 237,
+   "leaveFrame": 297,
+   "holdFrames": 60,
+   "budgetFrames": 42,
+   "graphemes": 4,
+   "contrast": 10.82,
+   "widthPx": 124.8,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "x2-title",
+   "scene": "feature",
+   "role": "body",
+   "text": "Hlavní nadpis",
+   "sizePx": 53.34,
+   "bbox": [
+    111.3,
+    535.9,
+    462.6,
+    589.1
+   ],
+   "completeFrame": 237,
+   "leaveFrame": 297,
+   "holdFrames": 60,
+   "budgetFrames": 42,
+   "graphemes": 13,
+   "contrast": 12.97,
+   "widthPx": 339,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "url",
+   "scene": "end",
+   "role": "url",
+   "text": "ucimesehrou.org/code",
+   "sizePx": 52,
+   "bbox": [
+    675.7,
+    659,
+    1244.3,
+    713
+   ],
+   "completeFrame": 342,
+   "leaveFrame": 402,
+   "holdFrames": 60,
+   "budgetFrames": 43,
+   "graphemes": 20,
+   "contrast": 9.11,
+   "widthPx": 568.6,
+   "ok": true,
+   "problems": []
+  }
+ ],
+ "checks": [
+  {
+   "name": "total <= 450 frames",
+   "ok": true,
+   "detail": "420"
+  },
+  {
+   "name": "scene frames sum to total (no gaps)",
+   "ok": true,
+   "detail": "intro:0-90 feature:90-319 end:319-420"
+  },
+  {
+   "name": "scene count",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "name": "feature radek-po-radku: result hold >= 36",
+   "ok": true,
+   "detail": "60 f"
+  },
+  {
+   "name": "fast flights <= 3, strong-blur frames <= 12",
+   "ok": true,
+   "detail": "0 flights, 0 frames > 60 px/f, max 2.23 px/f"
+  },
+  {
+   "name": "all reading holds end before the closing fade",
+   "ok": true,
+   "detail": "fade starts at 402"
+  },
+  {
+   "name": "sound starts with a cue",
+   "ok": true,
+   "detail": "first cue f1"
+  },
+  {
+   "name": "scene intro: max 2 text sizes",
+   "ok": true,
+   "detail": "160"
+  },
+  {
+   "name": "scene feature: max 2 text sizes",
+   "ok": true,
+   "detail": "52"
+  },
+  {
+   "name": "scene end: max 2 text sizes",
+   "ok": true,
+   "detail": "52"
+  }
+ ]
+}

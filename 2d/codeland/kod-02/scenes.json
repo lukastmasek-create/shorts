@@ -1,0 +1,191 @@
+{
+ "seed": 20261116,
+ "fps": 30,
+ "frames": 420,
+ "auto_whoosh": false,
+ "peak": 0.7,
+ "bed": {
+  "kind": "whoosh",
+  "gain": 0.085,
+  "every": 0.5,
+  "dur": 0.9
+ },
+ "order": [
+  {
+   "id": "intro",
+   "start": 0,
+   "dur": 3,
+   "extra": {
+    "logo-in": 0.0333,
+    "logo-face": 1,
+    "logo-pop": 1.3333
+   }
+  },
+  {
+   "id": "feature",
+   "start": 3,
+   "dur": 7.6333,
+   "extra": {
+    "card-morph": 3,
+    "explain-card-in": 3.3333,
+    "explain-card-lands": 3.9,
+    "code-card-lands": 3.7667,
+    "click-line-1": 5.3333,
+    "explain-1": 5.5333,
+    "click-line-2": 7.3333,
+    "HERO-result": 7.9,
+    "explain-2": 7.5333,
+    "check-tick": 8.3,
+    "cards-exit": 9.9
+   }
+  },
+  {
+   "id": "end",
+   "start": 10.6333,
+   "dur": 3.3667,
+   "extra": {
+    "end-logo-face": 10.8,
+    "end-logo-settle": 11.2,
+    "end-url": 11.0667
+   }
+  }
+ ],
+ "events": [
+  {
+   "id": "logo-in",
+   "t": 0.0333,
+   "frame": 1,
+   "kind": "whoosh",
+   "gain": 0.42,
+   "pan": -0.2
+  },
+  {
+   "id": "logo-face",
+   "t": 1,
+   "frame": 30,
+   "kind": "tok",
+   "gain": 0.34,
+   "pan": 0.1
+  },
+  {
+   "id": "logo-pop",
+   "t": 1.3333,
+   "frame": 40,
+   "kind": "cloth",
+   "gain": 0.28,
+   "pan": 0.25
+  },
+  {
+   "id": "card-morph",
+   "t": 3,
+   "frame": 90,
+   "kind": "cloth",
+   "gain": 0.5,
+   "pan": 0.1
+  },
+  {
+   "id": "explain-card-in",
+   "t": 3.3333,
+   "frame": 100,
+   "kind": "cloth",
+   "gain": 0.42,
+   "pan": -0.35
+  },
+  {
+   "id": "explain-card-lands",
+   "t": 3.9,
+   "frame": 117,
+   "kind": "tok",
+   "gain": 0.36,
+   "pan": -0.3
+  },
+  {
+   "id": "code-card-lands",
+   "t": 3.7667,
+   "frame": 113,
+   "kind": "tok",
+   "gain": 0.32,
+   "pan": 0.3
+  },
+  {
+   "id": "click-line-1",
+   "t": 5.3333,
+   "frame": 160,
+   "kind": "click",
+   "gain": 0.42,
+   "pan": 0.2
+  },
+  {
+   "id": "explain-1",
+   "t": 5.5333,
+   "frame": 166,
+   "kind": "tok",
+   "gain": 0.34,
+   "pan": -0.2
+  },
+  {
+   "id": "click-line-2",
+   "t": 7.3333,
+   "frame": 220,
+   "kind": "click",
+   "gain": 0.46,
+   "pan": 0.25
+  },
+  {
+   "id": "HERO-result",
+   "t": 7.9,
+   "frame": 237,
+   "kind": "impact",
+   "gain": 1,
+   "pan": 0
+  },
+  {
+   "id": "explain-2",
+   "t": 7.5333,
+   "frame": 226,
+   "kind": "tok",
+   "gain": 0.36,
+   "pan": -0.2
+  },
+  {
+   "id": "check-tick",
+   "t": 8.3,
+   "frame": 249,
+   "kind": "tok",
+   "gain": 0.3,
+   "pan": -0.3
+  },
+  {
+   "id": "cards-exit",
+   "t": 9.9,
+   "frame": 297,
+   "kind": "whoosh",
+   "gain": 0.3,
+   "pan": 0.2
+  },
+  {
+   "id": "end-logo-face",
+   "t": 10.8,
+   "frame": 324,
+   "kind": "tok",
+   "gain": 0.36,
+   "pan": 0
+  },
+  {
+   "id": "end-logo-settle",
+   "t": 11.2,
+   "frame": 336,
+   "kind": "cloth",
+   "gain": 0.28,
+   "pan": -0.1
+  },
+  {
+   "id": "end-url",
+   "t": 11.0667,
+   "frame": 332,
+   "kind": "tok",
+   "gain": 0.3,
+   "pan": 0.1
+  }
+ ]
+}

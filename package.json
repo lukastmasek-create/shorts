@@ -10,6 +10,7 @@
     "stills:2d": "node 2d/stills.mjs"
   },
   "dependencies": {
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/onest": "^5.3.1",
     "@fontsource/pangolin": "^5.3.0",
     "@fontsource/unbounded": "^5.3.0",

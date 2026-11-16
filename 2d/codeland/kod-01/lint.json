@@ -1,0 +1,288 @@
+{
+ "part": "kod-01",
+ "frames": 420,
+ "items": [
+  {
+   "id": "hero",
+   "scene": "intro",
+   "role": "hero",
+   "text": "Kód na hraní",
+   "sizePx": 160,
+   "bbox": [
+    543,
+    586,
+    1377,
+    711
+   ],
+   "completeFrame": 52,
+   "leaveFrame": 90,
+   "holdFrames": 38,
+   "budgetFrames": 36,
+   "graphemes": 12,
+   "contrast": 10.13,
+   "widthPx": 833.9,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "ex-label",
+   "scene": "feature",
+   "role": "label",
+   "text": "Doplň stav při najetí",
+   "sizePx": 44,
+   "bbox": [
+    250,
+    354,
+    802.7,
+    399
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 198,
+   "holdFrames": 84,
+   "budgetFrames": 45,
+   "graphemes": 21,
+   "contrast": 12.97,
+   "widthPx": 552.7,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "ex-button",
+   "scene": "feature",
+   "role": "cta",
+   "text": "Zkontrolovat",
+   "sizePx": 44,
+   "bbox": [
+    1228.3,
+    357,
+    1591.7,
+    392
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 198,
+   "holdFrames": 84,
+   "budgetFrames": 42,
+   "graphemes": 12,
+   "contrast": 8.31,
+   "widthPx": 363.4,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "code-1",
+   "scene": "feature",
+   "role": "code",
+   "text": "a:hover {",
+   "sizePx": 52,
+   "bbox": [
+    298,
+    506,
+    578.8,
+    556
+   ],
+   "completeFrame": 152,
+   "leaveFrame": 198,
+   "holdFrames": 46,
+   "budgetFrames": 42,
+   "graphemes": 9,
+   "contrast": 16.88,
+   "widthPx": 280.8,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "code-2",
+   "scene": "feature",
+   "role": "code",
+   "text": "  color: #3248f0;",
+   "sizePx": 52,
+   "bbox": [
+    298,
+    581,
+    828.4,
+    629
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 198,
+   "holdFrames": 84,
+   "budgetFrames": 42,
+   "graphemes": 17,
+   "contrast": 16.88,
+   "widthPx": 530.4,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "code-3",
+   "scene": "feature",
+   "role": "code",
+   "text": "}",
+   "sizePx": 52,
+   "bbox": [
+    298,
+    646,
+    329.2,
+    696
+   ],
+   "completeFrame": 114,
+   "leaveFrame": 198,
+   "holdFrames": 84,
+   "budgetFrames": 42,
+   "graphemes": 1,
+   "contrast": 16.88,
+   "widthPx": 31.2,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "result-1a",
+   "scene": "feature",
+   "role": "body",
+   "text": "Jupí, splněno!",
+   "sizePx": 54.08,
+   "bbox": [
+    469.1,
+    363.2,
+    836.1,
+    416.2
+   ],
+   "completeFrame": 224,
+   "leaveFrame": 297,
+   "holdFrames": 73,
+   "budgetFrames": 73,
+   "graphemes": 14,
+   "contrast": 14.82,
+   "widthPx": 352.9,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "result-1b",
+   "scene": "feature",
+   "role": "body",
+   "text": "Můžeš jít na další.",
+   "sizePx": 54.08,
+   "bbox": [
+    469.1,
+    442.2,
+    922.1,
+    497.4
+   ],
+   "completeFrame": 224,
+   "leaveFrame": 297,
+   "holdFrames": 73,
+   "budgetFrames": 73,
+   "graphemes": 19,
+   "contrast": 14.82,
+   "widthPx": 435.6,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "result-stat",
+   "scene": "feature",
+   "role": "label",
+   "text": "Splněno 1 z 43",
+   "sizePx": 45.76,
+   "bbox": [
+    377.6,
+    656.5,
+    777.2,
+    702.2
+   ],
+   "completeFrame": 243,
+   "leaveFrame": 297,
+   "holdFrames": 54,
+   "budgetFrames": 42,
+   "graphemes": 14,
+   "contrast": 14.82,
+   "widthPx": 384.3,
+   "ok": true,
+   "problems": []
+  },
+  {
+   "id": "url",
+   "scene": "end",
+   "role": "url",
+   "text": "ucimesehrou.org/code",
+   "sizePx": 52,
+   "bbox": [
+    675.7,
+    659,
+    1244.3,
+    713
+   ],
+   "completeFrame": 342,
+   "leaveFrame": 402,
+   "holdFrames": 60,
+   "budgetFrames": 43,
+   "graphemes": 20,
+   "contrast": 9.11,
+   "widthPx": 568.6,
+   "ok": true,
+   "problems": []
+  }
+ ],
+ "checks": [
+  {
+   "name": "total <= 450 frames",
+   "ok": true,
+   "detail": "420"
+  },
+  {
+   "name": "scene frames sum to total (no gaps)",
+   "ok": true,
+   "detail": "intro:0-90 feature:90-319 end:319-420"
+  },
+  {
+   "name": "scene count",
+   "ok": true,
+   "detail": "3"
+  },
+  {
+   "name": "feature cviceni-zkontrolovat: result hold >= 36",
+   "ok": true,
+   "detail": "73 f"
+  },
+  {
+   "name": "typing budget (14 chars/s)",
+   "ok": true,
+   "detail": "14 f for 6 chars, need 13"
+  },
+  {
+   "name": "one key sound per typed character",
+   "ok": true,
+   "detail": "6 keys"
+  },
+  {
+   "name": "fast flights <= 3, strong-blur frames <= 12",
+   "ok": true,
+   "detail": "0 flights, 0 frames > 60 px/f, max 2.27 px/f"
+  },
+  {
+   "name": "all reading holds end before the closing fade",
+   "ok": true,
+   "detail": "fade starts at 402"
+  },
+  {
+   "name": "sound starts with a cue",
+   "ok": true,
+   "detail": "first cue f1"
+  },
+  {
+   "name": "scene intro: max 2 text sizes",
+   "ok": true,
+   "detail": "160"
+  },
+  {
+   "name": "scene feature: max 2 text sizes",
+   "ok": true,
+   "detail": "44, 52"
+  },
+  {
+   "name": "scene end: max 2 text sizes",
+   "ok": true,
+   "detail": "52"
+  }
+ ]
+}
