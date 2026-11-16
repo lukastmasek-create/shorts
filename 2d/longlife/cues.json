@@ -1,0 +1,185 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 157,
+  "phrases": [
+   {
+    "text": "What if humans lived for a thousand years?",
+    "a": 11,
+    "b": 74
+   },
+   {
+    "text": "Not ninety.",
+    "a": 85,
+    "b": 105
+   },
+   {
+    "text": "A thousand.",
+    "a": 117,
+    "b": 135
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 157,
+  "len": 283,
+  "phrases": [
+   {
+    "text": "The global average life is about 73 years.",
+    "a": 10,
+    "b": 103
+   },
+   {
+    "text": "The longest verified one is Jeanne Calment's: 122 years.",
+    "a": 127,
+    "b": 267
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 440,
+  "len": 135,
+  "phrases": [
+   {
+    "text": "A thousand years is about eight of her lives,",
+    "a": 13,
+    "b": 78
+   },
+   {
+    "text": "back to back.",
+    "a": 95,
+    "b": 112
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 575,
+  "len": 225,
+  "phrases": [
+   {
+    "text": "In a dish,",
+    "a": 10,
+    "b": 27
+   },
+   {
+    "text": "human cells stop dividing after around fifty divisions.",
+    "a": 37,
+    "b": 128
+   },
+   {
+    "text": "Telomeres shorten every time.",
+    "a": 149,
+    "b": 203
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 800,
+  "len": 368,
+  "phrases": [
+   {
+    "text": "In 2016,",
+    "a": 10,
+    "b": 51
+   },
+   {
+    "text": "one team argued the ceiling is about 125.",
+    "a": 66,
+    "b": 180
+   },
+   {
+    "text": "A 2021 projection said 120 to 150.",
+    "a": 204,
+    "b": 349
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1168,
+  "len": 270,
+  "phrases": [
+   {
+    "text": "Nature sets no single rule.",
+    "a": 10,
+    "b": 61
+   },
+   {
+    "text": "A Greenland shark was dated at about 400 years,",
+    "a": 79,
+    "b": 178
+   },
+   {
+    "text": "give or take 120.",
+    "a": 198,
+    "b": 251
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1438,
+  "len": 195,
+  "phrases": [
+   {
+    "text": "A tiny animal called hydra showed no rise in deaths with age,",
+    "a": 12,
+    "b": 127
+   },
+   {
+    "text": "over four years.",
+    "a": 146,
+    "b": 178
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1633,
+  "len": 195,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 58
+   },
+   {
+    "text": "(segment 1)",
+    "a": 73,
+    "b": 85
+   },
+   {
+    "text": "(segment 2)",
+    "a": 94,
+    "b": 176
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1828,
+  "len": 232,
+  "phrases": [
+   {
+    "text": "A thousand years ago was the year 1026.",
+    "a": 12,
+    "b": 110
+   },
+   {
+    "text": "Imagine one life,",
+    "a": 125,
+    "b": 159
+   },
+   {
+    "text": "reaching back that far.",
+    "a": 174,
+    "b": 210
+   }
+  ]
+ }
+]
