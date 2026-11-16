@@ -1,0 +1,192 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 216,
+  "phrases": [
+   {
+    "text": "What if an AI simulated a whole universe,",
+    "a": 11,
+    "b": 99
+   },
+   {
+    "text": "and a world inside it started simulating its own?",
+    "a": 112,
+    "b": 194
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 216,
+  "len": 241,
+  "phrases": [
+   {
+    "text": "In 2025,",
+    "a": 12,
+    "b": 53
+   },
+   {
+    "text": "DeepMind's Genie 3 turned a text prompt into a world you walk through,",
+    "a": 70,
+    "b": 196
+   },
+   {
+    "text": "live.",
+    "a": 208,
+    "b": 218
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 457,
+  "len": 182,
+  "phrases": [
+   {
+    "text": "In 2003,",
+    "a": 10,
+    "b": 41
+   },
+   {
+    "text": "philosopher Nick Bostrom argued one of three things is true.",
+    "a": 57,
+    "b": 163
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 639,
+  "len": 207,
+  "phrases": [
+   {
+    "text": "Civilizations die out.",
+    "a": 11,
+    "b": 52
+   },
+   {
+    "text": "Or they never run simulations.",
+    "a": 69,
+    "b": 114
+   },
+   {
+    "text": "Or we are almost certainly in one.",
+    "a": 133,
+    "b": 185
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 846,
+  "len": 227,
+  "phrases": [
+   {
+    "text": "Now nest it.",
+    "a": 10,
+    "b": 31
+   },
+   {
+    "text": "Conway's Game of Life can compute anything a computer can.",
+    "a": 47,
+    "b": 148
+   },
+   {
+    "text": "So Life can run Life.",
+    "a": 163,
+    "b": 203
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1073,
+  "len": 203,
+  "phrases": [
+   {
+    "text": "One simulated cell takes a block two thousand cells wide.",
+    "a": 11,
+    "b": 113
+   },
+   {
+    "text": "And every layer runs slower.",
+    "a": 134,
+    "b": 183
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1276,
+  "len": 189,
+  "phrases": [
+   {
+    "text": "Seth Lloyd put a cap on reality: at most ten to the hundred and twentieth operations.",
+    "a": 11,
+    "b": 173
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1465,
+  "len": 264,
+  "phrases": [
+   {
+    "text": "In 2012,",
+    "a": 10,
+    "b": 108
+   },
+   {
+    "text": "physicists suggested a test: cosmic rays might reveal a grid.",
+    "a": 121,
+    "b": 182
+   },
+   {
+    "text": "None reported so far.",
+    "a": 200,
+    "b": 243
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1729,
+  "len": 214,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 38
+   },
+   {
+    "text": "(segment 1)",
+    "a": 54,
+    "b": 144
+   },
+   {
+    "text": "(segment 2)",
+    "a": 159,
+    "b": 196
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1943,
+  "len": 130,
+  "phrases": [
+   {
+    "text": "Which layer are you in?",
+    "a": 12,
+    "b": 46
+   },
+   {
+    "text": "Nobody can say.",
+    "a": 57,
+    "b": 85
+   }
+  ]
+ }
+]

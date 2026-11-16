@@ -1,0 +1,10 @@
+What if an AI simulated a whole universe, and a world inside it started simulating its own?
+In 2025, DeepMind's Genie 3 turned a text prompt into a world you walk through, live.
+In 2003, philosopher Nick Bostrom argued one of three things is true.
+Civilizations die out. Or they never run simulations. Or we are almost certainly in one.
+Now nest it. Conway's Game of Life can compute anything a computer can. So Life can run Life.
+One simulated cell takes a block two thousand cells wide. And every layer runs slower.
+Seth Lloyd put a cap on reality: at most ten to the hundred and twentieth operations.
+In 2012, physicists suggested a test: cosmic rays might reveal a grid. None reported so far.
+So imagine it. A simulator, a simulation, and inside it, another. Each thinks it is first.
+Which layer are you in? Nobody can say.
