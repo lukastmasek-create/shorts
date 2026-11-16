@@ -1,0 +1,199 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 210,
+  "phrases": [
+   {
+    "text": "What if you shrank to the size of a virus?",
+    "a": 13,
+    "b": 80
+   },
+   {
+    "text": "Not a little.",
+    "a": 92,
+    "b": 110
+   },
+   {
+    "text": "About seventeen million times smaller.",
+    "a": 124,
+    "b": 189
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 210,
+  "len": 271,
+  "phrases": [
+   {
+    "text": "A red blood cell is about seven micrometres across.",
+    "a": 13,
+    "b": 110
+   },
+   {
+    "text": "At your size,",
+    "a": 126,
+    "b": 148
+   },
+   {
+    "text": "that's a wall seventy-five times wider than you.",
+    "a": 166,
+    "b": 251
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 481,
+  "len": 158,
+  "phrases": [
+   {
+    "text": "A bacterium is about two micrometres long.",
+    "a": 12,
+    "b": 85
+   },
+   {
+    "text": "Twenty times your length.",
+    "a": 101,
+    "b": 134
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 639,
+  "len": 208,
+  "phrases": [
+   {
+    "text": "Most human cells are ten to thirty micrometres.",
+    "a": 10,
+    "b": 101
+   },
+   {
+    "text": "A hundred to three hundred times your width.",
+    "a": 122,
+    "b": 185
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 847,
+  "len": 180,
+  "phrases": [
+   {
+    "text": "Your body holds about thirty trillion human cells,",
+    "a": 11,
+    "b": 100
+   },
+   {
+    "text": "and about as many bacteria.",
+    "a": 119,
+    "b": 162
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1027,
+  "len": 221,
+  "phrases": [
+   {
+    "text": "The coronavirus behind COVID-19 is about a hundred nanometres wide.",
+    "a": 10,
+    "b": 149
+   },
+   {
+    "text": "That's your size now.",
+    "a": 171,
+    "b": 201
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1248,
+  "len": 205,
+  "phrases": [
+   {
+    "text": "Too small to see with light itself.",
+    "a": 10,
+    "b": 65
+   },
+   {
+    "text": "Visible light is four to seven hundred nanometres long.",
+    "a": 87,
+    "b": 184
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1453,
+  "len": 188,
+  "phrases": [
+   {
+    "text": "Its spikes grab a protein on the cell surface,",
+    "a": 12,
+    "b": 87
+   },
+   {
+    "text": "called ACE2.",
+    "a": 91,
+    "b": 129
+   },
+   {
+    "text": "That's the door.",
+    "a": 146,
+    "b": 167
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1641,
+  "len": 133,
+  "phrases": [
+   {
+    "text": "Once inside,",
+    "a": 10,
+    "b": 38
+   },
+   {
+    "text": "it makes the cell's own machinery copy it.",
+    "a": 49,
+    "b": 114
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1774,
+  "len": 131,
+  "phrases": [
+   {
+    "text": "One infected cell can release hundreds of new copies.",
+    "a": 10,
+    "b": 114
+   }
+  ]
+ },
+ {
+  "scene": 10,
+  "start": 1905,
+  "len": 150,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 13,
+    "b": 74
+   },
+   {
+    "text": "(segment 1)",
+    "a": 89,
+    "b": 128
+   }
+  ]
+ }
+]

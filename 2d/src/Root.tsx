@@ -27,6 +27,7 @@ import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
 import { LongLifeShort, LONGLIFE_FRAMES } from "./LongLife";
+import { VirusShort, VIRUS_FRAMES } from "./Virus";
 
 export const Root: React.FC = () => (
   <>
@@ -56,6 +57,7 @@ export const Root: React.FC = () => (
     <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ClocksShort" component={ClocksShort} durationInFrames={CLOCKS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="InsecureShort" component={InsecureShort} durationInFrames={INSECURE_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="VirusShort" component={VirusShort} durationInFrames={VIRUS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="LongLifeShort" component={LongLifeShort} durationInFrames={LONGLIFE_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
