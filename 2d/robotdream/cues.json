@@ -1,0 +1,205 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 137,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 13,
+    "b": 63
+   },
+   {
+    "text": "(segment 1)",
+    "a": 79,
+    "b": 116
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 137,
+  "len": 247,
+  "phrases": [
+   {
+    "text": "In 1994,",
+    "a": 10,
+    "b": 51
+   },
+   {
+    "text": "scientists recorded sleeping rats.",
+    "a": 63,
+    "b": 129
+   },
+   {
+    "text": "Their brain cells replayed the maze they had run.",
+    "a": 145,
+    "b": 226
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 384,
+  "len": 319,
+  "phrases": [
+   {
+    "text": "In 1995,",
+    "a": 10,
+    "b": 53
+   },
+   {
+    "text": "Geoffrey Hinton's team gave a network a sleep phase.",
+    "a": 62,
+    "b": 146
+   },
+   {
+    "text": "Awake,",
+    "a": 168,
+    "b": 178
+   },
+   {
+    "text": "it learns.",
+    "a": 187,
+    "b": 201
+   },
+   {
+    "text": "Asleep,",
+    "a": 224,
+    "b": 296
+   },
+   {
+    "text": "it practices on made-up samples.",
+    "a": 301,
+    "b": 302
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 703,
+  "len": 232,
+  "phrases": [
+   {
+    "text": "In 2015,",
+    "a": 13,
+    "b": 52
+   },
+   {
+    "text": "Google's DeepDream let a network find shapes in noise,",
+    "a": 65,
+    "b": 157
+   },
+   {
+    "text": "then amplify them.",
+    "a": 177,
+    "b": 212
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 935,
+  "len": 283,
+  "phrases": [
+   {
+    "text": "In 2018,",
+    "a": 11,
+    "b": 48
+   },
+   {
+    "text": "an agent learned a video game entirely inside its own imagined world.",
+    "a": 63,
+    "b": 201
+   },
+   {
+    "text": "Then it played the real one.",
+    "a": 223,
+    "b": 262
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1218,
+  "len": 216,
+  "phrases": [
+   {
+    "text": "In 2022,",
+    "a": 10,
+    "b": 53
+   },
+   {
+    "text": "sleep-like phases helped networks recover old skills they had forgotten.",
+    "a": 70,
+    "b": 192
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1434,
+  "len": 282,
+  "phrases": [
+   {
+    "text": "In 2025,",
+    "a": 10,
+    "b": 54
+   },
+   {
+    "text": "DreamerV3 imagined the future to learn Minecraft,",
+    "a": 72,
+    "b": 168
+   },
+   {
+    "text": "and found diamonds without human examples.",
+    "a": 188,
+    "b": 265
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1716,
+  "len": 188,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 56
+   },
+   {
+    "text": "(segment 1)",
+    "a": 69,
+    "b": 102
+   },
+   {
+    "text": "(segment 2)",
+    "a": 113,
+    "b": 171
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1904,
+  "len": 144,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 50
+   },
+   {
+    "text": "(segment 1)",
+    "a": 61,
+    "b": 75
+   },
+   {
+    "text": "(segment 2)",
+    "a": 79,
+    "b": 125
+   }
+  ]
+ }
+]

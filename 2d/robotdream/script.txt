@@ -1,0 +1,9 @@
+What if robots started dreaming? In a way, they already do.
+In 1994, scientists recorded sleeping rats. Their brain cells replayed the maze they had run.
+In 1995, Geoffrey Hinton's team gave a network a sleep phase. Awake, it learns. Asleep, it practices on made-up samples.
+In 2015, Google's DeepDream let a network find shapes in noise, then amplify them.
+In 2018, an agent learned a video game entirely inside its own imagined world. Then it played the real one.
+In 2022, sleep-like phases helped networks recover old skills they had forgotten.
+In 2025, DreamerV3 imagined the future to learn Minecraft, and found diamonds without human examples.
+But do machines feel anything? There is no evidence. It is practice, not experience.
+So, dreaming robots? Not yet. Practicing ones? Already here.

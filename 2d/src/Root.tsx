@@ -27,6 +27,7 @@ import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
 import { InternetShort, INTERNET_FRAMES } from "./Internet";
+import { RobotDreamShort, ROBOTDREAM_FRAMES } from "./RobotDream";
 
 export const Root: React.FC = () => (
   <>
@@ -57,5 +58,6 @@ export const Root: React.FC = () => (
     <Composition id="ClocksShort" component={ClocksShort} durationInFrames={CLOCKS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="InsecureShort" component={InsecureShort} durationInFrames={INSECURE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="InternetShort" component={InternetShort} durationInFrames={INTERNET_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="RobotDreamShort" component={RobotDreamShort} durationInFrames={ROBOTDREAM_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
