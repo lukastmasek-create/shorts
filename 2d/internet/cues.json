@@ -1,0 +1,222 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 154,
+  "phrases": [
+   {
+    "text": "What if you could walk into the internet?",
+    "a": 10,
+    "b": 61
+   },
+   {
+    "text": "You would find cables,",
+    "a": 77,
+    "b": 130
+   },
+   {
+    "text": "not cities.",
+    "a": 135,
+    "b": 138
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 154,
+  "len": 234,
+  "phrases": [
+   {
+    "text": "In 1969,",
+    "a": 13,
+    "b": 58
+   },
+   {
+    "text": "two computers tried to send login.",
+    "a": 64,
+    "b": 119
+   },
+   {
+    "text": "It crashed after two letters: L,",
+    "a": 136,
+    "b": 179
+   },
+   {
+    "text": "O.",
+    "a": 195,
+    "b": 211
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 388,
+  "len": 149,
+  "phrases": [
+   {
+    "text": "Today,",
+    "a": 10,
+    "b": 71
+   },
+   {
+    "text": "six billion people are online.",
+    "a": 88,
+    "b": 125
+   },
+   {
+    "text": "Three in four humans.",
+    "a": 130,
+    "b": 132
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 537,
+  "len": 148,
+  "phrases": [
+   {
+    "text": "Follow one tap.",
+    "a": 11,
+    "b": 38
+   },
+   {
+    "text": "It leaves your phone and enters a thread of glass.",
+    "a": 54,
+    "b": 132
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 685,
+  "len": 202,
+  "phrases": [
+   {
+    "text": "Light in glass moves at two thirds of its top speed.",
+    "a": 10,
+    "b": 105
+   },
+   {
+    "text": "Two hundred kilometers per millisecond.",
+    "a": 124,
+    "b": 182
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 887,
+  "len": 292,
+  "phrases": [
+   {
+    "text": "Across oceans,",
+    "a": 12,
+    "b": 41
+   },
+   {
+    "text": "the road is a seabed cable.",
+    "a": 48,
+    "b": 95
+   },
+   {
+    "text": "Over a million kilometers,",
+    "a": 114,
+    "b": 158
+   },
+   {
+    "text": "carrying nearly all data between continents,",
+    "a": 169,
+    "b": 245
+   },
+   {
+    "text": "groups say.",
+    "a": 255,
+    "b": 272
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1179,
+  "len": 264,
+  "phrases": [
+   {
+    "text": "The first ocean cable,",
+    "a": 10,
+    "b": 111
+   },
+   {
+    "text": "in 1858,",
+    "a": 123,
+    "b": 202
+   },
+   {
+    "text": "sent one royal message in most of a day.",
+    "a": 222,
+    "b": 230
+   },
+   {
+    "text": "Then it died.",
+    "a": 234,
+    "b": 242
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1443,
+  "len": 209,
+  "phrases": [
+   {
+    "text": "Cables break about one hundred fifty to two hundred times a year,",
+    "a": 10,
+    "b": 121
+   },
+   {
+    "text": "mostly from fishing and anchors.",
+    "a": 136,
+    "b": 193
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1652,
+  "len": 246,
+  "phrases": [
+   {
+    "text": "At the end waits a data center.",
+    "a": 13,
+    "b": 70
+   },
+   {
+    "text": "They used one and a half percent of the world's electricity in 2024.",
+    "a": 89,
+    "b": 227
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1898,
+  "len": 195,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 10,
+    "b": 71
+   },
+   {
+    "text": "(segment 1)",
+    "a": 88,
+    "b": 117
+   },
+   {
+    "text": "(segment 2)",
+    "a": 125,
+    "b": 174
+   }
+  ]
+ }
+]
