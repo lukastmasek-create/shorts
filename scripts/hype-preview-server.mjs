@@ -26,8 +26,12 @@ const server = http.createServer((req, res) => {
     const page = html
       .replace("/*__BEATS__*/[]", JSON.stringify(marks))
       .replace("/*__SHOTS__*/[]", JSON.stringify(list))
-      .replace("__VIDEO__", fs.existsSync(path.join(ROOT, "HypeShort-1080x1920.mp4")) ? "/files/HypeShort-1080x1920.mp4" : "")
-      .replace("__SMALL__", fs.existsSync(path.join(ROOT, "preview-720x1280.mp4")) ? "/files/preview-720x1280.mp4" : "");
+      .replace("__WEB__", fs.existsSync(path.join(ROOT, "HypeShort-1080x1920-web.mp4")) ? "/files/HypeShort-1080x1920-web.mp4" : "")
+      .replace("__FULL__", fs.existsSync(path.join(ROOT, "HypeShort-1080x1920.mp4")) ? "/files/HypeShort-1080x1920.mp4" : "")
+      .replace("__SIZE__", (() => {
+        const f = path.join(ROOT, "HypeShort-1080x1920.mp4");
+        return fs.existsSync(f) ? `${(fs.statSync(f).size / 1048576).toFixed(0)} MB` : "";
+      })());
     res.writeHead(200, { "content-type": TYPES[".html"], "cache-control": "no-store" });
     res.end(page);
     return;
