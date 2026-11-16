@@ -1,10 +1,10 @@
 // usage: node render.mjs [samples=16] [w=1920] [h=1080]  -> out/frames, out/tomato.mp4. env FRAMES=n, CHROME_PATH
 import fs from 'node:fs'; import path from 'node:path'; import cp from 'node:child_process';
-const { chromium } = await import('/opt/node-tools/node_modules/playwright/index.mjs');
+let chromium; try { ({ chromium } = await import('playwright-core')); } catch (e) { ({ chromium } = await import('/opt/node-tools/node_modules/playwright/index.mjs')); }
 const ROOT = path.dirname(new URL(import.meta.url).pathname), OUT = path.join(ROOT, 'out'), SAMPLES = +(process.argv[2] || 16);
 fs.mkdirSync(OUT + '/frames', { recursive: true });
 const FF = process.env.FFMPEG || 'ffmpeg';
-const br = await chromium.launch({ executablePath: process.env.CHROME_PATH || '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome', args: ['--no-sandbox', '--enable-unsafe-swiftshader', '--use-gl=angle', '--use-angle=swiftshader', '--disable-dev-shm-usage', '--autoplay-policy=no-user-gesture-required'] });
+const br = await chromium.launch({ executablePath: process.env.CHROME_PATH || (process.env.SOFTWARE ? '/opt/pw-browsers/chromium-1243/chrome-linux64/chrome' : undefined), channel: process.env.CHROME_PATH || process.env.SOFTWARE ? undefined : 'chrome', args: process.env.SOFTWARE ? ['--no-sandbox', '--enable-unsafe-swiftshader', '--use-gl=angle', '--use-angle=swiftshader', '--disable-dev-shm-usage'] : ['--enable-gpu', '--ignore-gpu-blocklist', '--use-angle=default', '--no-sandbox'] });
 const p = await br.newPage({ viewport: { width: 1300, height: 800 } });
 await p.route('https://cdn.jsdelivr.net/npm/three@0.187.0/build/**', (r) => { const f = path.join(ROOT, 'assets', path.basename(new URL(r.request().url()).pathname)); r.fulfill({ body: fs.readFileSync(f), contentType: 'text/javascript', headers: { 'access-control-allow-origin': '*' } }); });
 p.on('pageerror', (e) => console.log('PAGEERR', String(e).slice(0, 300)));
