@@ -7,9 +7,8 @@
 Needs Node 18+ (nothing else, ffmpeg and the browser come from npm).
 
 ```bash
-git clone https://github.com/lukastmasek-create/shorts.git
+git clone --single-branch --branch claude/magical-davinci-gmwwt8 https://github.com/lukastmasek-create/shorts.git
 cd shorts
-git checkout claude/magical-davinci-gmwwt8
 cd xray-cable
 npm install
 npx playwright install chromium
