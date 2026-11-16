@@ -16,17 +16,17 @@ export const SCREEN = {
 } as const;
 export type Point = readonly [number, number];
 export type Span = {start: number; end: number};
-const clamp = (v: number) => Math.min(1, Math.max(0, v));
-const mix = (a: number, b: number, t: number) => a + (b - a) * t;
-const smooth = (t: number) => t * t * (3 - 2 * t);
-const easeInOutQuintic = (t: number) => t ** 3 * (10 + t * (-15 + 6 * t));
-const easeOut = (t: number) => 1 - (1 - t) ** 3;
-const beat = (f: number, start: number, duration: number) => clamp((f - start) / Math.max(Number.EPSILON, duration));
-const phase = (f: number, s: Span) => beat(f, s.start, s.end - s.start);
-const eased = (f: number, s: Span) => easeInOutQuintic(phase(f, s));
+export const clamp = (v: number) => Math.min(1, Math.max(0, v));
+export const mix = (a: number, b: number, t: number) => a + (b - a) * t;
+export const smooth = (t: number) => t * t * (3 - 2 * t);
+export const easeInOutQuintic = (t: number) => t ** 3 * (10 + t * (-15 + 6 * t));
+export const easeOut = (t: number) => 1 - (1 - t) ** 3;
+export const beat = (f: number, start: number, duration: number) => clamp((f - start) / Math.max(Number.EPSILON, duration));
+export const phase = (f: number, s: Span) => beat(f, s.start, s.end - s.start);
+export const eased = (f: number, s: Span) => easeInOutQuintic(phase(f, s));
 const svgId = (prefix: string, id: string) => prefix + Array.from(id, (c) => c.codePointAt(0)!.toString(16)).join("-");
 
-function CardInset({x, y, width, height, radius = 16, state = "inset", fill, children}: {
+export function CardInset({x, y, width, height, radius = 16, state = "inset", fill, children}: {
   x: number; y: number; width: number; height: number; radius?: number;
   state?: "panel" | "inset" | "raised" | "selected"; fill?: string; children?: ReactNode;
 }) {
@@ -51,7 +51,7 @@ function CardInset({x, y, width, height, radius = 16, state = "inset", fill, chi
   );
 }
 
-function MonitorViewport({x, y, width, height, railHeight, scrollY, header, children}: {
+export function MonitorViewport({x, y, width, height, railHeight, scrollY, header, children}: {
   x: number; y: number; width: number; height: number; railHeight: number; scrollY: number; header: ReactNode; children: ReactNode;
 }) {
   const clipId = svgId("monitor-body-", useId());
@@ -64,12 +64,12 @@ function MonitorViewport({x, y, width, height, railHeight, scrollY, header, chil
   );
 }
 
-function monitorPillPose(f: number, span: Span, from: {x: number; width: number}, to: {x: number; width: number}) {
+export function monitorPillPose(f: number, span: Span, from: {x: number; width: number}, to: {x: number; width: number}) {
   const t = eased(f, span);
   return {x: mix(from.x, to.x, t), width: mix(from.width, to.width, t)};
 }
 
-function clickMotion(frame: number, click: number, from: Point, target: Point, start: number, contactLead: number, pressIn: number, release: number) {
+export function clickMotion(frame: number, click: number, from: Point, target: Point, start: number, contactLead: number, pressIn: number, release: number) {
   const approach = easeInOutQuintic(beat(frame, start, click - contactLead - start));
   const dx = target[0] - from[0], dy = target[1] - from[1], len = Math.hypot(dx, dy);
   const curve = Math.min(32, len * 0.17) * 4 * approach * (1 - approach);
@@ -80,15 +80,15 @@ function clickMotion(frame: number, click: number, from: Point, target: Point, s
   return {x, y, press, buttonScale: 1 - 0.035 * press, buttonY: 3 * press};
 }
 
-type Dock = {x: number; y: number; scale: number};
-function brandDockPose(f: number, span: Span, from: Dock, to: Dock) {
+export type Dock = {x: number; y: number; scale: number};
+export function brandDockPose(f: number, span: Span, from: Dock, to: Dock) {
   const t = eased(f, span);
   return {x: mix(from.x, to.x, t), y: mix(from.y, to.y, t), scale: mix(from.scale, to.scale, t)};
 }
 
 // ---------------------------------------------------------------- real content (cs), copied from umime-skola
 type Tool = {icon: string; title: string; text: string};
-const PRO_TOOLS: Tool[] = [
+export const PRO_TOOLS: Tool[] = [
   {icon: "doucovatel", title: "AI doučovač", text: "Vysvětlí úlohu krok za krokem a dovede tě k výsledku."},
   {icon: "plan", title: "Osobní plán učení", text: "Týdenní plán po 15 minutách podle toho, co ti nejde."},
   {icon: "zkouska", title: "Příprava na přijímačky", text: "Zkoušky nanečisto s časovým limitem a odhadem bodů."},
@@ -116,11 +116,11 @@ const SCHOOL_TOOLS: Tool[] = [
   {icon: "skola-dilna", title: "Učitelská dílna", text: "Hry na párování, řazení, příběh nebo mluvení z textu či fotky."},
   {icon: "skola-podpora", title: "Podpora", text: "Něco nefunguje nebo potřebuješ poradit s tarifem? Napiš nám."},
 ];
-const TABS = ["Pro", "Rodina", "Škola"] as const;
-const LISTS = [PRO_TOOLS, FAMILY_TOOLS, SCHOOL_TOOLS];
-const ACCENT = ["#ffc933", "#ff8a6b", "#8fd0ff", "#7ee0b0"];            // FEATURE_COLORS in ProToolPile.tsx
-const STRIP_TITLE = "Nástroje UčímePRO", STRIP_HINT = "Vyber, s čím chceš pracovat.";
-const URL_TEXT = "ucimesehrou.org/ucime-pro";
+export const TABS = ["Pro", "Rodina", "Škola"] as const;
+export const LISTS = [PRO_TOOLS, FAMILY_TOOLS, SCHOOL_TOOLS];
+export const ACCENT = ["#ffc933", "#ff8a6b", "#8fd0ff", "#7ee0b0"];            // FEATURE_COLORS in ProToolPile.tsx
+export const STRIP_TITLE = "Nástroje UčímePRO", STRIP_HINT = "Vyber, s čím chceš pracovat.";
+export const URL_TEXT = "ucimesehrou.org/ucime-pro";
 
 // ---------------------------------------------------------------- one timeline (frames @30)
 export const CUE = {
@@ -133,14 +133,14 @@ export const CUE = {
   wordIn: 334, urlIn: 348,
 };
 export const PRO_FRAMES = 432;
-const W = 1920, H = 1080;
-const ROW_H = 120, ROW_S = 132, RAIL = 252, BODY_BOTTOM = 1020, SCROLL_MAX = 330;
+export const W = 1920, H = 1080;
+export const ROW_H = 120, ROW_S = 132, RAIL = 252, BODY_BOTTOM = 1020, SCROLL_MAX = 330;
 
-const Icon: React.FC<{name: string; x: number; y: number; size: number; color: string; sw?: number}> = ({name, x, y, size, color, sw = 1.8}) => (
+export const Icon: React.FC<{name: string; x: number; y: number; size: number; color: string; sw?: number}> = ({name, x, y, size, color, sw = 1.8}) => (
   <g transform={`translate(${x} ${y}) scale(${size / 24})`} fill="none" stroke={color} strokeWidth={sw} strokeLinecap="round" strokeLinejoin="round" style={{color}}>{PRO_PATHS[name]}</g>
 );
 
-const Row: React.FC<{tool: Tool; i: number; y: number; o: number; dy: number}> = ({tool, i, y, o, dy}) => {
+export const Row: React.FC<{tool: Tool; i: number; y: number; o: number; dy: number}> = ({tool, i, y, o, dy}) => {
   const c = ACCENT[i % 4];
   return (
     <g opacity={o} transform={`translate(0 ${y + dy})`}>
@@ -158,11 +158,11 @@ const Row: React.FC<{tool: Tool; i: number; y: number; o: number; dy: number}> =
 };
 
 // mark = LOGO_PARTS[0..4] (anchor = top-left of its box in logo space), wordmark = [5..]
-const MARK_ANCHOR: Point = [5, 5];
-const LOGO_O: Point = [2.5, 2.3];                                         // viewBox origin of logo-tmave.svg
-const LOCK_S = 1.58, LOCK_X = (W - 942.5 * LOCK_S) / 2, LOCK_Y = 400;
-const HEADER_DOCK: Dock = {x: 96, y: 64, scale: 0.63};
-const LOCK_DOCK: Dock = {x: LOCK_X + (MARK_ANCHOR[0] - LOGO_O[0]) * LOCK_S, y: LOCK_Y + (MARK_ANCHOR[1] - LOGO_O[1]) * LOCK_S, scale: LOCK_S};
+export const MARK_ANCHOR: Point = [5, 5];
+export const LOGO_O: Point = [2.5, 2.3];                                         // viewBox origin of logo-tmave.svg
+export const LOCK_S = 1.58, LOCK_X = (W - 942.5 * LOCK_S) / 2, LOCK_Y = 400;
+export const HEADER_DOCK: Dock = {x: 96, y: 64, scale: 0.63};
+export const LOCK_DOCK: Dock = {x: LOCK_X + (MARK_ANCHOR[0] - LOGO_O[0]) * LOCK_S, y: LOCK_Y + (MARK_ANCHOR[1] - LOGO_O[1]) * LOCK_S, scale: LOCK_S};
 
 export const ProShowcase: React.FC = () => {
   const f = useCurrentFrame();

@@ -29,6 +29,7 @@ import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
 import { DepthDemo, DEPTHDEMO_FRAMES } from "./depth";
 import { Fx2Demo, FX2DEMO_FRAMES } from "./fx2";
 import { ProShowcase, PRO_FRAMES } from "./ProShowcase";
+import { ProShowcase2, PRO2_FRAMES } from "./ProShowcase2";
 import { CodePart1, CodePart2, CodePart3, CodePart4, CODE1_FRAMES, CODE2_FRAMES, CODE3_FRAMES, CODE4_FRAMES } from "./Code";
 
 export const Root: React.FC = () => (
@@ -65,6 +66,7 @@ export const Root: React.FC = () => (
     <Composition id="KodDil4" component={CodePart4} durationInFrames={CODE4_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="DepthDemo" component={DepthDemo} durationInFrames={DEPTHDEMO_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ProShowcase1" component={ProShowcase} durationInFrames={PRO_FRAMES} fps={30} width={1920} height={1080} />
+    <Composition id="ProShowcase2" component={ProShowcase2} durationInFrames={PRO2_FRAMES} fps={30} width={1920} height={1080} />
     <Composition id="Fx2Demo" component={Fx2Demo} durationInFrames={FX2DEMO_FRAMES} fps={30} width={1080} height={1920} />
   </>
 );
