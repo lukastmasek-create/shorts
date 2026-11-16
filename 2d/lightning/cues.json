@@ -1,0 +1,210 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 191,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 13,
+    "b": 75
+   },
+   {
+    "text": "(segment 1)",
+    "a": 89,
+    "b": 119
+   },
+   {
+    "text": "(segment 2)",
+    "a": 137,
+    "b": 172
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 191,
+  "len": 228,
+  "phrases": [
+   {
+    "text": "One bolt can heat the air to fifty thousand degrees Fahrenheit,",
+    "a": 10,
+    "b": 115
+   },
+   {
+    "text": "five times hotter than the surface of the Sun.",
+    "a": 134,
+    "b": 208
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 419,
+  "len": 267,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 62
+   },
+   {
+    "text": "(segment 1)",
+    "a": 81,
+    "b": 150
+   },
+   {
+    "text": "(segment 2)",
+    "a": 154,
+    "b": 190
+   },
+   {
+    "text": "(segment 3)",
+    "a": 205,
+    "b": 244
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 686,
+  "len": 243,
+  "phrases": [
+   {
+    "text": "But survive does not mean fine.",
+    "a": 10,
+    "b": 66
+   },
+   {
+    "text": "Lightning mostly injures the nervous system,",
+    "a": 88,
+    "b": 155
+   },
+   {
+    "text": "and scans often look normal.",
+    "a": 169,
+    "b": 225
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 929,
+  "len": 228,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 77
+   },
+   {
+    "text": "(segment 1)",
+    "a": 88,
+    "b": 139
+   },
+   {
+    "text": "(segment 2)",
+    "a": 159,
+    "b": 207
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1157,
+  "len": 204,
+  "phrases": [
+   {
+    "text": "Here is the honest part.",
+    "a": 12,
+    "b": 46
+   },
+   {
+    "text": "Nobody has tested daily strikes,",
+    "a": 66,
+    "b": 126
+   },
+   {
+    "text": "and nothing says a body could adapt.",
+    "a": 133,
+    "b": 183
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1361,
+  "len": 301,
+  "phrases": [
+   {
+    "text": "The record is Roy Sullivan,",
+    "a": 10,
+    "b": 59
+   },
+   {
+    "text": "a Virginia park ranger.",
+    "a": 71,
+    "b": 118
+   },
+   {
+    "text": "Guinness counts seven strikes,",
+    "a": 139,
+    "b": 192
+   },
+   {
+    "text": "from nineteen forty-two to nineteen seventy-seven.",
+    "a": 200,
+    "b": 281
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1662,
+  "len": 210,
+  "phrases": [
+   {
+    "text": "One hit him in his truck.",
+    "a": 10,
+    "b": 41
+   },
+   {
+    "text": "One in his garden.",
+    "a": 55,
+    "b": 83
+   },
+   {
+    "text": "One on a fishing boat.",
+    "a": 95,
+    "b": 131
+   },
+   {
+    "text": "His hair caught fire twice.",
+    "a": 143,
+    "b": 194
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1872,
+  "len": 218,
+  "phrases": [
+   {
+    "text": "Your odds of even one strike are about one in fifteen thousand.",
+    "a": 11,
+    "b": 117
+   },
+   {
+    "text": "If you hear thunder,",
+    "a": 137,
+    "b": 165
+   },
+   {
+    "text": "go inside.",
+    "a": 175,
+    "b": 195
+   }
+  ]
+ }
+]
