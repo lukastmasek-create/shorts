@@ -1,0 +1,11 @@
+<!doctype html><meta charset=utf-8><body style="margin:0;background:#222"><canvas id=c></canvas>
+<script type=importmap>{"imports":{"three":"./assets/three.module.js"}}</script>
+<script type=module>
+import * as THREE from 'three'; window.THREE = THREE;
+const load = (s) => new Promise((ok, no) => { const e = document.createElement('script'); e.src = s; e.onload = ok; e.onerror = no; document.head.appendChild(e); });
+await load('stage.js'); await load('sound.js'); await load('style.js');
+const q = new URLSearchParams(location.search); window.SHADOWMAP = +(q.get('shadow') || 4096);
+const style = STYLES[0];
+window.__S = await K.run(document.getElementById('c'), style, { samples: +(q.get('samples') || 16), width: +(q.get('w') || 1280), height: +(q.get('h') || 720) });
+window.DURATION = style.duration; window.__READY = true;
+</script>
