@@ -3,16 +3,16 @@
   const TITLE = ['HOW IT WORKS', 'A CAR ENGINE'];
   const CYCLE = ['INTAKE', 'COMPRESSION', 'POWER', 'EXHAUST'];
   const NOTE = ['ONE POWER STROKE', 'EVERY TWO TURNS'];
-  // `open` = where the label sits in the 1920 x 1080 frame while the engine is apart
+  // `lab` = where the label balloon sits relative to its part on screen
   const PARTS = [
-    { id: 'valves', name: 'VALVES', side: -1, open: [380, 800] },
-    { id: 'head', name: 'CYLINDER HEAD', side: -1, open: [700, 990] },
-    { id: 'plug', name: 'SPARK PLUG', side: -1, open: [960, 110] },
-    { id: 'block', name: 'CYLINDER', side: 1, open: [1300, 990] },
-    { id: 'piston', name: 'PISTON', side: 1, open: [1560, 880] },
-    { id: 'conrod', name: 'CONNECTING ROD', side: -1, open: [640, 330] },
-    { id: 'crank', name: 'CRANKSHAFT', side: 1, open: [1050, 170] },
-    { id: 'flywheel', name: 'FLYWHEEL', side: -1, open: [1840, 80] },
+    { id: 'valves', name: 'VALVES', side: -1, lab: [-190, -70] },
+    { id: 'head', name: 'CYLINDER HEAD', side: -1, lab: [-100, 170] },
+    { id: 'plug', name: 'SPARK PLUG', side: -1, lab: [-50, -170] },
+    { id: 'block', name: 'CYLINDER', side: 1, lab: [90, 200] },
+    { id: 'piston', name: 'PISTON', side: 1, lab: [110, 140] },
+    { id: 'conrod', name: 'CONNECTING ROD', side: -1, lab: [-140, 100] },
+    { id: 'crank', name: 'CRANKSHAFT', side: -1, lab: [60, -190] },
+    { id: 'flywheel', name: 'FLYWHEEL', side: 1, lab: [110, -150] },
   ];
   // The timeline, shared by picture and sound.
   const T = { stop: 1.7, pull: 1.9, stack: 2.5, spread: 2.75, labels: 3.25, gather: 5.9, unstack: 6.35, push: 6.75, seat: 7.2 };
@@ -311,6 +311,35 @@
     return { list, pose };
   }
 
+  // ---------------------------------------------------------------- kinetic type
+  // Draws `text` letter by letter in the 2D overlay. Each letter springs in (mode 'up': rises and untilts, 'slam': drops
+  // from a big scale), then flies off upward after t1. A few ghost copies a hair earlier in time fake motion blur.
+  function kin(ctx, t, text, o) {
+    const { x, y, size, weight = 700, fam = '"Space Grotesk"', t0, t1 = 1e9, stagger = 0.04, dur = 0.5, mode = 'up', color = '#131a3d', align = 'left', halo = false, spacing = 0 } = o;
+    const base = ctx.globalAlpha, chars = [...text];
+    ctx.save(); ctx.font = `${weight} ${size}px ${fam}`; ctx.letterSpacing = '0px'; ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+    const ws = chars.map((c) => ctx.measureText(c).width + spacing), total = ws.reduce((a, b) => a + b, 0);
+    let cx = align === 'center' ? x - total / 2 : align === 'right' ? x - total : x;
+    chars.forEach((ch, i) => {
+      const w = ws[i], px = cx + w / 2; cx += w;
+      if (ch === ' ') return;
+      const at = (tt, al) => {
+        const a0 = o.t0 + i * stagger, pin = K.seg(tt, a0, a0 + dur), b0 = t1 + i * stagger * 0.6, pout = K.seg(tt, b0, b0 + 0.3);
+        if (pin <= 0 || pout >= 1) return;
+        const e = mode === 'slam' ? K.ease.outBack(pin, 2.4) : K.ease.outBack(pin, 1.6), dir = i % 2 ? 1 : -1;
+        const sc = mode === 'slam' ? 2.8 - 1.8 * e : 0.65 + 0.35 * e, ty = (mode === 'slam' ? 0 : (1 - e) * size * 0.9) - K.ease.in(pout) * size * 1.1, rot = (1 - e) * (mode === 'slam' ? 0.12 : 0.22) * dir + pout * 0.2 * dir;
+        ctx.save(); ctx.globalAlpha = base * al * K.clamp(pin * (mode === 'slam' ? 5 : 3)) * (1 - pout);
+        ctx.translate(px, y - size * 0.35 + ty); ctx.rotate(rot); ctx.scale(sc, sc);
+        if (halo) { ctx.strokeStyle = 'rgba(242,238,229,0.9)'; ctx.lineWidth = size * 0.19; ctx.lineJoin = 'round'; ctx.strokeText(ch, -w / 2 + spacing / 2, size * 0.35); }
+        ctx.fillStyle = color; ctx.fillText(ch, -w / 2 + spacing / 2, size * 0.35); ctx.restore();
+      };
+      const moving = t < o.t0 + i * stagger + dur || t > t1 + i * stagger * 0.6;
+      if (moving) for (let g = 3; g >= 1; g--) at(t - g * 0.011, 0.2);
+      at(t, 1);
+    });
+    ctx.restore();
+  }
+
   // ---------------------------------------------------------------- reusable piece 4: callouts
   function callouts(S, list) {
     const { camera } = S, v = new THREE.Vector3(), R = 34, NAME_FONT = '600 64px "IBM Plex Mono"';
@@ -322,7 +351,7 @@
       for (const p of list) {
         const u = t - labelAt(p.index), fade = 1 - K.seg(t, homeAt(p.index) - 0.55, homeAt(p.index) - 0.15); if (u <= 0 || fade <= 0) continue;
         ctx.globalAlpha = fade;
-        const side = p.side, [ax, ay] = screen(p), bx = p.open[0], by = p.open[1];
+        const side = p.side, [ax, ay] = screen(p), est = p.name.length * 41 + 60, bx = K.clamp(ax + p.lab[0], side < 0 ? est : 60, 1920 - 60 - (side > 0 ? est : 0)), by = K.clamp(ay + p.lab[1], 80, 1000);
         const dx = bx - ax, dy = by - ay, d = Math.hypot(dx, dy) || 1, k = K.seg(u, 0.04, 0.3, K.ease.out), l = Math.max(0, d - R) * k;
         halo(ctx, (h) => { ctx.lineWidth = h ? 9 : 3; if (!h) ctx.strokeStyle = INK; ctx.beginPath(); ctx.moveTo(ax, ay); ctx.lineTo(ax + dx / d * l, ay + dy / d * l); ctx.stroke(); });
         const dot = K.ease.outBack(K.seg(u, 0, 0.16));
@@ -332,14 +361,8 @@
           ctx.fillStyle = INK; ctx.beginPath(); ctx.arc(bx, by, R * b, 0, 7); ctx.fill();
           ctx.fillStyle = '#ffffff'; ctx.font = `600 ${Math.round(40 * b)}px "IBM Plex Mono"`; ctx.letterSpacing = '0px'; ctx.textAlign = 'center'; ctx.fillText(String(p.index + 1), bx, by + 2);
         }
-        const w = K.seg(u, 0.3, 0.6, K.ease.out);
-        if (w > 0) {
-          ctx.font = NAME_FONT; ctx.letterSpacing = '2px'; ctx.textAlign = side > 0 ? 'left' : 'right';
-          const tw = ctx.measureText(p.name).width, tx = bx + side * (R + 18);
-          ctx.save(); ctx.beginPath(); if (side > 0) ctx.rect(tx - 8, by - 55, (tw + 20) * w, 110); else ctx.rect(tx + 8 - (tw + 20) * w, by - 55, (tw + 20) * w, 110); ctx.clip();
-          halo(ctx, (h) => { if (h) { ctx.lineWidth = 12; ctx.strokeText(p.name, tx, by + 3); } else { ctx.fillStyle = '#131a3d'; ctx.fillText(p.name, tx, by + 3); } });
-          ctx.restore(); ctx.letterSpacing = '0px';
-        }
+        const tx = bx + side * (R + 18);
+        kin(ctx, t, p.name, { x: tx, y: by + 22, size: 64, weight: 600, fam: '"IBM Plex Mono"', t0: labelAt(p.index) + 0.3, stagger: 0.022, dur: 0.32, mode: 'up', color: '#131a3d', align: side > 0 ? 'left' : 'right', halo: true, spacing: 2, t1: homeAt(p.index) - 0.5 });
         ctx.globalAlpha = 1;
       }
     };
@@ -363,45 +386,57 @@
 
       rig.pose((T.labels + T.gather) / 2); root.updateMatrixWorld(true);
       const spots = rig.list.map((p) => p.pivot.getWorldPosition(new THREE.Vector3()).toArray());
-      const cam = {
-        pos: K.path([[0, [-3.0, 4.4, 14.4]], [1.7, [-3.8, 5.0, 15.4]], [2.9, [-8.0, 6.8, 19.0]], [5.6, [-7.4, 6.4, 18.4]], [7.2, [-4.0, 4.8, 14.6]], [9.5, [-2.6, 4.0, 12.8]], [DUR, [-2.2, 3.8, 12.4]]]),
-        aim: K.path([[0, [-0.6, 3.1, 0]], [2.9, [-1.4, 3.1, 0]], [5.6, [-1.4, 3.1, 0]], [7.2, [-0.7, 3.0, 0]], [DUR, [-0.6, 2.9, 0]]]),
-        focus: K.path([[0, [0, 2.5, 0.4]], [T.pull + 0.4, [-1, 2.4, 0]], ...spots.map((s, i) => [labelAt(i) + 0.2, s]), [labelAt(PARTS.length) + 0.3, [0, 2.5, 0]], [T.gather + 0.3, [0, 2.5, 0]], [T.seat, [-1, 2.4, 0.4]], [DUR, [1, 2.4, 0.4]]]),
-        lens: K.track([[0, 0.1], [T.stack, 0.14], [labelAt(PARTS.length - 1), 0.14], [labelAt(PARTS.length) + 0.4, 0.06], [T.seat, 0.06], [DUR, 0.06]]),
+      // stroke events (same scan the sound score uses): [time, stroke]
+      const strokes = [];
+      { let prev = phi(0); for (let t = 1 / 600; t <= DUR; t += 1 / 600) { const c = phi(t); if (Math.floor(c / Math.PI) !== Math.floor(prev / Math.PI)) strokes.push([t, strokeOf(c + 1e-6).s]); prev = c; } }
+      const bangs = strokes.filter((e) => e[1] === 2).map((e) => e[0]);
+      // camera: an orbit rig (aim point, azimuth, elevation, distance, lens) with every move flowing through its keys
+      const D2R = Math.PI / 180, lagged = spots.map((p, i) => [labelAt(i) + 0.35, [K.lerp(p[0], -1.2, 0.72), K.lerp(p[1], 3.2, 0.75), 0]]);
+      const aim = K.path([[0, [-0.3, 3.9, 0]], [1.7, [-0.5, 3.6, 0]], [2.9, [-1.2, 3.2, 0]], ...lagged, [T.gather, [-1.2, 3.2, 0]], [T.seat, [-0.7, 3.5, 0]], [9.6, [-0.6, 3.6, 0]], [11.4, [-0.6, 3.9, 0]], [DUR, [-0.1, 4.15, 0]]]);
+      const az = K.path([[0, -6], [1.7, -20], [2.9, -36], [4.4, -26], [T.gather, -17], [T.seat, -7], [8.6, -17], [10.2, -27], [11.8, -14], [DUR, -20]]);
+      const el = K.path([[0, 13], [1.7, 17], [2.9, 24], [T.gather, 20], [T.seat, 13], [10.2, 12], [DUR, 14]]);
+      const dist = K.path([[0, 12.6], [1.7, 14.5], [2.9, 22.5], [4.6, 21], [T.gather, 19.5], [T.seat, 13.6], [9.6, 12.4], [11.4, 12.2], [DUR, 10.8]]);
+      const fov = K.path([[0, 34], [1.7, 34], [2.9, 26], [T.gather, 26], [T.seat, 32], [DUR, 33]]);
+      const focusAt = K.path([[0, [-2.2, 2.6, 0.4]], [T.pull + 0.4, [-1, 2.4, 0]], ...spots.map((p, i) => [labelAt(i) + 0.2, p]), [labelAt(PARTS.length) + 0.3, [0, 2.5, 0]], [T.gather + 0.3, [0, 2.5, 0]], [T.seat, [-2, 2.5, 0.5]], [9.0, [-2.2, 2.5, 0.5]], [11.0, [2.6, 2.5, -0.4]], [DUR, [-1, 2.5, 0.4]]]);
+      const lens = K.track([[0, 0.1], [T.stack, 0.14], [labelAt(PARTS.length - 1), 0.14], [labelAt(PARTS.length) + 0.4, 0.06], [T.seat, 0.06], [DUR, 0.06]]);
+      const shake = (t) => { let a = 0; for (const b of bangs) if (t >= b) a += 0.07 * Math.exp(-(t - b) * 9) * K.smooth(0, 0.02, t - b); return a; };
+      const punch = (t) => { let a = 0; for (const b of bangs) if (t >= b && t > T.seat) a += 1.1 * Math.exp(-(t - b) * 4.2) * K.smooth(0, 0.05, t - b); return a; };
+      const camera3 = (t) => {
+        const A = aim(t), a = az(t) * D2R, e = el(t) * D2R, d = dist(t) - punch(t), sh = shake(t);
+        const jx = sh * (Math.sin(t * 91) + 0.6 * Math.sin(t * 57)), jy = sh * (Math.cos(t * 77) + 0.6 * Math.sin(t * 43));
+        const roll = 0.012 * Math.sin(t * 0.8) + 0.035 * Math.sin(Math.PI * K.seg(t, T.gather, T.seat)) * (1) + sh * 0.12 * Math.sin(t * 61);
+        K.look(camera, [A[0] + d * Math.sin(a) * Math.cos(e) + jx, A[1] + d * Math.sin(e) + jy, A[2] + d * Math.cos(a) * Math.cos(e)], [A[0] + jx, A[1] + jy, A[2]], fov(t), roll);
+        K.focus(camera, focusAt(t), lens(t));
       };
-      const chip = (ctx, x, y, w, text, active, al) => {
-        ctx.globalAlpha = al; ctx.beginPath(); ctx.roundRect(x, y - 38, w, 76, 12);
-        if (active) { ctx.fillStyle = INK; ctx.fill(); ctx.fillStyle = '#fff'; } else { ctx.fillStyle = 'rgba(251,247,238,0.82)'; ctx.fill(); ctx.lineWidth = 3; ctx.strokeStyle = INK; ctx.stroke(); ctx.fillStyle = INK; }
-        ctx.textAlign = 'center'; ctx.fillText(text, x + w / 2, y + 3);
-      };
+      // the stroke words: the one in progress is shown, the previous one flies off as the next arrives
+      const STROKE = [
+        { word: 'INTAKE', sub: 'AIR + FUEL IN', color: '#1b2f8c' }, { word: 'COMPRESSION', sub: 'SQUEEZE IT', color: '#1b2f8c' },
+        { word: 'POWER', sub: 'SPARK  ->  PUSH', color: '#e8561a' }, { word: 'EXHAUST', sub: 'BURNT GAS OUT', color: '#5b6178' },
+      ];
+      const events = []; strokes.forEach(([ts, s], i) => { if (ts > T.seat + 0.3 && ts < 11.3) events.push({ ts, s }); });
+      events.unshift({ ts: T.seat + 0.15, s: strokeOf(phi(T.seat + 0.15)).s });
       const heading = (ctx, t) => {
-        const a = 1 - K.seg(t, T.stack - 0.1, T.stack + 0.3);
-        ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
-        if (a > 0) {
-          ctx.globalAlpha = a; ctx.fillStyle = INK; ctx.font = '500 40px "IBM Plex Mono"'; ctx.letterSpacing = '6px'; ctx.fillText(TITLE[0], 96, 116);
-          ctx.fillStyle = '#131a3d'; ctx.font = '700 92px "Space Grotesk"'; ctx.letterSpacing = '0px'; ctx.fillText(TITLE[1], 92, 212);
-        }
         ctx.globalAlpha = 1;
-        // the four strokes, always visible once the engine runs again; the one in progress is filled
-        const u = K.seg(t, T.seat + 0.1, T.seat + 0.5, K.ease.out);
-        if (u > 0) {
-          const cur = strokeOf(phi(t)).s, ws = [200, 330, 190, 230], gap = 18;
-          ctx.textBaseline = 'middle'; ctx.font = '600 40px "IBM Plex Mono"'; ctx.letterSpacing = '1px';
-          let x = 96; const y = 985 + (1 - u) * 20;
-          CYCLE.forEach((n, i) => { chip(ctx, x, y, ws[i] + 40, `${i + 1} ${n}`, i === cur, u); x += ws[i] + 40 + gap; });
-        }
-        const nu = K.seg(t, 11.4, 11.8, K.ease.out);
-        if (nu > 0) {
-          ctx.globalAlpha = nu; ctx.textAlign = 'right'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = '#131a3d'; ctx.font = '700 64px "Space Grotesk"'; ctx.letterSpacing = '0px';
-          ctx.fillText(NOTE[0], 1920 - 96, 120); ctx.fillStyle = INK; ctx.fillText(NOTE[1], 1920 - 96, 192);
-        }
+        // title: letters rise in, then fly off as the engine opens
+        kin(ctx, t, TITLE[0], { x: 96, y: 122, size: 40, weight: 500, fam: '"IBM Plex Mono"', t0: 0.1, stagger: 0.03, dur: 0.4, color: INK, t1: T.stack - 0.35, spacing: 6 });
+        kin(ctx, t, TITLE[1], { x: 90, y: 262, size: 150, t0: 0.18, stagger: 0.05, dur: 0.55, mode: 'up', color: '#131a3d', t1: T.stack - 0.3 });
+        // strokes, in giant type at the top and a small mono line at the bottom
+        events.forEach((ev, i) => {
+          const end = i + 1 < events.length ? events[i + 1].ts : 11.35, st = STROKE[ev.s];
+          if (t < ev.ts - 0.05 || t > end + 0.6) return;
+          kin(ctx, t, st.word, { x: 96, y: 232, size: ev.s === 1 ? 168 : 200, t0: ev.ts, stagger: 0.035, dur: 0.38, mode: 'slam', color: st.color, t1: end - 0.05 });
+          kin(ctx, t, st.sub, { x: 100, y: 1000, size: 54, weight: 600, fam: '"IBM Plex Mono"', t0: ev.ts + 0.25, stagger: 0.02, dur: 0.3, mode: 'up', color: '#131a3d', t1: end - 0.05, halo: true, spacing: 1 });
+        });
+        // the finish
+        kin(ctx, t, NOTE[0], { x: 96, y: 180, size: 120, t0: 11.45, stagger: 0.03, dur: 0.5, mode: 'slam', color: '#131a3d' });
+        kin(ctx, t, NOTE[1], { x: 96, y: 310, size: 120, t0: 11.7, stagger: 0.03, dur: 0.5, mode: 'slam', color: INK });
         ctx.globalAlpha = 1; ctx.letterSpacing = '0px';
       };
 
       return {
         update(t) {
           rig.pose(t);
-          K.look(camera, cam.pos(t), cam.aim(t)); K.focus(camera, cam.focus(t), cam.lens(t));
+          camera3(t);
         },
         overlay(ctx, t, W, H) { ctx.scale(W / 1920, H / 1080); labels(ctx, t); heading(ctx, t); },
       };
