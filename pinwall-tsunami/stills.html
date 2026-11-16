@@ -1,0 +1,18 @@
+<!doctype html><meta charset=utf-8>
+<style>
+@font-face{font-family:Oswald;font-weight:500;src:url(/node_modules/@fontsource/oswald/files/oswald-latin-500-normal.woff2)}
+@font-face{font-family:Inter;font-weight:500;src:url(/node_modules/@fontsource/inter/files/inter-latin-500-normal.woff2)}
+body{margin:0;background:#000}
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js"}}</script>
+<canvas id=c width=1920 height=1080></canvas>
+<script type=module>
+import * as THREE from 'three'; window.THREE = THREE;
+const load = (src) => new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = rej; document.head.appendChild(s); });
+await load('/lib/stage.js'); await load('/lib/sound.js'); await load('/style.js');
+const style = STYLES[STYLES.length - 1];
+const S = await K.run(document.getElementById('c'), style, { samples: +(new URLSearchParams(location.search).get('n') || 16), width: +(new URLSearchParams(location.search).get('w') || 1920), height: +(new URLSearchParams(location.search).get('h') || 1080) });
+window.S = S;
+window.shot = (t, n) => { S.seek(t, n); const o = document.createElement('canvas'); o.width = 1280; o.height = 720; o.getContext('2d').drawImage(S.renderer.domElement, 0, 0, 1280, 720); return o.toDataURL('image/jpeg', 0.86); };
+window.READY = true;
+</script>
