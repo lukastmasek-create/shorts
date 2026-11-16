@@ -392,10 +392,10 @@
       const bangs = strokes.filter((e) => e[1] === 2).map((e) => e[0]);
       // camera: an orbit rig (aim point, azimuth, elevation, distance, lens) with every move flowing through its keys
       const D2R = Math.PI / 180, lagged = spots.map((p, i) => [labelAt(i) + 0.35, [K.lerp(p[0], -1.2, 0.72), K.lerp(p[1], 3.2, 0.75), 0]]);
-      const aim = K.path([[0, [-0.3, 3.9, 0]], [1.7, [-0.5, 3.6, 0]], [2.9, [-1.2, 3.2, 0]], ...lagged, [T.gather, [-1.2, 3.2, 0]], [T.seat, [-0.7, 3.5, 0]], [9.6, [-0.6, 3.6, 0]], [11.4, [-0.6, 3.9, 0]], [DUR, [-0.1, 4.15, 0]]]);
-      const az = K.path([[0, -6], [1.7, -20], [2.9, -36], [4.4, -26], [T.gather, -17], [T.seat, -7], [8.6, -17], [10.2, -27], [11.8, -14], [DUR, -20]]);
+      const aim = K.path([[0, [-0.3, 3.9, 0]], [1.7, [-0.5, 3.6, 0]], [2.9, [-1.2, 3.2, 0]], ...lagged, [T.gather, [-1.2, 3.2, 0]], [T.seat, [-0.7, 3.5, 0]], [9.6, [-0.6, 3.6, 0]], [11.4, [-0.7, 3.9, 0]], [DUR, [-0.9, 4.1, 0]]]);
+      const az = K.path([[0, -6], [1.7, -20], [2.9, -36], [4.4, -26], [T.gather, -17], [T.seat, -7], [8.6, -17], [10.2, -27], [11.8, -14], [DUR, -17]]);
       const el = K.path([[0, 13], [1.7, 17], [2.9, 24], [T.gather, 20], [T.seat, 13], [10.2, 12], [DUR, 14]]);
-      const dist = K.path([[0, 12.6], [1.7, 14.5], [2.9, 22.5], [4.6, 21], [T.gather, 19.5], [T.seat, 13.6], [9.6, 12.4], [11.4, 12.2], [DUR, 10.8]]);
+      const dist = K.path([[0, 12.6], [1.7, 14.5], [2.9, 22.5], [4.6, 21], [T.gather, 19.5], [T.seat, 13.6], [9.6, 12.4], [11.4, 12.4], [DUR, 12.6]]);
       const fov = K.path([[0, 34], [1.7, 34], [2.9, 26], [T.gather, 26], [T.seat, 32], [DUR, 33]]);
       const focusAt = K.path([[0, [-2.2, 2.6, 0.4]], [T.pull + 0.4, [-1, 2.4, 0]], ...spots.map((p, i) => [labelAt(i) + 0.2, p]), [labelAt(PARTS.length) + 0.3, [0, 2.5, 0]], [T.gather + 0.3, [0, 2.5, 0]], [T.seat, [-2, 2.5, 0.5]], [9.0, [-2.2, 2.5, 0.5]], [11.0, [2.6, 2.5, -0.4]], [DUR, [-1, 2.5, 0.4]]]);
       const lens = K.track([[0, 0.1], [T.stack, 0.14], [labelAt(PARTS.length - 1), 0.14], [labelAt(PARTS.length) + 0.4, 0.06], [T.seat, 0.06], [DUR, 0.06]]);
