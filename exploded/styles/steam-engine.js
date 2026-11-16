@@ -376,5 +376,43 @@
         overlay(ctx, t, W, H) { ctx.scale(W / 1920, H / 1080); labels(ctx, t); heading(ctx, t); },
       };
     },
+
+    sound(k) {
+      const n = PARTS.length, pan = (i) => -0.5 + i / (n - 1);
+      // piston reversals: every time the crank angle passes a multiple of pi (same function that moves the picture)
+      const strokes = [];
+      let prev = phi(0);
+      for (let t = 1 / 600; t <= 12; t += 1 / 600) {
+        const c = phi(t);
+        if (Math.floor(c / Math.PI) !== Math.floor(prev / Math.PI)) strokes.push(t);
+        prev = c;
+      }
+      k.bed('room', 0, 12, { gain: 0.8 });
+      k.bed('hum', 0, 12, { gain: 0.5 });
+      strokes.forEach((t, i) => {
+        const run = t > T.seat ? K.smooth(T.seat, T.seat + 4, t) : 1 - 0.5 * K.smooth(0, T.stop, t), g = 0.55 + 0.45 * run, p = (i % 2 ? 0.15 : -0.15);
+        k.play('thud', t, { gain: 0.3 * g, f: i % 2 ? 105 : 85, pan: p });                                   // the chuff
+        k.noise(t, { dur: 0.16, color: 'pink', filter: 'bandpass', f: 1100, q: 0.7, gain: 0.2 * g, a: 0.01, pan: p, verb: 0.12 });
+        k.noise(t + 0.02, { dur: 0.3, filter: 'highpass', f: 3500, gain: 0.05 * g, a: 0.05, pan: -p });         // steam hiss behind it
+        if (t > T.seat && i % 2 === 0) k.play('tock', t, { gain: 0.18, f: 520, pan: 0.3 });                   // crosshead clack
+      });
+      // flywheel whirr: winds down, then spins up again
+      k.tone(0, { f: [[0, 300], [T.stop, 70]], type: 'triangle', dur: T.stop, gain: 0.05, a: 0.05, filter: 'lowpass', f2: 700, pan: 0.4 });
+      k.tone(T.seat, { f: [[0, 80], [4.5, 330]], type: 'triangle', dur: 12 - T.seat, gain: 0.05, a: 0.6, hold: 12 - T.seat - 1.2, filter: 'lowpass', f2: 700, pan: 0.4 });
+      k.play('swish', T.pull, { gain: 0.6, dur: 0.4 });
+      k.play('whoosh', T.stack, { gain: 0.35, dur: 0.6, top: 1700 });
+      k.play('thud', T.stack + 0.55, { gain: 0.3, f: 110 });
+      PARTS.forEach((p, i) => {
+        k.withMinor(() => k.play('swish', leaveAt(i), { gain: 0.22, dur: 0.22, pan: pan(i) }));
+        k.play('tick', labelAt(i), { gain: 0.3, f: 5200, pan: pan(i) * 0.6 });
+        k.play('pop', labelAt(i) + 0.22, { gain: 0.45, f: 560 + i * 45, pan: pan(i) * 0.6 });
+        k.play('tock', homeAt(i), { gain: 0.5, f: [1500, 520, 1900, 430, 700, 900, 620][i], pan: pan(i) * 0.6 });   // each part seats: brass, steel, chrome, iron...
+      });
+      k.play('whoosh', T.unstack, { gain: 0.3, dur: 0.55, top: 1500 });
+      k.play('swish', T.push, { gain: 0.5, dur: 0.38 });
+      k.play('thud', T.push + 0.42, { gain: 0.45, f: 150 }); k.play('tock', T.push + 0.42, { gain: 0.6, f: 480 });
+      for (const s of STEPS) k.play('tick', s.from, { gain: 0.35, f: 4600 });
+      k.play('tick', 10.3, { gain: 0.25, f: 5200 });
+    },
   });
 }
