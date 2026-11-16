@@ -8,7 +8,7 @@ Storyboard stage. `style.js` is the scene (5 beats, 12.5 s). `lib/` is the uncha
 cd shorts/pinwall-tsunami
 npm install
 npx playwright install chromium
-node shots.cjs 1.9,3.9,6.0,8.2,11.8 16 b
+node shots.cjs 1.9,3.9,6,7.6,11.8 16 b
 node board.cjs
 ```
 

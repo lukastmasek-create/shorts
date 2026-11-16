@@ -57,7 +57,7 @@
     const u = t - T0 - p.T;                                                    // where this pin is in the passing wave (0 = crest)
     const gate = K.smooth(T0 - 0.05, T0 + 0.3, t);
     const crest = Math.exp(-Math.pow(u / 0.6, 2));
-    const trough = -0.7 * K.smooth(0.8, 2.6, p.T) * Math.exp(-Math.pow((u + 1.6) / 0.8, 2));     // the trough runs ahead of the crest
+    const trough = -(0.7 + 0.8 * K.smooth(3, 0.5, p.dc)) * K.smooth(0.8, 2.6, p.T) * Math.exp(-Math.pow((u + 2.4) / 0.9, 2));     // the trough runs ahead of the crest
     const second = 0.35 * K.smooth(1, 3, p.T) * Math.exp(-Math.pow((u - 2.8) / 0.65, 2));        // and a smaller wave follows
     const seaEta = p.aSea * gate * (crest + trough + second);
     const flood = K.smooth(-0.3, 0.5, u) * (1 - 0.35 * K.smooth(1.8, 3.8, u));                   // on land: the water arrives and stays
