@@ -26,6 +26,7 @@ import { GlitchShort, GLITCH_FRAMES } from "./Glitch";
 import { ClocksShort, CLOCKS_FRAMES } from "./Clocks";
 import { DegreeShort, DEGREE_FRAMES } from "./Degree";
 import { InsecureShort, INSECURE_FRAMES } from "./Insecure";
+import { DoubleShort, DOUBLE_FRAMES } from "./Double";
 import { LightningShort, LIGHTNING_FRAMES } from "./Lightning";
 
 export const Root: React.FC = () => (
@@ -55,6 +56,7 @@ export const Root: React.FC = () => (
     <Composition id="NoHumansShort" component={NoHumansShort} durationInFrames={NOHUMANS_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="GlitchShort" component={GlitchShort} durationInFrames={GLITCH_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="ClocksShort" component={ClocksShort} durationInFrames={CLOCKS_FRAMES} fps={30} width={1080} height={1920} />
+    <Composition id="DoubleShort" component={DoubleShort} durationInFrames={DOUBLE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="InsecureShort" component={InsecureShort} durationInFrames={INSECURE_FRAMES} fps={30} width={1080} height={1920} />
     <Composition id="LightningShort" component={LightningShort} durationInFrames={LIGHTNING_FRAMES} fps={30} width={1080} height={1920} />
   </>

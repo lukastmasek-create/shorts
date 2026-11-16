@@ -1,0 +1,207 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 169,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 12,
+    "b": 72
+   },
+   {
+    "text": "(segment 1)",
+    "a": 87,
+    "b": 149
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 169,
+  "len": 208,
+  "phrases": [
+   {
+    "text": "In twenty twenty-four,",
+    "a": 11,
+    "b": 46
+   },
+   {
+    "text": "researchers interviewed over a thousand people,",
+    "a": 58,
+    "b": 133
+   },
+   {
+    "text": "about two hours each.",
+    "a": 148,
+    "b": 191
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 377,
+  "len": 165,
+  "phrases": [
+   {
+    "text": "Then they built an AI copy of every person from that one conversation.",
+    "a": 11,
+    "b": 145
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 542,
+  "len": 292,
+  "phrases": [
+   {
+    "text": "Both took the same survey.",
+    "a": 11,
+    "b": 55
+   },
+   {
+    "text": "The copies matched their owners about eighty-five percent as well as the owners matched themselves two weeks later.",
+    "a": 75,
+    "b": 273
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 834,
+  "len": 191,
+  "phrases": [
+   {
+    "text": "And you do not even need an interview.",
+    "a": 12,
+    "b": 62
+   },
+   {
+    "text": "In twenty fifteen,",
+    "a": 79,
+    "b": 110
+   },
+   {
+    "text": "a computer read Facebook likes.",
+    "a": 115,
+    "b": 175
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1025,
+  "len": 215,
+  "phrases": [
+   {
+    "text": "With seventy likes,",
+    "a": 11,
+    "b": 40
+   },
+   {
+    "text": "it judged personality better than a friend.",
+    "a": 50,
+    "b": 116
+   },
+   {
+    "text": "With three hundred,",
+    "a": 138,
+    "b": 190
+   },
+   {
+    "text": "better than a spouse.",
+    "a": 195,
+    "b": 198
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1240,
+  "len": 159,
+  "phrases": [
+   {
+    "text": "Humans still won on subtle traits.",
+    "a": 12,
+    "b": 77
+   },
+   {
+    "text": "But your double would only get better.",
+    "a": 90,
+    "b": 141
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1399,
+  "len": 260,
+  "phrases": [
+   {
+    "text": "Now add your voice and face.",
+    "a": 10,
+    "b": 65
+   },
+   {
+    "text": "In twenty twenty-four,",
+    "a": 81,
+    "b": 110
+   },
+   {
+    "text": "an employee in Hong Kong joined a call with the finance chief.",
+    "a": 122,
+    "b": 237
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1659,
+  "len": 231,
+  "phrases": [
+   {
+    "text": "The finance chief,",
+    "a": 10,
+    "b": 80
+   },
+   {
+    "text": "and every colleague on it,",
+    "a": 88,
+    "b": 108
+   },
+   {
+    "text": "were fakes.",
+    "a": 125,
+    "b": 207
+   },
+   {
+    "text": "The company lost about twenty-five million dollars.",
+    "a": 212,
+    "b": 214
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1890,
+  "len": 163,
+  "phrases": [
+   {
+    "text": "So whose answer counts,",
+    "a": 10,
+    "b": 51
+   },
+   {
+    "text": "yours,",
+    "a": 55,
+    "b": 66
+   },
+   {
+    "text": "or the one that sounds exactly like you?",
+    "a": 85,
+    "b": 142
+   }
+  ]
+ }
+]
