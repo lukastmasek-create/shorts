@@ -10,6 +10,7 @@ import "@fontsource/onest/800.css";
 import "@fontsource/pangolin/400.css";
 import { W, H, prog, easeOut, easeIO, lerp, pop, clamp } from "./kit";
 import { LOGO_PARTS } from "./logo";
+import { FilmDefs, FilmGrain } from "./fx2";
 
 const cx = W / 2, cy = H / 2;
 const rnd = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
@@ -385,10 +386,11 @@ const SceneFinale = (t: number) => {
 };
 
 // ---------- the engine: one world, one flying camera per part ----------
-type Sc = { C: (t: number) => React.ReactNode; len: number; k: number; plan?: boolean; fy?: number };
+export type Sc = { C: (t: number) => React.ReactNode; len: number; k: number; plan?: boolean; fy?: number; cam?: (t: number) => Cam };
+export type FilmOpts = { loop?: boolean; film?: boolean };   // loop: no fade from/to black (first frame == last frame), film: chromatic aberration + grain
 const POS = (i: number): [number, number] => [i * 1450, i % 2 ? -850 : (i % 4 === 0 ? 0 : 300)];
 const SF = [1.0, 1.14, 1.0, 1.1, 1.0, 1.12, 1.0, 1.12], ST = [1.12, 1.0, 1.08, 1.0, 1.1, 1.0, 1.1, 0.96], RT = [0, -2.5, 1.5, -2, 2, -1.5, 2, 0];
-type Cam = { x: number; y: number; s: number; r: number };
+export type Cam = { x: number; y: number; s: number; r: number };
 const Dust: React.FC<{ c: Cam; par: number; n: number; o: number; rr: number }> = ({ c, par, n, o, rr }) => {
   const spanX = W + 400, spanY = H + 400;
   return <g opacity={o} transform={`translate(${cx} ${cy}) rotate(${c.r * par}) translate(${-cx} ${-cy})`}>
@@ -399,13 +401,14 @@ const Dust: React.FC<{ c: Cam; par: number; n: number; o: number; rr: number }> 
     })}
   </g>;
 };
-const createFilm = (scs: Sc[], audio: string) => {
+export const createFilm = (scs: Sc[], audio: string, opts: FilmOpts = {}) => {
   const n = scs.length, S = [0], R = [0]; let acc = 0;
   scs.forEach(s => { S.push(S[S.length - 1] + s.len); acc += s.len * s.k; R.push(Math.floor(acc + 0.5)); });
   const frames = R[n];
   const warp = (fr: number) => { let i = 0; for (let k = 0; k < n; k++) if (fr >= R[k]) i = k; return S[i] + (fr - R[i]) * (S[i + 1] - S[i]) / (R[i + 1] - R[i]); };
   const hold = (i: number, f: number): Cam => {
     const a = i === 0 ? 0 : S[i] + 10, b = S[i + 1] - 14, u = clamp((f - a) / (b - a)), e = easeIO(u), [px, py] = POS(i), sc = scs[i];
+    if (sc.cam) return sc.cam(f - (S[i] - 12));
     if (sc.plan) return { x: px - cx + 540 - 95 * Math.cos(u * 8 * Math.PI), y: py - cy + PY(0) + (PY(8) - PY(0)) * u, s: 1.0, r: -3 + 6 * u };
     const j = i % 8;
     return { x: px + Math.sin(f * 0.05) * 9, y: py + (sc.fy ?? 0) + Math.cos(f * 0.041) * 7, s: lerp(SF[j], ST[j], e), r: RT[j] * (1 - e * 0.6) + Math.sin(f * 0.03) * 0.5 };
@@ -429,11 +432,12 @@ const createFilm = (scs: Sc[], audio: string) => {
     return (
       <FontGate>
         <div style={{ width: W, height: H, background: `radial-gradient(ellipse 70% 48% at 50% 46%, ${C.surf2} 0%, ${C.bg} 58%, #0a0918 100%)`, position: "relative", overflow: "hidden", fontFamily: FAM.b }}>
-          <Audio src={staticFile(audio)} />
+          {audio && <Audio src={staticFile(audio)} />}
           <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`} style={{ position: "absolute", inset: 0 }}>
+            {opts.film && <FilmDefs frame={fr} ca={0.8 + Math.min(5, Math.hypot(vx, vy) * 0.06)} grain={0.07} />}
             <defs><filter id="mb" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation={`${bx} ${by}`} /></filter></defs>
             <Dust c={c} par={0.12} n={46} o={0.5} rr={1} />
-            <g filter={bx + by > 1.2 ? "url(#mb)" : undefined}>
+            <g filter={opts.film ? "url(#ca)" : undefined}><g filter={bx + by > 1.2 ? "url(#mb)" : undefined}>
               <Dust c={c} par={0.35} n={30} o={0.6} rr={7} />
               <g transform={`translate(${cx} ${cy}) rotate(${c.r}) scale(${c.s}) translate(${-c.x} ${-c.y})`}>
                 {scs.map((sc, i) => {
@@ -443,10 +447,11 @@ const createFilm = (scs: Sc[], audio: string) => {
                   return <g key={i} transform={`translate(${px - cx} ${py - cy})`}>{sc.C(f - (S[i] - 12))}</g>;
                 })}
               </g>
-            </g>
+            </g></g>
             <defs><radialGradient id="vg" cx="50%" cy="50%" r="75%"><stop offset="55%" stopColor="#05040f" stopOpacity="0" /><stop offset="100%" stopColor="#05040f" stopOpacity="0.7" /></radialGradient></defs>
             <rect width={W} height={H} fill="url(#vg)" />
-            <rect width={W} height={H} fill="#05040f" opacity={Math.max(1 - fr / 8, prog(fr, frames - 18, frames - 1))} />
+            {opts.film && <FilmGrain />}
+            {!opts.loop && <rect width={W} height={H} fill="#05040f" opacity={Math.max(1 - fr / 8, prog(fr, frames - 18, frames - 1))} />}
           </svg>
         </div>
       </FontGate>
@@ -470,3 +475,6 @@ const P4 = createFilm([
 ], "code/part4.wav");
 export const CODE1_FRAMES = P1.frames, CODE2_FRAMES = P2.frames, CODE3_FRAMES = P3.frames, CODE4_FRAMES = P4.frames;
 export const CodePart1 = P1.Comp, CodePart2 = P2.Comp, CodePart3 = P3.Comp, CodePart4 = P4.Comp;
+
+// ---- shared building blocks for new showcase videos (import these instead of rewriting them) ----
+export { KText, Morph, Tag, Win, Code, Bolt, Rings, LogoRow, IntroScene, OutroScene, FontGate, SceneFiles, SceneFinale, C, FAM, MONO, BRAND, DEPTH, SOFT, NEON, WARM, typedN, tw, back, smoother, rnd, lerpC, hl };

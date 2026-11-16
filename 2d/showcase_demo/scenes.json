@@ -1,0 +1,10 @@
+{ "seed": 4242, "fps": 30, "frames": 450,
+  "order": [
+    {"id": "logoMorph", "start": 0.0, "dur": 2.2},
+    {"id": "cards3", "start": 2.2, "dur": 2.0},
+    {"id": "katanaCut", "start": 4.2, "dur": 2.0, "extra": {"cut": 4.9}},
+    {"id": "sparkChat", "start": 6.2, "dur": 3.2, "extra": {"arrive0": 7.4, "arrive1": 7.9, "arrive2": 8.4}},
+    {"id": "logoSplitMenu", "start": 9.4, "dur": 2.6, "extra": {"click": 11.0}},
+    {"id": "feature_quiz", "start": 12.0, "dur": 2.0},
+    {"id": "finale", "start": 14.0, "dur": 1.0}
+  ] }

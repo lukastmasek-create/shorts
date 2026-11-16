@@ -1,234 +1,144 @@
 # Showcase prompt for ucimesehrou.org (the only placeholder is `[]`)
 
-Copy everything below the line. Replace `[]` (one place) with the website section to showcase, e.g. a URL path or a section name. This single file replaces the older cinematic prompts.
+Copy everything below the line. Replace `[]` (one place) with the website section to showcase (a URL path or a section name).
 
 ---
 
-Make a cinematic vertical short (1080x1920, 30 fps, **max 15 s per video**, split into several parts if the section has more to show; each part is its own 15 s video with the same skeleton) that showcases this section of ucimesehrou.org: **[]**.
+Make a cinematic vertical showcase of this section of ucimesehrou.org: **[]**. Format 1080x1920, 30 fps, **max 15 s per video**; if the section has more to show, make several videos (each max 15 s, same recipe). Everything below is already built and tested in the repos named in section 1, so **import and wire, do not rewrite**.
 
-## Reference style: make it look and move like the "Kód na hraní" video
-This is the exact style already shown to and approved by the user (`2d/src/Code.tsx`, comps `KodDil1..4`). New videos must look like the same series.
-- **World:** night-blue radial background (`#26224a` centre -> `#12102a` -> `#0a0918` edges) with a dark vignette, two parallax layers of tiny cream dust dots (every fifth dot in a logo colour), faint concentric rings behind each scene.
-- **UI objects (depth and shading, see section "Depth, shading and neon edges"):** every card, window, pill and button is a shaded object, not a flat outline: gradient face lit from the top-left, bevel highlight on the top/left edge and shade on the bottom/right, an extrusion with visible thickness, a soft contact shadow on the floor, and a neon light that runs along its edge. Windows keep the three title-bar dots coral/yellow/green and the tiny uppercase title; pills "on" = blue and gold CTA with a darker underlay like the logo tiles; file chips in token colours; a light cream mini web page (`#f6f4ee`) whenever a result is shown so it contrasts with the dark UI.
-- **Type:** hero lines in Pangolin with cream-white fill and cyan neon glow (`drop-shadow(0 0 6px #6ee7ff) drop-shadow(0 0 18px #2ab7ff)`), one accent word in yellow; headlines and numbers in Unbounded 800; sentences in Onest 600-800; code in monospace with site token colours; every text is per-letter kinetic (rise with mask, drop, pop, scatter, track) with 2-5 frames stagger and back-easing overshoot.
-- **Motion:** every object pops with back-ease and a stagger; success = yellow ring pulse and a check mark that draws with dash-offset; the typed code and the result react together (typing a CSS line changes the preview colour with a pulse); a yellow spark icon hops line to line as the "pointer".
-- **Camera:** one continuous world, zigzag scene path, swoops (zoom-out dip, roll about 7 deg, smootherstep) with motion blur only above a speed threshold, slow push-in or pull-out on every hold, tiny handheld drift. A long vertical path scene may be followed by the camera (like the 9-step plan).
-- **Logo moment:** blob morphs, becomes the blue tile with the smiley face, flies into the real wordmark, letters and tiles pop around it. Every part opens with it (different source object) and ends with the logo + URL pill.
-- **Sound:** original D-minor score, drone -> pulse -> groove -> breather -> riser/snare roll -> D-major climax on the last logo hit; whooshes on swoops, ticks on typing, zaps on UI actions, chime on success, boom on slams.
-- **Now add on top of that style (the new wishes below):** more morphs, katana cut, sparks, chat, 3D.
+## 1. Repos to read (exact)
+1. **Site = the source of truth for content and brand:** `lukastmasek-create/umime-skola` (public). Read:
+   - the section page `src/app/[locale]/<section>/page.tsx` and every component it imports (`src/components/*`), the data behind it (`src/lib/*`)
+   - brand: `src/app/globals.css` (dark theme variables), `public/brand/logo-tmave.svg` + `ikona.svg`, fonts in `src/app/[locale]/layout.tsx` (Unbounded, Pangolin, Onest)
+   - take real labels, counts (count them with a node script, never guess), real sample code/text. Anything invented (sample chat lines) is reported as invented at the end.
+2. **Tools = the finished engine and effect kit:** `lukastmasek-create/shorts`, branch `claude/eloquent-mendel-zow67i`. Read first:
+   - `2d/src/Code.tsx` (engine `createFilm`, `KText`, `Morph`, `Tag`, `Win`, `Code`, `LogoRow`, `IntroScene`, `OutroScene`, `SceneFiles`, `SceneFinale`, palette `C`, fonts `FAM`) — everything is exported at the bottom of the file
+   - `2d/src/fx2.tsx` (tested effects: `PixelMorph`, `Squash`, `PageRead`, `DollyZoom`, `Sparks`, `sparkCam`, `Katana`, `Cursor`, `Ripple`, `TypeLine`, `FilmDefs`/`FilmGrain`, `loopP`; demo comp `Fx2Demo`)
+   - `2d/src/depth.tsx` (`Card3D`, `NeonRunner`, `depthStyle`; demo comp `DepthDemo`), `2d/src/logo.ts` (real logo in 20 pieces)
+   - `audio/sfx_real.py` (realistic sound effects), `audio/showcase_sfx.py` (builds the sound track from `scenes.json`), `audio/dsp.py`
+3. Access: attach both with `add_repo` (read), then `GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/lukastmasek-create/umime-skola /home/user/lukastmasek-create/umime-skola`; work inside the `shorts` checkout on the branch above. `npm i` once.
 
-## Depth, shading and neon edges (design pass, applies to everything)
-Goal: much more depth and shading, real 3D feel on cards, with a neon line running around a card's edge, and a clear depth order: **the nearest object is the thickest and brightest, the farthest is thin, dim and slightly out of focus.**
-1. **One depth value per object, `z` from 0 (far back) to 1 (very front).** All distance-dependent look comes from it (copy `depthStyle` from `2d/src/depth.tsx`): line thickness 1.6 -> 9 px, glow radius 2 -> 26 px, glow strength 0.12 -> 0.95, opacity 0.5 -> 1, extrusion thickness 5 -> 26 px, shadow size 8 -> 34 px, and for z < 0.3 a small blur (depth of field, up to 2.4 px). Text on far cards is dimmer and thinner as well. Assign `z` by layer: background cards 0.05-0.2, working cards 0.4-0.7, the focused/active card 1.
-2. **Card anatomy (`Card3D` in `2d/src/depth.tsx`, back to front):** soft contact shadow on the floor (further away and softer when the card floats: `lift`), extrusion = stacked copies sinking down-right and getting darker toward the back, face with a diagonal gradient (lit top-left, dark bottom-right) + a specular radial highlight + a darker bottom edge, bevel (light stroke on the top/left, dark stroke on the bottom/right), thin base edge line, then the neon runner. A fake `rotateY` (`tilt`: horizontal scale + a small skew) gives each card a different angle; the camera tilt from the CSS 3D layers adds real parallax on top.
-3. **Neon light running along the edge (`NeonRunner`)**: a bright white-hot head and a fading tail (16 segments of one `pathLength=1` rounded-rect path, `strokeDasharray` + `strokeDashoffset`, width and opacity falling along the tail) that circles the card; colour per card (cyan, yellow, blue, coral, green), different phase and speed per card so they never move in sync; the glow (two stacked `drop-shadow`s) is scaled by `z`, so the front card's runner is thick and blazing, the back card's runner is a thin faint line. Use it also on hover/active states (runner speeds up and the card lifts: `lift` up, extrusion +4 px, shadow longer) and on success (one full lap in green).
-4. **Light is consistent**: one light from the top-left for the whole film; every bevel, shadow direction and specular spot follows it; shadows lengthen when the object is higher.
-5. **Depth in motion:** when the camera moves, near layers travel further than far layers (parallax) and far layers lose sharpness; during a swoop the front cards get more motion blur than the back ones; katana halves, chips and sparks also use `z` (a falling chip grows and gets brighter as it comes toward the camera).
-6. **Check:** render a still with three cards at z = 0.1 / 0.55 / 1 (the `DepthDemo` comp does it) and confirm the order reads at first glance: front clearly thickest and glowing, back clearly thinner and fainter. Apply the same look to `Win`, `Tag`, chips and the chat bubbles, not only to big cards.
+## 2. Rules that never change
+- On-screen language Czech. Look = the site: night blue `#12102a` (surface `#1c1936`, edge `#6a63ad`), cream `#f6f1e4`, logo colours blue `#3248f0` / coral `#ff5a3c` / yellow `#ffc933` / green `#17a864`; fonts Unbounded (labels, numbers), Onest (text), Pangolin with cyan neon glow (hero lines). Already wired in `Code.tsx`.
+- Readability: headline fully visible >= 1.2 s, sentence >= 1.4 s, <= 7 words per sentence, text >= 44 px, inside the safe area (top 160, bottom 1540, sides 60). Nothing important starts while the camera moves fast (camera arrives at scene-local `t = 22`).
+- No voice. **No music at all, only realistic sound effects** (section 6).
+- One continuous world, flying camera, no hard cuts. Scenes are `Sc` objects (`{ C, len, k, cam?, fy? }`, about 2-4 s each) passed to `createFilm(scenes, "<name>/sfx.wav", { film: true, loop: true })`. Total <= 15 s: `sum(len * k) / 30 <= 15`.
+
+## 3. Look: reference style and depth
+The reference is the existing "Kód na hraní" series (`KodDil1..4` in `Code.tsx`): night-blue world with parallax dust and faint rings, shaded windows (3 coloured title-bar dots), pills with a darker underlay, hero lines in Pangolin + cyan neon, yellow accent word, per-letter kinetic type, back-eased pops, cream mini web page for results, yellow ring pulse + drawn check mark on success, the real logo built from a morphing blob. **Add depth and shading everywhere (use `2d/src/depth.tsx`):**
+- Every object gets a depth value `z` (0 far, 1 front). `depthStyle(z)` gives line thickness 1.6 -> 9 px, glow 2 -> 26 px, glow strength, opacity, extrusion thickness, shadow size, and a small blur for the far layer: **the nearest object is the thickest and glows most, the farthest is thin, dim and slightly out of focus.**
+- `Card3D` = contact shadow + extruded sides + gradient face lit from the top-left + specular + bevel + `NeonRunner` (a neon light with a bright head and fading tail that runs along the card edge; colour, phase and speed differ per card; glow scaled by `z`). Use it for windows, cards, chips and bubbles. Hover/active = runner faster, card lifts (`lift` up). Success = one green lap.
+- One light direction (top-left) in the whole film; shadows get longer when an object is higher.
 ```tsx
-import { Card3D, NeonRunner, depthStyle } from "./depth";                  // copy of 2d/src/depth.tsx
-<Card3D x={70} y={1220} w={940} h={380} z={1} t={frame} tilt={0.1} lift={0.8} accent="#6ee7ff" runPhase={0.3}>
-  <text x={540} y={1430} textAnchor="middle" fontSize={68} fontWeight={800} fill="#f6f1e4">vpředu</text>
-</Card3D>
-<Card3D x={150} y={380} w={780} h={300} z={0.1} t={frame} tilt={0.25} lift={0.3} accent="#5a6cff" />     {/* far card: thin, dim, soft */}
+import { Card3D } from "./depth";
+<Card3D x={70} y={1220} w={940} h={380} z={1} t={frame} tilt={0.1} lift={0.8} accent="#6ee7ff" runPhase={0.3}>{/* content */}</Card3D>
+<Card3D x={150} y={380} w={780} h={300} z={0.1} t={frame} tilt={0.25} lift={0.3} accent="#5a6cff" />   {/* far card: thin, dim, soft */}
 ```
-
-## 0. Ground rules
-- Work in this repo's Remotion 2D engine. Read first: `2d/src/depth.tsx` (depth/shading/neon-edge kit), `2d/src/Code.tsx` (engine: continuous world + flying camera, `KText` kinetic type, `Morph`, `Win`, `Tag`, `LogoRow`, `createFilm`), `2d/src/logo.ts` (real logo, 20 pieces), `audio/code_mix.py` (music + sfx, scene tables mirror the TSX). Copy their structure; add the new effects below as new components.
-- Real content only. Find the section in the site repo (`lukastmasek-create/umime-skola`, `src/app/[locale]/<section>/`, its components and `src/lib/*`) and take real feature names, labels, numbers and sample code from it. Never invent features. Anything illustrative (sample chat lines) is reported as invented at the end.
-- Language on screen: Czech. Look = the site: night blue `#12102a` (surface `#1c1936`, edge `#6a63ad`), cream text `#f6f1e4`, logo colours blue `#3248f0`, coral `#ff5a3c`, yellow `#ffc933`, green `#17a864` (each with its darker depth colour as in the logo), fonts Unbounded (labels), Onest (text), Pangolin with cyan neon glow (hero lines), via `@fontsource`. No voice. Music + sfx are original, synthesized.
-- Readability beats speed: a headline stays fully visible >= 1.2 s, a sentence >= 1.4 s, <= 7 words per sentence, <= 3 sentences per part. Nothing important starts while the camera moves fast. Text >= 44 px, inside safe area (top 160, bottom 1540, sides 60).
-
-## 0b. Must include (the wishes, all of them, in every part)
-1. More morphing: at least five shape morphs per part, and the logo always morphs out of an object (a different object per part).
-2. A katana cut with a real slice: the object splits, the halves slide apart and the cut edge crumbles, a corner chip breaks off and falls.
-3. Typewriter effects (with caret, jitter, sometimes a typo + backspace) and kinetic typography (per-letter rise / drop / pop / scatter / track).
-4. Fast glowing sparks with motion blur trails; sparks are born from a word (letters become sparks) and that is the transition into the next part of the animation, where they fly into a chat window and every spark becomes a sentence.
-5. Seamless camera: one continuous cinematic motion sequence, smooth shape transitions, 3D elements (CSS 3D layers + extruded objects), no hard cuts.
-6. Concrete code for all of it (snippets below), max 15 s per video, several videos if the section needs it.
-
-## 0c. How the Kód na hraní showcase was made (follow the same pipeline)
-1. **Read the real site code first.** Attach `lukastmasek-create/umime-skola` read-only (`add_repo`, then `GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://github.com/lukastmasek-create/umime-skola /home/user/lukastmasek-create/umime-skola`). Open the section page `src/app/[locale]/<section>/page.tsx`, its components (hero showcase, workspace, curriculum, exercises, assistant) and data in `src/lib/*`. Write down real feature names, button labels, counts (count them with a small node script, do not guess) and real sample code lines. Those become the scenes; anything else is reported as invented.
-2. **Brand from the repo, not from memory.** Colours: `src/app/globals.css` (dark theme variables), token colours in components (HTML `#ff7a5c`, CSS `#5ab8ff`, JS `#ffd24d`, strings `#7ee0b0`, keywords `#ff9bd2`). Fonts: `src/app/[locale]/layout.tsx` (Unbounded, Pangolin, Onest). Logo: `public/brand/logo-tmave.svg` + `ikona.svg`.
-3. **Logo as pieces.** A small python script splits the logo SVG into its 20 top-level elements and computes each centre (rect centre, or bbox of path end points) and writes `2d/src/logo.ts`. `LogoRow` pops the pieces with staggered back-easing and a small spin around their own centre. Piece 0 (blue tile with the face) is replaced by the hero blob: blob morphs, fills blue, face draws on (dash-offset smile + popping eyes), then flies and shrinks into the tile's slot while the other pieces pop in around it.
-4. **Fonts that really load.** `npm i @fontsource/unbounded @fontsource/onest @fontsource/pangolin`, import the weight CSS files, and block rendering with a `FontGate` (`delayRender` + `document.fonts.load(font, "Kód na hraní ČÍŘŠŽ čšřžýáíéěúů")` so the latin-ext Czech subset is loaded). Measure glyph advances with a canvas `measureText` (same Chromium renders and measures) so per-letter kinetic type is exact; give every text a `maxW` that auto-shrinks the size so nothing leaves the frame.
-5. **Engine.** `createFilm(scenes, audio)`: authored virtual timeline `S` (frames per scene), played slower by a per-scene factor `K` (text-heavy scenes 1.4-1.5) to get real frames `R`; `warp(frame)` maps real to virtual. Scenes sit along a zigzag path `POS(i)`; camera = `hold(i, f)` (slow push-in/out + handheld drift) and a swoop between scenes (zoom-out dip, roll, smootherstep, motion blur only above a speed threshold). The camera arrives at scene-local `t = 22`, so important text starts after that. Scenes are mounted only while the camera can see them. Total length is derived, never typed.
-6. **Stills before renders.** `COMP=<Id> GL=swangle CHROME_PATH=/opt/pw-browsers/chromium REMOTION_TMP=/tmp/remotion-tmp node 2d/stills.mjs out/c_ 30,80,125,170 0.3`, then `ffmpeg -i a.jpg -i b.jpg ... -filter_complex hstack=inputs=N sheet.jpg` and look at the sheet. Check the end of the logo morph, a mid-swoop frame, the cut frame +0/+6/+20, spark flight, every bubble, the last frame. Typical fixes found this way: text wider than the frame (`maxW`), overlaps between a headline and a card, content starting while the camera still moves.
-7. **Music with the same tables.** `pip install scipy`; reuse `audio/dsp.py` + `audio/instruments.py`. The python script repeats the scene table (type, length, K) of the TSX, computes the same real frames, and places events by scene-local time (`virtual frame = S_i - 12 + t`). Bar length is chosen so the final logo hit lands on a downbeat; print per-scene loudness to confirm the arc rises. Output `public/<name>/partN.wav` with the exact video length; `<Audio src={staticFile(...)}/>` is inside the composition.
-8. **Render as a tracked background job** (a paused container kills `nohup` jobs, a tracked one is restarted by hand if it dies). `npx remotion render 2d/src/index.ts <CompId> out/<name>.mp4 --codec h264 --crf 18 --audio-codec aac --gl=swangle --browser-executable=/opt/pw-browsers/chromium --concurrency=2`, about 2.3 s per frame on 2 cores. Verify with `ffprobe` (size, duration, audio stream) before saying it is done, then send the file with `SendUserFile`.
-9. **Repo hygiene.** Commit sources, `logo.ts`, the wav files and the audio script; never mp4; working copies in `<name>/audio/` are gitignored; push the session branch.
-10. **Feedback loop used last time.** First cut was too fast to read, so every scene got a slow factor and long scenes were split into separate parts; Czech on-screen text was requested explicitly (it overrides the old "English only" note in CLAUDE.md); the site's colours, fonts and the real logo replaced the generic white line art.
-
-## 1. Scenes: a small generic kit + animations built from the real section
-Every video is assembled from two kinds of scenes. The order, the picks, the transitions and the objects are random per video (seeded, reproducible).
-
-**A. Generic kit** (same for every section; write each as a `createFilm` scene in the style above)
-| id | what happens | len / K | audio intensity |
-|---|---|---|---|
-| `logoMorph`* | random object -> blob -> blue logo tile (face) -> real logo, pieces pop | 100-165 / 1.25-1.3 | 0.35-0.45 |
-| `cards3`* | one card splits into 3-4 cards that fan out (use the section's real items), chips pop | 105 / 1.3 | 0.65 |
-| `katanaCut` | the title card or an object is sliced, halves part, corner chip falls, debris | 60-90 / 1.3 | 0.85 |
-| `sparkChat` | a word becomes sparks (motion blur), they fly into a chat, every spark becomes a typed sentence | 130-170 / 1.35 | 0.8 |
-| `statCounter` | one real number counts up huge, ring fills | 80 / 1.3 | 0.8 |
-| `splitCompare` | slash line splits the screen, real before/after | 100 / 1.3 | 0.85 |
-| `deck3D` | cards on a CSS 3D carousel | 110 / 1.35 | 0.85 |
-| `deviceZoom` | phone/laptop frame with the real UI inside, camera dives through the screen | 100 / 1.3 | 0.8 |
-| `logoSplitMenu` | the logo is sliced or pulled into two halves, in the gap appear buttons for the real sections of the page (real labels); a cursor glides in, the camera zooms to the button it will click, press + ripple, the button expands (match cut) into the clicked section's scene | 120-150 / 1.3 | 0.7 |
-| `pickItem` | inside the section, a list of real options (a course, a subject, a plan, a tool...): the cursor hovers two of them, picks one (press + ripple), the chosen item's window flies in from the side with overshoot and settles | 100-120 / 1.3 | 0.8 |
-| `scrollDive` | the camera descends vertically through the stacked sections of the page in their real order (section panels as simplified windows with their real titles), parallax layers at different speeds, slow start, gradual acceleration, soft landing on the next scene | 100-130 / 1.4 | 0.9 |
-| `finale`* / `outro`* | claim slam, window morph, logo + URL pill | 90-150 / 1.3 | 0.9-1.0 |
-(* already exists in `2d/src/Code.tsx`: `IntroScene`, `SceneFiles`, `SceneFinale`, `OutroScene`. Do NOT reuse the other scenes of that video (explainer, preview, autocomplete, exercise, AI chat, plan path): they belong to that one section.)
-
-**B. Feature scenes: one bespoke animation per real part of the section `[]`** (this is the core of every video)
-1. List the real parts of the section: open its page and components in the site repo and write down every distinct feature the user sees or does (widgets, tools, lists, forms, games, dashboards, settings, rewards...). Take each one's real labels, numbers, colours and layout.
-2. For each important feature (at least 3, at most 5 per video) write ONE scene `feature_<name>`: redraw that component as SVG in the video style (same structure, same real labels, simplified), then animate what actually happens when someone uses it, in 3-5 s: the input is typed (typewriter), the thing reacts (pulse, morph, count, fill), the result appears. The animation must show the function, not decorate it: a viewer who has never seen the page should understand what the part does.
-3. Choose the motion by UI pattern (starting points, then adapt to the real component):
-   - list / ranking / leaderboard: rows slide in, bars race and reorder, the winner row morphs into a badge
-   - quiz / test / question: question card flips in, options pop, the right one morphs into a check mark, score counts up
-   - form / input / search: typed text, suggestions fan out, one is picked and morphs into the result card
-   - editor / workspace: split panes, typed content on one side, live result on the other, file tabs morph between each other
-   - chat / assistant: bubbles grow from dots, answer types in
-   - dashboard / progress / levels: bars grow, ring fills, level shape gains a side, streak spark hops
-   - shop / rewards / collection: items fall into a basket or shelf, prices tick, a chest morphs open
-   - calendar / schedule / plan: days fill one by one, a path or timeline is flown by the camera
-   - lesson / video / reading: a page turns in 3D, highlighted words become sparks that fill a notebook
-   - settings / themes / profile: a colour or theme swap sweeps across the UI, an avatar morphs between states
-   - map / world / game board: camera pulls out over the board, pieces move, one tile is dived into
-4. Give every feature scene metadata: `{ id: "feature_x", fam: "feature", len, k, intensity, needs: [real feature tag], weight }`, and a short event table for the audio script (typing ticks, zaps, chime on success...). Feature scenes always use the real section labels as on-screen text (Czech).
-5. A feature scene may be skipped only if the feature turns out not to be visual; never replace it with a made-up one.
-
-**Random selection rules (apply in this order)**
-1. Seed: one integer per video (`Date.now() % 2**31` at authoring time, saved in `scenes.json` and in the commit message; the same seed rebuilds the same video; never `Math.random()` inside a component, never random per frame).
-2. Fit <= 15 s real time per video (`sum(len*K)/30 <= 15`, usually 5-7 scenes). Always: first `logoMorph` (random source object), last `finale` or `outro`. Always once: `katanaCut`, directly followed by `sparkChat` (the sparks come out of the cut word). `cards3` is used when the section has 3-4 real items. `logoSplitMenu` is used right after `logoMorph` when the page has at least 3 real sections/nav items (its buttons are those real labels, and the clicked one decides which feature scene comes next); `pickItem` is used when the section has a real selectable list (it replaces a plain feature scene for that list); `scrollDive` is used once when the video shows more than one section, as the transition between two of them. Then fill the rest with feature scenes first (at least 3 when the section has them, they win over the generic extras), and generic extras (`statCounter`, `splitCompare`, `deck3D`, `deviceZoom`) only if time is left and a real number/before-after/screens exist.
-3. Shuffle the middle with the seed, then fix violations: two scenes of the same pattern never touch, `statCounter` is never directly after the intro, the lowest-intensity feature scene goes in the middle (breather), the highest-intensity one second to last.
-4. Randomize the details with the same seed: intro object, scene positions on the path (zigzag direction, spacing), swoop roll sign, hold push-in or pull-out, transition type between scenes (swoop, whip, dolly-through, spark-chase, slash-wipe; never the same twice in a row), accent colour order of the four logo colours, which word becomes the sparks, katana angle and which corner chips off, chat sentence slots, which of the real items go on the 3 cards.
-5. Stable parts that are never random: palette, fonts, logo, readability rules (headline >= 1.2 s, sentence >= 1.4 s, text >= 44 px), safe area, <= 15 s.
-6. Audio follows the picked list: the music script reads `scenes.json` (ids, len, K, intensity, event tables per scene id) and rebuilds the arc (quiet -> pulse -> groove -> breather -> riser -> climax on the last logo hit) for any order.
-7. Report: the seed, the picked order, which real features got scenes, which were skipped and why.
-
-```ts
-// deterministic seeded random for scene picking (Remotion must render every frame identically)
-const mulberry32 = (a: number) => () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
-type SceneDef = { id: string; fam: string; len: number; k: number; weight?: number; C: (t: number, r: () => number) => React.ReactNode };
-const secs = (a: SceneDef[]) => a.reduce((x, s) => x + (s.len * s.k) / 30, 0);
-// kit = generic scenes by id, features = the bespoke feature_* scenes written for the section, extras = optional generic ones
-export const pickScenes = (kit: Record<string, SceneDef>, features: SceneDef[], extras: SceneDef[], seed: number, budgetS = 15): SceneDef[] => {
-  const r = mulberry32(seed), shuffle = <T,>(a: T[]) => a.map(v => [r(), v] as const).sort((x, y) => x[0] - y[0]).map(x => x[1]);
-  const head = [kit.logoMorph], tail = [kit.finale], pair = [kit.katanaCut, kit.sparkChat], mid: SceneDef[] = [];
-  // heavier-weighted features first (with a little seeded jitter), the order inside the video is shuffled afterwards
-  const feats = features.map(f => [(f.weight ?? 1) * (0.7 + r() * 0.6), f] as const).sort((a, b) => b[0] - a[0]).map(x => x[1]);
-  for (const s of feats) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s);
-  for (const s of shuffle(extras)) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s);
-  const m = shuffle(mid), at = Math.floor(r() * (m.length + 1));        // katana + sparks as a pair somewhere in the middle
-  return [...head, ...m.slice(0, at), ...pair, ...m.slice(at), ...tail];
-};
-// every random detail inside a scene comes from the same seed: const rr = mulberry32(seed + sceneIndex * 101);
-```
-Write the picked list to `2d/<name>/scenes.json` (`{ seed, order: [{id, len, k, intensity}] }`) and make both the composition and the audio script read it, so picture and music can never disagree.
-
-## 2. Camera and 3D (seamless, no cuts)
-- One continuous world, scenes placed along a path; camera = position + zoom + roll with smootherstep swoops, tiny handheld drift, motion blur only while moving fast. Transitions are camera moves, match cuts or "dolly through" (zoom into a letter/hole until it fills the frame, next scene is behind it). Never hard cut.
-- Real 3D feel without a 3D engine (CPU render, ~2.3 s/frame): wrap the SVG layers in CSS 3D and tilt the whole plane a few degrees with the camera, so layers get parallax:
+- Real parallax: wrap layers in CSS 3D and tilt the plane with the camera (back layer `translateZ(-300px)`, scenes `0`, foreground sparks `translateZ(220px)`).
 ```tsx
-// layers at different z; camera tilt rx/ry/rz in degrees comes from the camera function
 <div style={{ perspective: 1600, width: W, height: H, overflow: "hidden" }}>
   <div style={{ transformStyle: "preserve-3d", transform: `rotateX(${rx}deg) rotateY(${ry}deg) rotateZ(${rz}deg)` }}>
     <svg style={{ position: "absolute", transform: "translateZ(-300px) scale(1.3)" }}>{/* dust, rings */}</svg>
-    <svg style={{ position: "absolute", transform: "translateZ(0)" }}>{/* scenes */}</svg>
-    <svg style={{ position: "absolute", transform: "translateZ(220px)" }}>{/* sparks, foreground */}</svg>
+    <svg style={{ position: "absolute" }}>{/* scenes */}</svg>
+    <svg style={{ position: "absolute", transform: "translateZ(220px)" }}>{/* sparks */}</svg>
   </div>
 </div>
 ```
-- Extruded objects (cubes, tiles, buttons) with a cheap depth stack, light from top-left:
-```tsx
-const Extrude: React.FC<{ depth?: number; dark: string; children: (fill?: string) => React.ReactNode }> = ({ depth = 16, dark, children }) => (
-  <g>{Array.from({ length: depth }, (_, i) => depth - i).map(d => <g key={d} transform={`translate(${d * 0.55} ${d})`}>{children(dark)}</g>)}{children()}</g>
-);
-```
-  Use real three/R3F (already installed) only for one hero object and only if the render time is acceptable.
 
-## 3. Effects to build (copy these shapes, then tune)
-**Morph (object -> logo)** reuse `Morph` from `Code.tsx` (all shapes resampled to 140 points, `lerp` per point, eased, with trail copies). Add object outlines as point arrays (`samp([...vertices])`) for keycap/bubble/play/gear, fill colour fades from transparent to `#3248f0`, add the darker depth shape under it, then hand over to `LogoRow` piece 0 when it reaches its slot.
-
-**Typewriter** per character with jitter, caret and an optional typo + backspace:
-```tsx
-const TypeLine: React.FC<{ text: string; x: number; y: number; t: number; a: number; cps?: number; typo?: [number, string] }> = ({ text, x, y, t, a, cps = 0.9, typo }) => {
-  let n = Math.floor(Math.max(0, t - a) * cps + 0.0), s = text.slice(0, n);
-  if (typo && n > typo[0]) { const k = n - typo[0]; s = k < 3 ? text.slice(0, typo[0]) + typo[1].slice(0, k) : text.slice(0, typo[0]) + (k < 6 ? typo[1].slice(0, 6 - k) : "") + text.slice(typo[0], typo[0] + Math.max(0, k - 6)); }
-  return <text x={x} y={y} fontFamily={MONO} fontSize={44} fill={C.cream}>{s}{Math.floor(t / 7) % 2 === 0 && <tspan fill={C.yellow}>▌</tspan>}</text>;
+## 4. Everything is random per video (seeded, reproducible)
+One integer `seed` per video (`Date.now() % 2**31` when you start; write it into `2d/<name>/scenes.json` and the commit message). Never `Math.random()` inside a component and never random per frame: derive all choices from the seed (`mulberry32(seed + sceneIndex * 101)` inside scenes). Random every time:
+1. **Which scenes and in which order** (below).
+2. **Which effects are used** (the effect pool, below).
+3. **Which scenes get sound effects** and which extra sounds (section 6).
+4. The small details: the intro object, scene positions on the path (zigzag direction, spacing), swoop roll sign, push-in or pull-out holds, transition type between scenes (swoop, whip, dolly-through, spark-chase, slash-wipe; never the same twice in a row), order of the four logo colours, which word turns into sparks, katana angle and which corner chips off, chat slots, which real items go on the cards.
+Stable, never random: palette, fonts, logo, readability rules, safe area, <= 15 s.
+```ts
+const mulberry32 = (a: number) => () => { a |= 0; a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+type SceneDef = { id: string; fam: string; len: number; k: number; weight?: number; C: (t: number) => React.ReactNode };
+const secs = (a: SceneDef[]) => a.reduce((x, s) => x + (s.len * s.k) / 30, 0);
+export const pickScenes = (kit: Record<string, SceneDef>, features: SceneDef[], extras: SceneDef[], seed: number, budgetS = 15): SceneDef[] => {
+  const r = mulberry32(seed), shuffle = <T,>(a: T[]) => a.map(v => [r(), v] as const).sort((x, y) => x[0] - y[0]).map(x => x[1]);
+  const head = [kit.logoMorph], tail = [kit.finale], pair = [kit.katanaCut, kit.sparkChat], mid: SceneDef[] = [];
+  const feats = features.map(f => [(f.weight ?? 1) * (0.7 + r() * 0.6), f] as const).sort((a, b) => b[0] - a[0]).map(x => x[1]);
+  for (const s of feats) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s);
+  for (const s of shuffle(extras)) if (secs([...head, ...pair, ...mid, s, ...tail]) <= budgetS) mid.push(s);
+  const m = shuffle(mid), at = Math.floor(r() * (m.length + 1));              // katana + sparks always as a pair, somewhere in the middle
+  return [...head, ...m.slice(0, at), ...pair, ...m.slice(at), ...tail];
 };
+// effect pool: katana and sparks are mandatory, 3-5 of these are drawn at random for every video
+const EFFECTS = ["pixelMorph", "squash", "pageRead", "dollyZoom", "sparkChase", "filmLook", "endLoop"] as const;
+export const pickEffects = (seed: number) => { const r = mulberry32(seed + 7), pool = [...EFFECTS].sort(() => r() - 0.5); return new Set(pool.slice(0, 3 + Math.floor(r() * 3))); };
 ```
-**Katana cut** (known bug to avoid: the corner chip must NOT be missing before the slash; the object stays whole and unclipped until the blade has crossed it). Order of events, always: (1) object whole, nothing masked or clipped, (2) the slash line sweeps across it in ~5 frames, (3) at `tc` the two halves part along the cut, (4) only 5 frames later a crack flashes at a corner and the chip breaks off, falls with spin and one bounce, (5) debris crumbles from the cut edge, small screen shake. Check stills at `tc-2` (must look untouched), `tc`, `tc+4` (halves apart, corner still attached), `tc+8` (chip leaving), `tc+20`.
+**Scene kit** (generic, same for every section; `*` = exists in `Code.tsx`): `logoMorph`* (`IntroScene`, random source object), `cards3`* (`SceneFiles`, the section's real items), `katanaCut`, `sparkChat`, `logoSplitMenu`, `pickItem`, `scrollDive`, `statCounter`, `splitCompare`, `deck3D`, `deviceZoom`, `finale`* (`SceneFinale` / `OutroScene`). First = `logoMorph`, last = `finale`/`outro`, `katanaCut` directly followed by `sparkChat` once, `logoSplitMenu` right after the intro when the page has >= 3 real sections, `pickItem` when the section has a real selectable list, `scrollDive` once when more than one section is shown. Do NOT reuse the scenes of the "Kód na hraní" videos (explainer, preview, autocomplete, exercise, AI chat, plan): they belong to that section.
+**Feature scenes** (the core, at least 3 per video when the section has them, they win over generic extras): for every real part of `[]` write ONE scene `feature_<name>` that redraws that real component in SVG (same structure, real labels) and animates what actually happens when it is used, so a stranger understands the function. Motion by UI pattern: list/ranking -> rows slide in, bars race and reorder, winner morphs into a badge; quiz -> card flips in, options pop, right one morphs into a check mark, score counts; form/search -> typed text, suggestions fan out, picked one morphs into the result card; editor -> typed pane + live result pane reacting with a pulse; chat -> bubbles grow from dots; dashboard/levels -> bars grow, ring fills, level shape gains a side; shop/rewards -> items fall into a basket (squash on landing), chest morphs open; calendar/plan -> days fill, camera flies along a path; lesson/reading -> `PageRead` highlighter + key words turn into sparks; settings/themes -> a colour swap sweeps over the UI; map/board -> camera pulls out, one tile is dived into.
+
+## 5. Recipes (import, then use exactly like this)
+**5.1 Logo morphs out of an object (`IntroScene`)**: the cream outline blob morphs through shapes, becomes the blue tile, the face draws on, the tile flies into the real logo and the other pieces pop. Random object = random list of morph names. Usage: `{ C: IntroScene(false, 1, ["Řádek 1", "Řádek 2"]), len: 98, k: 1.3, fy: -80 }`. Add object shapes in `SH` (`samp([...vertices])`, 140 points) e.g. keycap/bubble/play/gear and pass them as `names` in the `Morph` of `IntroScene`. Use >= 5 morphs per video: object -> logo tile, word box -> chat window, spark cluster -> star -> logo, dot -> bubble, play -> circle -> check, window -> card.
+
+**5.2 Three cards (`SceneFiles`)**: one card splits into 3-4 that fan out with chips popping. Copy the scene, replace the `FILES` array by the section's real items (`[label, chip text, colour]`) and the two kinetic lines.
+
+**5.3 Kinetic type and typewriter**: `<KText id="u1" text="..." x={540} y={1200} size={150} t={t} a={30} mode="rise" st={4} f="p" glow="neon" />` (`mode`: rise, drop, pop, scatter, track; `f`: h/b/p fonts; `maxW` auto-fits). Typewriter: `<TypeLine text="..." x={110} y={500} t={t} a={20} />` from `fx2.tsx`, or `Code` for syntax-coloured code.
+
+**5.4 Katana cut (`Katana`)**. Order is fixed and tested: whole object, blade sweep (5 frames), halves part at `tc`, 5 frames later the corner cracks and falls, debris, small shake. Never mask the corner before the cut. Check stills at `tc-2`, `tc`, `tc+4`, `tc+8`, `tc+20`.
 ```tsx
-const BIG = 4000;
-const half = (A: Pt, B: Pt, side: 1 | -1) => { const dx = B[0] - A[0], dy = B[1] - A[1], l = Math.hypot(dx, dy), nx = -dy / l * side, ny = dx / l * side, ux = dx / l, uy = dy / l;
-  return [[A[0] - ux * BIG, A[1] - uy * BIG], [B[0] + ux * BIG, B[1] + uy * BIG], [B[0] + ux * BIG + nx * BIG, B[1] + uy * BIG + ny * BIG], [A[0] - ux * BIG + nx * BIG, A[1] - uy * BIG + ny * BIG]].map(p => p.join(",")).join(" "); };
-const G = 2.4, fall = (s: number) => 0.5 * G * Math.max(0, s) ** 2;                // px/frame^2, s = frames since the event
-const GLOWB = "drop-shadow(0 0 10px #6ee7ff) drop-shadow(0 0 28px #2ab7ff)";
-const Katana: React.FC<{ t: number; tc: number; A: Pt; B: Pt; chip: Pt[]; id: string; children: React.ReactNode }> = ({ t, tc, A, B, chip, id, children }) => {
-  const s = t - tc, sweep = easeOut(prog(t, tc - 5, tc));
-  const blade = <line x1={A[0]} y1={A[1]} x2={lerp(A[0], B[0], sweep)} y2={lerp(A[1], B[1], sweep)} stroke="#fff" strokeWidth={7 * (1 - clamp(s / 8))} strokeLinecap="round" style={{ filter: GLOWB }} opacity={t >= tc - 5 && s < 9 ? 1 : 0} />;
-  if (s < 0) return <g>{children}{blade}</g>;                                          // 1+2: whole object, blade sweeping
-  const p = easeOut(prog(t, tc, tc + 26)), sep = 34 * p, shake = s < 10 ? Math.sin(s * 3.1) * (10 - s) * 0.8 : 0;
-  const nrm: Pt = [-(B[1] - A[1]), B[0] - A[0]], l = Math.hypot(nrm[0], nrm[1]), nx = nrm[0] / l, ny = nrm[1] / l, mid: Pt = [(A[0] + B[0]) / 2, (A[1] + B[1]) / 2];
-  const chipOn = s >= 5, cs = s - 5, poly = chip.map(q => q.join(",")).join(" ");     // 4: chip only after the crack
-  return <g transform={`translate(${shake} ${-shake * 0.6})`}>
-    <clipPath id={id + "a"}><polygon points={half(A, B, 1)} /></clipPath><clipPath id={id + "b"}><polygon points={half(A, B, -1)} /></clipPath><clipPath id={id + "c"}><polygon points={poly} /></clipPath>
-    <mask id={id + "m"}><rect x={-BIG} y={-BIG} width={2 * BIG} height={2 * BIG} fill="#fff" />{chipOn && <polygon points={poly} fill="#000" />}</mask>
-    <g clipPath={`url(#${id}a)`} transform={`translate(${nx * sep} ${ny * sep}) rotate(${-2.5 * p} ${mid[0]} ${mid[1]})`}>{children}</g>
-    <g clipPath={`url(#${id}b)`}><g mask={`url(#${id}m)`} transform={`translate(${-nx * sep} ${-ny * sep + fall(s - 6) * 0.25}) rotate(${3 * p} ${mid[0]} ${mid[1]})`}>{children}</g></g>
-    {chipOn && <g clipPath={`url(#${id}b)`} transform={`translate(${-nx * sep} ${-ny * sep + fall(s - 6) * 0.25}) rotate(${3 * p} ${mid[0]} ${mid[1]})`}>
-      <g transform={`translate(${cs * 3} ${Math.min(fall(cs), 520)}) rotate(${cs * 7} ${chip[0][0]} ${chip[0][1]})`}><g clipPath={`url(#${id}c)`}>{children}</g></g></g>}
-    {chipOn && cs < 6 && <polyline points={poly} fill="none" stroke="#fff" strokeWidth={4} opacity={1 - cs / 6} style={{ filter: GLOWB }} />}   {/* crack flash at the corner */}
-    {Array.from({ length: 16 }, (_, i) => { const u = i / 15, px = lerp(A[0], B[0], u), py = lerp(A[1], B[1], u), vx = (rnd(i) - 0.5) * 6, vy = -rnd(i + 5) * 3; return <rect key={i} x={px + vx * s} y={py + vy * s + fall(s) * 0.6} width={7} height={7} rx={2} fill={C.cream} opacity={clamp(1 - s / 40)} transform={`rotate(${s * (rnd(i + 9) - 0.5) * 30} ${px + vx * s} ${py})`} />; })}
-    {blade}
-  </g>;
-};
+import { Katana } from "./fx2";
+<Katana t={t} tc={60} A={[170, 760]} B={[910, 1060]} chip={[[760, 830], [920, 830], [920, 930]]} id="k1">
+  {/* the card / title object, drawn once; children are rendered several times */}
+</Katana>
 ```
-(`chip` = a triangle at one corner of the object on side B of the cut. Add a one-frame white flash at `tc`. Titles and text inside the object are sliced with it, they do not dissolve before the cut.)
-
-**Cursor, click and the accelerating dive** (for `logoSplitMenu`, `pickItem`, `scrollDive`): the cursor moves on a eased path with a tiny overshoot, the camera zooms to the click target BEFORE the click (so the viewer sees where it lands), the click is a press (button drops by its depth offset) + ripple, then the button expands into the next scene.
+**5.5 Sparks and chat (`Sparks`, `sparksFromWord`)**: letters of the cut word become sparks with motion-blur trails, they fly into a chat window, each spark lands in a slot, a ring bursts, a circle morphs into a bubble (`Morph` with `sx`/`sy` growing) and a sentence is typed.
 ```tsx
-const Cursor: React.FC<{ x: number; y: number; press?: number; o?: number }> = ({ x, y, press = 0, o = 1 }) => (
-  <g transform={`translate(${x} ${y}) scale(${1 - 0.12 * press})`} opacity={o} style={{ filter: "drop-shadow(0 4px 6px rgba(0,0,0,.5))" }}>
-    <path d="M0 0 L0 38 L10 29 L17 44 L25 40 L18 26 L31 26 Z" fill={C.cream} stroke={C.ink} strokeWidth={3} strokeLinejoin="round" />
-  </g>
-);
-const Ripple: React.FC<{ x: number; y: number; t: number; a: number }> = ({ x, y, t, a }) => { const p = prog(t, a, a + 18); return p > 0 && p < 1 ? <circle cx={x} cy={y} r={20 + 120 * easeOut(p)} fill="none" stroke={C.yellow} strokeWidth={5 * (1 - p)} opacity={1 - p} /> : null; };
-const lerpPath = (pts: Pt[], u: number): Pt => { const f = clamp(u) * (pts.length - 1), i = Math.min(pts.length - 2, Math.floor(f)), e = easeIO(f - i); return [lerp(pts[i][0], pts[i + 1][0], e), lerp(pts[i][1], pts[i + 1][1], e)]; };
-// button press: depth 8 px -> 2 px while pressed;  camera zoom to the click target:  { x: bx, y: by, s: 1.0 -> 1.6 } over the 20 frames before the press
-// slow-start accelerating vertical dive: long ramp, no pauses, soft landing (quintic in-out starts very slowly, speeds up, then settles)
-const easeIO5 = (u: number) => (u < 0.5 ? 16 * u ** 5 : 1 - ((-2 * u + 2) ** 5) / 2);
-const dive = (u: number, y0: number, y1: number) => lerp(y0, y1, easeIO5(clamp(u)));         // use >= 40 frames, blur from speed as in the camera
+const list = sparksFromWord(glyphCentres, slotPoints, t0);   // glyphCentres from the KText layout of the word
+<Sparks t={t} list={list} />
 ```
-Logo split: draw the real logo pieces (`LogoRow`) clipped by two half-planes (`half()` above, vertical cut line through the middle), slide the halves left/right with easeOut + a small roll, keep the buttons in the gap in front of a dark slot; the halves close again at the end of the scene.
+**5.6 Spark chase camera (`sparkCam`)**: the camera rides behind one spark through the whole transition: give the scene `cam: t => sparkCam(list[0], t)` in its `Sc`.
 
-**Sparks with motion blur** deterministic particles on quadratic Béziers, drawn as a tapered trail of N samples behind the head (that trail IS the motion blur); spawn them from letter positions of a word, fade the letter as its spark leaves:
+**5.7 Pixel dissolve and reassemble (`PixelMorph`)**: a word / card bursts into square pixels that fly in and form the logo tile or the next object. Rasterize any drawing to cells once (module scope), then animate `p` from 0 to 1.
 ```tsx
-type Spark = { x0: number; y0: number; cx: number; cy: number; x1: number; y1: number; a: number; dur: number; w: number };
-const bez = (s: Spark, u: number): Pt => { const m = 1 - u; return [m * m * s.x0 + 2 * m * u * s.cx + u * u * s.x1, m * m * s.y0 + 2 * m * u * s.cy + u * u * s.y1]; };
-const Sparks: React.FC<{ t: number; list: Spark[] }> = ({ t, list }) => (
-  <g style={{ filter: "drop-shadow(0 0 6px #ffc933) drop-shadow(0 0 18px #ff9b3c)" }}>
-    {list.map((s, i) => { const u = easeIO(clamp((t - s.a) / s.dur)); if (u <= 0 || u >= 1) return null; const N = 9, tail = 0.05 + 0.22 * Math.sin(Math.PI * u);   // longer trail at speed
-      const pts = Array.from({ length: N }, (_, j) => bez(s, clamp(u - (j / N) * tail)));
-      return <g key={i}>{pts.slice(1).map((q, j) => <line key={j} x1={pts[j][0]} y1={pts[j][1]} x2={q[0]} y2={q[1]} stroke={j < 3 ? "#fff6cf" : "#ffc933"} strokeWidth={s.w * (1 - j / N)} strokeLinecap="round" opacity={1 - j / N} />)}<circle cx={pts[0][0]} cy={pts[0][1]} r={s.w * 0.8} fill="#fff" /></g>; })}
-  </g>
-);
-// letters -> sparks: one spark per glyph, start = glyph centre, control point = random big arc, end = chat slot i
-const sparksFromWord = (xs: Pt[], slots: Pt[], a: number): Spark[] => xs.map((p, i) => ({ x0: p[0], y0: p[1], cx: p[0] + (rnd(i) - 0.3) * 700, cy: p[1] - 300 - rnd(i + 3) * 500, x1: slots[i % slots.length][0], y1: slots[i % slots.length][1], a: a + i * 1.5, dur: 34 + rnd(i + 7) * 14, w: 5 + rnd(i + 1) * 5 }));
+import { rasterCells, PixelMorph } from "./fx2";
+const A = rasterCells(720, 240, 10, g => { g.fillStyle = "#f6f1e4"; g.font = "800 190px Onest"; g.fillText("KÓD", 20, 200); });
+const B = rasterCells(300, 300, 10, g => { g.fillStyle = "#3248f0"; g.beginPath(); g.roundRect(20, 20, 260, 260, 80); g.fill(); });
+<PixelMorph A={A} B={B} ax={180} ay={620} bx={390} by={600} p={prog(t, 10, 52)} cell={10} />
 ```
-Add a speed-line/streak layer behind the sparks, and let the camera chase the sparks (camera target = centroid of the sparks in flight) so the transition is one move.
+**5.8 Rubber (squash and stretch)**: every card/button/bubble that lands or is pressed squashes and springs back, flying objects stretch along their motion.
+```tsx
+import { Squash, stretchAlong } from "./fx2";
+<Squash t={t} t0={landingFrame} px={540} py={640}>{card}</Squash>          // pivot at the bottom edge of the object
+<g transform={`translate(${x} ${y}) ${stretchAlong(vx, vy)}`}>{flyingCard}</g>
+```
+**5.9 Page reading (`PageRead`)**: a yellow highlighter glides word to word over a text, read words stay bright, unread dim, key words get a drawn underline.
+`<PageRead x={90} y={1000} width={900} text="..." t={t} a={58} focus={[3, 7]} />`
+**5.10 Dolly zoom (`DollyZoom`)**: just before the katana cut the subject grows while the background shrinks (vertigo).
+`<DollyZoom t={t} a={20} b={58} cx={540} cy={900} amount={0.5} fg={<Subject />} bg={<Background />} />`
+**5.11 Cursor, click, menu, pick, dive**: `Cursor` follows `lerpPath(points, u)`, the camera zooms to the target BEFORE the press, press = the button drops by its depth offset and `Ripple` fires, then the button expands into the next scene (match cut). `logoSplitMenu`: slice the real logo (`LogoRow`) with two half-planes and slide the halves apart, put the buttons (real section labels) in the gap. `pickItem`: cursor hovers two options, presses one, the chosen window flies in from the side with overshoot and squash. `scrollDive`: camera descends through the stacked sections of the page using `y = lerp(y0, y1, easeIO5(u))` (slow start, accelerating, soft landing), >= 40 frames, parallax layers at different speeds.
+```tsx
+import { Cursor, Ripple, lerpPath, easeIO5 } from "./fx2";
+const [cx_, cy_] = lerpPath([[900, 1500], [560, 800], [540, 760]], prog(t, 20, 60));
+<Cursor x={cx_} y={cy_} press={clamp(1 - Math.abs(t - 64) / 3)} /> <Ripple x={540} y={760} t={t} a={64} />
+```
+**5.12 Film look and seamless loop**: `createFilm(scenes, audio, { film: true, loop: true })` adds chromatic aberration (grows with camera speed) + animated grain and removes the fades. For the loop the closing 24 frames play the opening morph in reverse (`loopP(frame, total)` drives `u = 1 - loopP`), so the last frame equals the first. Check: render frame 0 and the last frame, `ffmpeg -i a.jpg -i b.jpg -lavfi psnr -f null -` must give PSNR above 30 dB.
 
-**Spark -> chat bubble -> sentence**: when spark i arrives (`t >= s.a + s.dur`) draw a ring burst at its end point, morph a circle (r 12) into a squircle bubble (`Morph` with `sx`,`sy` growing, fill `#1c1936`, stroke `#6a63ad`; user bubbles blue `#3248f0`), then `TypeLine` the sentence inside. Bubbles stack downward in the chat window (`Win` with title "chat"), earlier ones shift up by one slot with an eased translate.
+## 6. Sound: effects only, no music
+- **No music, no drone, no pads, no melodies, no sine blips, no electric zaps.** Only what the real thing would sound like: `audio/sfx_real.py` has them all: `click` (plastic mouse press + release), `key` (mechanical key thock), `whoosh` (air), `swish` (blade through air), `katana` (swish, then cut thud + steel ring on the hit frame), `chip` (corner chip clinks and bounces), `debris`, `crackle` (sparks like fire crackle), `page`, `tok` (wooden tap for a chat bubble), `cloth` (card sliding in), `impact` (short heavy body hit for slams), `thud`, `steel`.
+- Mapping: cursor press = `click`; katana cut = `katana` placed so its hit lands on the cut frame (`t0 = cut - 0.18 s`) + `chip` 0.3 s after + `debris`; sparks = `crackle` + `whoosh`; every typed character = `key`; chat bubble arrives = `tok`; card landing = `cloth`/`tok`; slam = `impact`; camera swoops = soft `whoosh`.
+- **Random:** `audio/showcase_sfx.py` decides per scene with the seed whether it gets sound (mandatory: katanaCut, sparkChat, logoSplitMenu, pickItem; others p = 0.7), randomizes seeds, pan and which swoops get a whoosh. Write the exact moments the picture decides (cut frame, click frame, spark arrivals) into `scenes.json` under `extra`, then:
+```bash
+python3 audio/showcase_sfx.py 2d/<name>/scenes.json public/<name>/sfx.wav     # needs numpy + scipy (pip install scipy)
+```
+```json
+{ "seed": 4242, "fps": 30, "frames": 450, "order": [
+  {"id": "logoMorph", "start": 0.0, "dur": 2.2},
+  {"id": "katanaCut", "start": 4.2, "dur": 2.0, "extra": {"cut": 4.9}},
+  {"id": "sparkChat", "start": 6.2, "dur": 3.2, "extra": {"arrive0": 7.4, "arrive1": 7.9, "arrive2": 8.4}},
+  {"id": "logoSplitMenu", "start": 9.4, "dur": 2.6, "extra": {"click": 11.0}} ] }
+```
+- Level: peak about -3 dBFS, quiet bed (no music), the katana hit is the loudest event. The track starts at full level and ends in a short fade (loop friendly). Report that the effects were measured, not auditioned.
 
-**More morphs** (use at least five per part): object -> logo tile, word box -> chat window, spark cluster -> star -> logo, circle dot -> bubble, play triangle -> circle -> check mark, window -> card -> window. Always equal point counts, eased, with echo trails, colour cross-fade.
+## 7. Build, check, deliver
+1. Create `2d/src/<Name>.tsx` with the picked `Sc` list per video, register `<Name>Dil1` etc. in `Root.tsx`, `npx tsc --noEmit` clean.
+2. Stills: `COMP=<Id> GL=swangle CHROME_PATH=/opt/pw-browsers/chromium REMOTION_TMP=/tmp/remotion-tmp node 2d/stills.mjs out/c_ <frames> 0.3`, then `ffmpeg -i a.jpg -i b.jpg ... -filter_complex hstack=inputs=N sheet.jpg` and look at it. Always check: the end of the logo morph, a mid-swoop frame, katana `tc-2/tc/tc+4/tc+8`, spark flight, each bubble, the frame before every click (cursor on the right target, camera already zoomed), the middle of the dive, first vs last frame (loop). Fix text wider than the frame (`maxW`), overlaps, text that starts while the camera is still fast.
+3. Render as a tracked background job: `npx remotion render 2d/src/index.ts <Id> out/<name>.mp4 --codec h264 --crf 18 --audio-codec aac --gl=swangle --browser-executable=/opt/pw-browsers/chromium --concurrency=2` (about 2.3 s/frame, film look a bit slower). Verify with `ffprobe` (1080x1920, <= 15 s, audio stream) before saying it is done, send the file directly.
+4. Commit sources, `scenes.json`, `public/<name>/sfx.wav`; never mp4. Report: seed, picked scene order, picked effects, which real features got scenes and which were skipped and why, what is invented, and that the sound was measured but not auditioned.
 
-## 4. Audio (original, `audio/<name>_mix.py`, copy `audio/code_mix.py`)
-D minor, ~100 bpm, bar grid chosen so the final logo hit is on a downbeat. Quiet drone while the logo forms, pulse enters at the title, **katana hit = metallic ring (resonant partials + noise burst) + sub boom at the exact cut frame, short silence of the music for 3 frames then it returns louder**, spark fizz = high-passed noise sweeps panned with the sparks, riser into the chat, one soft pluck note per bubble, typewriter ticks, chat pops, final D major chord + shimmer. Output `public/<name>/partN.wav` (exactly the video length), loudness -15 LUFS, peak < -1 dBFS.
-
-## 5. Build and check
-- Files: `2d/src/<Name>.tsx` with `createFilm(...)` per part, register `KodX`-style compositions in `Root.tsx`, `npx tsc --noEmit` clean.
-- Always check the katana frames `tc-2`, `tc`, `tc+4`, `tc+8` (object whole before the cut, corner attached until the crack), the frame just before each click (cursor over the right target, camera already zoomed), and the middle of the dive.
-- Check stills at: end of logo morph, mid title, the cut frame (+0, +6, +20), mid spark flight, each bubble, last frame; fix overlaps and cut-off text. Check that no text starts during a fast camera move.
-- Render per part: `npx remotion render 2d/src/index.ts <CompId> out/<name>-dilN.mp4 --codec h264 --crf 18 --audio-codec aac --gl=swangle --browser-executable=/opt/pw-browsers/chromium --concurrency=2` (run as a tracked background job, ~2.3 s/frame).
-- Commit sources + wavs, never mp4. Deliver each mp4 directly; report length, what was invented, and that the mix was measured but not auditioned.
+## 8. Don'ts
+No music, no voice, no captions over the picture, no stock sounds, no features or numbers that are not real, no hard cuts, no fast text, no rewriting what the repos already provide, no timeline tables in the answer.
