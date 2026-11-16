@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How Do Tomatoes Grow</title>
+<style>
+html,body{margin:0;height:100%;background:#12181a;color:#e8eef0;font:14px system-ui,sans-serif}
+#app{display:flex;flex-direction:column;height:100%}
+#stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+canvas{max-width:100%;max-height:100%;aspect-ratio:16/9;background:#a5cde6}
+#bar{display:flex;gap:12px;align-items:center;padding:10px 16px;background:#1b2427}
+button{background:#2b373b;color:inherit;border:0;border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+button[aria-pressed=true]{background:#3f7d5a}
+#seek{flex:1;min-width:0}#time{font-variant-numeric:tabular-nums;min-width:90px;text-align:right}
+body.render #bar{display:none}
+</style>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js"}}</script>
+</head><body>
+<div id="app"><div id="stage"><canvas id="c" width="1920" height="1080"></canvas></div>
+<div id="bar"><button id="play">Play</button><input id="seek" type="range" min="0" max="1" step="0.001" value="0" aria-label="Scrub"><span id="time">0.0 / 0.0 s</span>
+<button id="snd" aria-pressed="true">Sound on</button><button id="loop" aria-pressed="true">Loop on</button></div></div>
+<script type="text/plain" id="k-stage">/*STAGE*/</script>
+<script type="text/plain" id="k-sound">/*SOUND*/</script>
+<script type="text/plain" id="k-style">/*STYLE*/</script>
+<script type="module">
+import * as THREE from 'three'; window.THREE = THREE;
+for (const id of ['k-stage', 'k-sound', 'k-style']) { const s = document.createElement('script'); s.textContent = document.getElementById(id).textContent; document.head.appendChild(s); }
+const q = new URLSearchParams(location.search), render = q.has('render');
+if (render) document.body.classList.add('render');
+const style = STYLES[0], canvas = document.getElementById('c');
+const S = await K.run(canvas, style, { samples: +(q.get('samples') || (render ? style.render.samples : 3)) });
+window.seek = (t) => S.seek(t); window.DURATION = style.duration; window.STYLE = style;
+const $ = (id) => document.getElementById(id), D = style.duration;
+let t = 0, playing = false, soundOn = true, loop = true, stopSound = () => {}, last = 0;
+const show = () => { $('seek').value = t / D; $('time').textContent = t.toFixed(1) + ' / ' + D.toFixed(1) + ' s'; };
+const draw = () => { S.seek(t); show(); };
+const startSound = () => { stopSound(); if (soundOn && playing) stopSound = SOUND.live((k) => style.sound(k), t, { voiceover: false }); };
+const stop = () => { stopSound(); stopSound = () => {}; };
+function frame(now) {
+  if (!playing) return;
+  t += (now - last) / 1000; last = now;
+  if (t >= D) { if (loop) { t = 0; startSound(); } else { t = D; playing = false; stop(); $('play').textContent = 'Play'; } }
+  draw(); requestAnimationFrame(frame);
+}
+$('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'Pause' : 'Play'; if (playing) { if (t >= D) t = 0; last = performance.now(); startSound(); requestAnimationFrame(frame); } else stop(); };
+$('seek').oninput = (e) => { t = +e.target.value * D; stop(); draw(); if (playing) startSound(); };
+$('snd').onclick = () => { soundOn = !soundOn; $('snd').setAttribute('aria-pressed', soundOn); $('snd').textContent = soundOn ? 'Sound on' : 'Sound off'; if (soundOn) startSound(); else stop(); };
+$('loop').onclick = () => { loop = !loop; $('loop').setAttribute('aria-pressed', loop); $('loop').textContent = loop ? 'Loop on' : 'Loop off'; };
+draw();
+</script>
+</body></html>
