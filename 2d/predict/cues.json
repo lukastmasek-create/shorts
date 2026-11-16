@@ -1,0 +1,192 @@
+[
+ {
+  "scene": 0,
+  "start": 0,
+  "len": 189,
+  "phrases": [
+   {
+    "text": "What if an AI could predict your death?",
+    "a": 13,
+    "b": 77
+   },
+   {
+    "text": "It gives you a date,",
+    "a": 93,
+    "b": 118
+   },
+   {
+    "text": "and will not explain why.",
+    "a": 127,
+    "b": 168
+   }
+  ]
+ },
+ {
+  "scene": 1,
+  "start": 189,
+  "len": 266,
+  "phrases": [
+   {
+    "text": "Medicine already tries a version of this.",
+    "a": 11,
+    "b": 82
+   },
+   {
+    "text": "In twenty eighteen,",
+    "a": 98,
+    "b": 125
+   },
+   {
+    "text": "Stanford researchers trained an AI on hospital records.",
+    "a": 137,
+    "b": 249
+   }
+  ]
+ },
+ {
+  "scene": 2,
+  "start": 455,
+  "len": 217,
+  "phrases": [
+   {
+    "text": "It estimates who may die within three to twelve months,",
+    "a": 11,
+    "b": 102
+   },
+   {
+    "text": "so palliative care teams can reach them in time.",
+    "a": 114,
+    "b": 195
+   }
+  ]
+ },
+ {
+  "scene": 3,
+  "start": 672,
+  "len": 179,
+  "phrases": [
+   {
+    "text": "In twenty twenty,",
+    "a": 11,
+    "b": 37
+   },
+   {
+    "text": "researchers fed an AI a simple heart tracing,",
+    "a": 48,
+    "b": 130
+   },
+   {
+    "text": "an ECG.",
+    "a": 143,
+    "b": 153
+   }
+  ]
+ },
+ {
+  "scene": 4,
+  "start": 851,
+  "len": 306,
+  "phrases": [
+   {
+    "text": "It predicted who would die within a year,",
+    "a": 10,
+    "b": 73
+   },
+   {
+    "text": "even when doctors read the ECG as normal.",
+    "a": 87,
+    "b": 175
+   },
+   {
+    "text": "Cardiologists could not spot the pattern it used.",
+    "a": 194,
+    "b": 281
+   }
+  ]
+ },
+ {
+  "scene": 5,
+  "start": 1157,
+  "len": 272,
+  "phrases": [
+   {
+    "text": "In twenty twenty-three,",
+    "a": 11,
+    "b": 45
+   },
+   {
+    "text": "Danish researchers went further.",
+    "a": 57,
+    "b": 108
+   },
+   {
+    "text": "They gave an AI the health and work records of about six million people.",
+    "a": 129,
+    "b": 253
+   }
+  ]
+ },
+ {
+  "scene": 6,
+  "start": 1429,
+  "len": 146,
+  "phrases": [
+   {
+    "text": "It predicted early death over four years better than other models.",
+    "a": 12,
+    "b": 129
+   }
+  ]
+ },
+ {
+  "scene": 7,
+  "start": 1575,
+  "len": 139,
+  "phrases": [
+   {
+    "text": "But it only knew Denmark.",
+    "a": 11,
+    "b": 45
+   },
+   {
+    "text": "And accidents stay unforeseeable.",
+    "a": 61,
+    "b": 118
+   }
+  ]
+ },
+ {
+  "scene": 8,
+  "start": 1714,
+  "len": 136,
+  "phrases": [
+   {
+    "text": "(segment 0)",
+    "a": 11,
+    "b": 51
+   },
+   {
+    "text": "(segment 1)",
+    "a": 68,
+    "b": 115
+   }
+  ]
+ },
+ {
+  "scene": 9,
+  "start": 1850,
+  "len": 130,
+  "phrases": [
+   {
+    "text": "Would you open it,",
+    "a": 11,
+    "b": 34
+   },
+   {
+    "text": "or would you rather not know?",
+    "a": 45,
+    "b": 83
+   }
+  ]
+ }
+]

@@ -1,0 +1,10 @@
+What if an AI could predict your death? It gives you a date, and will not explain why.
+Medicine already tries a version of this. In twenty eighteen, Stanford researchers trained an AI on hospital records.
+It estimates who may die within three to twelve months, so palliative care teams can reach them in time.
+In twenty twenty, researchers fed an AI a simple heart tracing, an ECG.
+It predicted who would die within a year, even when doctors read the ECG as normal. Cardiologists could not spot the pattern it used.
+In twenty twenty-three, Danish researchers went further. They gave an AI the health and work records of about six million people.
+It predicted early death over four years better than other models.
+But it only knew Denmark. And accidents stay unforeseeable.
+So the date is not a fact. It is a probability, with error.
+Would you open it, or would you rather not know?
