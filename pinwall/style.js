@@ -229,6 +229,37 @@
       };
     },
 
-    sound(k) { /* written after storyboard approval */ },
+    sound(k) {
+      const K = globalThis.K, E0 = ERUPTIONS[0].at;
+      k.bed('room', 0, DURATION, { gain: 1.0 });
+      // pins sliding in their holes: a faint tick cloud all through
+      k.withMinor(() => { for (let t = 0, j = 0; t < DURATION; t += 0.03, j++) k.play('tick', t + 0.01 * K.hash(j, 5), { gain: 0.05 + 0.04 * K.hash(j, 1), f: 4200 + 3600 * K.hash(j, 2), pan: K.hash(j, 3) * 1.6 - 0.8 }); });
+      // caption plates: a small tock as each one lands
+      BEATS.forEach((b, i) => { if (i) k.play('tock', b.at + 0.08, { gain: 0.3, f: 700 }); });
+      // deep rumble swelling from below, cut dead just before the blast so the blast reads
+      const rl = E0 - 0.07 - 0.3;
+      k.tone(0.3, { f: [[0, 34], [rl, 62]], dur: rl, gain: 0.14, a: rl * 0.85 });
+      k.noise(0.3, { dur: rl, color: 'brown', filter: 'lowpass', f: [[0, 110], [rl, 480]], gain: 0.12, a: rl * 0.9 });
+      // tremors: a soft thud for each ring crossing the plain
+      TREMORS.forEach((e) => k.play('thud', e.at, { gain: 0.18 + e.a * 2.5, f: 70 + e.a * 150 }));
+      // cracks opening: ticks that get denser, then a riser
+      for (let t = 3.3, j = 0; t < E0 - 0.08; t += 0.2 - 0.15 * K.seg(t, 3.3, E0), j++) k.play('click', t, { gain: 0.5 + 0.8 * K.seg(t, 3.3, E0), f: 1200 + 1800 * K.hash(j, 4), pan: (K.hash(j, 6) - 0.5) * 0.6 });
+      k.play('riser', 4.05, { dur: 0.7, gain: 0.5 });
+      // eruptions: blow, sub drop, steam, pins of the cone jumping, the ring leaving, bombs landing, lava hissing
+      ERUPTIONS.forEach((e, n) => {
+        k.play('impact', e.at, { gain: 0.85 * e.adds, f: 92 - n * 6 });
+        k.tone(e.at, { f: [[0, 74 - n * 5], [0.6, 33]], dur: 1.0, gain: 0.5, a: 0.006 });
+        k.noise(e.at, { dur: 0.7, filter: 'highpass', f: [[0, 2600], [0.7, 900]], gain: 0.2, a: 0.03, verb: 0.3 });
+        k.withMinor(() => { for (let t = e.at, j = 0; t < e.at + 0.95; t += 0.008, j++) { const u = (t - e.at) / 0.95; k.play('tick', t, { gain: 0.5 * Math.pow(1 - u, 1.4) * (0.5 + 0.5 * K.hash(j, n)), f: 3000 + 3800 * K.hash(j, n, 3), pan: (K.hash(j, n, 4) - 0.5) * (0.4 + 1.2 * u) }); } });
+        k.play('whoosh', e.at + 0.35, { gain: 0.42, dur: 1.5, top: 1800, pan: n % 2 ? 0.3 : -0.3 });
+        for (let j = 0; j < 7; j++) k.play('pop', e.at + 0.6 + 0.9 * K.hash(j, n, 7), { gain: 0.1 + 0.08 * K.hash(j, n, 8), f: 500 + 700 * K.hash(j, n, 9), pan: (K.hash(j, n, 10) - 0.5) * 1.2 });
+        k.noise(e.at + 0.3, { dur: 2.3, color: 'pink', filter: 'bandpass', f: 3200, q: 0.5, gain: 0.07 * (n === 0 ? 1 : 0.8), a: 0.5, pan: n % 2 ? 0.25 : -0.25 });
+      });
+      // the volcano stands: one low warm note, one bell, the room goes on
+      const end = BEATS[BEATS.length - 1].at;
+      k.tone(end, { f: 'D3', type: 'triangle', dur: DURATION - end, gain: 0.065, a: 0.5, hold: 1.2, filter: 'lowpass', f2: 900, verb: 0.3 });
+      k.tone(end, { f: 'A3', dur: DURATION - end, gain: 0.045, a: 0.6, hold: 1.2, verb: 0.3 });
+      k.play('ding', end + 0.1, { gain: 0.3, f: 'A5' });
+    },
   });
 }

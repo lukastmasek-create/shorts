@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How do volcanoes appear - Pin Wall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500&family=Oswald:wght@500&display=swap" rel="stylesheet">
+<style>
+html,body{margin:0;height:100%;background:#050507;color:#cfd5e0;font:500 14px Inter,system-ui,sans-serif}
+#app{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+#stage{position:relative;aspect-ratio:16/9;width:min(100vw,calc((100vh - 60px) * 16 / 9));background:#000}
+canvas{width:100%;height:100%;display:block}
+#bar{display:flex;gap:12px;align-items:center;width:min(100vw,calc((100vh - 60px) * 16 / 9));padding:0 8px;box-sizing:border-box}
+button{background:#1a1d24;color:#eef1f6;border:1px solid #333a46;border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid #ff7a2e}
+input[type=range]{flex:1;accent-color:#ff7a2e}
+#time{min-width:92px;text-align:right;font-variant-numeric:tabular-nums}
+</style></head><body>
+<div id="app"><div id="stage"><canvas id="c"></canvas></div>
+<div id="bar"><button id="play">Pause</button><input id="scrub" type="range" min="0" max="1000" value="0" aria-label="Scrub"><span id="time">0.0 / 0.0</span><button id="snd">Sound: on</button><button id="loop">Loop: on</button></div></div>
+<script type="text/plain" id="k-stage">/*STAGE*/</script>
+<script type="text/plain" id="k-sound">/*SOUND*/</script>
+<script type="text/plain" id="k-style">/*STYLE*/</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+window.THREE = THREE;
+for (const id of ['k-stage', 'k-sound', 'k-style']) { const s = document.createElement('script'); s.textContent = document.getElementById(id).textContent; document.head.appendChild(s); }
+const q = new URLSearchParams(location.search), style = STYLES[0], $ = (i) => document.getElementById(i);
+const live = +q.get('samples') || 3;
+const S = await K.run($('c'), style, { samples: live, width: +q.get('w') || 1920, height: +q.get('h') || 1080 });
+window.S = S; window.DURATION = style.duration; window.seek = (t) => S.seek(t); window.ready = true;
+if (!q.has('render')) {
+  const D = style.duration; let t = 0, playing = true, loop = true, sound = true, last = performance.now(), stopSound = () => {}, idle = 0;
+  const fmt = (x) => x.toFixed(1);
+  const startSound = () => { stopSound(); if (sound && playing) stopSound = SOUND.live((k) => style.sound(k), t, { voiceover: false }); else stopSound = () => {}; };
+  const draw = (n) => { S.seek(t, n); $('scrub').value = Math.round(t / D * 1000); $('time').textContent = fmt(t) + ' / ' + fmt(D); };
+  $('play').onclick = () => { playing = !playing; $('play').textContent = playing ? 'Pause' : 'Play'; if (playing && t >= D) t = 0; last = performance.now(); startSound(); if (!playing) draw(12); };
+  $('scrub').oninput = (e) => { t = e.target.value / 1000 * D; stopSound(); draw(12); idle = performance.now(); if (playing) { startSound(); } };
+  $('snd').onclick = () => { sound = !sound; $('snd').textContent = 'Sound: ' + (sound ? 'on' : 'off'); sound ? startSound() : stopSound(); };
+  $('loop').onclick = () => { loop = !loop; $('loop').textContent = 'Loop: ' + (loop ? 'on' : 'off'); };
+  startSound();
+  const tick = (now) => {
+    if (playing) {
+      t += (now - last) / 1000;
+      if (t >= D) { if (loop) { t = 0; startSound(); } else { t = D; playing = false; $('play').textContent = 'Play'; stopSound(); } }
+      draw(live);
+    }
+    last = now; requestAnimationFrame(tick);
+  };
+  draw(live); requestAnimationFrame(tick);
+}
+</script></body></html>
