@@ -124,14 +124,15 @@ const URL_TEXT = "ucimesehrou.org/ucime-pro";
 
 // ---------------------------------------------------------------- one timeline (frames @30)
 export const CUE = {
-  scroll: {start: 36, end: 96},
-  click1: 148, click2: 236,
-  pill1: {start: 150, end: 176}, pill2: {start: 238, end: 264},
-  rodIn: 160, rodOut: 240, skIn: 246,
-  uiOut: {start: 328, end: 346}, dock: {start: 330, end: 366},
-  wordIn: 346, urlIn: 360,
+  open: {start: 16, end: 50}, wordOut: {start: 16, end: 32}, uiIn: {start: 34, end: 54},
+  scroll: {start: 58, end: 102},
+  click1: 136, click2: 224,
+  pill1: {start: 138, end: 164}, pill2: {start: 226, end: 252},
+  rodIn: 148, rodOut: 228, skIn: 234,
+  uiOut: {start: 316, end: 334}, dock: {start: 318, end: 354},
+  wordIn: 334, urlIn: 348,
 };
-export const PRO_FRAMES = 444;
+export const PRO_FRAMES = 432;
 const W = 1920, H = 1080;
 const ROW_H = 120, ROW_S = 132, RAIL = 252, BODY_BOTTOM = 1020, SCROLL_MAX = 330;
 
@@ -193,14 +194,14 @@ const Scene: React.FC<{f: number}> = ({f}) => {
 
   // ---- pointer (same clock as the sound cues)
   const D1: Point = [1180, 560], C0: Point = [1460, 700], D2: Point = [1500, 640];
-  const cm1 = clickMotion(f, CUE.click1, C0, centre(1), 112, 6, 3, 8);
-  const cm2 = clickMotion(f, CUE.click2, D1, centre(2), 204, 6, 3, 8);
+  const cm1 = clickMotion(f, CUE.click1, C0, centre(1), 100, 6, 3, 8);
+  const cm2 = clickMotion(f, CUE.click2, D1, centre(2), 192, 6, 3, 8);
   let cur: {x: number; y: number; press: number};
-  if (f < 158) cur = cm1;
-  else if (f < 204) { const t = easeInOutQuintic(beat(f, 158, 42)); cur = {x: mix(centre(1)[0], D1[0], t), y: mix(centre(1)[1], D1[1], t), press: 0}; }
-  else if (f < 252) cur = cm2;
-  else { const t = easeInOutQuintic(beat(f, 252, 40)); cur = {x: mix(centre(2)[0], D2[0], t), y: mix(centre(2)[1], D2[1], t), press: 0}; }
-  const curO = 1 - beat(f, 314, 14);
+  if (f < 146) cur = cm1;
+  else if (f < 192) { const t = easeInOutQuintic(beat(f, 146, 42)); cur = {x: mix(centre(1)[0], D1[0], t), y: mix(centre(1)[1], D1[1], t), press: 0}; }
+  else if (f < 240) cur = cm2;
+  else { const t = easeInOutQuintic(beat(f, 240, 40)); cur = {x: mix(centre(2)[0], D2[0], t), y: mix(centre(2)[1], D2[1], t), press: 0}; }
+  const curO = Math.min(beat(f, 40, 10), 1 - beat(f, 302, 14));
   const press = (i: number) => (i === 1 ? cm1 : i === 2 ? cm2 : {buttonScale: 1, buttonY: 0, press: 0});
 
   // ---- layers
@@ -212,10 +213,10 @@ const Scene: React.FC<{f: number}> = ({f}) => {
   ];
   const inAt = [0, CUE.rodIn, CUE.skIn];
   const rowEnter = (tab: number, i: number) => (tab === 0 ? {o: 1, dy: 0} : {o: easeOut(beat(f, inAt[tab] + i * 4, 16)), dy: 26 * (1 - easeOut(beat(f, inAt[tab] + i * 4, 16)))});
-  const uiO = 1 - beat(f, CUE.uiOut.start, CUE.uiOut.end - CUE.uiOut.start);
+  const uiO = Math.min(beat(f, CUE.uiIn.start, CUE.uiIn.end - CUE.uiIn.start), 1 - beat(f, CUE.uiOut.start, CUE.uiOut.end - CUE.uiOut.start));
 
   // ---- brand icon: the single mark instance, header -> lockup
-  const dock = f < CUE.dock.start ? HEADER_DOCK : brandDockPose(f, CUE.dock, HEADER_DOCK, LOCK_DOCK);
+  const dock = f < CUE.dock.start ? brandDockPose(f, CUE.open, LOCK_DOCK, HEADER_DOCK) : brandDockPose(f, CUE.dock, HEADER_DOCK, LOCK_DOCK);
 
   const stripIcons = (tab: number) => LISTS[tab].slice(0, 3);
   const avX = 96 + 36 + geo.labelW + 40;
@@ -234,7 +235,7 @@ const Scene: React.FC<{f: number}> = ({f}) => {
           );
         })}
         {(() => {
-          const p = press(f < 200 ? 1 : 2);
+          const p = press(f < 188 ? 1 : 2);
           return (
             <g transform={`translate(${pillX + pillW / 2} ${tabY + tabH / 2 + p.buttonY}) scale(${p.buttonScale}) translate(${-pillX - pillW / 2} ${-tabY - tabH / 2})`} style={{filter: "drop-shadow(0 0 16px rgba(90,108,255,.55))"}}>
               <rect x={pillX} y={tabY} width={pillW} height={tabH} rx={tabH / 2} fill="#2433b8" />
@@ -293,7 +294,7 @@ const Scene: React.FC<{f: number}> = ({f}) => {
       {/* wordmark (parts 5..) appears at its destination while the mark docks */}
       <g transform={`translate(${LOCK_X} ${LOCK_Y}) scale(${LOCK_S}) translate(${-LOGO_O[0]} ${-LOGO_O[1]})`}>
         {LOGO_PARTS.slice(5).map((p, j) => {
-          const t = easeOut(beat(f, CUE.wordIn + j * 1.4, 12));
+          const t = f < CUE.wordIn ? 1 - beat(f, CUE.wordOut.start + j * 0.8, 12) : easeOut(beat(f, CUE.wordIn + j * 1.4, 12));
           if (t <= 0) return null;
           return <g key={j} opacity={t} transform={`translate(${p.cx} ${p.cy + 10 * (1 - t)}) scale(${0.8 + 0.2 * t}) translate(${-p.cx} ${-p.cy})`} dangerouslySetInnerHTML={{__html: p.svg}} />;
         })}

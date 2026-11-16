@@ -6,16 +6,17 @@ HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
 from dsp import ns, place, pan, write_wav, integrated, true_peak
 from sfx_real import KINDS
 
-FRAMES, FPS = 444, 30
+FRAMES, FPS = 432, 30
 # (frame, kind, gain, pan, kwargs)  strongest cue = the two tab presses
-EV = [(36, "cloth", 0.30, 0.2, dict(dur=1.7, vel=0.3, seed=21)),            # list scroll
-      (148, "click", 1.00, 0.0, {}), (150, "swish", 0.35, -0.2, {}),         # press Rodina, pill slides
-      (164, "tok", 0.40, -0.1, dict(seed=31)), (168, "tok", 0.38, 0.0, dict(seed=32)), (172, "tok", 0.36, 0.1, dict(seed=33)),
-      (236, "click", 1.00, 0.0, {}), (238, "swish", 0.35, 0.2, {}),          # press Škola
-      (246, "tok", 0.34, -0.15, dict(seed=41)), (250, "tok", 0.33, -0.05, dict(seed=42)), (254, "tok", 0.32, 0.05, dict(seed=43)),
-      (258, "tok", 0.30, 0.1, dict(seed=44)), (262, "tok", 0.28, 0.15, dict(seed=45)),
-      (332, "cloth", 0.40, 0.0, dict(dur=0.8, vel=0.4, seed=51)),            # icon docks
-      (352, "impact", 0.38, 0.0, {}), (362, "tok", 0.40, 0.0, dict(seed=61))]  # lockup lands, URL
+EV = [(0, "impact", 0.35, 0.0, {}), (16, "swish", 0.4, 0.0, {}),            # logo opening, mark flies to header
+      (58, "cloth", 0.30, 0.2, dict(dur=1.4, vel=0.3, seed=21)),            # list scroll
+      (136, "click", 1.00, 0.0, {}), (138, "swish", 0.35, -0.2, {}),         # press Rodina
+      (152, "tok", 0.40, -0.1, dict(seed=31)), (156, "tok", 0.38, 0.0, dict(seed=32)), (160, "tok", 0.36, 0.1, dict(seed=33)),
+      (224, "click", 1.00, 0.0, {}), (226, "swish", 0.35, 0.2, {}),          # press Škola
+      (234, "tok", 0.34, -0.15, dict(seed=41)), (238, "tok", 0.33, -0.05, dict(seed=42)), (242, "tok", 0.32, 0.05, dict(seed=43)),
+      (246, "tok", 0.30, 0.1, dict(seed=44)), (250, "tok", 0.28, 0.15, dict(seed=45)),
+      (320, "cloth", 0.40, 0.0, dict(dur=0.8, vel=0.4, seed=51)),
+      (340, "impact", 0.38, 0.0, {}), (350, "tok", 0.40, 0.0, dict(seed=61))]
 
 def main(out):
     N = ns(FRAMES / FPS); buf = np.zeros((2, N))
