@@ -1,41 +1,63 @@
-# Popcorn storyboard — Particle Swarm (12 s)
+# Popcorn — Particle Swarm (12 s)
 
-Self-contained storyboard page for **"Why does popcorn pop?"**: five beats, one continuous bead
-world, rendered by the real STAGE kit + bead scene (60,000 glass beads, 16 sub-renders per still).
+Short for **"Why does popcorn pop?"**: five beats in one continuous bead world, built with the STAGE
+kit and the `particle-swarm-popcorn` style (60,000 glass beads, window key from upper left, teal paper
+wall, long lens, sub-render accumulation for real motion blur and depth of field).
 
-`index.html` is the deliverable — open it (or serve the folder) and it shows the five panels with
-on-screen text, the change from the previous panel, camera, and key sounds.
+## What is here
 
-## Files
+| Path | What |
+|---|---|
+| `storyboard/popcorn/index.html` | The deliverable page: five storyboard panels, the facts list, and a player for the 12 s film with sound. Self-contained — three.js, Tailwind and Inter are vendored in `assets/`, so it opens with no network. |
+| `storyboard/popcorn/stills/` | The five beat stills (1920×1080, 16 sub-renders). The page picks these up on load. |
+| `out/popcorn/popcorn_12s.mp4` | The rendered film: 480×270, 30 fps, 12 s, with the SFX mix. A **draft** — see quality below. |
+| `audio/popcorn_mix.py` | Builds `public/popcorn/mix.wav` (48 kHz, 12.000 s): SFX only, no voiceover, no music. |
+| `scripts/popcorn-storyboard-render.mjs` | Renders the five stills headlessly. |
+| `scripts/popcorn-film-render.mjs` | Renders the film frame by frame (resumable). |
 
-- `index.html` — the page: STAGE kit, the `particle-swarm-popcorn` style, the beat notes, the driver.
-- `assets/` — local copies of what the original page pulled from CDNs (three 0.187 module + core,
-  Tailwind browser build, Inter 400/600/700 woff2). No network needed to open the page.
-- `stills/beat{n}_t{t}.jpg` — 1920×1080 stills rendered ahead of time; the page picks these up
-  automatically so it opens instantly instead of re-rendering in the browser.
-
-## How the page behaves
-
-1. It probes `stills/` for each beat. Hits are shown straight away.
-2. Any missing still is rendered live in the browser from the same scene code (WebGL2 + float render
-   targets required), then inserted.
-3. `?manual` in the URL skips both and only exposes `window.__build()` / `window.__S.seek(t)` for a
-   headless driver.
-
-## Re-render the stills headlessly
+## Render it
 
 ```bash
-node scripts/popcorn-storyboard-render.mjs 16     # 16 sub-renders, ~9 min/still on a 2-core CPU box
+# stills (16 sub-renders each; ~9 min/still on a 2-core CPU box)
+node scripts/popcorn-storyboard-render.mjs 16
+
+# the film — draft settings (what is committed here)
+W=480 H=270 SAMPLES=1 SHADOW=0.125 BLUR=0 FPS=30 node scripts/popcorn-film-render.mjs out/popcorn/frames
+
+# the film — full quality (needs a GPU machine)
+W=1920 H=1080 SAMPLES=16 SHADOW=1 BLUR=0.5 node scripts/popcorn-film-render.mjs out/popcorn/frames
+
+# sound, then encode
+python audio/popcorn_mix.py
+node_modules/@remotion/compositor-linux-x64-gnu/ffmpeg -y -framerate 30 -i out/popcorn/frames/f_%05d.png \
+  -i public/popcorn/mix.wav -c:v libx264 -pix_fmt yuv420p -crf 20 -c:a aac -b:a 160k -shortest \
+  out/popcorn/popcorn_12s.mp4
 ```
 
-Env: `CHROME_PATH` (default `/tmp/cb/chromium`). The script serves this folder over HTTP itself, so
-no separate server is needed. On a GPU machine raise the sample count (the style ships at 96 for the
-final film).
+`CHROME_PATH` (default `/tmp/cb/chromium`) points at the browser. On a box with no Chrome CDN access,
+npm `@sparticuz/chromium` supplies one; unpack `al2023.tar.br` for the libnss/libnspr libs and pass
+`LD_LIBRARY_PATH` (the render scripts already do).
 
-## Notes for the next step (the actual animation)
+## Quality notes
 
-- Timing lives in `T = { heat: 2.0, press: 5.0, pop: 7.8 }`; captions in `CAPTIONS`, beats in `BEATS`.
-- The bead scene is the finished look — reuse it verbatim and add only the player and the sound mix
-  (no voiceover): glass clicks, burner hum, sizzle, hull creaks, one crack, soft chime, quiet room bed.
-- Assumed numbers, all stated on the page: 180 °C popping temperature, ~9 atm inside the hull,
-  "up to 40×" volume (cited range is 40–50×), water ≈ 14% of kernel weight, 52 px captions.
+- The committed MP4 is a **draft**: 480×270, one sample per frame (no accumulation anti-aliasing, no
+  real motion blur), shadow maps at 1/8. Timing, camera move, bead behaviour, captions and sound are
+  final. Expect visible grain and edge shimmer on the beads; re-render at full quality on a GPU.
+- The frame cost on a CPU box is dominated by the 120k-instance bead draw (~14 s/frame even at 480×270).
+  Capturing frames also avoids `canvas.toDataURL` in the page — on software GL that readback is ~100×
+  slower than the frame itself, which is why `scripts/popcorn-film-render.mjs` pulls raw pixels and
+  encodes PNG in Node.
+- Captions are drawn in the overlay at 52 px for a 1080-high frame and scale with render height.
+
+## Story beats
+
+| # | Time | Caption | Key sound |
+|---|---|---|---|
+| 1 | 0.0–2.0 | Every kernel hides a drop of water | glass clicks landing, soft tick on the drop |
+| 2 | 2.0–5.0 | Heat turns that water into steam | burner hum, sizzle, 46 boil pops |
+| 3 | 5.0–7.8 | Sealed in, the steam builds to ~9 atmospheres | creaks speeding up, whine, riser, held breath |
+| 4 | 7.8–9.4 | At 180 °C the hull bursts | crack + thud, steam hiss, whoosh |
+| 5 | 9.4–12.0 | Starch puffs out and sets, up to 40× bigger | landing clicks, soft chime, room bed out |
+
+Assumed numbers, all stated on the page: 180 °C (356 °F) popping temperature, ~9 atm (~135 psi) inside
+the hull, "up to 40×" volume (cited range 40–50×), water ≈ 14% of kernel weight, 52 px captions.
