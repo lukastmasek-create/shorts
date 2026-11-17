@@ -107,3 +107,29 @@ npx remotion render src/index.ts KineticReel out/kinetic.mp4 --codec h264 --crf 
 ```
 
 > **Headless CPU / Software-GL boxes (no GPU)**: pass `--gl=swangle --props='{"post":{"kick":true}}'` (and `"offlineFonts":true` if rendering in an air-gapped firewall without `fonts.gstatic.com` access — local `@fontsource` WOFF2 faces are bundled automatically).
+
+---
+
+## More styles (D–H): no WebGL, no audio
+
+Five extra 9:16 (`1080×1920`, `30 fps`) styles in the same system. All are SVG + CSS driven by `useCurrentFrame()`, so they render on any machine without a GPU. They have no soundtrack. Every text and number is a prop with a default; change them in the Studio props panel or with `--props='{"titleTop":"HELLO"}'`.
+
+| Style | Composition | Duration | Look | Source |
+|---|---|---:|---|---|
+| D | `NeonGrid` | `14.0 s` (`420f`) | Synthwave: scrolling neon grid, striped sun, chrome extruded title, light beams, camera bank. Music/brand launch. | [`src/styles/NeonGrid.tsx`](../src/styles/NeonGrid.tsx) |
+| E | `GlassUI` | `15.0 s` (`450f`) | Light mode frosted glass: drifting cards, card flip, stat dashboard, price + CTA. App demo. | [`src/styles/GlassUI.tsx`](../src/styles/GlassUI.tsx) |
+| F | `PaperCutStory` | `16.0 s` (`480f`) | Layered paper hills with parallax and shadows, torn-paper day to night wipe, serif story lines. | [`src/styles/PaperCutStory.tsx`](../src/styles/PaperCutStory.tsx) |
+| G | `DataPulse` | `13.0 s` (`390f`) | Dark data film, one green accent: counter ring, beat-grown bars, line chart that splits, big takeaway. | [`src/styles/DataPulse.tsx`](../src/styles/DataPulse.tsx) |
+| H | `LiquidType` | `12.0 s` (`360f`) | Flat colour floods on the beat, words warped by liquid displacement, calm serif finale. | [`src/styles/LiquidType.tsx`](../src/styles/LiquidType.tsx) |
+
+Render (output goes to `out/`):
+
+```bash
+npm run render:neon
+npm run render:glass
+npm run render:paper
+npm run render:data
+npm run render:liquid
+```
+
+Beats use the shared 120 BPM grid (`BEATS`, one beat = 15 frames). Verified with stills of all five at four frames each; the full videos are not rendered in the repo.
