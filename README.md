@@ -87,3 +87,7 @@ For voice generation, use [`TUTORIAL_KOKORO_REMOTION_THREEJS.md`](TUTORIAL_KOKOR
 ## License
 
 Code and documentation are MIT licensed; see [`LICENSE`](LICENSE). Reference research is for style study only; do not republish or copy private reference content.
+- [aging/](aging/INDEX.md)
+- [audio/](audio/INDEX.md)
+- [shadow/](shadow/INDEX.md)
+- [references/reports/](references/reports/INDEX.md)

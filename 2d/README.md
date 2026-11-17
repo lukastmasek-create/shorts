@@ -25,3 +25,14 @@ Voice for new shorts: `python 2d/voice_short.py <name>` (reads `2d/<name>/script
 - Committed: `src/*.tsx`, per-short `script.txt`, `words.json`, `frames.json`, `DESCRIPTION.md`, `SOURCES.md`, and the voice in `public/<name>/voice.wav` (the only copy, the one the comp loads).
 - Not committed (`.gitignore`): renders (`*.mp4`, keep them in `out/` or next to the short) and working voice files (`2d/**/voice*.wav`, `v16.wav`). Re-make the voice with the voice scripts, or copy it back from `public/`.
 - `sun/` and `chance/` live here too (`2d/sun/SCRIPT.md`, `2d/chance/SCRIPT.md`), like the other 2D shorts.
+- [insecure/](insecure/INDEX.md)
+- [bored/](bored/INDEX.md)
+- [above/](above/INDEX.md)
+- [ideas/](ideas/INDEX.md)
+- [delete/](delete/INDEX.md)
+- [twoselves/](twoselves/INDEX.md)
+- [lies/](lies/INDEX.md)
+- [chance/](chance/INDEX.md)
+- [sim/](sim/INDEX.md)
+- [sun/](sun/INDEX.md)
+- [dim4/](dim4/INDEX.md)
