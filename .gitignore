@@ -22,3 +22,9 @@ __pycache__/
 v16.wav
 # Aging mix: committed copy is public/aging/mix.wav (audio/aging_mix.py writes both)
 /aging/audio/mix.wav
+
+# Obsidian: per-machine state stays local; app.json travels
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.obsidian/plugins/*/data.json
