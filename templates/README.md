@@ -107,3 +107,22 @@ npx remotion render src/index.ts KineticReel out/kinetic.mp4 --codec h264 --crf 
 ```
 
 > **Headless CPU / Software-GL boxes (no GPU)**: pass `--gl=swangle --props='{"post":{"kick":true}}'` (and `"offlineFonts":true` if rendering in an air-gapped firewall without `fonts.gstatic.com` access — local `@fontsource` WOFF2 faces are bundled automatically).
+
+---
+
+## Cinema templates (3D, camera moves, morphing, kinetic type)
+
+Silent 12 s (`360f`, `1080×1920`, `30 fps`) single-shot films. Shared helpers: `src/cinema/common.tsx` (Hermite camera rig, procedural studio reflections, 3D text planes, per-letter `KText`).
+
+| Composition | Look | Idea |
+|---|---|---|
+| `ChromeMorph` | black + orange/blue rim light, liquid chrome | One 20k-vertex mesh morphs sphere → soft cube → lens → crystal → spiked → sphere. Giant 3D words sit behind it, camera orbits. |
+| `TunnelFlight` | violet / cyan / magenta neon | Camera flies a winding tunnel (hyper-speed warp, FOV 44→92, banking), words fly past in 3D, lands on glowing orb. |
+| `ParticleMorph` | navy + cyan / coral, 38k particles | Cloud → sphere → torus → DNA helix → "MORPH" glyph cloud → galaxy → ∞, staggered dissolve + swirl. |
+
+```bash
+npx remotion render src/index.ts ChromeMorph   out/chrome-morph.mp4   --codec h264 --crf 16 --gl=angle
+npx remotion render src/index.ts TunnelFlight  out/tunnel-flight.mp4  --codec h264 --crf 16 --gl=angle
+npx remotion render src/index.ts ParticleMorph out/particle-morph.mp4 --codec h264 --crf 16 --gl=angle
+```
+No GPU: add `--gl=swangle --props='{"post":{"kick":true,"msaa":0}}'`.

@@ -1,7 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { continueRender, delayRender, getInputProps, useCurrentFrame } from "remotion";
 import { useThree } from "@react-three/fiber";
-import { Bloom, DepthOfField, EffectComposer, Vignette } from "@react-three/postprocessing";
+import * as THREE from "three";
+import { ToneMappingMode } from "postprocessing";
+import {
+  Bloom,
+  ChromaticAberration,
+  DepthOfField,
+  EffectComposer,
+  ToneMapping,
+  Vignette,
+} from "@react-three/postprocessing";
 
 /**
  * Ensures EffectComposer runs on its very first mounted frame under software-GL (swangle),
@@ -37,6 +46,12 @@ export interface PostFXProps {
   enableDOF?: boolean;
   dofTarget?: [number, number, number];
   dofBokehScale?: number;
+  /** Chromatic aberration offset (0 = off). Cinema templates only. */
+  chroma?: number;
+  /** ACES filmic tone-map inside the composer. Cinema templates only. */
+  tone?: boolean;
+  /** Multisampling for the composer (0 = off, fast on software GL). */
+  msaa?: number;
 }
 
 export const PostFX: React.FC<PostFXProps> = ({
@@ -47,9 +62,12 @@ export const PostFX: React.FC<PostFXProps> = ({
   enableDOF = false,
   dofTarget = [0, 0, 0],
   dofBokehScale = 3.2,
+  chroma = 0,
+  tone = false,
+  msaa = 0,
 }) => {
   const inputProps = getInputProps() as {
-    post?: { composer?: boolean; kick?: boolean };
+    post?: { composer?: boolean; kick?: boolean; msaa?: number };
   };
   const useComposer = inputProps.post?.composer ?? true;
   const useKick = inputProps.post?.kick ?? false;
@@ -58,7 +76,7 @@ export const PostFX: React.FC<PostFXProps> = ({
 
   return (
     <>
-      <EffectComposer multisampling={0}>
+      <EffectComposer multisampling={inputProps.post?.msaa ?? msaa}>
         {enableDOF ? (
           <DepthOfField
             target={dofTarget}
@@ -78,6 +96,16 @@ export const PostFX: React.FC<PostFXProps> = ({
           levels={5}
           radius={bloomRadius}
         />
+        {chroma > 0 ? (
+          <ChromaticAberration
+            offset={new THREE.Vector2(chroma, chroma * 0.6)}
+            radialModulation
+            modulationOffset={0.25}
+          />
+        ) : (
+          <></>
+        )}
+        {tone ? <ToneMapping mode={ToneMappingMode.ACES_FILMIC} /> : <></>}
         <Vignette eskil={false} offset={0.22} darkness={vignetteDarkness} />
       </EffectComposer>
       {useKick ? <SoftwareGlKick /> : null}
