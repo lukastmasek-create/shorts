@@ -159,3 +159,44 @@ npm run render:blob
 ```
 
 Verified with software-GL stills only; full videos are not rendered in the repo. Cloud (no GPU) check: add `--gl=swangle --props='{"post":{"kick":true}}'`.
+
+---
+
+## Showcase styles (N–W): framed viewport, real-life lighting
+
+Ten cinematic showcases (`1080×1920`, `30 fps`, 14–16 s). They share one layout and lighting approach:
+
+- **Framed layout.** The 3D scene lives in a `1080×1290` viewport; the header strip and the title band are separate, so text never overlaps the picture. See `ShowcaseFrame` in [`src/three/cine/overlay.tsx`](../src/three/cine/overlay.tsx).
+- **Objects take about half the frame**, with the set visible around them.
+- **Real-life look.** Studio coves, soft shadow-casting spots, softbox rect-area lights (`Softbox`), contact shadows, procedural textures (marble, walnut, parquet, plaster, paintings), restrained exposure, depth of field.
+- **Morphing** where it fits: real morph targets on the gallery sculpture (knot to knot to loop) and the chess pawn that promotes into a queen.
+
+| Style | Composition | Duration | What happens | Source |
+|---|---|---:|---|---|
+| N | `PerfumeShowcase` | `15.0 s` | Spotlight reveal, turntable, exploded anatomy with callouts, detail shot, on a marble plinth. | [`PerfumeShowcase.tsx`](../src/styles/PerfumeShowcase.tsx) |
+| O | `CityFlyover` | `15.0 s` | Night drone flight: aerial, street level, dolly zoom on the hero tower, overhead. Lamp pools, traffic, haze. | [`CityFlyover.tsx`](../src/styles/CityFlyover.tsx) |
+| P | `GalleryWalk` | `15.0 s` | Steadicam stroll past paintings with picture lights, sliding doors, morphing gold sculpture. | [`GalleryWalk.tsx`](../src/styles/GalleryWalk.tsx) |
+| Q | `PlanetFlyby` | `15.0 s` | Sunrise over the limb with lens flare, procedural planet with relief and clouds, shadowed rings, asteroids. | [`PlanetFlyby.tsx`](../src/styles/PlanetFlyby.tsx) |
+| R | `PhoneShowcase` | `15.0 s` | Phone on a plinth: back glass, animated screen UI, exploded layers with callouts. | [`PhoneShowcase.tsx`](../src/styles/PhoneShowcase.tsx) |
+| S | `WatchStudio` | `15.0 s` | Watch on a walnut desk with live ticking hands (10:09:36 and running), props around. | [`WatchStudio.tsx`](../src/styles/WatchStudio.tsx) |
+| T | `ChessMatch` | `15.0 s` | Candle-lit board, five animated moves, pawn promotes and morphs into a queen. | [`ChessMatch.tsx`](../src/styles/ChessMatch.tsx) |
+| U | `LighthouseCoast` | `15.0 s` | Dusk lighthouse: wave-shader sea, sweeping beam, boat, gulls, orbit and crane camera. | [`LighthouseCoast.tsx`](../src/styles/LighthouseCoast.tsx) |
+| V | `DominoRun` | `15.0 s` | A steel ball starts a colour-graded domino run; the camera rides the wave front, then pulls back to the pattern. | [`DominoRun.tsx`](../src/styles/DominoRun.tsx) |
+| W | `PendulumWave` | `15.0 s` | 17 chrome pendulums drift out of phase and realign, shot from front, oblique, low and overhead. | [`PendulumWave.tsx`](../src/styles/PendulumWave.tsx) |
+
+All need WebGL (a GPU). No soundtrack. Text props have defaults.
+
+```bash
+npm run render:perfume
+npm run render:city
+npm run render:gallery
+npm run render:planet
+npm run render:phone
+npm run render:watch
+npm run render:chess
+npm run render:lighthouse
+npm run render:domino
+npm run render:pendulum
+```
+
+Verified with software-GL stills only (several frames per style); full videos are not rendered in the repo.

@@ -44,25 +44,25 @@ export function applyCamera(
   }
 }
 
-export interface CineCameraProps {
-  keys: readonly CamKey[];
-  /** World-unit handheld amplitude. */
-  shake?: number;
-  /** true: ease to rest at every key (crane/hold feel). false: one continuous glide. */
-  segmentEase?: boolean;
+export interface CamState {
+  pos: THREE.Vector3;
+  look: THREE.Vector3;
+  fov: number;
+  roll: number;
 }
 
-/** Fluid keyframed camera: Catmull-Rom path for position and target, eased fov and roll. */
-export const CineCamera: React.FC<CineCameraProps> = ({ keys, shake = 0.04, segmentEase = true }) => {
-  const frame = useCurrentFrame();
-  const camera = useThree((s) => s.camera);
-  const curves = useMemo(
-    () => ({
+const curveCache = new WeakMap<readonly CamKey[], { pos: THREE.CatmullRomCurve3; look: THREE.CatmullRomCurve3 }>();
+
+/** Pure sampler of a keyframed camera path (also usable outside the canvas, e.g. for focus pulls or flare overlays). */
+export function sampleKeys(keys: readonly CamKey[], frame: number, segmentEase = true): CamState {
+  let curves = curveCache.get(keys);
+  if (!curves) {
+    curves = {
       pos: new THREE.CatmullRomCurve3(keys.map((k) => new THREE.Vector3(...k.pos)), false, "centripetal"),
       look: new THREE.CatmullRomCurve3(keys.map((k) => new THREE.Vector3(...k.look)), false, "centripetal"),
-    }),
-    [keys]
-  );
+    };
+    curveCache.set(keys, curves);
+  }
   const f = Math.min(Math.max(frame, keys[0].f), keys[keys.length - 1].f);
   let i = keys.length - 2;
   for (let j = 0; j < keys.length - 1; j++) {
@@ -74,9 +74,31 @@ export const CineCamera: React.FC<CineCameraProps> = ({ keys, shake = 0.04, segm
   const t = (f - keys[i].f) / (keys[i + 1].f - keys[i].f);
   const e = segmentEase ? CAMERA_EASE(t) : t;
   const u = (i + e) / (keys.length - 1);
-  const fov = interpolate(e, [0, 1], [keys[i].fov ?? 40, keys[i + 1].fov ?? keys[i].fov ?? 40]);
-  const roll = interpolate(e, [0, 1], [keys[i].roll ?? 0, keys[i + 1].roll ?? keys[i].roll ?? 0]);
-  applyCamera(camera, curves.pos.getPoint(u), curves.look.getPoint(u), fov, roll, shake, frame);
+  return {
+    pos: curves.pos.getPoint(u),
+    look: curves.look.getPoint(u),
+    fov: interpolate(e, [0, 1], [keys[i].fov ?? 40, keys[i + 1].fov ?? keys[i].fov ?? 40]),
+    roll: interpolate(e, [0, 1], [keys[i].roll ?? 0, keys[i + 1].roll ?? keys[i].roll ?? 0]),
+  };
+}
+
+export interface CineCameraProps {
+  keys: readonly CamKey[];
+  /** World-unit handheld amplitude. */
+  shake?: number;
+  /** true: ease to rest at every key (crane/hold feel). false: one continuous glide. */
+  segmentEase?: boolean;
+  /** Override the fov per frame, e.g. for a dolly-zoom (vertigo) shot. */
+  fovFn?: (baseFov: number, pos: THREE.Vector3, look: THREE.Vector3, frame: number) => number;
+}
+
+/** Fluid keyframed camera: Catmull-Rom path for position and target, eased fov and roll. */
+export const CineCamera: React.FC<CineCameraProps> = ({ keys, shake = 0.04, segmentEase = true, fovFn }) => {
+  const frame = useCurrentFrame();
+  const camera = useThree((s) => s.camera);
+  const st = sampleKeys(keys, frame, segmentEase);
+  const fov = fovFn ? fovFn(st.fov, st.pos, st.look, frame) : st.fov;
+  applyCamera(camera, st.pos, st.look, fov, st.roll, shake, frame);
   return null;
 };
 
@@ -239,5 +261,66 @@ export const CinePost: React.FC<CinePostProps> = ({
       </EffectComposer>
       {input.post?.kick ? <SoftwareGlKick /> : null}
     </>
+  );
+};
+
+/* -------------------------------------------------------------- studio kit */
+
+import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib.js";
+
+let rectInit = false;
+
+export interface SoftboxProps {
+  position: V3;
+  lookAt?: V3;
+  width?: number;
+  height?: number;
+  intensity?: number;
+  color?: string;
+}
+
+/** Soft rectangular studio light: long, soft highlights on metal and glass, no hard hotspots. */
+export const Softbox: React.FC<SoftboxProps> = ({ position, lookAt = [0, 0, 0], width = 6, height = 2, intensity = 6, color = "#ffffff" }) => {
+  if (!rectInit) {
+    RectAreaLightUniformsLib.init();
+    rectInit = true;
+  }
+  const light = useMemo(() => {
+    const l = new THREE.RectAreaLight(color, intensity, width, height);
+    l.position.set(...position);
+    l.lookAt(...lookAt);
+    return l;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [color, width, height, position[0], position[1], position[2], lookAt[0], lookAt[1], lookAt[2]]);
+  light.intensity = intensity;
+  return <primitive object={light} />;
+};
+
+const SKY_VERT = `varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
+const SKY_FRAG = `uniform vec3 uTop; uniform vec3 uHorizon; uniform vec3 uBottom; varying vec3 vDir;
+void main(){
+  float y = vDir.y;
+  vec3 c = y > 0.0 ? mix(uHorizon, uTop, pow(clamp(y, 0.0, 1.0), 0.55)) : mix(uHorizon, uBottom, pow(clamp(-y, 0.0, 1.0), 0.5));
+  gl_FragColor = vec4(c, 1.0);
+}`;
+
+/** Seamless vertical gradient dome. Match the scene fog to `horizon` so the floor melts into the sky. */
+export const GradientSky: React.FC<{ top: string; horizon: string; bottom?: string; radius?: number }> = ({ top, horizon, bottom, radius = 400 }) => {
+  const mat = useMemo(
+    () =>
+      new THREE.ShaderMaterial({
+        vertexShader: SKY_VERT,
+        fragmentShader: SKY_FRAG,
+        uniforms: { uTop: { value: new THREE.Color(top) }, uHorizon: { value: new THREE.Color(horizon) }, uBottom: { value: new THREE.Color(bottom ?? horizon) } },
+        side: THREE.BackSide,
+        depthWrite: false,
+        fog: false,
+      }),
+    [top, horizon, bottom]
+  );
+  return (
+    <mesh material={mat} frustumCulled={false} renderOrder={-10}>
+      <sphereGeometry args={[radius, 32, 24]} />
+    </mesh>
   );
 };
