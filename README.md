@@ -31,6 +31,12 @@ These are separate workflows. Do not mix their APIs or visual rules unless the u
 - `audio/`: Python audio synthesis/mix tools; `scripts/`: voice, still rendering, QA, and related production helpers.
 - `references/STYLE_BIBLE.md` and `references/reports/`: style research and measured reports. The private reference videos, frames, and contact sheets are not in this checkout.
 - `CLAUDE.md`: environment-specific setup, rendering notes, and project status.
+- [`SCRIPT_example.md`](SCRIPT_example.md): example original script (Bridge short, v1).
+- [`2d/NOSLEEP_SCRIPT.md`](2d/NOSLEEP_SCRIPT.md), [`2d/UNIVERSE_SCRIPT.md`](2d/UNIVERSE_SCRIPT.md): voice scripts for NoSleepShort and UniverseShort.
+- [`storyboard/popcorn/README.md`](storyboard/popcorn/README.md): Popcorn particle-swarm short (12 s).
+- [`teams/README.md`](teams/README.md): Týmy, 21 s Czech 3D classroom explainer.
+- [`ucimesehrou/INSTAGRAM.md`](ucimesehrou/INSTAGRAM.md): Instagram caption for Učíme se hrou.
+- [`ucimesehrou/MONO_PROMPT_ARGON4.md`](ucimesehrou/MONO_PROMPT_ARGON4.md): MONO style showcase prompt (Argon 4.0).
 - `2d/chance/` and `2d/sun/`: scripts for those shorts are in the 2D project. `shadow/` is an unused draft.
 
 ## Common commands
