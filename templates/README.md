@@ -133,3 +133,29 @@ npm run render:liquid
 ```
 
 Beats use the shared 120 BPM grid (`BEATS`, one beat = 15 frames). Verified with stills of all five at four frames each; the full videos are not rendered in the repo.
+
+---
+
+## Cinematic 3D styles (I–M): WebGL, camera-driven
+
+Five more `9:16` (`1080×1920`, `30 fps`) styles, this time real Three.js scenes with a keyframed fluid camera (Catmull-Rom path, eased fov and roll, deterministic handheld drift), kinetic 3D type, and a shared post stack (bloom, chromatic aberration on the beat, depth of field, vignette). They need a GPU or WebGL (`--gl=angle`). No soundtrack. Text props have defaults.
+
+| Style | Composition | Duration | Look | Source |
+|---|---|---:|---|---|
+| I | `ChromeOrbit` | `14.0 s` (`420f`) | Chrome torus knot with orbiting glowing gems; orbit, low sweep, high arc and push-in camera moves through 3D words. | [`src/styles/ChromeOrbit.tsx`](../src/styles/ChromeOrbit.tsx) |
+| J | `TunnelRush` | `13.0 s` (`390f`) | Speed-ramped flythrough of a bending neon ring tunnel; camera banks into bends, fov widens with speed, word gates, speed readout. | [`src/styles/TunnelRush.tsx`](../src/styles/TunnelRush.tsx) |
+| K | `MonolithField` | `14.0 s` (`420f`) | 529 beat-driven monoliths under a low sun with shadows and depth of field; street-level glide, top-down reveal, aerial pull-back. | [`src/styles/MonolithField.tsx`](../src/styles/MonolithField.tsx) |
+| L | `VortexMorph` | `13.0 s` (`390f`) | 8,000 particles: vortex, sphere, torus, helix, then the word `FLOW`, then a burst; camera swirls through every shape. | [`src/styles/VortexMorph.tsx`](../src/styles/VortexMorph.tsx) |
+| M | `LiquidBlob` | `14.0 s` (`420f`) | Iridescent noise-displaced liquid blob with satellites that merge in; macro close-ups and swoops, type hidden behind it. | [`src/styles/LiquidBlob.tsx`](../src/styles/LiquidBlob.tsx) |
+
+Shared building blocks live in [`src/three/cine/index.tsx`](../src/three/cine/index.tsx): `CineCamera`, `applyCamera`, `TextPlane` (3D text), `RoomEnv` (offline studio reflections), `CinePost`.
+
+```bash
+npm run render:chrome
+npm run render:tunnel
+npm run render:monolith
+npm run render:vortex
+npm run render:blob
+```
+
+Verified with software-GL stills only; full videos are not rendered in the repo. Cloud (no GPU) check: add `--gl=swangle --props='{"post":{"kick":true}}'`.

@@ -7,7 +7,7 @@ import { Bloom, DepthOfField, EffectComposer, Vignette } from "@react-three/post
  * Ensures EffectComposer runs on its very first mounted frame under software-GL (swangle),
  * without adding per-frame sleep overhead once the composer's useFrame hook is registered.
  */
-const SoftwareGlKick: React.FC = () => {
+export const SoftwareGlKick: React.FC = () => {
   const frame = useCurrentFrame();
   const { advance } = useThree();
   const bootedRef = useRef(false);

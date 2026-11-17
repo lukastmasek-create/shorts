@@ -15,6 +15,7 @@ This repository is an instruction kit for AI assistants making short animated vi
 |---|---|---|
 | Dark Glow + Kinetic Poster Type (Three.js shaders + kinetic poster reel) | [`templates/README.md`](templates/README.md) | `src/index.ts` → `src/Root.tsx`; compositions `Main`, `EmberReveal`, `GreenShowcase`, `KineticReel`; renders in `templates/` |
 | More no-GPU motion styles: `NeonGrid`, `GlassUI`, `PaperCutStory`, `DataPulse`, `LiquidType` | [`templates/README.md`](templates/README.md) | `src/styles/*.tsx`; compositions registered in `src/Root.tsx` |
+| Cinematic 3D camera styles: `ChromeOrbit`, `TunnelRush`, `MonolithField`, `VortexMorph`, `LiquidBlob` | [`templates/README.md`](templates/README.md) | `src/styles/*.tsx`, `src/three/cine/` |
 | 3D cartoon story short (Three.js in Remotion) | [`SKILL.md`](SKILL.md), [`references/STYLE_BIBLE.md`](references/STYLE_BIBLE.md) | `src/index.ts` → `src/Root.tsx`; compositions `BridgeShort`, `AgingShort` |
 | Flat 2D line-art short (Remotion) | [`2d/README.md`](2d/README.md), [`2d/STYLE.md`](2d/STYLE.md) | `2d/src/index.ts` → `2d/src/Root.tsx` |
 | Paper pop-up book (standalone Three.js) | [`ucimesehrou/README.md`](ucimesehrou/README.md), [`ucimesehrou/PROMPT_TEMPLATE.md`](ucimesehrou/PROMPT_TEMPLATE.md) | `ucimesehrou/src/style.js` + shared Stage/Sound kits |
