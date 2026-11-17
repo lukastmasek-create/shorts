@@ -866,9 +866,9 @@ input[type=range]{flex:1;accent-color:#ff7a2e}
       bowl: Math.exp(-Math.pow(r / CRATER.radius, 2)),
       hills: 0.16 * N.fbm(x * 0.33, y * 0.33, 9, 3) + 0.03 * N.n2(x * 1.7, y * 1.7),
       blob: 0.7 + 0.6 * (N.fbm(dx * 0.5 + 2, dy * 0.5 - 4, 0, 3) + 0.4),
-      crack: (() => { const d = r * Math.abs(Math.sin(1.5 * (ang + warp))) / 1.5; return Math.exp(-Math.pow(d / 0.1, 2)) * K.smooth(2.5, 1.2, r) * K.smooth(0.1, 0.5, r); })(),
-      chan: ERUPTIONS.map((e, i) => Math.pow(0.5 + 0.5 * Math.cos(ang * 5 + 2 * warp + i * 2.1), 5)),
-      bomb: ERUPTIONS.map((e, i) => { const h = K.hash(x * 5.3 + i, y * 4.1, i * 3); return r < 3.2 && h < 0.1 * Math.exp(-r / 1.3) ? 1.0 + 2.2 * K.hash(x + 1.7, y - 2.3, 9 + i) : 0; }),
+      crack: (() => { const d = r * Math.abs(Math.sin(1.5 * (ang + warp))) / 1.5; return Math.exp(-Math.pow(d / 0.17, 2)) * K.smooth(2.5, 1.2, r) * K.smooth(0.1, 0.5, r); })(),
+      chan: ERUPTIONS.map((e, i) => K.clamp(Math.pow(0.5 + 0.5 * Math.cos(ang * 3 + 3.2 * N.fbm(dx * 0.45 + i * 5, dy * 0.45, 2, 3) + i * 2.1), 2.2) * (0.55 + 1.1 * (N.fbm(x * 1.1, y * 1.1, i + 20, 3) + 0.4)))),
+      crust: 0.5 + N.fbm(x * 1.9, y * 1.9, 40, 3),
       rnd: K.hash(x * 9.1, y * 7.3),
     };
   }
@@ -919,13 +919,11 @@ input[type=range]{flex:1;accent-color:#ff7a2e}
         const tr = (p.re - 0.5) / FLOW + 0.15, ext = REACH * (0.7 + 0.3 * p.chan[i]);
         if (te > tr && p.re < ext && p.re > 0.4) {
           const f = K.smooth(0, 0.35, te - tr) * K.smooth(ext, ext - 0.8, p.re);
-          heat = Math.max(heat, p.chan[i] * f * Math.exp(-(te - tr) / COOL));
+          heat = Math.max(heat, p.chan[i] * f * Math.exp(-(te - tr) / COOL) * K.clamp(0.62 + 0.55 * p.crust * (1 + 0.25 * Math.sin(t * 2.3 + p.rnd * 20))));
           cool = Math.max(cool, p.chan[i] * f * (1 - Math.exp(-(te - tr) / 1.2)));
         }
         ash = Math.max(ash, K.smooth(0.2, 1.4, te) * Math.exp(-p.re / (3.3 + i * 0.4)));
       }
-      // volcanic bombs: a few pins near the crater are thrown up and fall back
-      if (te > 0 && p.bomb[i] > 0) { const v = p.bomb[i], x = v * te - 2.6 * te * te; if (x > 0) { h += x; heat = Math.max(heat, 0.9 * Math.min(1, x * 3)); } }
     });
     const rise = top * p.shape;
     let lift = h + rise + ring * 0 - p.bowl * CRATER.depth * K.clamp(top / 1.6);
@@ -935,15 +933,15 @@ input[type=range]{flex:1;accent-color:#ff7a2e}
     const elev = m.dome * p.dm * 0.55 + rise;
     const rock = K.smooth(0.15, 0.95, elev);
     const blob = m.blobK * p.blob * Math.exp(-Math.pow(p.r / m.blobR, 2)) * (1 - 0.5 * K.smooth(2, 4.7, t) * K.smooth(1.0, 2.2, p.r));   // magma seen through the crust
-    const lake = m.lake * Math.exp(-Math.pow(p.r / 0.62, 2)) * (0.8 + 0.2 * Math.sin(t * 9 + p.rnd * 6));
+    const lake = m.lake * Math.exp(-Math.pow(p.r / 0.62, 2)) * K.clamp(0.7 + 0.5 * p.crust + 0.15 * Math.sin(t * 3 + p.rnd * 6), 0.3, 1);
     o.lift = lift;
     o.land = rock * (0.4 + 0.6 * K.smooth(ERUPTIONS[0].at - 0.1, ERUPTIONS[0].at + 1.0, t));
-    o.pale = K.clamp(0.9 * ash * K.smooth(0.1, 0.8, elev + 0.3) + 0.55 * cool * (1 - heat) + 3.2 * Math.max(0, ring) + 0.25 * K.clamp(fresh));
-    o.hot = K.clamp(blob + m.crack * p.crack * 0.95 + lake + heat + 0.5 * K.clamp(fresh) * Math.exp(-p.r / 3) + m.burst * 0.8 * Math.exp(-Math.pow(p.r / 1.0, 2)));
+    o.pale = K.clamp(0.9 * ash * K.smooth(0.1, 0.8, elev + 0.3) + 3.2 * Math.max(0, ring) + 0.25 * K.clamp(fresh));
+    o.hot = K.clamp(blob + m.crack * p.crack * 0.9 + lake * 0.9 + heat * 0.9 + 0.35 * K.clamp(fresh) * Math.exp(-p.r / 3) + m.burst * 0.7 * Math.exp(-Math.pow(p.r / 1.0, 2)));
   }
 
   // ---------------------------------------------------------------- the mechanism
-  const PITCH = 0.1;
+  const PITCH = 0.17;            // fewer, bigger pins: calmer, less shimmer
 
   registerStyle({
     id: 'pin-wall',
@@ -952,7 +950,7 @@ input[type=range]{flex:1;accent-color:#ff7a2e}
     topic: 'How do volcanoes appear',
     duration: DURATION,
     fonts: ['500 60px "Oswald"', '500 40px "Inter"'],
-    render: { samples: 40, shutter: 0.55, tone: 'filmic', exposure: 1.2, bloom: 0.4, bloomThreshold: 1.3, vignette: 0.4, grain: 0.012, saturation: 1.12, fov: 28, background: '#030304' },
+    render: { samples: 40, shutter: 0.55, tone: 'filmic', exposure: 1.2, bloom: 0.32, bloomThreshold: 1.3, vignette: 0.4, grain: 0.012, saturation: 1.12, fov: 28, background: '#030304' },
 
     build(S) {
       const { THREE, K, scene, camera } = S;
@@ -962,16 +960,16 @@ input[type=range]{flex:1;accent-color:#ff7a2e}
           Object.assign(sh.uniforms, U);
           sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute vec4 aPin; varying vec4 vPin; varying float vShaft;')
             .replace('#include <begin_vertex>', '#include <begin_vertex>\nvShaft = position.z; vPin = aPin; transformed.z += aPin.x;');
-          if (lit) sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec4 vPin; varying float vShaft; uniform vec3 uDeep, uPale, uLand, uHot;')
-            .replace('#include <color_fragment>', '#include <color_fragment>\nfloat head = smoothstep(-0.085, -0.03, vShaft);\ndiffuseColor.rgb *= mix(mix(uDeep, uPale, vPin.w), uLand, vPin.y) * mix(0.42, 1.0, head);')
-            .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance += uHot * vPin.z * vPin.z * mix(0.3, 1.0, head);');
+          if (lit) sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nvarying vec4 vPin; varying float vShaft; uniform vec3 uDeep, uPale, uLand, uHot, uHot2;')
+            .replace('#include <color_fragment>', '#include <color_fragment>\nfloat head = smoothstep(-0.085 * ' + (PITCH / 0.1).toFixed(3) + ', -0.03 * ' + (PITCH / 0.1).toFixed(3) + ', vShaft);\ndiffuseColor.rgb *= mix(mix(uDeep, uPale, vPin.w), uLand, vPin.y) * mix(0.42, 1.0, head);')
+            .replace('#include <emissivemap_fragment>', '#include <emissivemap_fragment>\ntotalEmissiveRadiance += mix(uHot, uHot2, vPin.z * vPin.z) * pow(vPin.z, 1.7) * mix(0.3, 1.0, head);');
         };
         return m;
       };
-      const U = { uDeep: { value: new THREE.Color(TINTS.deep) }, uPale: { value: new THREE.Color(TINTS.pale) }, uLand: { value: new THREE.Color(TINTS.land) }, uHot: { value: new THREE.Color(TINTS.hot).multiplyScalar(7) } };
+      const U = { uDeep: { value: new THREE.Color(TINTS.deep) }, uPale: { value: new THREE.Color(TINTS.pale) }, uLand: { value: new THREE.Color(TINTS.land) }, uHot: { value: new THREE.Color('#d83a08').multiplyScalar(5) }, uHot2: { value: new THREE.Color('#ffa040').multiplyScalar(8) } };
       const R = PITCH * 0.47, LEN = 7, prof = [];
       for (const q of [0, 0.3, 0.55, 0.75, 0.9, 0.98, 1]) prof.push(new THREE.Vector2(Math.max(1e-4, q * R), -0.62 * R * (1 - Math.sqrt(1 - q * q * 0.985))));
-      prof.push(new THREE.Vector2(R, -0.075), new THREE.Vector2(R * 0.9, -0.085), new THREE.Vector2(R * 0.9, -LEN));
+      prof.push(new THREE.Vector2(R, -0.075 * PITCH / 0.1), new THREE.Vector2(R * 0.9, -0.085 * PITCH / 0.1), new THREE.Vector2(R * 0.9, -LEN));
       const pinGeo = new THREE.LatheGeometry(prof.reverse(), 12); pinGeo.rotateX(Math.PI / 2);
       const cols = Math.floor(WALL_W / PITCH), rowH = PITCH * Math.sqrt(3) / 2, rows = Math.floor(WALL_H / rowH), count = cols * rows;
       const state = new THREE.InstancedBufferAttribute(new Float32Array(count * 4), 4); state.setUsage(THREE.DynamicDrawUsage);
@@ -1072,14 +1070,13 @@ input[type=range]{flex:1;accent-color:#ff7a2e}
       // cracks opening: ticks that get denser, then a riser
       for (let t = 3.3, j = 0; t < E0 - 0.08; t += 0.2 - 0.15 * K.seg(t, 3.3, E0), j++) k.play('click', t, { gain: 0.5 + 0.8 * K.seg(t, 3.3, E0), f: 1200 + 1800 * K.hash(j, 4), pan: (K.hash(j, 6) - 0.5) * 0.6 });
       k.play('riser', 4.05, { dur: 0.7, gain: 0.5 });
-      // eruptions: blow, sub drop, steam, pins of the cone jumping, the ring leaving, bombs landing, lava hissing
+      // eruptions: blow, sub drop, steam, pins of the cone jumping, the ring leaving, lava hissing
       ERUPTIONS.forEach((e, n) => {
         k.play('impact', e.at, { gain: 0.85 * e.adds, f: 92 - n * 6 });
         k.tone(e.at, { f: [[0, 74 - n * 5], [0.6, 33]], dur: 1.0, gain: 0.5, a: 0.006 });
         k.noise(e.at, { dur: 0.7, filter: 'highpass', f: [[0, 2600], [0.7, 900]], gain: 0.2, a: 0.03, verb: 0.3 });
         k.withMinor(() => { for (let t = e.at, j = 0; t < e.at + 0.95; t += 0.008, j++) { const u = (t - e.at) / 0.95; k.play('tick', t, { gain: 0.5 * Math.pow(1 - u, 1.4) * (0.5 + 0.5 * K.hash(j, n)), f: 3000 + 3800 * K.hash(j, n, 3), pan: (K.hash(j, n, 4) - 0.5) * (0.4 + 1.2 * u) }); } });
         k.play('whoosh', e.at + 0.35, { gain: 0.42, dur: 1.5, top: 1800, pan: n % 2 ? 0.3 : -0.3 });
-        for (let j = 0; j < 7; j++) k.play('pop', e.at + 0.6 + 0.9 * K.hash(j, n, 7), { gain: 0.1 + 0.08 * K.hash(j, n, 8), f: 500 + 700 * K.hash(j, n, 9), pan: (K.hash(j, n, 10) - 0.5) * 1.2 });
         k.noise(e.at + 0.3, { dur: 2.3, color: 'pink', filter: 'bandpass', f: 3200, q: 0.5, gain: 0.07 * (n === 0 ? 1 : 0.8), a: 0.5, pan: n % 2 ? 0.25 : -0.25 });
       });
       // the volcano stands: one low warm note, one bell, the room goes on
