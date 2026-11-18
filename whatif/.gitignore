@@ -5,4 +5,3 @@ voice/*.bin
 __pycache__
 *.mp4
 *.part
-narration/*/*.wav
