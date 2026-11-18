@@ -1,155 +1,155 @@
 1
-00:00:00,250 --> 00:00:02,879
+00:00:00,250 --> 00:00:02,905
 What if time moved at a different speed
 
 2
-00:00:02,919 --> 00:00:03,837
+00:00:02,945 --> 00:00:03,873
 in every room?
 
 3
-00:00:03,877 --> 00:00:06,506
+00:00:03,913 --> 00:00:06,568
 In your house, the bedroom races ahead,
 
 4
-00:00:06,546 --> 00:00:08,764
+00:00:06,608 --> 00:00:08,848
 the kitchen walks at normal pace,
 
 5
-00:00:08,804 --> 00:00:11,639
+00:00:08,888 --> 00:00:11,751
 and the cellar crawls like a sleepy snail.
 
 6
-00:00:12,950 --> 00:00:15,417
+00:00:12,950 --> 00:00:15,407
 You step into the fast bedroom and a
 
 7
-00:00:15,457 --> 00:00:16,461
+00:00:15,447 --> 00:00:16,448
 day flashes by.
 
 8
-00:00:16,501 --> 00:00:18,620
+00:00:16,488 --> 00:00:18,598
 The sun zips across the window,
 
 9
-00:00:18,660 --> 00:00:20,361
+00:00:18,638 --> 00:00:20,332
 plants shoot up and wilt,
 
 10
-00:00:20,401 --> 00:00:22,798
+00:00:20,372 --> 00:00:22,760
 and your pillow fort builds itself,
 
 11
-00:00:22,838 --> 00:00:23,981
+00:00:22,800 --> 00:00:23,939
 then falls apart.
 
 12
-00:00:25,250 --> 00:00:28,876
+00:00:25,250 --> 00:00:28,533
 In the kitchen, a single egg takes years to fry.
 
 13
-00:00:28,916 --> 00:00:31,472
+00:00:28,573 --> 00:00:30,887
 A water drop hangs in the air like
 
 14
-00:00:31,512 --> 00:00:32,618
+00:00:30,927 --> 00:00:31,926
 a tiny crystal.
 
 15
-00:00:32,658 --> 00:00:35,367
+00:00:31,966 --> 00:00:34,418
 You wait for your toast so long that
 
 16
-00:00:35,407 --> 00:00:37,353
+00:00:34,458 --> 00:00:36,218
 you start writing a novel.
 
 17
-00:00:38,650 --> 00:00:41,002
+00:00:38,650 --> 00:00:40,905
 The hallway is the strangest place.
 
 18
-00:00:41,042 --> 00:00:43,531
+00:00:40,945 --> 00:00:43,332
 Your left hand sits in the slow room,
 
 19
-00:00:43,571 --> 00:00:45,718
+00:00:43,372 --> 00:00:45,430
 your right hand in the fast one,
 
 20
-00:00:45,758 --> 00:00:49,681
+00:00:45,470 --> 00:00:49,234
 and you wave goodbye to yourself in two different decades.
 
 21
-00:00:50,950 --> 00:00:52,732
+00:00:50,950 --> 00:00:52,623
 You soon learn the tricks.
 
 22
-00:00:52,772 --> 00:00:54,904
+00:00:52,663 --> 00:00:54,666
 Do the dishes in the slow room,
 
 23
-00:00:54,944 --> 00:00:56,235
+00:00:54,706 --> 00:00:55,918
 and no time passes.
 
 24
-00:00:56,275 --> 00:00:57,847
+00:00:55,958 --> 00:00:57,433
 Study in the fast room,
 
 25
-00:00:57,887 --> 00:01:01,981
+00:00:57,473 --> 00:01:01,321
 and you finish your homework before the pizza even arrives.
 
 26
-00:01:03,250 --> 00:01:06,531
+00:01:03,250 --> 00:01:06,534
 Physicists would say time can't really vary between
 
 27
-00:01:06,571 --> 00:01:09,396
+00:01:06,574 --> 00:01:09,402
 rooms, so this is only a thought experiment.
 
 28
-00:01:09,436 --> 00:01:12,000
+00:01:09,442 --> 00:01:12,009
 Still, it makes you wonder how much time
 
 29
-00:01:12,040 --> 00:01:14,996
+00:01:12,049 --> 00:01:15,007
 you're wasting in the fast rooms of your life.
 
 30
-00:01:16,250 --> 00:01:17,369
+00:01:16,250 --> 00:01:17,445
 Here is the twist.
 
 31
-00:01:17,409 --> 00:01:19,495
+00:01:17,485 --> 00:01:19,709
 Grandpa sits in the slowest room,
 
 32
-00:01:19,535 --> 00:01:22,006
+00:01:19,749 --> 00:01:22,386
 reading the same page of his newspaper.
 
 33
-00:01:22,046 --> 00:01:24,840
+00:01:22,426 --> 00:01:25,405
 The family realises the cellar isn't broken.
 
 34
-00:01:24,880 --> 00:01:27,996
+00:01:25,445 --> 00:01:28,767
 It's where a quiet minute can last all afternoon.
 
 35
-00:01:29,250 --> 00:01:32,671
+00:01:29,250 --> 00:01:32,906
 So the whole family gathers in the cellar for dinner.
 
 36
-00:01:32,711 --> 00:01:34,173
+00:01:32,946 --> 00:01:34,510
 Candles barely flicker.
 
 37
-00:01:34,213 --> 00:01:35,806
+00:01:34,550 --> 00:01:36,253
 Steam hangs like ribbons.
 
 38
-00:01:35,846 --> 00:01:37,569
+00:01:36,293 --> 00:01:38,136
 One hour feels like a week,
 
 39
-00:01:37,609 --> 00:01:40,639
+00:01:38,176 --> 00:01:41,413
 and you finally get to enjoy every single bite.

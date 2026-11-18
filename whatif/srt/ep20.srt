@@ -1,69 +1,69 @@
 1
-00:00:00,250 --> 00:00:03,562
+00:00:00,250 --> 00:00:03,678
 What if the world paused whenever you stopped moving?
 
 2
-00:00:03,602 --> 00:00:05,396
+00:00:03,718 --> 00:00:05,576
 You're sprinting for the bus,
 
 3
-00:00:05,436 --> 00:00:07,040
+00:00:05,616 --> 00:00:07,278
 you stop to tie your shoe,
 
 4
-00:00:07,080 --> 00:00:08,938
+00:00:07,318 --> 00:00:09,241
 and everything stops with you.
 
 5
-00:00:08,978 --> 00:00:10,519
+00:00:09,281 --> 00:00:10,877
 A bird hangs in mid-flap.
 
 6
-00:00:10,559 --> 00:00:12,353
+00:00:10,917 --> 00:00:12,775
 A cyclist freezes mid-wobble.
 
 7
-00:00:13,650 --> 00:00:15,260
+00:00:13,650 --> 00:00:15,329
 At first it's a disaster,
 
 8
-00:00:15,300 --> 00:00:17,372
+00:00:15,369 --> 00:00:17,529
 until you realize the best part:
 
 9
-00:00:17,412 --> 00:00:18,494
+00:00:17,569 --> 00:00:18,698
 you can sit down,
 
 10
-00:00:18,534 --> 00:00:20,935
+00:00:18,738 --> 00:00:21,242
 close your eyes, and take a nap while
 
 11
-00:00:20,975 --> 00:00:23,047
+00:00:21,282 --> 00:00:23,442
 the entire world waits politely.
 
 12
-00:00:23,087 --> 00:00:25,753
+00:00:23,482 --> 00:00:26,261
 Hypothetically, it's the best sleep ever.
 
 13
-00:00:27,050 --> 00:00:28,431
+00:00:27,050 --> 00:00:28,503
 Then the pranks begin.
 
 14
-00:00:28,471 --> 00:00:30,690
+00:00:28,543 --> 00:00:30,878
 You wander through the frozen town,
 
 15
-00:00:30,730 --> 00:00:33,531
+00:00:30,918 --> 00:00:33,864
 swapping hats, stacking cups into a tower on
 
 16
-00:00:33,571 --> 00:00:35,016
+00:00:33,904 --> 00:00:35,424
 a sleeping chef's head,
 
 17
-00:00:35,056 --> 00:00:38,439
+00:00:35,464 --> 00:00:39,021
 and adding a tiny moustache to a very serious statue.
 
 18
@@ -71,105 +71,105 @@ and adding a tiny moustache to a very serious statue.
 But there's a problem.
 
 19
-00:00:41,234 --> 00:00:42,678
+00:00:41,234 --> 00:00:42,677
 You can't stand still.
 
 20
-00:00:42,718 --> 00:00:45,714
+00:00:42,717 --> 00:00:45,712
 Sneezing is dangerous, and being trapped in a
 
 21
-00:00:45,754 --> 00:00:47,198
+00:00:45,752 --> 00:00:47,196
 long queue is torture,
 
 22
-00:00:47,238 --> 00:00:49,897
+00:00:47,236 --> 00:00:49,893
 because the line only moves when you do.
 
 23
-00:00:49,937 --> 00:00:51,853
+00:00:49,933 --> 00:00:51,849
 So you start dancing in line.
 
 24
-00:00:53,150 --> 00:00:56,059
+00:00:53,150 --> 00:00:56,265
 Scientists say time can't depend on one person's
 
 25
-00:00:56,099 --> 00:00:58,947
+00:00:56,305 --> 00:00:59,353
 wiggling, so this is only a thought experiment.
 
 26
-00:00:58,987 --> 00:01:01,282
+00:00:59,393 --> 00:01:01,851
 But it would make you the most fidgety
 
 27
-00:01:01,322 --> 00:01:04,539
+00:01:01,891 --> 00:01:05,334
 person on Earth, and the world's strangest metronome.
 
 28
-00:01:05,850 --> 00:01:07,004
+00:01:05,850 --> 00:01:07,073
 Here is the twist.
 
 29
-00:01:07,044 --> 00:01:09,526
+00:01:07,113 --> 00:01:09,740
 One evening, you stop in the middle of
 
 30
-00:01:09,566 --> 00:01:12,578
+00:01:09,780 --> 00:01:12,968
 a frozen park, and somebody else keeps moving.
 
 31
-00:01:12,618 --> 00:01:14,701
+00:01:13,008 --> 00:01:15,214
 A girl on a scooter glides past,
 
 32
-00:01:14,741 --> 00:01:16,758
+00:01:15,254 --> 00:01:17,390
 whistling, completely unfrozen.
 
 33
-00:01:16,798 --> 00:01:17,953
+00:01:17,430 --> 00:01:18,653
 She smiles at you.
 
 34
-00:01:19,250 --> 00:01:22,010
+00:01:19,250 --> 00:01:22,205
 She tells you she's been doing this for years.
 
 35
-00:01:22,050 --> 00:01:24,263
+00:01:22,245 --> 00:01:24,614
 Two people, standing perfectly still,
 
 36
-00:01:24,303 --> 00:01:25,967
+00:01:24,654 --> 00:01:26,437
 in a perfectly paused world,
 
 37
-00:01:26,007 --> 00:01:27,550
+00:01:26,477 --> 00:01:28,130
 finally talking for hours.
 
 38
-00:01:27,590 --> 00:01:29,924
+00:01:28,170 --> 00:01:30,669
 And outside, not one second has passed.
 
 39
-00:01:31,150 --> 00:01:33,063
+00:01:31,150 --> 00:01:33,072
 So the two of you stand up and
 
 40
-00:01:33,103 --> 00:01:35,603
+00:01:33,112 --> 00:01:35,624
 start to dance through the paused city,
 
 41
-00:01:35,643 --> 00:01:38,468
+00:01:35,664 --> 00:01:38,502
 past hanging confetti and floating balloons.
 
 42
-00:01:38,508 --> 00:01:39,900
+00:01:38,542 --> 00:01:39,941
 When you finally stop,
 
 43
-00:01:39,940 --> 00:01:41,333
+00:01:39,981 --> 00:01:41,380
 the world stays still,
 
 44
-00:01:41,373 --> 00:01:42,896
+00:01:41,420 --> 00:01:42,950
 as if politely clapping.

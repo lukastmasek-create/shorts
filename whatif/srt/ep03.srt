@@ -1,53 +1,53 @@
 1
-00:00:00,250 --> 00:00:03,010
+00:00:00,250 --> 00:00:03,059
 What if you doubled in size every two seconds?
 
 2
-00:00:03,050 --> 00:00:05,324
+00:00:03,099 --> 00:00:05,413
 One moment you're brushing your teeth.
 
 3
-00:00:05,364 --> 00:00:08,246
+00:00:05,453 --> 00:00:08,386
 Two seconds later your head touches the ceiling.
 
 4
-00:00:08,286 --> 00:00:10,924
+00:00:08,426 --> 00:00:11,111
 Four seconds later, you're wearing the roof.
 
 5
-00:00:12,150 --> 00:00:15,178
+00:00:12,150 --> 00:00:15,368
 By eight seconds you're taller than the apartments.
 
 6
-00:00:15,218 --> 00:00:17,644
+00:00:15,408 --> 00:00:17,988
 Tiny people wave from the windows and the
 
 7
-00:00:17,684 --> 00:00:18,847
+00:00:18,028 --> 00:00:19,266
 cars look like toys.
 
 8
-00:00:18,887 --> 00:00:21,975
+00:00:19,306 --> 00:00:22,588
 Hypothetically, you should probably say sorry to the
 
 9
-00:00:22,015 --> 00:00:23,539
+00:00:22,628 --> 00:00:24,249
 bakery you're standing on.
 
 10
-00:00:24,850 --> 00:00:27,310
+00:00:24,850 --> 00:00:27,500
 Sixteen seconds in, you're mountain-sized.
 
 11
-00:00:27,350 --> 00:00:30,108
+00:00:27,540 --> 00:00:30,509
 Clouds drift past your waist like fluffy sheep.
 
 12
-00:00:30,148 --> 00:00:32,191
+00:00:30,549 --> 00:00:32,750
 A passing airplane buzzes your ear,
 
 13
-00:00:32,231 --> 00:00:34,810
+00:00:32,790 --> 00:00:35,568
 and you politely resist the urge to swat it.
 
 14
@@ -59,85 +59,85 @@ After forty-five seconds you're bigger than the whole planet.
 Earth sits in your palm like a marble.
 
 16
-00:00:42,278 --> 00:00:44,376
+00:00:42,278 --> 00:00:44,377
 The Moon is small enough to flick,
 
 17
-00:00:44,416 --> 00:00:47,081
+00:00:44,417 --> 00:00:47,082
 but a thought experiment says please don't.
 
 18
-00:00:48,350 --> 00:00:51,206
+00:00:48,350 --> 00:00:50,876
 In one minute you're as wide as the Sun.
 
 19
-00:00:51,246 --> 00:00:54,319
+00:00:50,916 --> 00:00:53,634
 Planets circle your fingers like beads on a
 
 20
-00:00:54,359 --> 00:00:57,070
+00:00:53,674 --> 00:00:56,071
 string, and the Sun looks like a warm,
 
 21
-00:00:57,110 --> 00:00:59,024
+00:00:56,111 --> 00:00:57,803
 friendly lamp in your hand.
 
 22
-00:01:00,250 --> 00:01:02,854
+00:01:00,250 --> 00:01:03,047
 By ninety seconds you're bigger than galaxies.
 
 23
-00:01:02,894 --> 00:01:04,578
+00:01:03,087 --> 00:01:04,897
 Stars drift past like glitter.
 
 24
-00:01:04,618 --> 00:01:07,221
+00:01:04,937 --> 00:01:07,734
 Physics says you'd collapse into a black hole,
 
 25
-00:01:07,261 --> 00:01:09,003
+00:01:07,774 --> 00:01:09,646
 but in this thought experiment,
 
 26
-00:01:09,043 --> 00:01:10,210
+00:01:09,686 --> 00:01:10,941
 you stay comfortable.
 
 27
-00:01:11,450 --> 00:01:14,388
+00:01:11,450 --> 00:01:14,384
 Soon the entire universe fits in your hands
 
 28
-00:01:14,428 --> 00:01:15,635
+00:01:14,424 --> 00:01:15,629
 like a snow globe.
 
 29
-00:01:15,675 --> 00:01:18,544
+00:01:15,669 --> 00:01:18,534
 Time stretches out, and for the first time
 
 30
-00:01:18,584 --> 00:01:20,484
+00:01:18,574 --> 00:01:20,471
 all day you can finally say:
 
 31
-00:01:20,524 --> 00:01:22,839
+00:01:20,511 --> 00:01:22,823
 I really needed that growth spurt.
 
 32
-00:01:24,150 --> 00:01:27,571
+00:01:24,150 --> 00:01:27,576
 Then you notice a tiny someone on your palm, waving.
 
 33
-00:01:27,611 --> 00:01:28,968
+00:01:27,616 --> 00:01:28,976
 They're doubling too.
 
 34
-00:01:29,008 --> 00:01:30,166
+00:01:29,016 --> 00:01:30,175
 And on their palm,
 
 35
-00:01:30,206 --> 00:01:32,429
+00:01:30,215 --> 00:01:32,442
 an even tinier someone waves back.
 
 36
-00:01:32,469 --> 00:01:34,824
+00:01:32,482 --> 00:01:34,841
 It's growth spurts all the way down.

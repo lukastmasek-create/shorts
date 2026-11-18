@@ -1,155 +1,155 @@
 1
-00:00:00,250 --> 00:00:03,533
+00:00:00,250 --> 00:00:03,518
 What if all shadows vanished at noon, except one?
 
 2
-00:00:03,573 --> 00:00:05,906
+00:00:03,558 --> 00:00:05,881
 The sun reaches the top of the sky.
 
 3
-00:00:05,946 --> 00:00:08,280
+00:00:05,921 --> 00:00:08,244
 Every shadow on the street shrinks,
 
 4
-00:00:08,320 --> 00:00:10,924
+00:00:08,284 --> 00:00:10,877
 flickers, and pops, like a soap bubble.
 
 5
-00:00:12,150 --> 00:00:13,701
+00:00:12,150 --> 00:00:13,775
 People gasp, then shrug.
 
 6
-00:00:13,741 --> 00:00:15,359
+00:00:13,815 --> 00:00:15,509
 Hot sidewalks get hotter,
 
 7
-00:00:15,399 --> 00:00:17,347
+00:00:15,549 --> 00:00:17,590
 and picnic blankets need hats.
 
 8
-00:00:17,387 --> 00:00:19,403
+00:00:17,630 --> 00:00:19,740
 But in the middle of the plaza,
 
 9
-00:00:19,443 --> 00:00:21,259
+00:00:19,780 --> 00:00:21,682
 one single shadow stays put,
 
 10
-00:00:21,299 --> 00:00:23,181
+00:00:21,722 --> 00:00:23,694
 sharp as ink, and it's yours.
 
 11
-00:00:24,450 --> 00:00:27,858
+00:00:24,450 --> 00:00:27,866
 Within minutes, the whole town is crowding around you.
 
 12
-00:00:27,898 --> 00:00:30,348
+00:00:27,906 --> 00:00:30,362
 Everyone is hot, and your shadow is the
 
 13
-00:00:30,388 --> 00:00:31,625
+00:00:30,402 --> 00:00:31,642
 only shade on Earth.
 
 14
-00:00:31,665 --> 00:00:34,817
+00:00:31,682 --> 00:00:34,842
 Soon forty neighbors are squished beneath a shadow
 
 15
-00:00:34,857 --> 00:00:35,839
+00:00:34,882 --> 00:00:35,866
 shaped like you.
 
 16
-00:00:37,150 --> 00:00:39,930
+00:00:37,150 --> 00:00:40,134
 Scientists would say shadows can't just disappear,
 
 17
-00:00:39,970 --> 00:00:42,298
+00:00:40,174 --> 00:00:42,674
 because they're only the absence of light.
 
 18
-00:00:42,338 --> 00:00:43,821
+00:00:42,714 --> 00:00:44,306
 In this thought experiment,
 
 19
-00:00:43,861 --> 00:00:46,753
+00:00:44,346 --> 00:00:47,451
 the missing shade feels like missing a quiet friend.
 
 20
-00:00:47,950 --> 00:00:48,746
+00:00:47,950 --> 00:00:48,761
 Mayors panic.
 
 21
-00:00:48,786 --> 00:00:50,805
+00:00:48,801 --> 00:00:50,856
 Newspapers write headlines like,
 
 22
-00:00:50,845 --> 00:00:52,606
+00:00:50,896 --> 00:00:52,689
 one shadow to rule them all.
 
 23
-00:00:52,646 --> 00:00:54,600
+00:00:52,729 --> 00:00:54,718
 You just want to buy ice cream,
 
 24
-00:00:54,640 --> 00:00:58,267
+00:00:54,758 --> 00:00:58,449
 but your shadow keeps tugging you gently down the street.
 
 25
-00:00:59,450 --> 00:01:01,942
+00:00:59,450 --> 00:01:02,134
 The shadow finally stops at an empty lot
 
 26
-00:01:01,982 --> 00:01:03,207
+00:01:02,174 --> 00:01:03,496
 where nothing grows.
 
 27
-00:01:03,247 --> 00:01:07,321
+00:01:03,536 --> 00:01:07,923
 It stretches, wriggles, and settles into a perfect little circle.
 
 28
-00:01:07,361 --> 00:01:09,410
+00:01:07,963 --> 00:01:10,170
 Then it waits, patient as a seed.
 
 29
-00:01:10,650 --> 00:01:11,927
+00:01:10,650 --> 00:01:11,757
 Here is the twist.
 
 30
-00:01:11,967 --> 00:01:14,926
+00:01:11,797 --> 00:01:14,371
 A tiny green sprout pushes up through the
 
 31
-00:01:14,966 --> 00:01:16,462
+00:01:14,411 --> 00:01:15,709
 middle of the shadow.
 
 32
-00:01:16,502 --> 00:01:18,291
+00:01:15,749 --> 00:01:17,303
 It was never your shadow.
 
 33
-00:01:18,331 --> 00:01:20,778
+00:01:17,343 --> 00:01:19,470
 It was the shadow of the tree this
 
 34
-00:01:20,818 --> 00:01:22,753
+00:01:19,510 --> 00:01:21,191
 seed would become, one day.
 
 35
-00:01:24,050 --> 00:01:26,470
+00:01:24,050 --> 00:01:26,447
 So the whole town waters the sprout.
 
 36
-00:01:26,510 --> 00:01:28,111
+00:01:26,487 --> 00:01:28,071
 Years later it's a huge,
 
 37
-00:01:28,151 --> 00:01:30,844
+00:01:28,111 --> 00:01:30,779
 leafy tree with a shadow wide enough for
 
 38
-00:01:30,884 --> 00:01:32,553
+00:01:30,819 --> 00:01:32,471
 everyone, and every noon,
 
 39
-00:01:32,593 --> 00:01:35,081
+00:01:32,511 --> 00:01:34,975
 the shadows return to sit beneath it.
