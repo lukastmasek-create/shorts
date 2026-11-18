@@ -1,0 +1,13 @@
+<!doctype html><meta charset="utf-8"><title>What If?</title>
+<style>
+@font-face{font-family:Montserrat;font-weight:700;src:url(/node_modules/@fontsource/montserrat/files/montserrat-latin-700-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:800;src:url(/node_modules/@fontsource/montserrat/files/montserrat-latin-800-normal.woff2)}
+html,body{margin:0;background:#111;color:#eee;font:14px system-ui}canvas{display:block}
+body.view{display:flex;flex-direction:column;align-items:center;height:100vh}body.view canvas{height:calc(100vh - 70px);width:auto;aspect-ratio:9/16}
+#bar{display:flex;gap:6px;align-items:center;padding:8px}#bar[hidden]{display:none}#sl{width:300px}
+</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js"}}</script>
+<link rel="icon" href="data:,">
+<canvas id="c" width="1080" height="1920"></canvas>
+<div id="bar" hidden><button id="pb">pause</button><input id="sl" type="range" min="0" max="90" step="0.01" value="0"><span id="tt"></span></div>
+<script type="module" src="/web/main.js"></script>

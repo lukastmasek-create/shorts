@@ -1,0 +1,29 @@
+{
+  "name": "whatif-shorts",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "doctor": "node tools/doctor.mjs",
+    "check": "node tools/check.mjs",
+    "view": "node tools/view.mjs",
+    "preview": "node tools/render.mjs --preview",
+    "stills": "node tools/render.mjs --stills",
+    "still": "node tools/render.mjs --still",
+    "render": "node tools/render.mjs",
+    "render:all": "node tools/all.mjs",
+    "narrate": "node tools/narrate.mjs",
+    "narrate:all": "node tools/narrate.mjs --all",
+    "srt": "node tools/srt.mjs"
+  },
+  "dependencies": {
+    "@fontsource/montserrat": "^5.3.0",
+    "puppeteer-core": "^24.0.0",
+    "three": "^0.170.0"
+  },
+  "optionalDependencies": {
+    "ffmpeg-static": "^5.2.0"
+  }
+}

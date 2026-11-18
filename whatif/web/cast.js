@@ -1,0 +1,13 @@
+import { C } from './engine.js';
+export const SHADOW = { skin: '#2b2f3a', shirt: '#2b2f3a', ink: '#2b2f3a', feat: '#fff' };
+export const GHOST = { skin: '#dfeaf7', shirt: '#c5d8ee', ink: '#8fb0d6', feat: '#5d7fa8', alpha: .55 };
+export const MIA = { hair: 'puffs', hc: C.brown, shirt: C.blue };
+export const BEN = { hair: 'short', hc: '#3a2a1c', shirt: C.green, glasses: true };
+export const ZOE = { hair: 'long', hc: '#c9822c', shirt: C.pink, dress: true };
+export const KAI = { hair: 'beanie', hc: C.orange, shirt: C.purple };
+export const POPS = { hair: ['short', 'beard'], hc: '#9a9a9a', shirt: C.teal };
+export const NANA = { hair: 'bun', hc: '#cfcfcf', shirt: '#c98aa6', dress: true, glasses: true };
+export const KID = { hair: 'spiky', hc: '#2a2a2a', shirt: C.yellow };
+export const COOK = { hair: 'cap', hc: C.red, shirt: '#f3ecda' };
+export const FOLK = [BEN, ZOE, KAI, POPS, NANA, KID, COOK, MIA, { hair: 'curly', hc: '#5a3a28', shirt: C.orange }, { hair: 'spiky', hc: C.red, shirt: C.teal }];
+export const folk = i => FOLK[((i % FOLK.length) + FOLK.length) % FOLK.length];
