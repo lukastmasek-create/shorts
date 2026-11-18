@@ -114,6 +114,6 @@ export class Actor {
     const o = mo * (flap ? .45 + .55 * Math.abs(Math.sin(t * 15)) : 1), y0 = -.27, f = lerp(1, .3, clamp(o * 3)), N = 12, up = [], lo = [];
     for (let j = 0; j <= N; j++) { const u = -1 + 2 * j / N, xx = u * mw / 2; up.push([xx, y0 + mc * .14 * f * (u * u - .5)]); lo.push([xx, y0 + mc * .14 * (u * u - .5) - o * .3 * (1 - u * u) ** .6]); }
     this.mouth.set(up.concat(lo.reverse())); this.mouth.f.material.opacity = clamp(o * 8);
-    if (this.alpha !== undefined) this.setAlpha(this.g, this.alpha);
+    if (this.alpha !== undefined && !(this.k && this.k.o)) setAlpha(this.g, this.alpha);
   }
 }
